@@ -1,7 +1,8 @@
+import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/core/constants/locale.dart';
 import 'package:amanmemilih_mobile_app/core/constants/router.dart';
-import 'package:amanmemilih_mobile_app/core/resources/colors.dart';
 import 'package:amanmemilih_mobile_app/core/utils/scroll_behaviour_utils.dart';
+import 'package:amanmemilih_mobile_app/feature/login/presentation/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -31,8 +32,9 @@ class MainApp extends StatelessWidget {
             LOCALE.english,
             LOCALE.indonesia,
           ],
-          initialRoute: ROUTER.splash,
+          initialRoute: ROUTER.login,
           routes: {
+            ROUTER.login: (context) => const LoginScreen(),
             ROUTER.splash: (context) => const SplashScreen(),
           },
           debugShowCheckedModeBanner: false,
@@ -44,7 +46,7 @@ class MainApp extends StatelessWidget {
           },
           theme: ThemeData(
             colorScheme: const ColorScheme.light(
-              primary: BaseColors.primary,
+              primary: colorPrimary,
             ),
           ),
         );
