@@ -1,15 +1,12 @@
-import 'package:amanmemilih_mobile_app/core/widgets/bottom_sheet.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
-import 'package:amanmemilih_mobile_app/core/widgets/text_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/text_field.dart';
-import 'package:amanmemilih_mobile_app/feature/register_password/presentation/register_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterPasswordScreen extends StatelessWidget {
+  const RegisterPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,41 +35,25 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             const Text(
-              "Silahkan login menggunakan username dan password anda sebelumnya",
+              "Tambahkan password agar anda bisa mengakses fitur pada AmanMemilih",
             ),
             SizedBox(height: 12.h),
-            AMTextField(
-              controller: TextEditingController(text: ""),
-              hint: "Username",
-              isPassword: false,
-            ),
-            SizedBox(height: 8.h),
             AMTextField(
               controller: TextEditingController(text: ""),
               hint: "Password",
               isPassword: true,
             ),
+            SizedBox(height: 8.h),
+            AMTextField(
+              controller: TextEditingController(text: ""),
+              hint: "Konfirmasi Password",
+              isPassword: true,
+            ),
             SizedBox(height: 16.h),
             AMElevatedButton(
-              title: "Masuk",
-              onTap: () => showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) => AMBottomSheet(
-                  onContinue: () => Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterPasswordScreen(),
-                    ),
-                    (Route<dynamic> route) => false,
-                  ),
-                  onCancel: () {},
-                ),
-              ),
-            ),
-            AMTextButton(
+              title: "Lanjut",
               onTap: () {},
-              title: "Lupa Password?",
-            )
+            ),
           ],
         ),
       ),
