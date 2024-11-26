@@ -3,6 +3,8 @@ import 'package:amanmemilih_mobile_app/core/constants/locale.dart';
 import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/utils/scroll_behaviour_utils.dart';
 import 'package:amanmemilih_mobile_app/feature/login/presentation/login_screen.dart';
+import 'package:amanmemilih_mobile_app/feature/recovery_key/presentation/recovery_key_screen.dart';
+import 'package:amanmemilih_mobile_app/feature/register_password/presentation/register_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -32,10 +34,12 @@ class MainApp extends StatelessWidget {
             LOCALE.english,
             LOCALE.indonesia,
           ],
-          initialRoute: ROUTER.login,
+          initialRoute: ROUTER.recoveryKey,
           routes: {
             ROUTER.login: (context) => const LoginScreen(),
             ROUTER.splash: (context) => const SplashScreen(),
+            ROUTER.recoveryKey: (context) => const RecoveryKeyScreen(),
+            ROUTER.registerPassword: (context) => RegisterPasswordScreen(),
           },
           debugShowCheckedModeBanner: false,
           builder: (context, child) {

@@ -1,5 +1,6 @@
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AMTextButton extends StatelessWidget {
   const AMTextButton({
@@ -21,7 +22,14 @@ class AMTextButton extends StatelessWidget {
         overlayColor: WidgetStatePropertyAll(Colors.white),
       ),
       onPressed: onTap,
-      child: Text(title),
+      child: Text(
+        title,
+        style: GoogleFonts.plusJakartaSans(
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+          color: colorPrimary,
+        ),
+      ),
     );
   }
 }
