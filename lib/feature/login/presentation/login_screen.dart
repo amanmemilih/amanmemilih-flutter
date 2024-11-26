@@ -1,3 +1,4 @@
+import 'package:amanmemilih_mobile_app/core/widgets/bottom_sheet.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/text_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/text_field.dart';
@@ -53,7 +54,13 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 16.h),
             AMElevatedButton(
               title: "Masuk",
-              onTap: () {},
+              onTap: () => showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) => AMBottomSheet(
+                  onContinue: () {},
+                  onCancel: () {},
+                ),
+              ),
             ),
             AMTextButton(
               onTap: () {},
