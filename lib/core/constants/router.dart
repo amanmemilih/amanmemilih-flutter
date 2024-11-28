@@ -4,7 +4,7 @@ class ROUTER {
   static const splash = 'apps.screen.splash';
   static const login = 'apps.screen.login';
   static const registerPassword = 'apps.screen.register_password';
-  static const main = 'apps.screen.main';
+  static const dashboard = 'apps.screen.dashboard';
   static const notificationMain = 'apps.screen.notification_main';
   static const termAndConditions = 'apps.screen.term_and_conditions';
   static const privacyPolicy = 'apps.screen.privacy_policy';
