@@ -29,23 +29,21 @@ class DocumentInformationScreen extends StatelessWidget {
         child: Column(
           children: [
             _filterButtons(),
-            SizedBox(height: 12.h),
+            SizedBox(height: 5.h),
             _cardInformation(
-              "Pemilihan Dewan Perwakilan Rakyat",
-              "Terverifikasi",
-              "verified",
+              title: "Pemilihan Dewan Perwakilan Rakyat",
+              subtitle: "Terverifikasi",
+              status: "verified",
             ),
-            SizedBox(height: 12),
             _cardInformation(
-              "Pemilihan Dewan Perwakilan Rakyat",
-              "Terverifikasi",
-              "unverified",
+              title: "Pemilihan Dewan Perwakilan Rakyat",
+              subtitle: "Terunggah",
+              status: "unverified",
             ),
-            SizedBox(height: 12),
             _cardInformation(
-              "Pemilihan Dewan Perwakilan Rakyat",
-              "Terverifikasi",
-              "verified",
+              status: "unuploaded",
+              subtitle: "Belum diunggah",
+              title: "Pemilihan Dewan Perwakilan",
             ),
           ],
         ),
@@ -53,35 +51,37 @@ class DocumentInformationScreen extends StatelessWidget {
     );
   }
 
-  Widget _cardInformation(String title, String subtitle, String status) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: BorderSide(
-          color: Colors.black.withOpacity(0.08),
+  Widget _cardInformation(
+      {String? title, String? subtitle, String status = "unuploaded"}) {
+    return Container(
+      margin: EdgeInsets.only(top: 5.h),
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(
+            color: Colors.black.withOpacity(0.08),
+          ),
         ),
-      ),
-      title: Text(
-        title,
-        style: GoogleFonts.plusJakartaSans(
-          fontWeight: FontWeight.w700,
-          fontSize: 12,
-          color: const Color(0xff3A3A3A),
+        title: Text(
+          title ?? "Error",
+          style: GoogleFonts.plusJakartaSans(
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+            color: const Color(0xff3A3A3A),
+          ),
         ),
-      ),
-      subtitle: Text(
-        subtitle,
-        style: GoogleFonts.plusJakartaSans(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: status == "verified"
-              ? status == "unverified"
-                  ? colorYellow
-                  : colorGreen
-              : Colors.black,
+        subtitle: Text(
+          subtitle ?? "Error",
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: status == "verified"
+                ? colorGreen
+                : (status == "unverified" ? colorYellow : Colors.black),
+          ),
         ),
+        trailing: const Icon(Icons.arrow_forward_ios_sharp),
       ),
-      trailing: const Icon(Icons.arrow_forward_ios_sharp),
     );
   }
 
