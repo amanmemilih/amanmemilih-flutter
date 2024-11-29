@@ -1,4 +1,5 @@
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
+import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,7 +50,7 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5.h),
-                  _cardInformationDocument(),
+                  _cardInformationDocument(context),
                   SizedBox(height: 5.h),
                   _cardInformationTPS(),
                 ],
@@ -232,7 +233,7 @@ class DashboardScreen extends StatelessWidget {
         ),
       );
 
-  Widget _cardInformationDocument() => Container(
+  Widget _cardInformationDocument(BuildContext context) => Container(
         padding: const EdgeInsets.fromLTRB(16, 18, 16, 18),
         width: double.infinity,
         height: 90.h,
@@ -329,7 +330,8 @@ class DashboardScreen extends StatelessWidget {
             ),
             AMOutlinedButton(
               title: "Detail",
-              onTap: () {},
+              onTap: () =>
+                  Navigator.pushNamed(context, ROUTER.documentInformation),
             )
           ],
         ),
