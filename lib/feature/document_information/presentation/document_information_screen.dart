@@ -1,4 +1,5 @@
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
+import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,16 +35,28 @@ class DocumentInformationScreen extends StatelessWidget {
               title: "Pemilihan Dewan Perwakilan Rakyat",
               subtitle: "Terverifikasi",
               status: "verified",
+              onTap: () => Navigator.pushNamed(
+                context,
+                ROUTER.detailForm,
+              ),
             ),
             _cardInformation(
               title: "Pemilihan Dewan Perwakilan Rakyat",
               subtitle: "Terunggah",
               status: "unverified",
+              onTap: () => Navigator.pushNamed(
+                context,
+                ROUTER.detailForm,
+              ),
             ),
             _cardInformation(
               status: "unuploaded",
               subtitle: "Belum diunggah",
               title: "Pemilihan Dewan Perwakilan",
+              onTap: () => Navigator.pushNamed(
+                context,
+                ROUTER.detailForm,
+              ),
             ),
           ],
         ),
@@ -51,11 +64,16 @@ class DocumentInformationScreen extends StatelessWidget {
     );
   }
 
-  Widget _cardInformation(
-      {String? title, String? subtitle, String status = "unuploaded"}) {
+  Widget _cardInformation({
+    String? title,
+    String? subtitle,
+    String status = "unuploaded",
+    Function()? onTap,
+  }) {
     return Container(
       margin: EdgeInsets.only(top: 5.h),
       child: ListTile(
+        onTap: onTap,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
           side: BorderSide(
