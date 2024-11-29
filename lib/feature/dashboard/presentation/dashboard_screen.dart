@@ -1,8 +1,8 @@
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/outlined_button.dart';
-import 'package:amanmemilih_mobile_app/core/widgets/text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -27,30 +27,33 @@ class DashboardScreen extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.fromLTRB(24, 34.h, 24, 24.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Halo,",
-                  style: GoogleFonts.plusJakartaSans(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Halo,",
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                Text(
-                  "Reinhard Situmeang",
-                  style: GoogleFonts.plusJakartaSans(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
+                  Text(
+                    "Reinhard Situmeang",
+                    style: GoogleFonts.plusJakartaSans(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                    ),
                   ),
-                ),
-                SizedBox(height: 10.h),
-                _cardInformationDocument(),
-                SizedBox(height: 15.h),
-                _cardInformationTPS(),
-              ],
+                  SizedBox(height: 5.h),
+                  _cardInformationDocument(),
+                  SizedBox(height: 5.h),
+                  _cardInformationTPS(),
+                ],
+              ),
             ),
           ),
         ],
@@ -60,15 +63,15 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _cardInformationTPS() => Container(
         width: double.infinity,
-        height: 180.h,
-        padding: const EdgeInsets.all(20),
+        height: 170.h,
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Informasi TPS",
@@ -213,7 +216,18 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
-            AMTextButton(onTap: () {}, title: "Selengkapnya")
+            ListTile(
+              title: Text(
+                "Selengkapnya",
+                textAlign: TextAlign.right,
+                style: GoogleFonts.plusJakartaSans(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  color: colorPrimary,
+                ),
+              ),
+              trailing: SvgPicture.asset("assets/svg/right_arrow.svg"),
+            )
           ],
         ),
       );

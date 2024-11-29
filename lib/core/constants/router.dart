@@ -6,6 +6,7 @@ class ROUTER {
   static const registerPassword = 'apps.screen.register_password';
   static const dashboard = 'apps.screen.dashboard';
   static const notificationMain = 'apps.screen.notification_main';
+  static const bottomNavBar = 'apps.screen.bottom_navigation';
   static const termAndConditions = 'apps.screen.term_and_conditions';
   static const privacyPolicy = 'apps.screen.privacy_policy';
   static const help = 'apps.screen.help';
