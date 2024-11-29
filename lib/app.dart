@@ -3,6 +3,7 @@ import 'package:amanmemilih_mobile_app/core/constants/locale.dart';
 import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/utils/scroll_behaviour_utils.dart';
 import 'package:amanmemilih_mobile_app/feature/dashboard/presentation/dashboard_screen.dart';
+import 'package:amanmemilih_mobile_app/feature/document_information/presentation/document_information_screen.dart';
 import 'package:amanmemilih_mobile_app/feature/login/presentation/login_screen.dart';
 import 'package:amanmemilih_mobile_app/feature/main/component/bloc/navigation_cubit.dart';
 import 'package:amanmemilih_mobile_app/feature/main/component/presentation/bottom_navigation_bar.dart';
@@ -51,6 +52,8 @@ class MainApp extends StatelessWidget {
                   const RegisterPasswordScreen(),
               ROUTER.dashboard: (context) => const DashboardScreen(),
               ROUTER.bottomNavBar: (context) => AMBottomNavigationBar(),
+              ROUTER.documentInformation: (context) =>
+                  const DocumentInformationScreen(),
             },
             debugShowCheckedModeBanner: false,
             builder: (context, child) {
