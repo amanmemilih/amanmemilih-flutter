@@ -64,7 +64,6 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _cardInformationTPS() => Container(
         width: double.infinity,
-        height: 170.h,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -236,7 +235,6 @@ class DashboardScreen extends StatelessWidget {
   Widget _cardInformationDocument(BuildContext context) => Container(
         padding: const EdgeInsets.fromLTRB(16, 18, 16, 18),
         width: double.infinity,
-        height: 90.h,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -328,6 +326,7 @@ class DashboardScreen extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(height: 15.h),
             AMOutlinedButton(
               title: "Detail",
               onTap: () =>
