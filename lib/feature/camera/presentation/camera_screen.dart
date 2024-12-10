@@ -21,7 +21,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   late Future<void> _initializeControllerFuture;
   final List<File> _capturedImages = [];
   bool _permissionsGranted = false;
-  bool _isFlashOn = false; // State to track flash status
+  bool _isFlashOn = false;
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       ResolutionPreset.high,
     );
     _initializeControllerFuture = _controller.initialize();
-    _initializePermissions(); // Initialize permissions when the screen loads
+    _initializePermissions();
   }
 
   @override
@@ -55,7 +55,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         _isFlashOn = !_isFlashOn;
       });
 
-      // Update flash mode on the camera
       await _controller.setFlashMode(
         _isFlashOn ? FlashMode.torch : FlashMode.off,
       );
@@ -99,26 +98,18 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     }
   }
 
-  void _addCapturedImage(File image) {
-    if (!_capturedImages.any((img) => img.path == image.path)) {
-      setState(() {
-        _capturedImages.add(image);
-      });
+  void _navigateToEditor() {
+    if (_capturedImages.isNotEmpty) {
+      List<String> imagePaths =
+          _capturedImages.map((file) => file.path).toList();
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PreviewScreen(imagePaths: imagePaths),
+        ),
+      );
     }
-  }
-
-  void _navigateToEditor(File image) {
-    _addCapturedImage(image);
-
-    List<String> existingImagePaths =
-        _capturedImages.map((file) => file.path).toList();
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PreviewScreen(imagePaths: existingImagePaths),
-      ),
-    );
   }
 
   @override
@@ -167,11 +158,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                           size: 60, color: Colors.white),
                     ),
                     IconButton(
-                      onPressed: () {
-                        if (_capturedImages.isNotEmpty) {
-                          _navigateToEditor(_capturedImages.last);
-                        }
-                      },
+                      onPressed: _navigateToEditor,
                       icon:
                           const Icon(Icons.photo_library, color: Colors.white),
                     ),
@@ -183,10 +170,10 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: _capturedImages.length,
                     itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () => _navigateToEditor(_capturedImages[index]),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: GestureDetector(
+                          onTap: () => _navigateToEditor(),
                           child: Image.file(
                             _capturedImages[index],
                             width: 60,

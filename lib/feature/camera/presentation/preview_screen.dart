@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
+import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gal/gal.dart'; // Import gal package
 import 'package:carousel_slider/carousel_slider.dart'; // Import carousel_slider
 
@@ -16,6 +18,7 @@ class PreviewScreen extends StatefulWidget {
 class _PreviewScreenState extends State<PreviewScreen> {
   bool _permissionsGranted = false;
   int _currentIndex = 0; // To keep track of the current slide index
+  bool _isFullScreen = false; // State to manage full-screen mode
 
   @override
   void initState() {
@@ -23,7 +26,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
     _checkPermissions();
   }
 
-  // Mengecek izin untuk menyimpan gambar ke galeri
   Future<void> _checkPermissions() async {
     final permissionStatus = await Gal.requestAccess();
     setState(() {
@@ -38,7 +40,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
     }
   }
 
-  // Menyimpan gambar ke galeri
   Future<void> _saveImagesToGallery() async {
     if (!_permissionsGranted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -62,111 +63,133 @@ class _PreviewScreenState extends State<PreviewScreen> {
     }
   }
 
+  void _toggleFullScreen() {
+    setState(() {
+      _isFullScreen = !_isFullScreen;
+    });
+    if (_isFullScreen) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    } else {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Preview Images",
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: colorPrimary,
-      ),
-      body: Column(
-        children: [
-          // Carousel to display images
-          Expanded(
-            child: CarouselSlider.builder(
-              itemCount: widget.imagePaths.length,
-              itemBuilder: (context, index, realIndex) {
-                return Image.file(
-                  File(widget.imagePaths[index]),
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
-                );
-              },
-              options: CarouselOptions(
-                height: 400,
-                autoPlay: false,
-                enlargeCenterPage: true,
-                enableInfiniteScroll: false,
-                viewportFraction: 1.0,
-                aspectRatio: 1.0,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _currentIndex =
-                        index; // Update current index on page change
-                  });
-                },
+      appBar: _isFullScreen
+          ? null
+          : AppBar(
+              title: const Text(
+                "Preview Images",
+                style: TextStyle(color: Colors.white),
               ),
-            ),
-          ),
-          // Button row below the carousel
-          Container(
-            padding: const EdgeInsets.all(20),
-            color: Colors.black,
-            child: Column(
-              children: [
-                // Dots indicator for carousel
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(widget.imagePaths.length, (index) {
-                      return AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        width: _currentIndex == index ? 12.0 : 10.0,
-                        height: 10.0,
-                        decoration: BoxDecoration(
-                          color: _currentIndex == index
-                              ? Colors.redAccent
-                              : Colors.grey,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-                SizedBox(
-                  height: 42,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _customButton(
-                      icon: Icons.settings,
-                      label: "Edit",
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Edit feature coming soon')),
-                        );
-                      },
-                    ),
-                    _customButton(
-                      icon: Icons.add,
-                      label: "Tambah",
-                      onPressed: () {
-                        // Navigate back to CameraScreen (you might need to replace this with your actual CameraScreen route)
-                        Navigator.pop(
-                            context); // Replace with your camera screen navigation
-                      },
-                    ),
-                    _customButton(
-                      icon: Icons.check,
-                      label: "Selesai",
-                      onPressed: () {
-                        _saveImagesToGallery();
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
+              backgroundColor: colorPrimary,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.fullscreen, color: Colors.white),
+                  onPressed: _toggleFullScreen,
                 ),
               ],
             ),
+      body: Column(
+        children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: _toggleFullScreen,
+              child: CarouselSlider.builder(
+                itemCount: widget.imagePaths.length,
+                itemBuilder: (context, index, realIndex) {
+                  return Image.file(
+                    File(widget.imagePaths[index]),
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                  );
+                },
+                options: CarouselOptions(
+                  height: 400,
+                  autoPlay: false,
+                  enlargeCenterPage: true,
+                  enableInfiniteScroll: false,
+                  viewportFraction: 1.0,
+                  aspectRatio: 1.0,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                ),
+              ),
+            ),
           ),
+          if (!_isFullScreen)
+            Container(
+              padding: const EdgeInsets.all(20),
+              color: Colors.black,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    //membuat dots atau titik titik di carousel_slider
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:
+                          List.generate(widget.imagePaths.length, (index) {
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                          width: _currentIndex == index ? 12.0 : 10.0,
+                          height: 10.0,
+                          decoration: BoxDecoration(
+                            color: _currentIndex == index
+                                ? Colors.redAccent
+                                : Colors.grey,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 42,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _customButton(
+                        icon: Icons.settings,
+                        label: "Edit",
+                        onPressed: () {
+                          final selectedImagePath =
+                              widget.imagePaths[_currentIndex];
+                          Navigator.pushNamed(
+                            context,
+                            ROUTER.editImageScreen,
+                            arguments: widget.imagePaths,
+                          );
+                        },
+                      ),
+                      _customButton(
+                        icon: Icons.add,
+                        label: "Tambah",
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      _customButton(
+                        icon: Icons.check,
+                        label: "Selesai",
+                        onPressed: () {
+                          _saveImagesToGallery();
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );
@@ -180,7 +203,7 @@ Widget _customButton({
 }) {
   return Container(
     decoration: BoxDecoration(
-      color: Color(0xFF242424),
+      color: const Color(0xFF242424),
       borderRadius: BorderRadius.circular(8),
     ),
     child: Padding(

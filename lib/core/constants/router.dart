@@ -13,4 +13,5 @@ class ROUTER {
   static const privacyPolicy = 'apps.screen.privacy_policy';
   static const help = 'apps.screen.help';
   static const faq = 'apps.screen.faq';
+  static const editImageScreen = 'apps.screen.edit_image';
 }
