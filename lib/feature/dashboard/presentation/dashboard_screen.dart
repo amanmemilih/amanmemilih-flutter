@@ -52,7 +52,7 @@ class DashboardScreen extends StatelessWidget {
                   SizedBox(height: 5.h),
                   _cardInformationDocument(context),
                   SizedBox(height: 5.h),
-                  _cardInformationTPS(),
+                  _cardInformationTPS(context),
                 ],
               ),
             ),
@@ -62,7 +62,7 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _cardInformationTPS() => Container(
+  Widget _cardInformationTPS(context) => Container(
         width: double.infinity,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -217,6 +217,9 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             ListTile(
+              onTap: () {
+                Navigator.of(context).pushNamed(ROUTER.documentInformation);
+              },
               title: Text(
                 "Selengkapnya",
                 textAlign: TextAlign.right,

@@ -19,7 +19,9 @@ class AMBottomNavigationBar extends StatefulWidget {
 class _AMBottomNavigationBarState extends State<AMBottomNavigationBar> {
   final PageController _listViewController = PageController(initialPage: 0);
   final List<Widget> _listView = const [
+    // Yazid
     DashboardScreen(),
+    // Indra
     ProfileScreen(),
   ];
 

@@ -1,3 +1,4 @@
+import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/bottom_sheet.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/text_button.dart';
@@ -70,7 +71,9 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             AMTextButton(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(ROUTER.recoveryKey);
+              },
               title: "Lupa Password?",
             )
           ],

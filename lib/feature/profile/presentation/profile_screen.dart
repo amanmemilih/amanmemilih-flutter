@@ -1,3 +1,4 @@
+import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -114,7 +115,9 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(height: 15.h),
             AMElevatedButton(
               title: "Logout",
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed(ROUTER.login);
+              },
             )
           ],
         ),

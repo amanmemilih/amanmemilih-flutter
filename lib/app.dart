@@ -47,17 +47,28 @@ class MainApp extends StatelessWidget {
             ],
             initialRoute: ROUTER.bottomNavBar,
             routes: {
-              ROUTER.login: (context) => const LoginScreen(),
               ROUTER.splash: (context) => const SplashScreen(),
-              ROUTER.recoveryKey: (context) => const RecoveryKeyScreen(),
+              // ROUTER.profile: (context) => const profileScreen(),
+
+              // Rifqi
+              ROUTER.login: (context) => const LoginScreen(),
               ROUTER.registerPassword: (context) =>
                   const RegisterPasswordScreen(),
+
+              // Aaron
+              ROUTER.recoveryKey: (context) => const RecoveryKeyScreen(),
+
+              // Yazid & Indra, please go to detail AMBottomNavigationBar to see detail jobs
               ROUTER.dashboard: (context) => const DashboardScreen(),
               ROUTER.bottomNavBar: (context) => AMBottomNavigationBar(),
+
+              // Wildan
+              ROUTER.editImageScreen: (context) => const EditImageScreen(),
+
+              // Reinhard
               ROUTER.documentInformation: (context) =>
                   const DocumentInformationScreen(),
               ROUTER.detailForm: (context) => const FormDetailScreen(),
-              ROUTER.editImageScreen: (context) => const EditImageScreen(),
             },
             debugShowCheckedModeBanner: false,
             builder: (context, child) {
