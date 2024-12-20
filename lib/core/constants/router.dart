@@ -14,4 +14,8 @@ class ROUTER {
   static const help = 'apps.screen.help';
   static const faq = 'apps.screen.faq';
   static const editImageScreen = 'apps.screen.edit_image';
+  static const cropImage = 'apps.screen.crop_image';
+  static const brightnessImage = 'apps.screen.brightness_image';
+  static const contrastImage = 'apps.screen.contrast_image';
+  static const sharpnessImage = 'apps.screen.sharpness_image';
 }

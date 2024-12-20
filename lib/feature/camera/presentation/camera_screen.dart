@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/feature/camera/presentation/preview_screen.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +8,16 @@ import 'package:gal/gal.dart';
 import 'package:image/image.dart' as img;
 import 'package:permission_handler/permission_handler.dart';
 
-class TakePictureScreen extends StatefulWidget {
+class CameraScreen extends StatefulWidget {
   final CameraDescription camera;
 
-  const TakePictureScreen({super.key, required this.camera});
+  const CameraScreen({super.key, required this.camera});
 
   @override
-  TakePictureScreenState createState() => TakePictureScreenState();
+  CameraScreenState createState() => CameraScreenState();
 }
 
-class TakePictureScreenState extends State<TakePictureScreen> {
+class CameraScreenState extends State<CameraScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
   final List<File> _capturedImages = [];
@@ -117,7 +118,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Foto Formulir'),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: colorPrimary,
       ),
       body: Stack(
         children: [

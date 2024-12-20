@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -142,6 +143,7 @@ class _EditImageScreenState extends State<EditImageScreen> {
   }
 
   // Navigasi ke halaman fitur tertentu
+  // Navigasi ke halaman fitur tertentu menggunakan ModalRoute
   void _navigateToTool(int toolIndex, List<String> imagePaths) async {
     final selectedImagePath = imagePaths.isNotEmpty
         ? imagePaths[_currentIndex.clamp(0, imagePaths.length - 1)]
@@ -154,21 +156,34 @@ class _EditImageScreenState extends State<EditImageScreen> {
       return;
     }
 
-    final editedImagePath = await Navigator.push<String>(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PlaceholderScreen(
-          title: _tools[toolIndex]['label'],
-          imagePath: selectedImagePath,
-        ),
-      ),
-    );
+    String? routeName;
 
-    if (editedImagePath != null) {
-      setState(() {
-        imagePaths[_currentIndex] = editedImagePath; // Update hasil edit
-      });
+    // Menentukan route berdasarkan tool index
+    switch (toolIndex) {
+      case 0:
+        routeName = ROUTER.cropImage;
+        break;
+      case 1:
+        routeName = ROUTER.brightnessImage;
+        break;
+      case 2:
+        routeName = ROUTER.contrastImage;
+        break;
+      case 3:
+        routeName = ROUTER.sharpnessImage;
+        break;
+      default:
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Fitur belum tersedia')),
+        );
+        return;
     }
+
+    Navigator.pushNamed(
+      context,
+      routeName,
+      arguments: selectedImagePath, // Kirimkan data gambar
+    );
   }
 
   // Fungsi untuk menyimpan hasil edit

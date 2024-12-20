@@ -62,8 +62,7 @@ class _AMBottomNavigationBarState extends State<AMBottomNavigationBar> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        TakePictureScreen(camera: cameras.first),
+                    builder: (context) => CameraScreen(camera: cameras.first),
                   ),
                 );
               },
