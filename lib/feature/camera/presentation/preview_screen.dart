@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/core/constants/router.dart';
+import 'package:amanmemilih_mobile_app/feature/validasi_data/presentation/validasi_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gal/gal.dart'; // Import gal package
@@ -182,7 +183,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         label: "Selesai",
                         onPressed: () {
                           _saveImagesToGallery();
-                          Navigator.pop(context);
+                          Navigator.pushNamed(context, ROUTER.validasiData,
+                              arguments: widget.imagePaths);
                         },
                       ),
                     ],

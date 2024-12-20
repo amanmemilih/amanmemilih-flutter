@@ -12,6 +12,8 @@ import 'package:amanmemilih_mobile_app/feature/main/component/bloc/navigation_cu
 import 'package:amanmemilih_mobile_app/feature/main/component/presentation/bottom_navigation_bar.dart';
 import 'package:amanmemilih_mobile_app/feature/recovery_key/presentation/recovery_key_screen.dart';
 import 'package:amanmemilih_mobile_app/feature/register_password/presentation/register_password_screen.dart';
+import 'package:amanmemilih_mobile_app/feature/validasi_data/presentation/rekapitulasi_data.dart';
+import 'package:amanmemilih_mobile_app/feature/validasi_data/presentation/validasi_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,6 +63,8 @@ class MainApp extends StatelessWidget {
               ROUTER.editImageScreen: (context) => const EditImageScreen(),
               ROUTER.cropImage: (context) => const CropImageScreen(),
               ROUTER.editImageScreen: (context) => const EditImageScreen(),
+              ROUTER.validasiData: (context) => const ValidasiData(),
+              ROUTER.rekapitulasiData: (context) => const RekapitulasiData(),
             },
             debugShowCheckedModeBanner: false,
             builder: (context, child) {

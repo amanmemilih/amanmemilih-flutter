@@ -117,8 +117,10 @@ class CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Foto Formulir'),
+        title:
+            const Text('Foto Formulir', style: TextStyle(color: Colors.white)),
         backgroundColor: colorPrimary,
+        foregroundColor: Colors.white,
       ),
       body: Stack(
         children: [

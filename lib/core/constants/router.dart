@@ -18,4 +18,7 @@ class ROUTER {
   static const brightnessImage = 'apps.screen.brightness_image';
   static const contrastImage = 'apps.screen.contrast_image';
   static const sharpnessImage = 'apps.screen.sharpness_image';
+  static const validasiData = 'apps.screen.validasi_data';
+  static const rekapitulasiData = 'apps.screen.rekapitulasiData';
+
 }
