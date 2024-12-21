@@ -25,5 +25,6 @@
   "unableToOpenGoogleMapsFailure": "Gak bisa buka peta nihh. Pastikan Google Maps terpasang & ada browser web.",
   "invalidGivenDataFailure": "Pastikan semua data yang di inputkan sudah benar.",
   "locationPermissionDeniedFailure": "Aduhh lokasi tidak diizinkan, tolong izinkan supaya bisa menikmati fitur yang diberikan.",
-  "locationPermissionDisabledFailure": "Upss, layanan lokasi tidak ada. tolong aktifkan supaya bisa menikmati fitur yang diberikan."
+  "locationPermissionDisabledFailure": "Upss, layanan lokasi tidak ada. tolong aktifkan supaya bisa menikmati fitur yang diberikan.",
+  "invalidRegisterPhraseFailure": "Wah, kode recovery kamu ada yang salah! coba cek ulang ya."
 }

@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -61,6 +62,12 @@ class Failure with _$Failure {
       InvalidGivenDataFailure;
   const factory Failure.voucherInvalidFailure(String message) =
       VoucherInvalidFailure;
+  const factory Failure.invalidLoginCredentialsFailure() =
+      InvalidLoginCredentialsFailure;
+  const factory Failure.userNotRegisteredFailure() = UserNotRegisteredFailure;
+  const factory Failure.recoveryKeyNotSyncFailure() = RecoveryKeyNotSyncFailure;
+  const factory Failure.invalidRegisterPhraseFailure() =
+      InvalidRegisterPhraseFailure;
 
   // Location Failure
   const factory Failure.locationPermissionDeniedFailure() =

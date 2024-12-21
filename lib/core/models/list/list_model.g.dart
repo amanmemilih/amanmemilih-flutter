@@ -6,19 +6,19 @@ part of 'list_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ListModel<T> _$$_ListModelFromJson<T>(
+_$ListModelImpl<T> _$$ListModelImplFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
 ) =>
-    _$_ListModel<T>(
-      code: json['code'] as int?,
+    _$ListModelImpl<T>(
+      code: (json['code'] as num?)?.toInt(),
       success: json['success'] as bool?,
       message: json['message'] as String?,
       data: (json['data'] as List<dynamic>?)?.map(fromJsonT).toList(),
     );
 
-Map<String, dynamic> _$$_ListModelToJson<T>(
-  _$_ListModel<T> instance,
+Map<String, dynamic> _$$ListModelImplToJson<T>(
+  _$ListModelImpl<T> instance,
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{

@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 import 'package:equatable/equatable.dart';
 import 'package:localization/localization.dart';
@@ -20,17 +21,17 @@ class ErrorObject extends Equatable {
     this.isDevelopment = false,
   });
 
-  final String title;
-  final String message;
-  final String shortMessage;
+  final String? title;
+  final String? message;
+  final String? shortMessage;
   final Failure failure;
   final bool isDevelopment;
 
   @override
   List<Object?> get props => [title, message, isDevelopment];
 
-  static ErrorObject mapFailureToErrorObject(Failure failure) {
-    return failure.when(
+  static ErrorObject? mapFailureToErrorObject(Failure failure) {
+    return failure.maybeWhen(
       apiFailure: (code, message) => ErrorObject(
         title: LocalizationText.titleFailureMessage,
         failure: failure,
@@ -207,6 +208,24 @@ class ErrorObject extends Equatable {
         failure: failure,
         message: LocalizationText.locationPermissionDeniedFailure.i18n(),
         shortMessage: LocalizationText.locationPermissionDeniedFailure.i18n(),
+      ),
+      invalidLoginCredentialsFailure: () => ErrorObject(
+        title: LocalizationText.titleFailureMessage.i18n(),
+        failure: failure,
+        message: LocalizationText.invalidLoginCredentialsFailure.i18n(),
+        shortMessage: LocalizationText.invalidLoginCredentialsFailure.i18n(),
+      ),
+      invalidRegisterPhraseFailure: () => ErrorObject(
+        title: LocalizationText.titleFailureMessage.i18n(),
+        failure: failure,
+        message: LocalizationText.invalidRegisterPhraseFailure.i18n(),
+        shortMessage: LocalizationText.invalidRegisterPhraseFailure.i18n(),
+      ),
+      orElse: () => ErrorObject(
+        title: null,
+        message: null,
+        shortMessage: null,
+        failure: failure,
       ),
     );
   }

@@ -2,21 +2,23 @@ import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/core/constants/locale.dart';
 import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/utils/scroll_behaviour_utils.dart';
-import 'package:amanmemilih_mobile_app/feature/dashboard/presentation/dashboard_screen.dart';
-import 'package:amanmemilih_mobile_app/feature/document_information/presentation/document_information_screen.dart';
-import 'package:amanmemilih_mobile_app/feature/edit_image/presentation/edit_image_screen.dart';
-import 'package:amanmemilih_mobile_app/feature/form_details/presentation/form_detail_screen.dart';
-import 'package:amanmemilih_mobile_app/feature/login/presentation/login_screen.dart';
-import 'package:amanmemilih_mobile_app/feature/main/component/bloc/navigation_cubit.dart';
-import 'package:amanmemilih_mobile_app/feature/main/component/presentation/bottom_navigation_bar.dart';
-import 'package:amanmemilih_mobile_app/feature/recovery_key/presentation/recovery_key_screen.dart';
-import 'package:amanmemilih_mobile_app/feature/register_password/presentation/register_password_screen.dart';
+import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
+import 'package:amanmemilih_mobile_app/features/auth/presentation/screens/generate_recovery_key_screen.dart';
+import 'package:amanmemilih_mobile_app/features/auth/presentation/screens/register_recovery_key_screen.dart';
+import 'package:amanmemilih_mobile_app/features/document_information/presentation/document_information_screen.dart';
+import 'package:amanmemilih_mobile_app/features/edit_image/presentation/edit_image_screen.dart';
+import 'package:amanmemilih_mobile_app/features/form_details/presentation/form_detail_screen.dart';
+import 'package:amanmemilih_mobile_app/features/intro/presentation/screens/splash_screen.dart';
+import 'package:amanmemilih_mobile_app/features/login/presentation/login_screen.dart';
+import 'package:amanmemilih_mobile_app/features/main/component/bloc/navigation_cubit.dart';
+import 'package:amanmemilih_mobile_app/features/main/component/presentation/bottom_navigation_bar.dart';
+import 'package:amanmemilih_mobile_app/features/register_password/presentation/register_password_screen.dart';
+import 'package:amanmemilih_mobile_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:amanmemilih_mobile_app/feature/intro/presentation/splash_screen.dart';
 import 'package:localization/localization.dart';
 
 class MainApp extends StatelessWidget {
@@ -29,6 +31,9 @@ class MainApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+            BlocProvider(
+              create: (context) => getIt<AuthCubit>()..checkCredential(),
+            ),
             BlocProvider(create: (context) => NavigationCubit()),
           ],
           child: MaterialApp(
@@ -45,27 +50,23 @@ class MainApp extends StatelessWidget {
               LOCALE.english,
               LOCALE.indonesia,
             ],
-            initialRoute: ROUTER.bottomNavBar,
+            initialRoute: ROUTER.splash,
             routes: {
+              // Intro
               ROUTER.splash: (context) => const SplashScreen(),
-              // ROUTER.profile: (context) => const profileScreen(),
-
-              // Rifqi
+              // Auth
               ROUTER.login: (context) => const LoginScreen(),
               ROUTER.registerPassword: (context) =>
                   const RegisterPasswordScreen(),
-
-              // Aaron
-              ROUTER.recoveryKey: (context) => const RecoveryKeyScreen(),
-
-              // Yazid & Indra, please go to detail AMBottomNavigationBar to see detail jobs
-              ROUTER.dashboard: (context) => const DashboardScreen(),
+              ROUTER.generateRecoveryKey: (context) =>
+                  const GenerateRecoveryKeyScreen(),
+              ROUTER.registerRecoveryKey: (context) =>
+                  const RegisterRecoveryKeyScreen(),
+              // Main
               ROUTER.bottomNavBar: (context) => AMBottomNavigationBar(),
-
-              // Wildan
+              // Camera
               ROUTER.editImageScreen: (context) => const EditImageScreen(),
-
-              // Reinhard
+              // Document
               ROUTER.documentInformation: (context) =>
                   const DocumentInformationScreen(),
               ROUTER.detailForm: (context) => const FormDetailScreen(),

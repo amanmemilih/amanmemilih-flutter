@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 import 'dart:io';
 
@@ -28,6 +29,12 @@ class CustomCatchError {
       return const LocationPermissionDeniedPermanentFailure();
     } else if (err is InvalidGivenDataFailure) {
       return InvalidGivenDataFailure(err.message, err.data);
+    } else if (err is InvalidLoginCredentialException) {
+      return InvalidLoginCredentialsFailure();
+    } else if (err is UserNotRegisteredException) {
+      return UserNotRegisteredFailure();
+    } else if (err is InvalidRegisterPhraseException) {
+      return InvalidRegisterPhraseFailure();
     }
 
     return null;
@@ -72,6 +79,10 @@ class CatchError {
 
     failure ??= const UnexpectedFailure();
 
+    if (isCustomError) {
+      return failure;
+    }
+
     // Check if application on development
     return DevelopmentCatchError.getFailure(err, stackTrace, failure);
     // if (FlavorConfig.isDevelopment() && !isCustomError) {
@@ -83,6 +94,7 @@ class CatchError {
 
 class DevelopmentCatchError {
   static Failure getFailure(err, stackTrace, failure) {
+    print(err.toString());
     return DevelopmentFailure(
       failure: failure,
       runtimeType: err.runtimeType,

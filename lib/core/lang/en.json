@@ -24,5 +24,7 @@
   "tooManyAttemptRequestFailure": "Too many request attempted right now. Please try again later.",
   "unableToOpenGoogleMapsFailure": "Could not open the map. Please ensure you have google maps installed on your system and have atleast web browser.",
   "locationPermissionDeniedFailure": "Oops, location not permitted. Please grant permission to enjoy the provided features.",
-  "locationPermissionDisabledFailure": "Oops, location services unavailable. Please enable them to enjoy the provided features."
+  "locationPermissionDisabledFailure": "Oops, location services unavailable. Please enable them to enjoy the provided features.",
+  "invalidLoginCredentialsFailure": "Oops, location services unavailable. Please enable them to enjoy the provided features.",
+  "invalidRegisterPhraseFailure": "Oops, location services unavailable. Please enable them to enjoy the provided features."
 }

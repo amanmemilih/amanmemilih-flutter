@@ -6,19 +6,19 @@ part of 'single_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SingleModel<T> _$$_SingleModelFromJson<T>(
+_$SingleModelImpl<T> _$$SingleModelImplFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
 ) =>
-    _$_SingleModel<T>(
-      code: json['code'] as int?,
+    _$SingleModelImpl<T>(
+      code: (json['code'] as num?)?.toInt(),
       success: json['success'] as bool?,
       message: json['message'] as String?,
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
     );
 
-Map<String, dynamic> _$$_SingleModelToJson<T>(
-  _$_SingleModel<T> instance,
+Map<String, dynamic> _$$SingleModelImplToJson<T>(
+  _$SingleModelImpl<T> instance,
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{

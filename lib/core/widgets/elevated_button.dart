@@ -1,4 +1,6 @@
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
+import 'package:amanmemilih_mobile_app/core/resources/colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,9 +9,11 @@ class AMElevatedButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.onTap,
+    this.isLoading = false,
   });
 
   final String title;
+  final bool isLoading;
   final Function() onTap;
 
   @override
@@ -30,14 +34,24 @@ class AMElevatedButton extends StatelessWidget {
         foregroundColor: const WidgetStatePropertyAll(colorPrimary),
         overlayColor: WidgetStatePropertyAll(buttonPressed),
       ),
-      child: Text(
-        title,
-        style: GoogleFonts.plusJakartaSans(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: 16,
-        ),
-      ),
+      child: isLoading
+          ? Center(
+              child: SizedBox(
+                height: 50.w,
+                width: 50.w,
+                child: const CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
+            )
+          : Text(
+              title,
+              style: GoogleFonts.plusJakartaSans(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              ),
+            ),
     );
   }
 }

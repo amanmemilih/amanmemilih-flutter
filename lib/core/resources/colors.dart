@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class BaseColors {
   // PRIMARY
-  static const Color primary = Color(0xFF68BD45);
+  static const Color primary = Color(0xFFFF5353);
   static const Color primarySurface = Color(0xFFE1F2DA);
-  static const Color primaryBackground= Color(0xFFF4FFEF);
+  static const Color primaryBackground = Color(0xFFF4FFEF);
   static const Color primaryBorder = Color(0xFF9AD383);
   static const Color primaryHover = Color(0xFF579D39);
   static const Color primaryPressed = Color(0xFF345E22);

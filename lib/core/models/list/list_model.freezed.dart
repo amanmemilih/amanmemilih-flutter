@@ -12,7 +12,7 @@ part of 'list_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ListModel<T> _$ListModelFromJson<T>(
     Map<String, dynamic> json, T Function(Object?) fromJsonT) {
@@ -26,9 +26,13 @@ mixin _$ListModel<T> {
   String? get message => throw _privateConstructorUsedError;
   List<T>? get data => throw _privateConstructorUsedError;
 
+  /// Serializes this ListModel to a JSON map.
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
       throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ListModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ListModelCopyWith<T, ListModel<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$ListModelCopyWithImpl<T, $Res, $Val extends ListModel<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ListModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,24 +88,26 @@ class _$ListModelCopyWithImpl<T, $Res, $Val extends ListModel<T>>
 }
 
 /// @nodoc
-abstract class _$$_ListModelCopyWith<T, $Res>
+abstract class _$$ListModelImplCopyWith<T, $Res>
     implements $ListModelCopyWith<T, $Res> {
-  factory _$$_ListModelCopyWith(
-          _$_ListModel<T> value, $Res Function(_$_ListModel<T>) then) =
-      __$$_ListModelCopyWithImpl<T, $Res>;
+  factory _$$ListModelImplCopyWith(
+          _$ListModelImpl<T> value, $Res Function(_$ListModelImpl<T>) then) =
+      __$$ListModelImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call({int? code, bool? success, String? message, List<T>? data});
 }
 
 /// @nodoc
-class __$$_ListModelCopyWithImpl<T, $Res>
-    extends _$ListModelCopyWithImpl<T, $Res, _$_ListModel<T>>
-    implements _$$_ListModelCopyWith<T, $Res> {
-  __$$_ListModelCopyWithImpl(
-      _$_ListModel<T> _value, $Res Function(_$_ListModel<T>) _then)
+class __$$ListModelImplCopyWithImpl<T, $Res>
+    extends _$ListModelCopyWithImpl<T, $Res, _$ListModelImpl<T>>
+    implements _$$ListModelImplCopyWith<T, $Res> {
+  __$$ListModelImplCopyWithImpl(
+      _$ListModelImpl<T> _value, $Res Function(_$ListModelImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of ListModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -108,7 +116,7 @@ class __$$_ListModelCopyWithImpl<T, $Res>
     Object? message = freezed,
     Object? data = freezed,
   }) {
-    return _then(_$_ListModel<T>(
+    return _then(_$ListModelImpl<T>(
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -131,14 +139,14 @@ class __$$_ListModelCopyWithImpl<T, $Res>
 
 /// @nodoc
 @JsonSerializable(genericArgumentFactories: true)
-class _$_ListModel<T> implements _ListModel<T> {
-  const _$_ListModel(
+class _$ListModelImpl<T> implements _ListModel<T> {
+  const _$ListModelImpl(
       {this.code, this.success, this.message, final List<T>? data})
       : _data = data;
 
-  factory _$_ListModel.fromJson(
+  factory _$ListModelImpl.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
-      _$$_ListModelFromJson(json, fromJsonT);
+      _$$ListModelImplFromJson(json, fromJsonT);
 
   @override
   final int? code;
@@ -162,30 +170,32 @@ class _$_ListModel<T> implements _ListModel<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ListModel<T> &&
+            other is _$ListModelImpl<T> &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, code, success, message,
       const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ListModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ListModelCopyWith<T, _$_ListModel<T>> get copyWith =>
-      __$$_ListModelCopyWithImpl<T, _$_ListModel<T>>(this, _$identity);
+  _$$ListModelImplCopyWith<T, _$ListModelImpl<T>> get copyWith =>
+      __$$ListModelImplCopyWithImpl<T, _$ListModelImpl<T>>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
-    return _$$_ListModelToJson<T>(this, toJsonT);
+    return _$$ListModelImplToJson<T>(this, toJsonT);
   }
 }
 
@@ -194,11 +204,11 @@ abstract class _ListModel<T> implements ListModel<T> {
       {final int? code,
       final bool? success,
       final String? message,
-      final List<T>? data}) = _$_ListModel<T>;
+      final List<T>? data}) = _$ListModelImpl<T>;
 
   factory _ListModel.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =
-      _$_ListModel<T>.fromJson;
+      _$ListModelImpl<T>.fromJson;
 
   @override
   int? get code;
@@ -208,8 +218,11 @@ abstract class _ListModel<T> implements ListModel<T> {
   String? get message;
   @override
   List<T>? get data;
+
+  /// Create a copy of ListModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_ListModelCopyWith<T, _$_ListModel<T>> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ListModelImplCopyWith<T, _$ListModelImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

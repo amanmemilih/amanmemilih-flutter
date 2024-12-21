@@ -12,7 +12,7 @@ part of 'failure.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Failure {
@@ -47,6 +47,10 @@ mixin _$Failure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -82,6 +86,10 @@ mixin _$Failure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -117,6 +125,10 @@ mixin _$Failure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -166,6 +178,14 @@ mixin _$Failure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -208,6 +228,13 @@ mixin _$Failure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -250,6 +277,13 @@ mixin _$Failure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -276,13 +310,16 @@ class _$FailureCopyWithImpl<$Res, $Val extends Failure>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$DevelopmentFailureCopyWith<$Res> {
-  factory _$$DevelopmentFailureCopyWith(_$DevelopmentFailure value,
-          $Res Function(_$DevelopmentFailure) then) =
-      __$$DevelopmentFailureCopyWithImpl<$Res>;
+abstract class _$$DevelopmentFailureImplCopyWith<$Res> {
+  factory _$$DevelopmentFailureImplCopyWith(_$DevelopmentFailureImpl value,
+          $Res Function(_$DevelopmentFailureImpl) then) =
+      __$$DevelopmentFailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {Failure failure,
@@ -294,13 +331,15 @@ abstract class _$$DevelopmentFailureCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$DevelopmentFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$DevelopmentFailure>
-    implements _$$DevelopmentFailureCopyWith<$Res> {
-  __$$DevelopmentFailureCopyWithImpl(
-      _$DevelopmentFailure _value, $Res Function(_$DevelopmentFailure) _then)
+class __$$DevelopmentFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$DevelopmentFailureImpl>
+    implements _$$DevelopmentFailureImplCopyWith<$Res> {
+  __$$DevelopmentFailureImplCopyWithImpl(_$DevelopmentFailureImpl _value,
+      $Res Function(_$DevelopmentFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -309,7 +348,7 @@ class __$$DevelopmentFailureCopyWithImpl<$Res>
     Object? message = null,
     Object? stackTrace = freezed,
   }) {
-    return _then(_$DevelopmentFailure(
+    return _then(_$DevelopmentFailureImpl(
       failure: null == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -329,6 +368,8 @@ class __$$DevelopmentFailureCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res> get failure {
@@ -340,8 +381,8 @@ class __$$DevelopmentFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DevelopmentFailure extends DevelopmentFailure {
-  const _$DevelopmentFailure(
+class _$DevelopmentFailureImpl extends DevelopmentFailure {
+  const _$DevelopmentFailureImpl(
       {required this.failure,
       required this.runtimeType,
       required this.message,
@@ -363,10 +404,10 @@ class _$DevelopmentFailure extends DevelopmentFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DevelopmentFailure &&
+            other is _$DevelopmentFailureImpl &&
             (identical(other.failure, failure) || other.failure == failure) &&
             (identical(other.runtimeType, runtimeType) ||
                 other.runtimeType == runtimeType) &&
@@ -379,11 +420,13 @@ class _$DevelopmentFailure extends DevelopmentFailure {
   int get hashCode =>
       Object.hash(runtimeType, failure, runtimeType, message, stackTrace);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DevelopmentFailureCopyWith<_$DevelopmentFailure> get copyWith =>
-      __$$DevelopmentFailureCopyWithImpl<_$DevelopmentFailure>(
+  _$$DevelopmentFailureImplCopyWith<_$DevelopmentFailureImpl> get copyWith =>
+      __$$DevelopmentFailureImplCopyWithImpl<_$DevelopmentFailureImpl>(
           this, _$identity);
 
   @override
@@ -418,6 +461,10 @@ class _$DevelopmentFailure extends DevelopmentFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -456,6 +503,10 @@ class _$DevelopmentFailure extends DevelopmentFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -494,6 +545,10 @@ class _$DevelopmentFailure extends DevelopmentFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -549,6 +604,14 @@ class _$DevelopmentFailure extends DevelopmentFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -594,6 +657,13 @@ class _$DevelopmentFailure extends DevelopmentFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -639,6 +709,13 @@ class _$DevelopmentFailure extends DevelopmentFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -659,42 +736,47 @@ abstract class DevelopmentFailure extends Failure {
       {required final Failure failure,
       required final Type runtimeType,
       required final String message,
-      final StackTrace? stackTrace}) = _$DevelopmentFailure;
+      final StackTrace? stackTrace}) = _$DevelopmentFailureImpl;
   const DevelopmentFailure._() : super._();
 
   Failure get failure;
   Type get runtimeType;
   String get message;
   StackTrace? get stackTrace;
-  @JsonKey(ignore: true)
-  _$$DevelopmentFailureCopyWith<_$DevelopmentFailure> get copyWith =>
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DevelopmentFailureImplCopyWith<_$DevelopmentFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ApiFailureCopyWith<$Res> {
-  factory _$$ApiFailureCopyWith(
-          _$ApiFailure value, $Res Function(_$ApiFailure) then) =
-      __$$ApiFailureCopyWithImpl<$Res>;
+abstract class _$$ApiFailureImplCopyWith<$Res> {
+  factory _$$ApiFailureImplCopyWith(
+          _$ApiFailureImpl value, $Res Function(_$ApiFailureImpl) then) =
+      __$$ApiFailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int? code, String? message});
 }
 
 /// @nodoc
-class __$$ApiFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$ApiFailure>
-    implements _$$ApiFailureCopyWith<$Res> {
-  __$$ApiFailureCopyWithImpl(
-      _$ApiFailure _value, $Res Function(_$ApiFailure) _then)
+class __$$ApiFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$ApiFailureImpl>
+    implements _$$ApiFailureImplCopyWith<$Res> {
+  __$$ApiFailureImplCopyWithImpl(
+      _$ApiFailureImpl _value, $Res Function(_$ApiFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? code = freezed,
     Object? message = freezed,
   }) {
-    return _then(_$ApiFailure(
+    return _then(_$ApiFailureImpl(
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -709,8 +791,8 @@ class __$$ApiFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ApiFailure extends ApiFailure {
-  const _$ApiFailure({this.code, this.message}) : super._();
+class _$ApiFailureImpl extends ApiFailure {
+  const _$ApiFailureImpl({this.code, this.message}) : super._();
 
   @override
   final int? code;
@@ -723,10 +805,10 @@ class _$ApiFailure extends ApiFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ApiFailure &&
+            other is _$ApiFailureImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.message, message) || other.message == message));
   }
@@ -734,11 +816,13 @@ class _$ApiFailure extends ApiFailure {
   @override
   int get hashCode => Object.hash(runtimeType, code, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ApiFailureCopyWith<_$ApiFailure> get copyWith =>
-      __$$ApiFailureCopyWithImpl<_$ApiFailure>(this, _$identity);
+  _$$ApiFailureImplCopyWith<_$ApiFailureImpl> get copyWith =>
+      __$$ApiFailureImplCopyWithImpl<_$ApiFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -772,6 +856,10 @@ class _$ApiFailure extends ApiFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -810,6 +898,10 @@ class _$ApiFailure extends ApiFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -848,6 +940,10 @@ class _$ApiFailure extends ApiFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -903,6 +999,14 @@ class _$ApiFailure extends ApiFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -948,6 +1052,13 @@ class _$ApiFailure extends ApiFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -993,6 +1104,13 @@ class _$ApiFailure extends ApiFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -1010,36 +1128,44 @@ class _$ApiFailure extends ApiFailure {
 
 abstract class ApiFailure extends Failure {
   const factory ApiFailure({final int? code, final String? message}) =
-      _$ApiFailure;
+      _$ApiFailureImpl;
   const ApiFailure._() : super._();
 
   int? get code;
   String? get message;
-  @JsonKey(ignore: true)
-  _$$ApiFailureCopyWith<_$ApiFailure> get copyWith =>
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ApiFailureImplCopyWith<_$ApiFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RequestCancelledFailureCopyWith<$Res> {
-  factory _$$RequestCancelledFailureCopyWith(_$RequestCancelledFailure value,
-          $Res Function(_$RequestCancelledFailure) then) =
-      __$$RequestCancelledFailureCopyWithImpl<$Res>;
+abstract class _$$RequestCancelledFailureImplCopyWith<$Res> {
+  factory _$$RequestCancelledFailureImplCopyWith(
+          _$RequestCancelledFailureImpl value,
+          $Res Function(_$RequestCancelledFailureImpl) then) =
+      __$$RequestCancelledFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RequestCancelledFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$RequestCancelledFailure>
-    implements _$$RequestCancelledFailureCopyWith<$Res> {
-  __$$RequestCancelledFailureCopyWithImpl(_$RequestCancelledFailure _value,
-      $Res Function(_$RequestCancelledFailure) _then)
+class __$$RequestCancelledFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$RequestCancelledFailureImpl>
+    implements _$$RequestCancelledFailureImplCopyWith<$Res> {
+  __$$RequestCancelledFailureImplCopyWithImpl(
+      _$RequestCancelledFailureImpl _value,
+      $Res Function(_$RequestCancelledFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RequestCancelledFailure extends RequestCancelledFailure {
-  const _$RequestCancelledFailure() : super._();
+class _$RequestCancelledFailureImpl extends RequestCancelledFailure {
+  const _$RequestCancelledFailureImpl() : super._();
 
   @override
   String toString() {
@@ -1047,10 +1173,10 @@ class _$RequestCancelledFailure extends RequestCancelledFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestCancelledFailure);
+            other is _$RequestCancelledFailureImpl);
   }
 
   @override
@@ -1088,6 +1214,10 @@ class _$RequestCancelledFailure extends RequestCancelledFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -1126,6 +1256,10 @@ class _$RequestCancelledFailure extends RequestCancelledFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -1164,6 +1298,10 @@ class _$RequestCancelledFailure extends RequestCancelledFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -1219,6 +1357,14 @@ class _$RequestCancelledFailure extends RequestCancelledFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -1264,6 +1410,13 @@ class _$RequestCancelledFailure extends RequestCancelledFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -1309,6 +1462,13 @@ class _$RequestCancelledFailure extends RequestCancelledFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -1325,32 +1485,35 @@ class _$RequestCancelledFailure extends RequestCancelledFailure {
 }
 
 abstract class RequestCancelledFailure extends Failure {
-  const factory RequestCancelledFailure() = _$RequestCancelledFailure;
+  const factory RequestCancelledFailure() = _$RequestCancelledFailureImpl;
   const RequestCancelledFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$UnauthorizedRequestFailureCopyWith<$Res> {
-  factory _$$UnauthorizedRequestFailureCopyWith(
-          _$UnauthorizedRequestFailure value,
-          $Res Function(_$UnauthorizedRequestFailure) then) =
-      __$$UnauthorizedRequestFailureCopyWithImpl<$Res>;
+abstract class _$$UnauthorizedRequestFailureImplCopyWith<$Res> {
+  factory _$$UnauthorizedRequestFailureImplCopyWith(
+          _$UnauthorizedRequestFailureImpl value,
+          $Res Function(_$UnauthorizedRequestFailureImpl) then) =
+      __$$UnauthorizedRequestFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$UnauthorizedRequestFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$UnauthorizedRequestFailure>
-    implements _$$UnauthorizedRequestFailureCopyWith<$Res> {
-  __$$UnauthorizedRequestFailureCopyWithImpl(
-      _$UnauthorizedRequestFailure _value,
-      $Res Function(_$UnauthorizedRequestFailure) _then)
+class __$$UnauthorizedRequestFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$UnauthorizedRequestFailureImpl>
+    implements _$$UnauthorizedRequestFailureImplCopyWith<$Res> {
+  __$$UnauthorizedRequestFailureImplCopyWithImpl(
+      _$UnauthorizedRequestFailureImpl _value,
+      $Res Function(_$UnauthorizedRequestFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$UnauthorizedRequestFailure extends UnauthorizedRequestFailure {
-  const _$UnauthorizedRequestFailure() : super._();
+class _$UnauthorizedRequestFailureImpl extends UnauthorizedRequestFailure {
+  const _$UnauthorizedRequestFailureImpl() : super._();
 
   @override
   String toString() {
@@ -1358,10 +1521,10 @@ class _$UnauthorizedRequestFailure extends UnauthorizedRequestFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UnauthorizedRequestFailure);
+            other is _$UnauthorizedRequestFailureImpl);
   }
 
   @override
@@ -1399,6 +1562,10 @@ class _$UnauthorizedRequestFailure extends UnauthorizedRequestFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -1437,6 +1604,10 @@ class _$UnauthorizedRequestFailure extends UnauthorizedRequestFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -1475,6 +1646,10 @@ class _$UnauthorizedRequestFailure extends UnauthorizedRequestFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -1530,6 +1705,14 @@ class _$UnauthorizedRequestFailure extends UnauthorizedRequestFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -1575,6 +1758,13 @@ class _$UnauthorizedRequestFailure extends UnauthorizedRequestFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -1620,6 +1810,13 @@ class _$UnauthorizedRequestFailure extends UnauthorizedRequestFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -1636,30 +1833,33 @@ class _$UnauthorizedRequestFailure extends UnauthorizedRequestFailure {
 }
 
 abstract class UnauthorizedRequestFailure extends Failure {
-  const factory UnauthorizedRequestFailure() = _$UnauthorizedRequestFailure;
+  const factory UnauthorizedRequestFailure() = _$UnauthorizedRequestFailureImpl;
   const UnauthorizedRequestFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$BadRequestFailureCopyWith<$Res> {
-  factory _$$BadRequestFailureCopyWith(
-          _$BadRequestFailure value, $Res Function(_$BadRequestFailure) then) =
-      __$$BadRequestFailureCopyWithImpl<$Res>;
+abstract class _$$BadRequestFailureImplCopyWith<$Res> {
+  factory _$$BadRequestFailureImplCopyWith(_$BadRequestFailureImpl value,
+          $Res Function(_$BadRequestFailureImpl) then) =
+      __$$BadRequestFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$BadRequestFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$BadRequestFailure>
-    implements _$$BadRequestFailureCopyWith<$Res> {
-  __$$BadRequestFailureCopyWithImpl(
-      _$BadRequestFailure _value, $Res Function(_$BadRequestFailure) _then)
+class __$$BadRequestFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$BadRequestFailureImpl>
+    implements _$$BadRequestFailureImplCopyWith<$Res> {
+  __$$BadRequestFailureImplCopyWithImpl(_$BadRequestFailureImpl _value,
+      $Res Function(_$BadRequestFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$BadRequestFailure extends BadRequestFailure {
-  const _$BadRequestFailure() : super._();
+class _$BadRequestFailureImpl extends BadRequestFailure {
+  const _$BadRequestFailureImpl() : super._();
 
   @override
   String toString() {
@@ -1667,9 +1867,9 @@ class _$BadRequestFailure extends BadRequestFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BadRequestFailure);
+        (other.runtimeType == runtimeType && other is _$BadRequestFailureImpl);
   }
 
   @override
@@ -1707,6 +1907,10 @@ class _$BadRequestFailure extends BadRequestFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -1745,6 +1949,10 @@ class _$BadRequestFailure extends BadRequestFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -1783,6 +1991,10 @@ class _$BadRequestFailure extends BadRequestFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -1838,6 +2050,14 @@ class _$BadRequestFailure extends BadRequestFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -1883,6 +2103,13 @@ class _$BadRequestFailure extends BadRequestFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -1928,6 +2155,13 @@ class _$BadRequestFailure extends BadRequestFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -1944,30 +2178,33 @@ class _$BadRequestFailure extends BadRequestFailure {
 }
 
 abstract class BadRequestFailure extends Failure {
-  const factory BadRequestFailure() = _$BadRequestFailure;
+  const factory BadRequestFailure() = _$BadRequestFailureImpl;
   const BadRequestFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$NotFoundFailureCopyWith<$Res> {
-  factory _$$NotFoundFailureCopyWith(
-          _$NotFoundFailure value, $Res Function(_$NotFoundFailure) then) =
-      __$$NotFoundFailureCopyWithImpl<$Res>;
+abstract class _$$NotFoundFailureImplCopyWith<$Res> {
+  factory _$$NotFoundFailureImplCopyWith(_$NotFoundFailureImpl value,
+          $Res Function(_$NotFoundFailureImpl) then) =
+      __$$NotFoundFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NotFoundFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$NotFoundFailure>
-    implements _$$NotFoundFailureCopyWith<$Res> {
-  __$$NotFoundFailureCopyWithImpl(
-      _$NotFoundFailure _value, $Res Function(_$NotFoundFailure) _then)
+class __$$NotFoundFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$NotFoundFailureImpl>
+    implements _$$NotFoundFailureImplCopyWith<$Res> {
+  __$$NotFoundFailureImplCopyWithImpl(
+      _$NotFoundFailureImpl _value, $Res Function(_$NotFoundFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$NotFoundFailure extends NotFoundFailure {
-  const _$NotFoundFailure() : super._();
+class _$NotFoundFailureImpl extends NotFoundFailure {
+  const _$NotFoundFailureImpl() : super._();
 
   @override
   String toString() {
@@ -1975,9 +2212,9 @@ class _$NotFoundFailure extends NotFoundFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NotFoundFailure);
+        (other.runtimeType == runtimeType && other is _$NotFoundFailureImpl);
   }
 
   @override
@@ -2015,6 +2252,10 @@ class _$NotFoundFailure extends NotFoundFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -2053,6 +2294,10 @@ class _$NotFoundFailure extends NotFoundFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -2091,6 +2336,10 @@ class _$NotFoundFailure extends NotFoundFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -2146,6 +2395,14 @@ class _$NotFoundFailure extends NotFoundFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -2191,6 +2448,13 @@ class _$NotFoundFailure extends NotFoundFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -2236,6 +2500,13 @@ class _$NotFoundFailure extends NotFoundFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -2252,30 +2523,35 @@ class _$NotFoundFailure extends NotFoundFailure {
 }
 
 abstract class NotFoundFailure extends Failure {
-  const factory NotFoundFailure() = _$NotFoundFailure;
+  const factory NotFoundFailure() = _$NotFoundFailureImpl;
   const NotFoundFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$MethodNotAllowedFailureCopyWith<$Res> {
-  factory _$$MethodNotAllowedFailureCopyWith(_$MethodNotAllowedFailure value,
-          $Res Function(_$MethodNotAllowedFailure) then) =
-      __$$MethodNotAllowedFailureCopyWithImpl<$Res>;
+abstract class _$$MethodNotAllowedFailureImplCopyWith<$Res> {
+  factory _$$MethodNotAllowedFailureImplCopyWith(
+          _$MethodNotAllowedFailureImpl value,
+          $Res Function(_$MethodNotAllowedFailureImpl) then) =
+      __$$MethodNotAllowedFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MethodNotAllowedFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$MethodNotAllowedFailure>
-    implements _$$MethodNotAllowedFailureCopyWith<$Res> {
-  __$$MethodNotAllowedFailureCopyWithImpl(_$MethodNotAllowedFailure _value,
-      $Res Function(_$MethodNotAllowedFailure) _then)
+class __$$MethodNotAllowedFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$MethodNotAllowedFailureImpl>
+    implements _$$MethodNotAllowedFailureImplCopyWith<$Res> {
+  __$$MethodNotAllowedFailureImplCopyWithImpl(
+      _$MethodNotAllowedFailureImpl _value,
+      $Res Function(_$MethodNotAllowedFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$MethodNotAllowedFailure extends MethodNotAllowedFailure {
-  const _$MethodNotAllowedFailure() : super._();
+class _$MethodNotAllowedFailureImpl extends MethodNotAllowedFailure {
+  const _$MethodNotAllowedFailureImpl() : super._();
 
   @override
   String toString() {
@@ -2283,10 +2559,10 @@ class _$MethodNotAllowedFailure extends MethodNotAllowedFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MethodNotAllowedFailure);
+            other is _$MethodNotAllowedFailureImpl);
   }
 
   @override
@@ -2324,6 +2600,10 @@ class _$MethodNotAllowedFailure extends MethodNotAllowedFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -2362,6 +2642,10 @@ class _$MethodNotAllowedFailure extends MethodNotAllowedFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -2400,6 +2684,10 @@ class _$MethodNotAllowedFailure extends MethodNotAllowedFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -2455,6 +2743,14 @@ class _$MethodNotAllowedFailure extends MethodNotAllowedFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -2500,6 +2796,13 @@ class _$MethodNotAllowedFailure extends MethodNotAllowedFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -2545,6 +2848,13 @@ class _$MethodNotAllowedFailure extends MethodNotAllowedFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -2561,30 +2871,33 @@ class _$MethodNotAllowedFailure extends MethodNotAllowedFailure {
 }
 
 abstract class MethodNotAllowedFailure extends Failure {
-  const factory MethodNotAllowedFailure() = _$MethodNotAllowedFailure;
+  const factory MethodNotAllowedFailure() = _$MethodNotAllowedFailureImpl;
   const MethodNotAllowedFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$NotAcceptableFailureCopyWith<$Res> {
-  factory _$$NotAcceptableFailureCopyWith(_$NotAcceptableFailure value,
-          $Res Function(_$NotAcceptableFailure) then) =
-      __$$NotAcceptableFailureCopyWithImpl<$Res>;
+abstract class _$$NotAcceptableFailureImplCopyWith<$Res> {
+  factory _$$NotAcceptableFailureImplCopyWith(_$NotAcceptableFailureImpl value,
+          $Res Function(_$NotAcceptableFailureImpl) then) =
+      __$$NotAcceptableFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NotAcceptableFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$NotAcceptableFailure>
-    implements _$$NotAcceptableFailureCopyWith<$Res> {
-  __$$NotAcceptableFailureCopyWithImpl(_$NotAcceptableFailure _value,
-      $Res Function(_$NotAcceptableFailure) _then)
+class __$$NotAcceptableFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$NotAcceptableFailureImpl>
+    implements _$$NotAcceptableFailureImplCopyWith<$Res> {
+  __$$NotAcceptableFailureImplCopyWithImpl(_$NotAcceptableFailureImpl _value,
+      $Res Function(_$NotAcceptableFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$NotAcceptableFailure extends NotAcceptableFailure {
-  const _$NotAcceptableFailure() : super._();
+class _$NotAcceptableFailureImpl extends NotAcceptableFailure {
+  const _$NotAcceptableFailureImpl() : super._();
 
   @override
   String toString() {
@@ -2592,9 +2905,10 @@ class _$NotAcceptableFailure extends NotAcceptableFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NotAcceptableFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$NotAcceptableFailureImpl);
   }
 
   @override
@@ -2632,6 +2946,10 @@ class _$NotAcceptableFailure extends NotAcceptableFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -2670,6 +2988,10 @@ class _$NotAcceptableFailure extends NotAcceptableFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -2708,6 +3030,10 @@ class _$NotAcceptableFailure extends NotAcceptableFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -2763,6 +3089,14 @@ class _$NotAcceptableFailure extends NotAcceptableFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -2808,6 +3142,13 @@ class _$NotAcceptableFailure extends NotAcceptableFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -2853,6 +3194,13 @@ class _$NotAcceptableFailure extends NotAcceptableFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -2869,30 +3217,34 @@ class _$NotAcceptableFailure extends NotAcceptableFailure {
 }
 
 abstract class NotAcceptableFailure extends Failure {
-  const factory NotAcceptableFailure() = _$NotAcceptableFailure;
+  const factory NotAcceptableFailure() = _$NotAcceptableFailureImpl;
   const NotAcceptableFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$RequestTimeoutFailureCopyWith<$Res> {
-  factory _$$RequestTimeoutFailureCopyWith(_$RequestTimeoutFailure value,
-          $Res Function(_$RequestTimeoutFailure) then) =
-      __$$RequestTimeoutFailureCopyWithImpl<$Res>;
+abstract class _$$RequestTimeoutFailureImplCopyWith<$Res> {
+  factory _$$RequestTimeoutFailureImplCopyWith(
+          _$RequestTimeoutFailureImpl value,
+          $Res Function(_$RequestTimeoutFailureImpl) then) =
+      __$$RequestTimeoutFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RequestTimeoutFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$RequestTimeoutFailure>
-    implements _$$RequestTimeoutFailureCopyWith<$Res> {
-  __$$RequestTimeoutFailureCopyWithImpl(_$RequestTimeoutFailure _value,
-      $Res Function(_$RequestTimeoutFailure) _then)
+class __$$RequestTimeoutFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$RequestTimeoutFailureImpl>
+    implements _$$RequestTimeoutFailureImplCopyWith<$Res> {
+  __$$RequestTimeoutFailureImplCopyWithImpl(_$RequestTimeoutFailureImpl _value,
+      $Res Function(_$RequestTimeoutFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RequestTimeoutFailure extends RequestTimeoutFailure {
-  const _$RequestTimeoutFailure() : super._();
+class _$RequestTimeoutFailureImpl extends RequestTimeoutFailure {
+  const _$RequestTimeoutFailureImpl() : super._();
 
   @override
   String toString() {
@@ -2900,9 +3252,10 @@ class _$RequestTimeoutFailure extends RequestTimeoutFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RequestTimeoutFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$RequestTimeoutFailureImpl);
   }
 
   @override
@@ -2940,6 +3293,10 @@ class _$RequestTimeoutFailure extends RequestTimeoutFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -2978,6 +3335,10 @@ class _$RequestTimeoutFailure extends RequestTimeoutFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -3016,6 +3377,10 @@ class _$RequestTimeoutFailure extends RequestTimeoutFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -3071,6 +3436,14 @@ class _$RequestTimeoutFailure extends RequestTimeoutFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -3116,6 +3489,13 @@ class _$RequestTimeoutFailure extends RequestTimeoutFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -3161,6 +3541,13 @@ class _$RequestTimeoutFailure extends RequestTimeoutFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -3177,30 +3564,33 @@ class _$RequestTimeoutFailure extends RequestTimeoutFailure {
 }
 
 abstract class RequestTimeoutFailure extends Failure {
-  const factory RequestTimeoutFailure() = _$RequestTimeoutFailure;
+  const factory RequestTimeoutFailure() = _$RequestTimeoutFailureImpl;
   const RequestTimeoutFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$SendTimeoutFailureCopyWith<$Res> {
-  factory _$$SendTimeoutFailureCopyWith(_$SendTimeoutFailure value,
-          $Res Function(_$SendTimeoutFailure) then) =
-      __$$SendTimeoutFailureCopyWithImpl<$Res>;
+abstract class _$$SendTimeoutFailureImplCopyWith<$Res> {
+  factory _$$SendTimeoutFailureImplCopyWith(_$SendTimeoutFailureImpl value,
+          $Res Function(_$SendTimeoutFailureImpl) then) =
+      __$$SendTimeoutFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SendTimeoutFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$SendTimeoutFailure>
-    implements _$$SendTimeoutFailureCopyWith<$Res> {
-  __$$SendTimeoutFailureCopyWithImpl(
-      _$SendTimeoutFailure _value, $Res Function(_$SendTimeoutFailure) _then)
+class __$$SendTimeoutFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$SendTimeoutFailureImpl>
+    implements _$$SendTimeoutFailureImplCopyWith<$Res> {
+  __$$SendTimeoutFailureImplCopyWithImpl(_$SendTimeoutFailureImpl _value,
+      $Res Function(_$SendTimeoutFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$SendTimeoutFailure extends SendTimeoutFailure {
-  const _$SendTimeoutFailure() : super._();
+class _$SendTimeoutFailureImpl extends SendTimeoutFailure {
+  const _$SendTimeoutFailureImpl() : super._();
 
   @override
   String toString() {
@@ -3208,9 +3598,9 @@ class _$SendTimeoutFailure extends SendTimeoutFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SendTimeoutFailure);
+        (other.runtimeType == runtimeType && other is _$SendTimeoutFailureImpl);
   }
 
   @override
@@ -3248,6 +3638,10 @@ class _$SendTimeoutFailure extends SendTimeoutFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -3286,6 +3680,10 @@ class _$SendTimeoutFailure extends SendTimeoutFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -3324,6 +3722,10 @@ class _$SendTimeoutFailure extends SendTimeoutFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -3379,6 +3781,14 @@ class _$SendTimeoutFailure extends SendTimeoutFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -3424,6 +3834,13 @@ class _$SendTimeoutFailure extends SendTimeoutFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -3469,6 +3886,13 @@ class _$SendTimeoutFailure extends SendTimeoutFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -3485,30 +3909,33 @@ class _$SendTimeoutFailure extends SendTimeoutFailure {
 }
 
 abstract class SendTimeoutFailure extends Failure {
-  const factory SendTimeoutFailure() = _$SendTimeoutFailure;
+  const factory SendTimeoutFailure() = _$SendTimeoutFailureImpl;
   const SendTimeoutFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$ConflictFailureCopyWith<$Res> {
-  factory _$$ConflictFailureCopyWith(
-          _$ConflictFailure value, $Res Function(_$ConflictFailure) then) =
-      __$$ConflictFailureCopyWithImpl<$Res>;
+abstract class _$$ConflictFailureImplCopyWith<$Res> {
+  factory _$$ConflictFailureImplCopyWith(_$ConflictFailureImpl value,
+          $Res Function(_$ConflictFailureImpl) then) =
+      __$$ConflictFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ConflictFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$ConflictFailure>
-    implements _$$ConflictFailureCopyWith<$Res> {
-  __$$ConflictFailureCopyWithImpl(
-      _$ConflictFailure _value, $Res Function(_$ConflictFailure) _then)
+class __$$ConflictFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$ConflictFailureImpl>
+    implements _$$ConflictFailureImplCopyWith<$Res> {
+  __$$ConflictFailureImplCopyWithImpl(
+      _$ConflictFailureImpl _value, $Res Function(_$ConflictFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ConflictFailure extends ConflictFailure {
-  const _$ConflictFailure() : super._();
+class _$ConflictFailureImpl extends ConflictFailure {
+  const _$ConflictFailureImpl() : super._();
 
   @override
   String toString() {
@@ -3516,9 +3943,9 @@ class _$ConflictFailure extends ConflictFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ConflictFailure);
+        (other.runtimeType == runtimeType && other is _$ConflictFailureImpl);
   }
 
   @override
@@ -3556,6 +3983,10 @@ class _$ConflictFailure extends ConflictFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -3594,6 +4025,10 @@ class _$ConflictFailure extends ConflictFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -3632,6 +4067,10 @@ class _$ConflictFailure extends ConflictFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -3687,6 +4126,14 @@ class _$ConflictFailure extends ConflictFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -3732,6 +4179,13 @@ class _$ConflictFailure extends ConflictFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -3777,6 +4231,13 @@ class _$ConflictFailure extends ConflictFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -3793,32 +4254,35 @@ class _$ConflictFailure extends ConflictFailure {
 }
 
 abstract class ConflictFailure extends Failure {
-  const factory ConflictFailure() = _$ConflictFailure;
+  const factory ConflictFailure() = _$ConflictFailureImpl;
   const ConflictFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$InternalServerErrorFailureCopyWith<$Res> {
-  factory _$$InternalServerErrorFailureCopyWith(
-          _$InternalServerErrorFailure value,
-          $Res Function(_$InternalServerErrorFailure) then) =
-      __$$InternalServerErrorFailureCopyWithImpl<$Res>;
+abstract class _$$InternalServerErrorFailureImplCopyWith<$Res> {
+  factory _$$InternalServerErrorFailureImplCopyWith(
+          _$InternalServerErrorFailureImpl value,
+          $Res Function(_$InternalServerErrorFailureImpl) then) =
+      __$$InternalServerErrorFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InternalServerErrorFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$InternalServerErrorFailure>
-    implements _$$InternalServerErrorFailureCopyWith<$Res> {
-  __$$InternalServerErrorFailureCopyWithImpl(
-      _$InternalServerErrorFailure _value,
-      $Res Function(_$InternalServerErrorFailure) _then)
+class __$$InternalServerErrorFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$InternalServerErrorFailureImpl>
+    implements _$$InternalServerErrorFailureImplCopyWith<$Res> {
+  __$$InternalServerErrorFailureImplCopyWithImpl(
+      _$InternalServerErrorFailureImpl _value,
+      $Res Function(_$InternalServerErrorFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$InternalServerErrorFailure extends InternalServerErrorFailure {
-  const _$InternalServerErrorFailure() : super._();
+class _$InternalServerErrorFailureImpl extends InternalServerErrorFailure {
+  const _$InternalServerErrorFailureImpl() : super._();
 
   @override
   String toString() {
@@ -3826,10 +4290,10 @@ class _$InternalServerErrorFailure extends InternalServerErrorFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InternalServerErrorFailure);
+            other is _$InternalServerErrorFailureImpl);
   }
 
   @override
@@ -3867,6 +4331,10 @@ class _$InternalServerErrorFailure extends InternalServerErrorFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -3905,6 +4373,10 @@ class _$InternalServerErrorFailure extends InternalServerErrorFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -3943,6 +4415,10 @@ class _$InternalServerErrorFailure extends InternalServerErrorFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -3998,6 +4474,14 @@ class _$InternalServerErrorFailure extends InternalServerErrorFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -4043,6 +4527,13 @@ class _$InternalServerErrorFailure extends InternalServerErrorFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -4088,6 +4579,13 @@ class _$InternalServerErrorFailure extends InternalServerErrorFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -4104,30 +4602,34 @@ class _$InternalServerErrorFailure extends InternalServerErrorFailure {
 }
 
 abstract class InternalServerErrorFailure extends Failure {
-  const factory InternalServerErrorFailure() = _$InternalServerErrorFailure;
+  const factory InternalServerErrorFailure() = _$InternalServerErrorFailureImpl;
   const InternalServerErrorFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$NotImplementedFailureCopyWith<$Res> {
-  factory _$$NotImplementedFailureCopyWith(_$NotImplementedFailure value,
-          $Res Function(_$NotImplementedFailure) then) =
-      __$$NotImplementedFailureCopyWithImpl<$Res>;
+abstract class _$$NotImplementedFailureImplCopyWith<$Res> {
+  factory _$$NotImplementedFailureImplCopyWith(
+          _$NotImplementedFailureImpl value,
+          $Res Function(_$NotImplementedFailureImpl) then) =
+      __$$NotImplementedFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NotImplementedFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$NotImplementedFailure>
-    implements _$$NotImplementedFailureCopyWith<$Res> {
-  __$$NotImplementedFailureCopyWithImpl(_$NotImplementedFailure _value,
-      $Res Function(_$NotImplementedFailure) _then)
+class __$$NotImplementedFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$NotImplementedFailureImpl>
+    implements _$$NotImplementedFailureImplCopyWith<$Res> {
+  __$$NotImplementedFailureImplCopyWithImpl(_$NotImplementedFailureImpl _value,
+      $Res Function(_$NotImplementedFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$NotImplementedFailure extends NotImplementedFailure {
-  const _$NotImplementedFailure() : super._();
+class _$NotImplementedFailureImpl extends NotImplementedFailure {
+  const _$NotImplementedFailureImpl() : super._();
 
   @override
   String toString() {
@@ -4135,9 +4637,10 @@ class _$NotImplementedFailure extends NotImplementedFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NotImplementedFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$NotImplementedFailureImpl);
   }
 
   @override
@@ -4175,6 +4678,10 @@ class _$NotImplementedFailure extends NotImplementedFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -4213,6 +4720,10 @@ class _$NotImplementedFailure extends NotImplementedFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -4251,6 +4762,10 @@ class _$NotImplementedFailure extends NotImplementedFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -4306,6 +4821,14 @@ class _$NotImplementedFailure extends NotImplementedFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -4351,6 +4874,13 @@ class _$NotImplementedFailure extends NotImplementedFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -4396,6 +4926,13 @@ class _$NotImplementedFailure extends NotImplementedFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -4412,31 +4949,35 @@ class _$NotImplementedFailure extends NotImplementedFailure {
 }
 
 abstract class NotImplementedFailure extends Failure {
-  const factory NotImplementedFailure() = _$NotImplementedFailure;
+  const factory NotImplementedFailure() = _$NotImplementedFailureImpl;
   const NotImplementedFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$ServiceUnavailableFailureCopyWith<$Res> {
-  factory _$$ServiceUnavailableFailureCopyWith(
-          _$ServiceUnavailableFailure value,
-          $Res Function(_$ServiceUnavailableFailure) then) =
-      __$$ServiceUnavailableFailureCopyWithImpl<$Res>;
+abstract class _$$ServiceUnavailableFailureImplCopyWith<$Res> {
+  factory _$$ServiceUnavailableFailureImplCopyWith(
+          _$ServiceUnavailableFailureImpl value,
+          $Res Function(_$ServiceUnavailableFailureImpl) then) =
+      __$$ServiceUnavailableFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ServiceUnavailableFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$ServiceUnavailableFailure>
-    implements _$$ServiceUnavailableFailureCopyWith<$Res> {
-  __$$ServiceUnavailableFailureCopyWithImpl(_$ServiceUnavailableFailure _value,
-      $Res Function(_$ServiceUnavailableFailure) _then)
+class __$$ServiceUnavailableFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$ServiceUnavailableFailureImpl>
+    implements _$$ServiceUnavailableFailureImplCopyWith<$Res> {
+  __$$ServiceUnavailableFailureImplCopyWithImpl(
+      _$ServiceUnavailableFailureImpl _value,
+      $Res Function(_$ServiceUnavailableFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ServiceUnavailableFailure extends ServiceUnavailableFailure {
-  const _$ServiceUnavailableFailure() : super._();
+class _$ServiceUnavailableFailureImpl extends ServiceUnavailableFailure {
+  const _$ServiceUnavailableFailureImpl() : super._();
 
   @override
   String toString() {
@@ -4444,10 +4985,10 @@ class _$ServiceUnavailableFailure extends ServiceUnavailableFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ServiceUnavailableFailure);
+            other is _$ServiceUnavailableFailureImpl);
   }
 
   @override
@@ -4485,6 +5026,10 @@ class _$ServiceUnavailableFailure extends ServiceUnavailableFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -4523,6 +5068,10 @@ class _$ServiceUnavailableFailure extends ServiceUnavailableFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -4561,6 +5110,10 @@ class _$ServiceUnavailableFailure extends ServiceUnavailableFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -4616,6 +5169,14 @@ class _$ServiceUnavailableFailure extends ServiceUnavailableFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -4661,6 +5222,13 @@ class _$ServiceUnavailableFailure extends ServiceUnavailableFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -4706,6 +5274,13 @@ class _$ServiceUnavailableFailure extends ServiceUnavailableFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -4722,32 +5297,35 @@ class _$ServiceUnavailableFailure extends ServiceUnavailableFailure {
 }
 
 abstract class ServiceUnavailableFailure extends Failure {
-  const factory ServiceUnavailableFailure() = _$ServiceUnavailableFailure;
+  const factory ServiceUnavailableFailure() = _$ServiceUnavailableFailureImpl;
   const ServiceUnavailableFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$NoInternetConnectionFailureCopyWith<$Res> {
-  factory _$$NoInternetConnectionFailureCopyWith(
-          _$NoInternetConnectionFailure value,
-          $Res Function(_$NoInternetConnectionFailure) then) =
-      __$$NoInternetConnectionFailureCopyWithImpl<$Res>;
+abstract class _$$NoInternetConnectionFailureImplCopyWith<$Res> {
+  factory _$$NoInternetConnectionFailureImplCopyWith(
+          _$NoInternetConnectionFailureImpl value,
+          $Res Function(_$NoInternetConnectionFailureImpl) then) =
+      __$$NoInternetConnectionFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NoInternetConnectionFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$NoInternetConnectionFailure>
-    implements _$$NoInternetConnectionFailureCopyWith<$Res> {
-  __$$NoInternetConnectionFailureCopyWithImpl(
-      _$NoInternetConnectionFailure _value,
-      $Res Function(_$NoInternetConnectionFailure) _then)
+class __$$NoInternetConnectionFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$NoInternetConnectionFailureImpl>
+    implements _$$NoInternetConnectionFailureImplCopyWith<$Res> {
+  __$$NoInternetConnectionFailureImplCopyWithImpl(
+      _$NoInternetConnectionFailureImpl _value,
+      $Res Function(_$NoInternetConnectionFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$NoInternetConnectionFailure extends NoInternetConnectionFailure {
-  const _$NoInternetConnectionFailure() : super._();
+class _$NoInternetConnectionFailureImpl extends NoInternetConnectionFailure {
+  const _$NoInternetConnectionFailureImpl() : super._();
 
   @override
   String toString() {
@@ -4755,10 +5333,10 @@ class _$NoInternetConnectionFailure extends NoInternetConnectionFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NoInternetConnectionFailure);
+            other is _$NoInternetConnectionFailureImpl);
   }
 
   @override
@@ -4796,6 +5374,10 @@ class _$NoInternetConnectionFailure extends NoInternetConnectionFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -4834,6 +5416,10 @@ class _$NoInternetConnectionFailure extends NoInternetConnectionFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -4872,6 +5458,10 @@ class _$NoInternetConnectionFailure extends NoInternetConnectionFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -4927,6 +5517,14 @@ class _$NoInternetConnectionFailure extends NoInternetConnectionFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -4972,6 +5570,13 @@ class _$NoInternetConnectionFailure extends NoInternetConnectionFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -5017,6 +5622,13 @@ class _$NoInternetConnectionFailure extends NoInternetConnectionFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -5033,30 +5645,34 @@ class _$NoInternetConnectionFailure extends NoInternetConnectionFailure {
 }
 
 abstract class NoInternetConnectionFailure extends Failure {
-  const factory NoInternetConnectionFailure() = _$NoInternetConnectionFailure;
+  const factory NoInternetConnectionFailure() =
+      _$NoInternetConnectionFailureImpl;
   const NoInternetConnectionFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$FormatFailureCopyWith<$Res> {
-  factory _$$FormatFailureCopyWith(
-          _$FormatFailure value, $Res Function(_$FormatFailure) then) =
-      __$$FormatFailureCopyWithImpl<$Res>;
+abstract class _$$FormatFailureImplCopyWith<$Res> {
+  factory _$$FormatFailureImplCopyWith(
+          _$FormatFailureImpl value, $Res Function(_$FormatFailureImpl) then) =
+      __$$FormatFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FormatFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$FormatFailure>
-    implements _$$FormatFailureCopyWith<$Res> {
-  __$$FormatFailureCopyWithImpl(
-      _$FormatFailure _value, $Res Function(_$FormatFailure) _then)
+class __$$FormatFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$FormatFailureImpl>
+    implements _$$FormatFailureImplCopyWith<$Res> {
+  __$$FormatFailureImplCopyWithImpl(
+      _$FormatFailureImpl _value, $Res Function(_$FormatFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$FormatFailure extends FormatFailure {
-  const _$FormatFailure() : super._();
+class _$FormatFailureImpl extends FormatFailure {
+  const _$FormatFailureImpl() : super._();
 
   @override
   String toString() {
@@ -5064,9 +5680,9 @@ class _$FormatFailure extends FormatFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FormatFailure);
+        (other.runtimeType == runtimeType && other is _$FormatFailureImpl);
   }
 
   @override
@@ -5104,6 +5720,10 @@ class _$FormatFailure extends FormatFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -5142,6 +5762,10 @@ class _$FormatFailure extends FormatFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -5180,6 +5804,10 @@ class _$FormatFailure extends FormatFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -5235,6 +5863,14 @@ class _$FormatFailure extends FormatFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -5280,6 +5916,13 @@ class _$FormatFailure extends FormatFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -5325,6 +5968,13 @@ class _$FormatFailure extends FormatFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -5341,30 +5991,35 @@ class _$FormatFailure extends FormatFailure {
 }
 
 abstract class FormatFailure extends Failure {
-  const factory FormatFailure() = _$FormatFailure;
+  const factory FormatFailure() = _$FormatFailureImpl;
   const FormatFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$UnableToProcessFailureCopyWith<$Res> {
-  factory _$$UnableToProcessFailureCopyWith(_$UnableToProcessFailure value,
-          $Res Function(_$UnableToProcessFailure) then) =
-      __$$UnableToProcessFailureCopyWithImpl<$Res>;
+abstract class _$$UnableToProcessFailureImplCopyWith<$Res> {
+  factory _$$UnableToProcessFailureImplCopyWith(
+          _$UnableToProcessFailureImpl value,
+          $Res Function(_$UnableToProcessFailureImpl) then) =
+      __$$UnableToProcessFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$UnableToProcessFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$UnableToProcessFailure>
-    implements _$$UnableToProcessFailureCopyWith<$Res> {
-  __$$UnableToProcessFailureCopyWithImpl(_$UnableToProcessFailure _value,
-      $Res Function(_$UnableToProcessFailure) _then)
+class __$$UnableToProcessFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$UnableToProcessFailureImpl>
+    implements _$$UnableToProcessFailureImplCopyWith<$Res> {
+  __$$UnableToProcessFailureImplCopyWithImpl(
+      _$UnableToProcessFailureImpl _value,
+      $Res Function(_$UnableToProcessFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$UnableToProcessFailure extends UnableToProcessFailure {
-  const _$UnableToProcessFailure() : super._();
+class _$UnableToProcessFailureImpl extends UnableToProcessFailure {
+  const _$UnableToProcessFailureImpl() : super._();
 
   @override
   String toString() {
@@ -5372,9 +6027,10 @@ class _$UnableToProcessFailure extends UnableToProcessFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnableToProcessFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$UnableToProcessFailureImpl);
   }
 
   @override
@@ -5412,6 +6068,10 @@ class _$UnableToProcessFailure extends UnableToProcessFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -5450,6 +6110,10 @@ class _$UnableToProcessFailure extends UnableToProcessFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -5488,6 +6152,10 @@ class _$UnableToProcessFailure extends UnableToProcessFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -5543,6 +6211,14 @@ class _$UnableToProcessFailure extends UnableToProcessFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -5588,6 +6264,13 @@ class _$UnableToProcessFailure extends UnableToProcessFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -5633,6 +6316,13 @@ class _$UnableToProcessFailure extends UnableToProcessFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -5649,30 +6339,33 @@ class _$UnableToProcessFailure extends UnableToProcessFailure {
 }
 
 abstract class UnableToProcessFailure extends Failure {
-  const factory UnableToProcessFailure() = _$UnableToProcessFailure;
+  const factory UnableToProcessFailure() = _$UnableToProcessFailureImpl;
   const UnableToProcessFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$OtherErrorFailureCopyWith<$Res> {
-  factory _$$OtherErrorFailureCopyWith(
-          _$OtherErrorFailure value, $Res Function(_$OtherErrorFailure) then) =
-      __$$OtherErrorFailureCopyWithImpl<$Res>;
+abstract class _$$OtherErrorFailureImplCopyWith<$Res> {
+  factory _$$OtherErrorFailureImplCopyWith(_$OtherErrorFailureImpl value,
+          $Res Function(_$OtherErrorFailureImpl) then) =
+      __$$OtherErrorFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$OtherErrorFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$OtherErrorFailure>
-    implements _$$OtherErrorFailureCopyWith<$Res> {
-  __$$OtherErrorFailureCopyWithImpl(
-      _$OtherErrorFailure _value, $Res Function(_$OtherErrorFailure) _then)
+class __$$OtherErrorFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$OtherErrorFailureImpl>
+    implements _$$OtherErrorFailureImplCopyWith<$Res> {
+  __$$OtherErrorFailureImplCopyWithImpl(_$OtherErrorFailureImpl _value,
+      $Res Function(_$OtherErrorFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$OtherErrorFailure extends OtherErrorFailure {
-  const _$OtherErrorFailure() : super._();
+class _$OtherErrorFailureImpl extends OtherErrorFailure {
+  const _$OtherErrorFailureImpl() : super._();
 
   @override
   String toString() {
@@ -5680,9 +6373,9 @@ class _$OtherErrorFailure extends OtherErrorFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OtherErrorFailure);
+        (other.runtimeType == runtimeType && other is _$OtherErrorFailureImpl);
   }
 
   @override
@@ -5720,6 +6413,10 @@ class _$OtherErrorFailure extends OtherErrorFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -5758,6 +6455,10 @@ class _$OtherErrorFailure extends OtherErrorFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -5796,6 +6497,10 @@ class _$OtherErrorFailure extends OtherErrorFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -5851,6 +6556,14 @@ class _$OtherErrorFailure extends OtherErrorFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -5896,6 +6609,13 @@ class _$OtherErrorFailure extends OtherErrorFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -5941,6 +6661,13 @@ class _$OtherErrorFailure extends OtherErrorFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -5957,30 +6684,33 @@ class _$OtherErrorFailure extends OtherErrorFailure {
 }
 
 abstract class OtherErrorFailure extends Failure {
-  const factory OtherErrorFailure() = _$OtherErrorFailure;
+  const factory OtherErrorFailure() = _$OtherErrorFailureImpl;
   const OtherErrorFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$UnexpectedFailureCopyWith<$Res> {
-  factory _$$UnexpectedFailureCopyWith(
-          _$UnexpectedFailure value, $Res Function(_$UnexpectedFailure) then) =
-      __$$UnexpectedFailureCopyWithImpl<$Res>;
+abstract class _$$UnexpectedFailureImplCopyWith<$Res> {
+  factory _$$UnexpectedFailureImplCopyWith(_$UnexpectedFailureImpl value,
+          $Res Function(_$UnexpectedFailureImpl) then) =
+      __$$UnexpectedFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$UnexpectedFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$UnexpectedFailure>
-    implements _$$UnexpectedFailureCopyWith<$Res> {
-  __$$UnexpectedFailureCopyWithImpl(
-      _$UnexpectedFailure _value, $Res Function(_$UnexpectedFailure) _then)
+class __$$UnexpectedFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$UnexpectedFailureImpl>
+    implements _$$UnexpectedFailureImplCopyWith<$Res> {
+  __$$UnexpectedFailureImplCopyWithImpl(_$UnexpectedFailureImpl _value,
+      $Res Function(_$UnexpectedFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$UnexpectedFailure extends UnexpectedFailure {
-  const _$UnexpectedFailure() : super._();
+class _$UnexpectedFailureImpl extends UnexpectedFailure {
+  const _$UnexpectedFailureImpl() : super._();
 
   @override
   String toString() {
@@ -5988,9 +6718,9 @@ class _$UnexpectedFailure extends UnexpectedFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnexpectedFailure);
+        (other.runtimeType == runtimeType && other is _$UnexpectedFailureImpl);
   }
 
   @override
@@ -6028,6 +6758,10 @@ class _$UnexpectedFailure extends UnexpectedFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -6066,6 +6800,10 @@ class _$UnexpectedFailure extends UnexpectedFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -6104,6 +6842,10 @@ class _$UnexpectedFailure extends UnexpectedFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -6159,6 +6901,14 @@ class _$UnexpectedFailure extends UnexpectedFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -6204,6 +6954,13 @@ class _$UnexpectedFailure extends UnexpectedFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -6249,6 +7006,13 @@ class _$UnexpectedFailure extends UnexpectedFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -6265,30 +7029,34 @@ class _$UnexpectedFailure extends UnexpectedFailure {
 }
 
 abstract class UnexpectedFailure extends Failure {
-  const factory UnexpectedFailure() = _$UnexpectedFailure;
+  const factory UnexpectedFailure() = _$UnexpectedFailureImpl;
   const UnexpectedFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$ForbiddenErrorFailureCopyWith<$Res> {
-  factory _$$ForbiddenErrorFailureCopyWith(_$ForbiddenErrorFailure value,
-          $Res Function(_$ForbiddenErrorFailure) then) =
-      __$$ForbiddenErrorFailureCopyWithImpl<$Res>;
+abstract class _$$ForbiddenErrorFailureImplCopyWith<$Res> {
+  factory _$$ForbiddenErrorFailureImplCopyWith(
+          _$ForbiddenErrorFailureImpl value,
+          $Res Function(_$ForbiddenErrorFailureImpl) then) =
+      __$$ForbiddenErrorFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ForbiddenErrorFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$ForbiddenErrorFailure>
-    implements _$$ForbiddenErrorFailureCopyWith<$Res> {
-  __$$ForbiddenErrorFailureCopyWithImpl(_$ForbiddenErrorFailure _value,
-      $Res Function(_$ForbiddenErrorFailure) _then)
+class __$$ForbiddenErrorFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$ForbiddenErrorFailureImpl>
+    implements _$$ForbiddenErrorFailureImplCopyWith<$Res> {
+  __$$ForbiddenErrorFailureImplCopyWithImpl(_$ForbiddenErrorFailureImpl _value,
+      $Res Function(_$ForbiddenErrorFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ForbiddenErrorFailure extends ForbiddenErrorFailure {
-  const _$ForbiddenErrorFailure() : super._();
+class _$ForbiddenErrorFailureImpl extends ForbiddenErrorFailure {
+  const _$ForbiddenErrorFailureImpl() : super._();
 
   @override
   String toString() {
@@ -6296,9 +7064,10 @@ class _$ForbiddenErrorFailure extends ForbiddenErrorFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ForbiddenErrorFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$ForbiddenErrorFailureImpl);
   }
 
   @override
@@ -6336,6 +7105,10 @@ class _$ForbiddenErrorFailure extends ForbiddenErrorFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -6374,6 +7147,10 @@ class _$ForbiddenErrorFailure extends ForbiddenErrorFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -6412,6 +7189,10 @@ class _$ForbiddenErrorFailure extends ForbiddenErrorFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -6467,6 +7248,14 @@ class _$ForbiddenErrorFailure extends ForbiddenErrorFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -6512,6 +7301,13 @@ class _$ForbiddenErrorFailure extends ForbiddenErrorFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -6557,6 +7353,13 @@ class _$ForbiddenErrorFailure extends ForbiddenErrorFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -6573,30 +7376,34 @@ class _$ForbiddenErrorFailure extends ForbiddenErrorFailure {
 }
 
 abstract class ForbiddenErrorFailure extends Failure {
-  const factory ForbiddenErrorFailure() = _$ForbiddenErrorFailure;
+  const factory ForbiddenErrorFailure() = _$ForbiddenErrorFailureImpl;
   const ForbiddenErrorFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$BadCertificateFailureCopyWith<$Res> {
-  factory _$$BadCertificateFailureCopyWith(_$BadCertificateFailure value,
-          $Res Function(_$BadCertificateFailure) then) =
-      __$$BadCertificateFailureCopyWithImpl<$Res>;
+abstract class _$$BadCertificateFailureImplCopyWith<$Res> {
+  factory _$$BadCertificateFailureImplCopyWith(
+          _$BadCertificateFailureImpl value,
+          $Res Function(_$BadCertificateFailureImpl) then) =
+      __$$BadCertificateFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$BadCertificateFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$BadCertificateFailure>
-    implements _$$BadCertificateFailureCopyWith<$Res> {
-  __$$BadCertificateFailureCopyWithImpl(_$BadCertificateFailure _value,
-      $Res Function(_$BadCertificateFailure) _then)
+class __$$BadCertificateFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$BadCertificateFailureImpl>
+    implements _$$BadCertificateFailureImplCopyWith<$Res> {
+  __$$BadCertificateFailureImplCopyWithImpl(_$BadCertificateFailureImpl _value,
+      $Res Function(_$BadCertificateFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$BadCertificateFailure extends BadCertificateFailure {
-  const _$BadCertificateFailure() : super._();
+class _$BadCertificateFailureImpl extends BadCertificateFailure {
+  const _$BadCertificateFailureImpl() : super._();
 
   @override
   String toString() {
@@ -6604,9 +7411,10 @@ class _$BadCertificateFailure extends BadCertificateFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BadCertificateFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$BadCertificateFailureImpl);
   }
 
   @override
@@ -6644,6 +7452,10 @@ class _$BadCertificateFailure extends BadCertificateFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -6682,6 +7494,10 @@ class _$BadCertificateFailure extends BadCertificateFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -6720,6 +7536,10 @@ class _$BadCertificateFailure extends BadCertificateFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -6775,6 +7595,14 @@ class _$BadCertificateFailure extends BadCertificateFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -6820,6 +7648,13 @@ class _$BadCertificateFailure extends BadCertificateFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -6865,6 +7700,13 @@ class _$BadCertificateFailure extends BadCertificateFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -6881,32 +7723,35 @@ class _$BadCertificateFailure extends BadCertificateFailure {
 }
 
 abstract class BadCertificateFailure extends Failure {
-  const factory BadCertificateFailure() = _$BadCertificateFailure;
+  const factory BadCertificateFailure() = _$BadCertificateFailureImpl;
   const BadCertificateFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$TooManyAttemptRequestFailureCopyWith<$Res> {
-  factory _$$TooManyAttemptRequestFailureCopyWith(
-          _$TooManyAttemptRequestFailure value,
-          $Res Function(_$TooManyAttemptRequestFailure) then) =
-      __$$TooManyAttemptRequestFailureCopyWithImpl<$Res>;
+abstract class _$$TooManyAttemptRequestFailureImplCopyWith<$Res> {
+  factory _$$TooManyAttemptRequestFailureImplCopyWith(
+          _$TooManyAttemptRequestFailureImpl value,
+          $Res Function(_$TooManyAttemptRequestFailureImpl) then) =
+      __$$TooManyAttemptRequestFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TooManyAttemptRequestFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$TooManyAttemptRequestFailure>
-    implements _$$TooManyAttemptRequestFailureCopyWith<$Res> {
-  __$$TooManyAttemptRequestFailureCopyWithImpl(
-      _$TooManyAttemptRequestFailure _value,
-      $Res Function(_$TooManyAttemptRequestFailure) _then)
+class __$$TooManyAttemptRequestFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$TooManyAttemptRequestFailureImpl>
+    implements _$$TooManyAttemptRequestFailureImplCopyWith<$Res> {
+  __$$TooManyAttemptRequestFailureImplCopyWithImpl(
+      _$TooManyAttemptRequestFailureImpl _value,
+      $Res Function(_$TooManyAttemptRequestFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$TooManyAttemptRequestFailure extends TooManyAttemptRequestFailure {
-  const _$TooManyAttemptRequestFailure() : super._();
+class _$TooManyAttemptRequestFailureImpl extends TooManyAttemptRequestFailure {
+  const _$TooManyAttemptRequestFailureImpl() : super._();
 
   @override
   String toString() {
@@ -6914,10 +7759,10 @@ class _$TooManyAttemptRequestFailure extends TooManyAttemptRequestFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TooManyAttemptRequestFailure);
+            other is _$TooManyAttemptRequestFailureImpl);
   }
 
   @override
@@ -6955,6 +7800,10 @@ class _$TooManyAttemptRequestFailure extends TooManyAttemptRequestFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -6993,6 +7842,10 @@ class _$TooManyAttemptRequestFailure extends TooManyAttemptRequestFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -7031,6 +7884,10 @@ class _$TooManyAttemptRequestFailure extends TooManyAttemptRequestFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -7086,6 +7943,14 @@ class _$TooManyAttemptRequestFailure extends TooManyAttemptRequestFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -7131,6 +7996,13 @@ class _$TooManyAttemptRequestFailure extends TooManyAttemptRequestFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -7176,6 +8048,13 @@ class _$TooManyAttemptRequestFailure extends TooManyAttemptRequestFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -7192,30 +8071,34 @@ class _$TooManyAttemptRequestFailure extends TooManyAttemptRequestFailure {
 }
 
 abstract class TooManyAttemptRequestFailure extends Failure {
-  const factory TooManyAttemptRequestFailure() = _$TooManyAttemptRequestFailure;
+  const factory TooManyAttemptRequestFailure() =
+      _$TooManyAttemptRequestFailureImpl;
   const TooManyAttemptRequestFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$DataNotFoundFailureCopyWith<$Res> {
-  factory _$$DataNotFoundFailureCopyWith(_$DataNotFoundFailure value,
-          $Res Function(_$DataNotFoundFailure) then) =
-      __$$DataNotFoundFailureCopyWithImpl<$Res>;
+abstract class _$$DataNotFoundFailureImplCopyWith<$Res> {
+  factory _$$DataNotFoundFailureImplCopyWith(_$DataNotFoundFailureImpl value,
+          $Res Function(_$DataNotFoundFailureImpl) then) =
+      __$$DataNotFoundFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DataNotFoundFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$DataNotFoundFailure>
-    implements _$$DataNotFoundFailureCopyWith<$Res> {
-  __$$DataNotFoundFailureCopyWithImpl(
-      _$DataNotFoundFailure _value, $Res Function(_$DataNotFoundFailure) _then)
+class __$$DataNotFoundFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$DataNotFoundFailureImpl>
+    implements _$$DataNotFoundFailureImplCopyWith<$Res> {
+  __$$DataNotFoundFailureImplCopyWithImpl(_$DataNotFoundFailureImpl _value,
+      $Res Function(_$DataNotFoundFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$DataNotFoundFailure extends DataNotFoundFailure {
-  const _$DataNotFoundFailure() : super._();
+class _$DataNotFoundFailureImpl extends DataNotFoundFailure {
+  const _$DataNotFoundFailureImpl() : super._();
 
   @override
   String toString() {
@@ -7223,9 +8106,10 @@ class _$DataNotFoundFailure extends DataNotFoundFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DataNotFoundFailure);
+        (other.runtimeType == runtimeType &&
+            other is _$DataNotFoundFailureImpl);
   }
 
   @override
@@ -7263,6 +8147,10 @@ class _$DataNotFoundFailure extends DataNotFoundFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -7301,6 +8189,10 @@ class _$DataNotFoundFailure extends DataNotFoundFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -7339,6 +8231,10 @@ class _$DataNotFoundFailure extends DataNotFoundFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -7394,6 +8290,14 @@ class _$DataNotFoundFailure extends DataNotFoundFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -7439,6 +8343,13 @@ class _$DataNotFoundFailure extends DataNotFoundFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -7484,6 +8395,13 @@ class _$DataNotFoundFailure extends DataNotFoundFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -7500,32 +8418,36 @@ class _$DataNotFoundFailure extends DataNotFoundFailure {
 }
 
 abstract class DataNotFoundFailure extends Failure {
-  const factory DataNotFoundFailure() = _$DataNotFoundFailure;
+  const factory DataNotFoundFailure() = _$DataNotFoundFailureImpl;
   const DataNotFoundFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$UnableToOpenGoogleMapsFailureCopyWith<$Res> {
-  factory _$$UnableToOpenGoogleMapsFailureCopyWith(
-          _$UnableToOpenGoogleMapsFailure value,
-          $Res Function(_$UnableToOpenGoogleMapsFailure) then) =
-      __$$UnableToOpenGoogleMapsFailureCopyWithImpl<$Res>;
+abstract class _$$UnableToOpenGoogleMapsFailureImplCopyWith<$Res> {
+  factory _$$UnableToOpenGoogleMapsFailureImplCopyWith(
+          _$UnableToOpenGoogleMapsFailureImpl value,
+          $Res Function(_$UnableToOpenGoogleMapsFailureImpl) then) =
+      __$$UnableToOpenGoogleMapsFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$UnableToOpenGoogleMapsFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$UnableToOpenGoogleMapsFailure>
-    implements _$$UnableToOpenGoogleMapsFailureCopyWith<$Res> {
-  __$$UnableToOpenGoogleMapsFailureCopyWithImpl(
-      _$UnableToOpenGoogleMapsFailure _value,
-      $Res Function(_$UnableToOpenGoogleMapsFailure) _then)
+class __$$UnableToOpenGoogleMapsFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$UnableToOpenGoogleMapsFailureImpl>
+    implements _$$UnableToOpenGoogleMapsFailureImplCopyWith<$Res> {
+  __$$UnableToOpenGoogleMapsFailureImplCopyWithImpl(
+      _$UnableToOpenGoogleMapsFailureImpl _value,
+      $Res Function(_$UnableToOpenGoogleMapsFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$UnableToOpenGoogleMapsFailure extends UnableToOpenGoogleMapsFailure {
-  const _$UnableToOpenGoogleMapsFailure() : super._();
+class _$UnableToOpenGoogleMapsFailureImpl
+    extends UnableToOpenGoogleMapsFailure {
+  const _$UnableToOpenGoogleMapsFailureImpl() : super._();
 
   @override
   String toString() {
@@ -7533,10 +8455,10 @@ class _$UnableToOpenGoogleMapsFailure extends UnableToOpenGoogleMapsFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UnableToOpenGoogleMapsFailure);
+            other is _$UnableToOpenGoogleMapsFailureImpl);
   }
 
   @override
@@ -7574,6 +8496,10 @@ class _$UnableToOpenGoogleMapsFailure extends UnableToOpenGoogleMapsFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -7612,6 +8538,10 @@ class _$UnableToOpenGoogleMapsFailure extends UnableToOpenGoogleMapsFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -7650,6 +8580,10 @@ class _$UnableToOpenGoogleMapsFailure extends UnableToOpenGoogleMapsFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -7705,6 +8639,14 @@ class _$UnableToOpenGoogleMapsFailure extends UnableToOpenGoogleMapsFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -7750,6 +8692,13 @@ class _$UnableToOpenGoogleMapsFailure extends UnableToOpenGoogleMapsFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -7795,6 +8744,13 @@ class _$UnableToOpenGoogleMapsFailure extends UnableToOpenGoogleMapsFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -7812,34 +8768,38 @@ class _$UnableToOpenGoogleMapsFailure extends UnableToOpenGoogleMapsFailure {
 
 abstract class UnableToOpenGoogleMapsFailure extends Failure {
   const factory UnableToOpenGoogleMapsFailure() =
-      _$UnableToOpenGoogleMapsFailure;
+      _$UnableToOpenGoogleMapsFailureImpl;
   const UnableToOpenGoogleMapsFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$InvalidGivenDataFailureCopyWith<$Res> {
-  factory _$$InvalidGivenDataFailureCopyWith(_$InvalidGivenDataFailure value,
-          $Res Function(_$InvalidGivenDataFailure) then) =
-      __$$InvalidGivenDataFailureCopyWithImpl<$Res>;
+abstract class _$$InvalidGivenDataFailureImplCopyWith<$Res> {
+  factory _$$InvalidGivenDataFailureImplCopyWith(
+          _$InvalidGivenDataFailureImpl value,
+          $Res Function(_$InvalidGivenDataFailureImpl) then) =
+      __$$InvalidGivenDataFailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String? message, dynamic data});
 }
 
 /// @nodoc
-class __$$InvalidGivenDataFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$InvalidGivenDataFailure>
-    implements _$$InvalidGivenDataFailureCopyWith<$Res> {
-  __$$InvalidGivenDataFailureCopyWithImpl(_$InvalidGivenDataFailure _value,
-      $Res Function(_$InvalidGivenDataFailure) _then)
+class __$$InvalidGivenDataFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$InvalidGivenDataFailureImpl>
+    implements _$$InvalidGivenDataFailureImplCopyWith<$Res> {
+  __$$InvalidGivenDataFailureImplCopyWithImpl(
+      _$InvalidGivenDataFailureImpl _value,
+      $Res Function(_$InvalidGivenDataFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = freezed,
     Object? data = freezed,
   }) {
-    return _then(_$InvalidGivenDataFailure(
+    return _then(_$InvalidGivenDataFailureImpl(
       freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -7854,8 +8814,8 @@ class __$$InvalidGivenDataFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
-  const _$InvalidGivenDataFailure(this.message, this.data) : super._();
+class _$InvalidGivenDataFailureImpl extends InvalidGivenDataFailure {
+  const _$InvalidGivenDataFailureImpl(this.message, this.data) : super._();
 
   @override
   final String? message;
@@ -7868,10 +8828,10 @@ class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InvalidGivenDataFailure &&
+            other is _$InvalidGivenDataFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other.data, data));
   }
@@ -7880,12 +8840,14 @@ class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
   int get hashCode => Object.hash(
       runtimeType, message, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$InvalidGivenDataFailureCopyWith<_$InvalidGivenDataFailure> get copyWith =>
-      __$$InvalidGivenDataFailureCopyWithImpl<_$InvalidGivenDataFailure>(
-          this, _$identity);
+  _$$InvalidGivenDataFailureImplCopyWith<_$InvalidGivenDataFailureImpl>
+      get copyWith => __$$InvalidGivenDataFailureImplCopyWithImpl<
+          _$InvalidGivenDataFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -7919,6 +8881,10 @@ class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -7957,6 +8923,10 @@ class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -7995,6 +8965,10 @@ class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -8050,6 +9024,14 @@ class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -8095,6 +9077,13 @@ class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -8140,6 +9129,13 @@ class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -8157,39 +9153,46 @@ class _$InvalidGivenDataFailure extends InvalidGivenDataFailure {
 
 abstract class InvalidGivenDataFailure extends Failure {
   const factory InvalidGivenDataFailure(
-      final String? message, final dynamic data) = _$InvalidGivenDataFailure;
+          final String? message, final dynamic data) =
+      _$InvalidGivenDataFailureImpl;
   const InvalidGivenDataFailure._() : super._();
 
   String? get message;
   dynamic get data;
-  @JsonKey(ignore: true)
-  _$$InvalidGivenDataFailureCopyWith<_$InvalidGivenDataFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$InvalidGivenDataFailureImplCopyWith<_$InvalidGivenDataFailureImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$VoucherInvalidFailureCopyWith<$Res> {
-  factory _$$VoucherInvalidFailureCopyWith(_$VoucherInvalidFailure value,
-          $Res Function(_$VoucherInvalidFailure) then) =
-      __$$VoucherInvalidFailureCopyWithImpl<$Res>;
+abstract class _$$VoucherInvalidFailureImplCopyWith<$Res> {
+  factory _$$VoucherInvalidFailureImplCopyWith(
+          _$VoucherInvalidFailureImpl value,
+          $Res Function(_$VoucherInvalidFailureImpl) then) =
+      __$$VoucherInvalidFailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$VoucherInvalidFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$VoucherInvalidFailure>
-    implements _$$VoucherInvalidFailureCopyWith<$Res> {
-  __$$VoucherInvalidFailureCopyWithImpl(_$VoucherInvalidFailure _value,
-      $Res Function(_$VoucherInvalidFailure) _then)
+class __$$VoucherInvalidFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$VoucherInvalidFailureImpl>
+    implements _$$VoucherInvalidFailureImplCopyWith<$Res> {
+  __$$VoucherInvalidFailureImplCopyWithImpl(_$VoucherInvalidFailureImpl _value,
+      $Res Function(_$VoucherInvalidFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$VoucherInvalidFailure(
+    return _then(_$VoucherInvalidFailureImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -8200,8 +9203,8 @@ class __$$VoucherInvalidFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$VoucherInvalidFailure extends VoucherInvalidFailure {
-  const _$VoucherInvalidFailure(this.message) : super._();
+class _$VoucherInvalidFailureImpl extends VoucherInvalidFailure {
+  const _$VoucherInvalidFailureImpl(this.message) : super._();
 
   @override
   final String message;
@@ -8212,22 +9215,24 @@ class _$VoucherInvalidFailure extends VoucherInvalidFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VoucherInvalidFailure &&
+            other is _$VoucherInvalidFailureImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$VoucherInvalidFailureCopyWith<_$VoucherInvalidFailure> get copyWith =>
-      __$$VoucherInvalidFailureCopyWithImpl<_$VoucherInvalidFailure>(
-          this, _$identity);
+  _$$VoucherInvalidFailureImplCopyWith<_$VoucherInvalidFailureImpl>
+      get copyWith => __$$VoucherInvalidFailureImplCopyWithImpl<
+          _$VoucherInvalidFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -8261,6 +9266,10 @@ class _$VoucherInvalidFailure extends VoucherInvalidFailure {
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -8299,6 +9308,10 @@ class _$VoucherInvalidFailure extends VoucherInvalidFailure {
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -8337,6 +9350,10 @@ class _$VoucherInvalidFailure extends VoucherInvalidFailure {
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -8392,6 +9409,14 @@ class _$VoucherInvalidFailure extends VoucherInvalidFailure {
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -8437,6 +9462,13 @@ class _$VoucherInvalidFailure extends VoucherInvalidFailure {
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -8482,6 +9514,13 @@ class _$VoucherInvalidFailure extends VoucherInvalidFailure {
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -8499,49 +9538,55 @@ class _$VoucherInvalidFailure extends VoucherInvalidFailure {
 
 abstract class VoucherInvalidFailure extends Failure {
   const factory VoucherInvalidFailure(final String message) =
-      _$VoucherInvalidFailure;
+      _$VoucherInvalidFailureImpl;
   const VoucherInvalidFailure._() : super._();
 
   String get message;
-  @JsonKey(ignore: true)
-  _$$VoucherInvalidFailureCopyWith<_$VoucherInvalidFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VoucherInvalidFailureImplCopyWith<_$VoucherInvalidFailureImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LocationPermissionDeniedFailureCopyWith<$Res> {
-  factory _$$LocationPermissionDeniedFailureCopyWith(
-          _$LocationPermissionDeniedFailure value,
-          $Res Function(_$LocationPermissionDeniedFailure) then) =
-      __$$LocationPermissionDeniedFailureCopyWithImpl<$Res>;
+abstract class _$$InvalidLoginCredentialsFailureImplCopyWith<$Res> {
+  factory _$$InvalidLoginCredentialsFailureImplCopyWith(
+          _$InvalidLoginCredentialsFailureImpl value,
+          $Res Function(_$InvalidLoginCredentialsFailureImpl) then) =
+      __$$InvalidLoginCredentialsFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LocationPermissionDeniedFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$LocationPermissionDeniedFailure>
-    implements _$$LocationPermissionDeniedFailureCopyWith<$Res> {
-  __$$LocationPermissionDeniedFailureCopyWithImpl(
-      _$LocationPermissionDeniedFailure _value,
-      $Res Function(_$LocationPermissionDeniedFailure) _then)
+class __$$InvalidLoginCredentialsFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$InvalidLoginCredentialsFailureImpl>
+    implements _$$InvalidLoginCredentialsFailureImplCopyWith<$Res> {
+  __$$InvalidLoginCredentialsFailureImplCopyWithImpl(
+      _$InvalidLoginCredentialsFailureImpl _value,
+      $Res Function(_$InvalidLoginCredentialsFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LocationPermissionDeniedFailure
-    extends LocationPermissionDeniedFailure {
-  const _$LocationPermissionDeniedFailure() : super._();
+class _$InvalidLoginCredentialsFailureImpl
+    extends InvalidLoginCredentialsFailure {
+  const _$InvalidLoginCredentialsFailureImpl() : super._();
 
   @override
   String toString() {
-    return 'Failure.locationPermissionDeniedFailure()';
+    return 'Failure.invalidLoginCredentialsFailure()';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LocationPermissionDeniedFailure);
+            other is _$InvalidLoginCredentialsFailureImpl);
   }
 
   @override
@@ -8579,6 +9624,1405 @@ class _$LocationPermissionDeniedFailure
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
+    required TResult Function() locationPermissionDeniedFailure,
+    required TResult Function() locationPermissionDeniedPermanentFailure,
+    required TResult Function() locationDisabledFailure,
+  }) {
+    return invalidLoginCredentialsFailure();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)?
+        developmentFailure,
+    TResult? Function(int? code, String? message)? apiFailure,
+    TResult? Function()? requestCancelledFailure,
+    TResult? Function()? unauthorisedRequestFailure,
+    TResult? Function()? badRequestFailure,
+    TResult? Function()? notFoundFailure,
+    TResult? Function()? methodNotAllowedFailure,
+    TResult? Function()? notAcceptableFailure,
+    TResult? Function()? requestTimeoutFailure,
+    TResult? Function()? sendTimeoutFailure,
+    TResult? Function()? conflictFailure,
+    TResult? Function()? internalServerErrorFailure,
+    TResult? Function()? notImplementedFailure,
+    TResult? Function()? serviceUnavailableFailure,
+    TResult? Function()? noInternetConnectionFailure,
+    TResult? Function()? formatFailure,
+    TResult? Function()? unableToProcessFailure,
+    TResult? Function()? otherErrorFailure,
+    TResult? Function()? unexpectedFailure,
+    TResult? Function()? forbiddenErrorFailure,
+    TResult? Function()? badCertificateFailure,
+    TResult? Function()? tooManyAttemptRequestFailure,
+    TResult? Function()? dataNotFoundFailure,
+    TResult? Function()? unableToOpenGoogleMaps,
+    TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
+    TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
+    TResult? Function()? locationPermissionDeniedFailure,
+    TResult? Function()? locationPermissionDeniedPermanentFailure,
+    TResult? Function()? locationDisabledFailure,
+  }) {
+    return invalidLoginCredentialsFailure?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)?
+        developmentFailure,
+    TResult Function(int? code, String? message)? apiFailure,
+    TResult Function()? requestCancelledFailure,
+    TResult Function()? unauthorisedRequestFailure,
+    TResult Function()? badRequestFailure,
+    TResult Function()? notFoundFailure,
+    TResult Function()? methodNotAllowedFailure,
+    TResult Function()? notAcceptableFailure,
+    TResult Function()? requestTimeoutFailure,
+    TResult Function()? sendTimeoutFailure,
+    TResult Function()? conflictFailure,
+    TResult Function()? internalServerErrorFailure,
+    TResult Function()? notImplementedFailure,
+    TResult Function()? serviceUnavailableFailure,
+    TResult Function()? noInternetConnectionFailure,
+    TResult Function()? formatFailure,
+    TResult Function()? unableToProcessFailure,
+    TResult Function()? otherErrorFailure,
+    TResult Function()? unexpectedFailure,
+    TResult Function()? forbiddenErrorFailure,
+    TResult Function()? badCertificateFailure,
+    TResult Function()? tooManyAttemptRequestFailure,
+    TResult Function()? dataNotFoundFailure,
+    TResult Function()? unableToOpenGoogleMaps,
+    TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
+    TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
+    TResult Function()? locationPermissionDeniedFailure,
+    TResult Function()? locationPermissionDeniedPermanentFailure,
+    TResult Function()? locationDisabledFailure,
+    required TResult orElse(),
+  }) {
+    if (invalidLoginCredentialsFailure != null) {
+      return invalidLoginCredentialsFailure();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DevelopmentFailure value) developmentFailure,
+    required TResult Function(ApiFailure value) apiFailure,
+    required TResult Function(RequestCancelledFailure value)
+        requestCancelledFailure,
+    required TResult Function(UnauthorizedRequestFailure value)
+        unauthorisedRequestFailure,
+    required TResult Function(BadRequestFailure value) badRequestFailure,
+    required TResult Function(NotFoundFailure value) notFoundFailure,
+    required TResult Function(MethodNotAllowedFailure value)
+        methodNotAllowedFailure,
+    required TResult Function(NotAcceptableFailure value) notAcceptableFailure,
+    required TResult Function(RequestTimeoutFailure value)
+        requestTimeoutFailure,
+    required TResult Function(SendTimeoutFailure value) sendTimeoutFailure,
+    required TResult Function(ConflictFailure value) conflictFailure,
+    required TResult Function(InternalServerErrorFailure value)
+        internalServerErrorFailure,
+    required TResult Function(NotImplementedFailure value)
+        notImplementedFailure,
+    required TResult Function(ServiceUnavailableFailure value)
+        serviceUnavailableFailure,
+    required TResult Function(NoInternetConnectionFailure value)
+        noInternetConnectionFailure,
+    required TResult Function(FormatFailure value) formatFailure,
+    required TResult Function(UnableToProcessFailure value)
+        unableToProcessFailure,
+    required TResult Function(OtherErrorFailure value) otherErrorFailure,
+    required TResult Function(UnexpectedFailure value) unexpectedFailure,
+    required TResult Function(ForbiddenErrorFailure value)
+        forbiddenErrorFailure,
+    required TResult Function(BadCertificateFailure value)
+        badCertificateFailure,
+    required TResult Function(TooManyAttemptRequestFailure value)
+        tooManyAttemptRequestFailure,
+    required TResult Function(DataNotFoundFailure value) dataNotFoundFailure,
+    required TResult Function(UnableToOpenGoogleMapsFailure value)
+        unableToOpenGoogleMaps,
+    required TResult Function(InvalidGivenDataFailure value)
+        invalidGiveDataFailure,
+    required TResult Function(VoucherInvalidFailure value)
+        voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
+    required TResult Function(LocationPermissionDeniedFailure value)
+        locationPermissionDeniedFailure,
+    required TResult Function(LocationPermissionDeniedPermanentFailure value)
+        locationPermissionDeniedPermanentFailure,
+    required TResult Function(LocationPermissionDisabledFailure value)
+        locationDisabledFailure,
+  }) {
+    return invalidLoginCredentialsFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DevelopmentFailure value)? developmentFailure,
+    TResult? Function(ApiFailure value)? apiFailure,
+    TResult? Function(RequestCancelledFailure value)? requestCancelledFailure,
+    TResult? Function(UnauthorizedRequestFailure value)?
+        unauthorisedRequestFailure,
+    TResult? Function(BadRequestFailure value)? badRequestFailure,
+    TResult? Function(NotFoundFailure value)? notFoundFailure,
+    TResult? Function(MethodNotAllowedFailure value)? methodNotAllowedFailure,
+    TResult? Function(NotAcceptableFailure value)? notAcceptableFailure,
+    TResult? Function(RequestTimeoutFailure value)? requestTimeoutFailure,
+    TResult? Function(SendTimeoutFailure value)? sendTimeoutFailure,
+    TResult? Function(ConflictFailure value)? conflictFailure,
+    TResult? Function(InternalServerErrorFailure value)?
+        internalServerErrorFailure,
+    TResult? Function(NotImplementedFailure value)? notImplementedFailure,
+    TResult? Function(ServiceUnavailableFailure value)?
+        serviceUnavailableFailure,
+    TResult? Function(NoInternetConnectionFailure value)?
+        noInternetConnectionFailure,
+    TResult? Function(FormatFailure value)? formatFailure,
+    TResult? Function(UnableToProcessFailure value)? unableToProcessFailure,
+    TResult? Function(OtherErrorFailure value)? otherErrorFailure,
+    TResult? Function(UnexpectedFailure value)? unexpectedFailure,
+    TResult? Function(ForbiddenErrorFailure value)? forbiddenErrorFailure,
+    TResult? Function(BadCertificateFailure value)? badCertificateFailure,
+    TResult? Function(TooManyAttemptRequestFailure value)?
+        tooManyAttemptRequestFailure,
+    TResult? Function(DataNotFoundFailure value)? dataNotFoundFailure,
+    TResult? Function(UnableToOpenGoogleMapsFailure value)?
+        unableToOpenGoogleMaps,
+    TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
+    TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
+    TResult? Function(LocationPermissionDeniedFailure value)?
+        locationPermissionDeniedFailure,
+    TResult? Function(LocationPermissionDeniedPermanentFailure value)?
+        locationPermissionDeniedPermanentFailure,
+    TResult? Function(LocationPermissionDisabledFailure value)?
+        locationDisabledFailure,
+  }) {
+    return invalidLoginCredentialsFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DevelopmentFailure value)? developmentFailure,
+    TResult Function(ApiFailure value)? apiFailure,
+    TResult Function(RequestCancelledFailure value)? requestCancelledFailure,
+    TResult Function(UnauthorizedRequestFailure value)?
+        unauthorisedRequestFailure,
+    TResult Function(BadRequestFailure value)? badRequestFailure,
+    TResult Function(NotFoundFailure value)? notFoundFailure,
+    TResult Function(MethodNotAllowedFailure value)? methodNotAllowedFailure,
+    TResult Function(NotAcceptableFailure value)? notAcceptableFailure,
+    TResult Function(RequestTimeoutFailure value)? requestTimeoutFailure,
+    TResult Function(SendTimeoutFailure value)? sendTimeoutFailure,
+    TResult Function(ConflictFailure value)? conflictFailure,
+    TResult Function(InternalServerErrorFailure value)?
+        internalServerErrorFailure,
+    TResult Function(NotImplementedFailure value)? notImplementedFailure,
+    TResult Function(ServiceUnavailableFailure value)?
+        serviceUnavailableFailure,
+    TResult Function(NoInternetConnectionFailure value)?
+        noInternetConnectionFailure,
+    TResult Function(FormatFailure value)? formatFailure,
+    TResult Function(UnableToProcessFailure value)? unableToProcessFailure,
+    TResult Function(OtherErrorFailure value)? otherErrorFailure,
+    TResult Function(UnexpectedFailure value)? unexpectedFailure,
+    TResult Function(ForbiddenErrorFailure value)? forbiddenErrorFailure,
+    TResult Function(BadCertificateFailure value)? badCertificateFailure,
+    TResult Function(TooManyAttemptRequestFailure value)?
+        tooManyAttemptRequestFailure,
+    TResult Function(DataNotFoundFailure value)? dataNotFoundFailure,
+    TResult Function(UnableToOpenGoogleMapsFailure value)?
+        unableToOpenGoogleMaps,
+    TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
+    TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
+    TResult Function(LocationPermissionDeniedFailure value)?
+        locationPermissionDeniedFailure,
+    TResult Function(LocationPermissionDeniedPermanentFailure value)?
+        locationPermissionDeniedPermanentFailure,
+    TResult Function(LocationPermissionDisabledFailure value)?
+        locationDisabledFailure,
+    required TResult orElse(),
+  }) {
+    if (invalidLoginCredentialsFailure != null) {
+      return invalidLoginCredentialsFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InvalidLoginCredentialsFailure extends Failure {
+  const factory InvalidLoginCredentialsFailure() =
+      _$InvalidLoginCredentialsFailureImpl;
+  const InvalidLoginCredentialsFailure._() : super._();
+}
+
+/// @nodoc
+abstract class _$$UserNotRegisteredFailureImplCopyWith<$Res> {
+  factory _$$UserNotRegisteredFailureImplCopyWith(
+          _$UserNotRegisteredFailureImpl value,
+          $Res Function(_$UserNotRegisteredFailureImpl) then) =
+      __$$UserNotRegisteredFailureImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UserNotRegisteredFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$UserNotRegisteredFailureImpl>
+    implements _$$UserNotRegisteredFailureImplCopyWith<$Res> {
+  __$$UserNotRegisteredFailureImplCopyWithImpl(
+      _$UserNotRegisteredFailureImpl _value,
+      $Res Function(_$UserNotRegisteredFailureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$UserNotRegisteredFailureImpl extends UserNotRegisteredFailure {
+  const _$UserNotRegisteredFailureImpl() : super._();
+
+  @override
+  String toString() {
+    return 'Failure.userNotRegisteredFailure()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserNotRegisteredFailureImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)
+        developmentFailure,
+    required TResult Function(int? code, String? message) apiFailure,
+    required TResult Function() requestCancelledFailure,
+    required TResult Function() unauthorisedRequestFailure,
+    required TResult Function() badRequestFailure,
+    required TResult Function() notFoundFailure,
+    required TResult Function() methodNotAllowedFailure,
+    required TResult Function() notAcceptableFailure,
+    required TResult Function() requestTimeoutFailure,
+    required TResult Function() sendTimeoutFailure,
+    required TResult Function() conflictFailure,
+    required TResult Function() internalServerErrorFailure,
+    required TResult Function() notImplementedFailure,
+    required TResult Function() serviceUnavailableFailure,
+    required TResult Function() noInternetConnectionFailure,
+    required TResult Function() formatFailure,
+    required TResult Function() unableToProcessFailure,
+    required TResult Function() otherErrorFailure,
+    required TResult Function() unexpectedFailure,
+    required TResult Function() forbiddenErrorFailure,
+    required TResult Function() badCertificateFailure,
+    required TResult Function() tooManyAttemptRequestFailure,
+    required TResult Function() dataNotFoundFailure,
+    required TResult Function() unableToOpenGoogleMaps,
+    required TResult Function(String? message, dynamic data)
+        invalidGiveDataFailure,
+    required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
+    required TResult Function() locationPermissionDeniedFailure,
+    required TResult Function() locationPermissionDeniedPermanentFailure,
+    required TResult Function() locationDisabledFailure,
+  }) {
+    return userNotRegisteredFailure();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)?
+        developmentFailure,
+    TResult? Function(int? code, String? message)? apiFailure,
+    TResult? Function()? requestCancelledFailure,
+    TResult? Function()? unauthorisedRequestFailure,
+    TResult? Function()? badRequestFailure,
+    TResult? Function()? notFoundFailure,
+    TResult? Function()? methodNotAllowedFailure,
+    TResult? Function()? notAcceptableFailure,
+    TResult? Function()? requestTimeoutFailure,
+    TResult? Function()? sendTimeoutFailure,
+    TResult? Function()? conflictFailure,
+    TResult? Function()? internalServerErrorFailure,
+    TResult? Function()? notImplementedFailure,
+    TResult? Function()? serviceUnavailableFailure,
+    TResult? Function()? noInternetConnectionFailure,
+    TResult? Function()? formatFailure,
+    TResult? Function()? unableToProcessFailure,
+    TResult? Function()? otherErrorFailure,
+    TResult? Function()? unexpectedFailure,
+    TResult? Function()? forbiddenErrorFailure,
+    TResult? Function()? badCertificateFailure,
+    TResult? Function()? tooManyAttemptRequestFailure,
+    TResult? Function()? dataNotFoundFailure,
+    TResult? Function()? unableToOpenGoogleMaps,
+    TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
+    TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
+    TResult? Function()? locationPermissionDeniedFailure,
+    TResult? Function()? locationPermissionDeniedPermanentFailure,
+    TResult? Function()? locationDisabledFailure,
+  }) {
+    return userNotRegisteredFailure?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)?
+        developmentFailure,
+    TResult Function(int? code, String? message)? apiFailure,
+    TResult Function()? requestCancelledFailure,
+    TResult Function()? unauthorisedRequestFailure,
+    TResult Function()? badRequestFailure,
+    TResult Function()? notFoundFailure,
+    TResult Function()? methodNotAllowedFailure,
+    TResult Function()? notAcceptableFailure,
+    TResult Function()? requestTimeoutFailure,
+    TResult Function()? sendTimeoutFailure,
+    TResult Function()? conflictFailure,
+    TResult Function()? internalServerErrorFailure,
+    TResult Function()? notImplementedFailure,
+    TResult Function()? serviceUnavailableFailure,
+    TResult Function()? noInternetConnectionFailure,
+    TResult Function()? formatFailure,
+    TResult Function()? unableToProcessFailure,
+    TResult Function()? otherErrorFailure,
+    TResult Function()? unexpectedFailure,
+    TResult Function()? forbiddenErrorFailure,
+    TResult Function()? badCertificateFailure,
+    TResult Function()? tooManyAttemptRequestFailure,
+    TResult Function()? dataNotFoundFailure,
+    TResult Function()? unableToOpenGoogleMaps,
+    TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
+    TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
+    TResult Function()? locationPermissionDeniedFailure,
+    TResult Function()? locationPermissionDeniedPermanentFailure,
+    TResult Function()? locationDisabledFailure,
+    required TResult orElse(),
+  }) {
+    if (userNotRegisteredFailure != null) {
+      return userNotRegisteredFailure();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DevelopmentFailure value) developmentFailure,
+    required TResult Function(ApiFailure value) apiFailure,
+    required TResult Function(RequestCancelledFailure value)
+        requestCancelledFailure,
+    required TResult Function(UnauthorizedRequestFailure value)
+        unauthorisedRequestFailure,
+    required TResult Function(BadRequestFailure value) badRequestFailure,
+    required TResult Function(NotFoundFailure value) notFoundFailure,
+    required TResult Function(MethodNotAllowedFailure value)
+        methodNotAllowedFailure,
+    required TResult Function(NotAcceptableFailure value) notAcceptableFailure,
+    required TResult Function(RequestTimeoutFailure value)
+        requestTimeoutFailure,
+    required TResult Function(SendTimeoutFailure value) sendTimeoutFailure,
+    required TResult Function(ConflictFailure value) conflictFailure,
+    required TResult Function(InternalServerErrorFailure value)
+        internalServerErrorFailure,
+    required TResult Function(NotImplementedFailure value)
+        notImplementedFailure,
+    required TResult Function(ServiceUnavailableFailure value)
+        serviceUnavailableFailure,
+    required TResult Function(NoInternetConnectionFailure value)
+        noInternetConnectionFailure,
+    required TResult Function(FormatFailure value) formatFailure,
+    required TResult Function(UnableToProcessFailure value)
+        unableToProcessFailure,
+    required TResult Function(OtherErrorFailure value) otherErrorFailure,
+    required TResult Function(UnexpectedFailure value) unexpectedFailure,
+    required TResult Function(ForbiddenErrorFailure value)
+        forbiddenErrorFailure,
+    required TResult Function(BadCertificateFailure value)
+        badCertificateFailure,
+    required TResult Function(TooManyAttemptRequestFailure value)
+        tooManyAttemptRequestFailure,
+    required TResult Function(DataNotFoundFailure value) dataNotFoundFailure,
+    required TResult Function(UnableToOpenGoogleMapsFailure value)
+        unableToOpenGoogleMaps,
+    required TResult Function(InvalidGivenDataFailure value)
+        invalidGiveDataFailure,
+    required TResult Function(VoucherInvalidFailure value)
+        voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
+    required TResult Function(LocationPermissionDeniedFailure value)
+        locationPermissionDeniedFailure,
+    required TResult Function(LocationPermissionDeniedPermanentFailure value)
+        locationPermissionDeniedPermanentFailure,
+    required TResult Function(LocationPermissionDisabledFailure value)
+        locationDisabledFailure,
+  }) {
+    return userNotRegisteredFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DevelopmentFailure value)? developmentFailure,
+    TResult? Function(ApiFailure value)? apiFailure,
+    TResult? Function(RequestCancelledFailure value)? requestCancelledFailure,
+    TResult? Function(UnauthorizedRequestFailure value)?
+        unauthorisedRequestFailure,
+    TResult? Function(BadRequestFailure value)? badRequestFailure,
+    TResult? Function(NotFoundFailure value)? notFoundFailure,
+    TResult? Function(MethodNotAllowedFailure value)? methodNotAllowedFailure,
+    TResult? Function(NotAcceptableFailure value)? notAcceptableFailure,
+    TResult? Function(RequestTimeoutFailure value)? requestTimeoutFailure,
+    TResult? Function(SendTimeoutFailure value)? sendTimeoutFailure,
+    TResult? Function(ConflictFailure value)? conflictFailure,
+    TResult? Function(InternalServerErrorFailure value)?
+        internalServerErrorFailure,
+    TResult? Function(NotImplementedFailure value)? notImplementedFailure,
+    TResult? Function(ServiceUnavailableFailure value)?
+        serviceUnavailableFailure,
+    TResult? Function(NoInternetConnectionFailure value)?
+        noInternetConnectionFailure,
+    TResult? Function(FormatFailure value)? formatFailure,
+    TResult? Function(UnableToProcessFailure value)? unableToProcessFailure,
+    TResult? Function(OtherErrorFailure value)? otherErrorFailure,
+    TResult? Function(UnexpectedFailure value)? unexpectedFailure,
+    TResult? Function(ForbiddenErrorFailure value)? forbiddenErrorFailure,
+    TResult? Function(BadCertificateFailure value)? badCertificateFailure,
+    TResult? Function(TooManyAttemptRequestFailure value)?
+        tooManyAttemptRequestFailure,
+    TResult? Function(DataNotFoundFailure value)? dataNotFoundFailure,
+    TResult? Function(UnableToOpenGoogleMapsFailure value)?
+        unableToOpenGoogleMaps,
+    TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
+    TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
+    TResult? Function(LocationPermissionDeniedFailure value)?
+        locationPermissionDeniedFailure,
+    TResult? Function(LocationPermissionDeniedPermanentFailure value)?
+        locationPermissionDeniedPermanentFailure,
+    TResult? Function(LocationPermissionDisabledFailure value)?
+        locationDisabledFailure,
+  }) {
+    return userNotRegisteredFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DevelopmentFailure value)? developmentFailure,
+    TResult Function(ApiFailure value)? apiFailure,
+    TResult Function(RequestCancelledFailure value)? requestCancelledFailure,
+    TResult Function(UnauthorizedRequestFailure value)?
+        unauthorisedRequestFailure,
+    TResult Function(BadRequestFailure value)? badRequestFailure,
+    TResult Function(NotFoundFailure value)? notFoundFailure,
+    TResult Function(MethodNotAllowedFailure value)? methodNotAllowedFailure,
+    TResult Function(NotAcceptableFailure value)? notAcceptableFailure,
+    TResult Function(RequestTimeoutFailure value)? requestTimeoutFailure,
+    TResult Function(SendTimeoutFailure value)? sendTimeoutFailure,
+    TResult Function(ConflictFailure value)? conflictFailure,
+    TResult Function(InternalServerErrorFailure value)?
+        internalServerErrorFailure,
+    TResult Function(NotImplementedFailure value)? notImplementedFailure,
+    TResult Function(ServiceUnavailableFailure value)?
+        serviceUnavailableFailure,
+    TResult Function(NoInternetConnectionFailure value)?
+        noInternetConnectionFailure,
+    TResult Function(FormatFailure value)? formatFailure,
+    TResult Function(UnableToProcessFailure value)? unableToProcessFailure,
+    TResult Function(OtherErrorFailure value)? otherErrorFailure,
+    TResult Function(UnexpectedFailure value)? unexpectedFailure,
+    TResult Function(ForbiddenErrorFailure value)? forbiddenErrorFailure,
+    TResult Function(BadCertificateFailure value)? badCertificateFailure,
+    TResult Function(TooManyAttemptRequestFailure value)?
+        tooManyAttemptRequestFailure,
+    TResult Function(DataNotFoundFailure value)? dataNotFoundFailure,
+    TResult Function(UnableToOpenGoogleMapsFailure value)?
+        unableToOpenGoogleMaps,
+    TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
+    TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
+    TResult Function(LocationPermissionDeniedFailure value)?
+        locationPermissionDeniedFailure,
+    TResult Function(LocationPermissionDeniedPermanentFailure value)?
+        locationPermissionDeniedPermanentFailure,
+    TResult Function(LocationPermissionDisabledFailure value)?
+        locationDisabledFailure,
+    required TResult orElse(),
+  }) {
+    if (userNotRegisteredFailure != null) {
+      return userNotRegisteredFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UserNotRegisteredFailure extends Failure {
+  const factory UserNotRegisteredFailure() = _$UserNotRegisteredFailureImpl;
+  const UserNotRegisteredFailure._() : super._();
+}
+
+/// @nodoc
+abstract class _$$RecoveryKeyNotSyncFailureImplCopyWith<$Res> {
+  factory _$$RecoveryKeyNotSyncFailureImplCopyWith(
+          _$RecoveryKeyNotSyncFailureImpl value,
+          $Res Function(_$RecoveryKeyNotSyncFailureImpl) then) =
+      __$$RecoveryKeyNotSyncFailureImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RecoveryKeyNotSyncFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$RecoveryKeyNotSyncFailureImpl>
+    implements _$$RecoveryKeyNotSyncFailureImplCopyWith<$Res> {
+  __$$RecoveryKeyNotSyncFailureImplCopyWithImpl(
+      _$RecoveryKeyNotSyncFailureImpl _value,
+      $Res Function(_$RecoveryKeyNotSyncFailureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$RecoveryKeyNotSyncFailureImpl extends RecoveryKeyNotSyncFailure {
+  const _$RecoveryKeyNotSyncFailureImpl() : super._();
+
+  @override
+  String toString() {
+    return 'Failure.recoveryKeyNotSyncFailure()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RecoveryKeyNotSyncFailureImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)
+        developmentFailure,
+    required TResult Function(int? code, String? message) apiFailure,
+    required TResult Function() requestCancelledFailure,
+    required TResult Function() unauthorisedRequestFailure,
+    required TResult Function() badRequestFailure,
+    required TResult Function() notFoundFailure,
+    required TResult Function() methodNotAllowedFailure,
+    required TResult Function() notAcceptableFailure,
+    required TResult Function() requestTimeoutFailure,
+    required TResult Function() sendTimeoutFailure,
+    required TResult Function() conflictFailure,
+    required TResult Function() internalServerErrorFailure,
+    required TResult Function() notImplementedFailure,
+    required TResult Function() serviceUnavailableFailure,
+    required TResult Function() noInternetConnectionFailure,
+    required TResult Function() formatFailure,
+    required TResult Function() unableToProcessFailure,
+    required TResult Function() otherErrorFailure,
+    required TResult Function() unexpectedFailure,
+    required TResult Function() forbiddenErrorFailure,
+    required TResult Function() badCertificateFailure,
+    required TResult Function() tooManyAttemptRequestFailure,
+    required TResult Function() dataNotFoundFailure,
+    required TResult Function() unableToOpenGoogleMaps,
+    required TResult Function(String? message, dynamic data)
+        invalidGiveDataFailure,
+    required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
+    required TResult Function() locationPermissionDeniedFailure,
+    required TResult Function() locationPermissionDeniedPermanentFailure,
+    required TResult Function() locationDisabledFailure,
+  }) {
+    return recoveryKeyNotSyncFailure();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)?
+        developmentFailure,
+    TResult? Function(int? code, String? message)? apiFailure,
+    TResult? Function()? requestCancelledFailure,
+    TResult? Function()? unauthorisedRequestFailure,
+    TResult? Function()? badRequestFailure,
+    TResult? Function()? notFoundFailure,
+    TResult? Function()? methodNotAllowedFailure,
+    TResult? Function()? notAcceptableFailure,
+    TResult? Function()? requestTimeoutFailure,
+    TResult? Function()? sendTimeoutFailure,
+    TResult? Function()? conflictFailure,
+    TResult? Function()? internalServerErrorFailure,
+    TResult? Function()? notImplementedFailure,
+    TResult? Function()? serviceUnavailableFailure,
+    TResult? Function()? noInternetConnectionFailure,
+    TResult? Function()? formatFailure,
+    TResult? Function()? unableToProcessFailure,
+    TResult? Function()? otherErrorFailure,
+    TResult? Function()? unexpectedFailure,
+    TResult? Function()? forbiddenErrorFailure,
+    TResult? Function()? badCertificateFailure,
+    TResult? Function()? tooManyAttemptRequestFailure,
+    TResult? Function()? dataNotFoundFailure,
+    TResult? Function()? unableToOpenGoogleMaps,
+    TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
+    TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
+    TResult? Function()? locationPermissionDeniedFailure,
+    TResult? Function()? locationPermissionDeniedPermanentFailure,
+    TResult? Function()? locationDisabledFailure,
+  }) {
+    return recoveryKeyNotSyncFailure?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)?
+        developmentFailure,
+    TResult Function(int? code, String? message)? apiFailure,
+    TResult Function()? requestCancelledFailure,
+    TResult Function()? unauthorisedRequestFailure,
+    TResult Function()? badRequestFailure,
+    TResult Function()? notFoundFailure,
+    TResult Function()? methodNotAllowedFailure,
+    TResult Function()? notAcceptableFailure,
+    TResult Function()? requestTimeoutFailure,
+    TResult Function()? sendTimeoutFailure,
+    TResult Function()? conflictFailure,
+    TResult Function()? internalServerErrorFailure,
+    TResult Function()? notImplementedFailure,
+    TResult Function()? serviceUnavailableFailure,
+    TResult Function()? noInternetConnectionFailure,
+    TResult Function()? formatFailure,
+    TResult Function()? unableToProcessFailure,
+    TResult Function()? otherErrorFailure,
+    TResult Function()? unexpectedFailure,
+    TResult Function()? forbiddenErrorFailure,
+    TResult Function()? badCertificateFailure,
+    TResult Function()? tooManyAttemptRequestFailure,
+    TResult Function()? dataNotFoundFailure,
+    TResult Function()? unableToOpenGoogleMaps,
+    TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
+    TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
+    TResult Function()? locationPermissionDeniedFailure,
+    TResult Function()? locationPermissionDeniedPermanentFailure,
+    TResult Function()? locationDisabledFailure,
+    required TResult orElse(),
+  }) {
+    if (recoveryKeyNotSyncFailure != null) {
+      return recoveryKeyNotSyncFailure();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DevelopmentFailure value) developmentFailure,
+    required TResult Function(ApiFailure value) apiFailure,
+    required TResult Function(RequestCancelledFailure value)
+        requestCancelledFailure,
+    required TResult Function(UnauthorizedRequestFailure value)
+        unauthorisedRequestFailure,
+    required TResult Function(BadRequestFailure value) badRequestFailure,
+    required TResult Function(NotFoundFailure value) notFoundFailure,
+    required TResult Function(MethodNotAllowedFailure value)
+        methodNotAllowedFailure,
+    required TResult Function(NotAcceptableFailure value) notAcceptableFailure,
+    required TResult Function(RequestTimeoutFailure value)
+        requestTimeoutFailure,
+    required TResult Function(SendTimeoutFailure value) sendTimeoutFailure,
+    required TResult Function(ConflictFailure value) conflictFailure,
+    required TResult Function(InternalServerErrorFailure value)
+        internalServerErrorFailure,
+    required TResult Function(NotImplementedFailure value)
+        notImplementedFailure,
+    required TResult Function(ServiceUnavailableFailure value)
+        serviceUnavailableFailure,
+    required TResult Function(NoInternetConnectionFailure value)
+        noInternetConnectionFailure,
+    required TResult Function(FormatFailure value) formatFailure,
+    required TResult Function(UnableToProcessFailure value)
+        unableToProcessFailure,
+    required TResult Function(OtherErrorFailure value) otherErrorFailure,
+    required TResult Function(UnexpectedFailure value) unexpectedFailure,
+    required TResult Function(ForbiddenErrorFailure value)
+        forbiddenErrorFailure,
+    required TResult Function(BadCertificateFailure value)
+        badCertificateFailure,
+    required TResult Function(TooManyAttemptRequestFailure value)
+        tooManyAttemptRequestFailure,
+    required TResult Function(DataNotFoundFailure value) dataNotFoundFailure,
+    required TResult Function(UnableToOpenGoogleMapsFailure value)
+        unableToOpenGoogleMaps,
+    required TResult Function(InvalidGivenDataFailure value)
+        invalidGiveDataFailure,
+    required TResult Function(VoucherInvalidFailure value)
+        voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
+    required TResult Function(LocationPermissionDeniedFailure value)
+        locationPermissionDeniedFailure,
+    required TResult Function(LocationPermissionDeniedPermanentFailure value)
+        locationPermissionDeniedPermanentFailure,
+    required TResult Function(LocationPermissionDisabledFailure value)
+        locationDisabledFailure,
+  }) {
+    return recoveryKeyNotSyncFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DevelopmentFailure value)? developmentFailure,
+    TResult? Function(ApiFailure value)? apiFailure,
+    TResult? Function(RequestCancelledFailure value)? requestCancelledFailure,
+    TResult? Function(UnauthorizedRequestFailure value)?
+        unauthorisedRequestFailure,
+    TResult? Function(BadRequestFailure value)? badRequestFailure,
+    TResult? Function(NotFoundFailure value)? notFoundFailure,
+    TResult? Function(MethodNotAllowedFailure value)? methodNotAllowedFailure,
+    TResult? Function(NotAcceptableFailure value)? notAcceptableFailure,
+    TResult? Function(RequestTimeoutFailure value)? requestTimeoutFailure,
+    TResult? Function(SendTimeoutFailure value)? sendTimeoutFailure,
+    TResult? Function(ConflictFailure value)? conflictFailure,
+    TResult? Function(InternalServerErrorFailure value)?
+        internalServerErrorFailure,
+    TResult? Function(NotImplementedFailure value)? notImplementedFailure,
+    TResult? Function(ServiceUnavailableFailure value)?
+        serviceUnavailableFailure,
+    TResult? Function(NoInternetConnectionFailure value)?
+        noInternetConnectionFailure,
+    TResult? Function(FormatFailure value)? formatFailure,
+    TResult? Function(UnableToProcessFailure value)? unableToProcessFailure,
+    TResult? Function(OtherErrorFailure value)? otherErrorFailure,
+    TResult? Function(UnexpectedFailure value)? unexpectedFailure,
+    TResult? Function(ForbiddenErrorFailure value)? forbiddenErrorFailure,
+    TResult? Function(BadCertificateFailure value)? badCertificateFailure,
+    TResult? Function(TooManyAttemptRequestFailure value)?
+        tooManyAttemptRequestFailure,
+    TResult? Function(DataNotFoundFailure value)? dataNotFoundFailure,
+    TResult? Function(UnableToOpenGoogleMapsFailure value)?
+        unableToOpenGoogleMaps,
+    TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
+    TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
+    TResult? Function(LocationPermissionDeniedFailure value)?
+        locationPermissionDeniedFailure,
+    TResult? Function(LocationPermissionDeniedPermanentFailure value)?
+        locationPermissionDeniedPermanentFailure,
+    TResult? Function(LocationPermissionDisabledFailure value)?
+        locationDisabledFailure,
+  }) {
+    return recoveryKeyNotSyncFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DevelopmentFailure value)? developmentFailure,
+    TResult Function(ApiFailure value)? apiFailure,
+    TResult Function(RequestCancelledFailure value)? requestCancelledFailure,
+    TResult Function(UnauthorizedRequestFailure value)?
+        unauthorisedRequestFailure,
+    TResult Function(BadRequestFailure value)? badRequestFailure,
+    TResult Function(NotFoundFailure value)? notFoundFailure,
+    TResult Function(MethodNotAllowedFailure value)? methodNotAllowedFailure,
+    TResult Function(NotAcceptableFailure value)? notAcceptableFailure,
+    TResult Function(RequestTimeoutFailure value)? requestTimeoutFailure,
+    TResult Function(SendTimeoutFailure value)? sendTimeoutFailure,
+    TResult Function(ConflictFailure value)? conflictFailure,
+    TResult Function(InternalServerErrorFailure value)?
+        internalServerErrorFailure,
+    TResult Function(NotImplementedFailure value)? notImplementedFailure,
+    TResult Function(ServiceUnavailableFailure value)?
+        serviceUnavailableFailure,
+    TResult Function(NoInternetConnectionFailure value)?
+        noInternetConnectionFailure,
+    TResult Function(FormatFailure value)? formatFailure,
+    TResult Function(UnableToProcessFailure value)? unableToProcessFailure,
+    TResult Function(OtherErrorFailure value)? otherErrorFailure,
+    TResult Function(UnexpectedFailure value)? unexpectedFailure,
+    TResult Function(ForbiddenErrorFailure value)? forbiddenErrorFailure,
+    TResult Function(BadCertificateFailure value)? badCertificateFailure,
+    TResult Function(TooManyAttemptRequestFailure value)?
+        tooManyAttemptRequestFailure,
+    TResult Function(DataNotFoundFailure value)? dataNotFoundFailure,
+    TResult Function(UnableToOpenGoogleMapsFailure value)?
+        unableToOpenGoogleMaps,
+    TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
+    TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
+    TResult Function(LocationPermissionDeniedFailure value)?
+        locationPermissionDeniedFailure,
+    TResult Function(LocationPermissionDeniedPermanentFailure value)?
+        locationPermissionDeniedPermanentFailure,
+    TResult Function(LocationPermissionDisabledFailure value)?
+        locationDisabledFailure,
+    required TResult orElse(),
+  }) {
+    if (recoveryKeyNotSyncFailure != null) {
+      return recoveryKeyNotSyncFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RecoveryKeyNotSyncFailure extends Failure {
+  const factory RecoveryKeyNotSyncFailure() = _$RecoveryKeyNotSyncFailureImpl;
+  const RecoveryKeyNotSyncFailure._() : super._();
+}
+
+/// @nodoc
+abstract class _$$InvalidRegisterPhraseFailureImplCopyWith<$Res> {
+  factory _$$InvalidRegisterPhraseFailureImplCopyWith(
+          _$InvalidRegisterPhraseFailureImpl value,
+          $Res Function(_$InvalidRegisterPhraseFailureImpl) then) =
+      __$$InvalidRegisterPhraseFailureImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InvalidRegisterPhraseFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$InvalidRegisterPhraseFailureImpl>
+    implements _$$InvalidRegisterPhraseFailureImplCopyWith<$Res> {
+  __$$InvalidRegisterPhraseFailureImplCopyWithImpl(
+      _$InvalidRegisterPhraseFailureImpl _value,
+      $Res Function(_$InvalidRegisterPhraseFailureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$InvalidRegisterPhraseFailureImpl extends InvalidRegisterPhraseFailure {
+  const _$InvalidRegisterPhraseFailureImpl() : super._();
+
+  @override
+  String toString() {
+    return 'Failure.invalidRegisterPhraseFailure()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InvalidRegisterPhraseFailureImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)
+        developmentFailure,
+    required TResult Function(int? code, String? message) apiFailure,
+    required TResult Function() requestCancelledFailure,
+    required TResult Function() unauthorisedRequestFailure,
+    required TResult Function() badRequestFailure,
+    required TResult Function() notFoundFailure,
+    required TResult Function() methodNotAllowedFailure,
+    required TResult Function() notAcceptableFailure,
+    required TResult Function() requestTimeoutFailure,
+    required TResult Function() sendTimeoutFailure,
+    required TResult Function() conflictFailure,
+    required TResult Function() internalServerErrorFailure,
+    required TResult Function() notImplementedFailure,
+    required TResult Function() serviceUnavailableFailure,
+    required TResult Function() noInternetConnectionFailure,
+    required TResult Function() formatFailure,
+    required TResult Function() unableToProcessFailure,
+    required TResult Function() otherErrorFailure,
+    required TResult Function() unexpectedFailure,
+    required TResult Function() forbiddenErrorFailure,
+    required TResult Function() badCertificateFailure,
+    required TResult Function() tooManyAttemptRequestFailure,
+    required TResult Function() dataNotFoundFailure,
+    required TResult Function() unableToOpenGoogleMaps,
+    required TResult Function(String? message, dynamic data)
+        invalidGiveDataFailure,
+    required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
+    required TResult Function() locationPermissionDeniedFailure,
+    required TResult Function() locationPermissionDeniedPermanentFailure,
+    required TResult Function() locationDisabledFailure,
+  }) {
+    return invalidRegisterPhraseFailure();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)?
+        developmentFailure,
+    TResult? Function(int? code, String? message)? apiFailure,
+    TResult? Function()? requestCancelledFailure,
+    TResult? Function()? unauthorisedRequestFailure,
+    TResult? Function()? badRequestFailure,
+    TResult? Function()? notFoundFailure,
+    TResult? Function()? methodNotAllowedFailure,
+    TResult? Function()? notAcceptableFailure,
+    TResult? Function()? requestTimeoutFailure,
+    TResult? Function()? sendTimeoutFailure,
+    TResult? Function()? conflictFailure,
+    TResult? Function()? internalServerErrorFailure,
+    TResult? Function()? notImplementedFailure,
+    TResult? Function()? serviceUnavailableFailure,
+    TResult? Function()? noInternetConnectionFailure,
+    TResult? Function()? formatFailure,
+    TResult? Function()? unableToProcessFailure,
+    TResult? Function()? otherErrorFailure,
+    TResult? Function()? unexpectedFailure,
+    TResult? Function()? forbiddenErrorFailure,
+    TResult? Function()? badCertificateFailure,
+    TResult? Function()? tooManyAttemptRequestFailure,
+    TResult? Function()? dataNotFoundFailure,
+    TResult? Function()? unableToOpenGoogleMaps,
+    TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
+    TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
+    TResult? Function()? locationPermissionDeniedFailure,
+    TResult? Function()? locationPermissionDeniedPermanentFailure,
+    TResult? Function()? locationDisabledFailure,
+  }) {
+    return invalidRegisterPhraseFailure?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)?
+        developmentFailure,
+    TResult Function(int? code, String? message)? apiFailure,
+    TResult Function()? requestCancelledFailure,
+    TResult Function()? unauthorisedRequestFailure,
+    TResult Function()? badRequestFailure,
+    TResult Function()? notFoundFailure,
+    TResult Function()? methodNotAllowedFailure,
+    TResult Function()? notAcceptableFailure,
+    TResult Function()? requestTimeoutFailure,
+    TResult Function()? sendTimeoutFailure,
+    TResult Function()? conflictFailure,
+    TResult Function()? internalServerErrorFailure,
+    TResult Function()? notImplementedFailure,
+    TResult Function()? serviceUnavailableFailure,
+    TResult Function()? noInternetConnectionFailure,
+    TResult Function()? formatFailure,
+    TResult Function()? unableToProcessFailure,
+    TResult Function()? otherErrorFailure,
+    TResult Function()? unexpectedFailure,
+    TResult Function()? forbiddenErrorFailure,
+    TResult Function()? badCertificateFailure,
+    TResult Function()? tooManyAttemptRequestFailure,
+    TResult Function()? dataNotFoundFailure,
+    TResult Function()? unableToOpenGoogleMaps,
+    TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
+    TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
+    TResult Function()? locationPermissionDeniedFailure,
+    TResult Function()? locationPermissionDeniedPermanentFailure,
+    TResult Function()? locationDisabledFailure,
+    required TResult orElse(),
+  }) {
+    if (invalidRegisterPhraseFailure != null) {
+      return invalidRegisterPhraseFailure();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DevelopmentFailure value) developmentFailure,
+    required TResult Function(ApiFailure value) apiFailure,
+    required TResult Function(RequestCancelledFailure value)
+        requestCancelledFailure,
+    required TResult Function(UnauthorizedRequestFailure value)
+        unauthorisedRequestFailure,
+    required TResult Function(BadRequestFailure value) badRequestFailure,
+    required TResult Function(NotFoundFailure value) notFoundFailure,
+    required TResult Function(MethodNotAllowedFailure value)
+        methodNotAllowedFailure,
+    required TResult Function(NotAcceptableFailure value) notAcceptableFailure,
+    required TResult Function(RequestTimeoutFailure value)
+        requestTimeoutFailure,
+    required TResult Function(SendTimeoutFailure value) sendTimeoutFailure,
+    required TResult Function(ConflictFailure value) conflictFailure,
+    required TResult Function(InternalServerErrorFailure value)
+        internalServerErrorFailure,
+    required TResult Function(NotImplementedFailure value)
+        notImplementedFailure,
+    required TResult Function(ServiceUnavailableFailure value)
+        serviceUnavailableFailure,
+    required TResult Function(NoInternetConnectionFailure value)
+        noInternetConnectionFailure,
+    required TResult Function(FormatFailure value) formatFailure,
+    required TResult Function(UnableToProcessFailure value)
+        unableToProcessFailure,
+    required TResult Function(OtherErrorFailure value) otherErrorFailure,
+    required TResult Function(UnexpectedFailure value) unexpectedFailure,
+    required TResult Function(ForbiddenErrorFailure value)
+        forbiddenErrorFailure,
+    required TResult Function(BadCertificateFailure value)
+        badCertificateFailure,
+    required TResult Function(TooManyAttemptRequestFailure value)
+        tooManyAttemptRequestFailure,
+    required TResult Function(DataNotFoundFailure value) dataNotFoundFailure,
+    required TResult Function(UnableToOpenGoogleMapsFailure value)
+        unableToOpenGoogleMaps,
+    required TResult Function(InvalidGivenDataFailure value)
+        invalidGiveDataFailure,
+    required TResult Function(VoucherInvalidFailure value)
+        voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
+    required TResult Function(LocationPermissionDeniedFailure value)
+        locationPermissionDeniedFailure,
+    required TResult Function(LocationPermissionDeniedPermanentFailure value)
+        locationPermissionDeniedPermanentFailure,
+    required TResult Function(LocationPermissionDisabledFailure value)
+        locationDisabledFailure,
+  }) {
+    return invalidRegisterPhraseFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DevelopmentFailure value)? developmentFailure,
+    TResult? Function(ApiFailure value)? apiFailure,
+    TResult? Function(RequestCancelledFailure value)? requestCancelledFailure,
+    TResult? Function(UnauthorizedRequestFailure value)?
+        unauthorisedRequestFailure,
+    TResult? Function(BadRequestFailure value)? badRequestFailure,
+    TResult? Function(NotFoundFailure value)? notFoundFailure,
+    TResult? Function(MethodNotAllowedFailure value)? methodNotAllowedFailure,
+    TResult? Function(NotAcceptableFailure value)? notAcceptableFailure,
+    TResult? Function(RequestTimeoutFailure value)? requestTimeoutFailure,
+    TResult? Function(SendTimeoutFailure value)? sendTimeoutFailure,
+    TResult? Function(ConflictFailure value)? conflictFailure,
+    TResult? Function(InternalServerErrorFailure value)?
+        internalServerErrorFailure,
+    TResult? Function(NotImplementedFailure value)? notImplementedFailure,
+    TResult? Function(ServiceUnavailableFailure value)?
+        serviceUnavailableFailure,
+    TResult? Function(NoInternetConnectionFailure value)?
+        noInternetConnectionFailure,
+    TResult? Function(FormatFailure value)? formatFailure,
+    TResult? Function(UnableToProcessFailure value)? unableToProcessFailure,
+    TResult? Function(OtherErrorFailure value)? otherErrorFailure,
+    TResult? Function(UnexpectedFailure value)? unexpectedFailure,
+    TResult? Function(ForbiddenErrorFailure value)? forbiddenErrorFailure,
+    TResult? Function(BadCertificateFailure value)? badCertificateFailure,
+    TResult? Function(TooManyAttemptRequestFailure value)?
+        tooManyAttemptRequestFailure,
+    TResult? Function(DataNotFoundFailure value)? dataNotFoundFailure,
+    TResult? Function(UnableToOpenGoogleMapsFailure value)?
+        unableToOpenGoogleMaps,
+    TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
+    TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
+    TResult? Function(LocationPermissionDeniedFailure value)?
+        locationPermissionDeniedFailure,
+    TResult? Function(LocationPermissionDeniedPermanentFailure value)?
+        locationPermissionDeniedPermanentFailure,
+    TResult? Function(LocationPermissionDisabledFailure value)?
+        locationDisabledFailure,
+  }) {
+    return invalidRegisterPhraseFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DevelopmentFailure value)? developmentFailure,
+    TResult Function(ApiFailure value)? apiFailure,
+    TResult Function(RequestCancelledFailure value)? requestCancelledFailure,
+    TResult Function(UnauthorizedRequestFailure value)?
+        unauthorisedRequestFailure,
+    TResult Function(BadRequestFailure value)? badRequestFailure,
+    TResult Function(NotFoundFailure value)? notFoundFailure,
+    TResult Function(MethodNotAllowedFailure value)? methodNotAllowedFailure,
+    TResult Function(NotAcceptableFailure value)? notAcceptableFailure,
+    TResult Function(RequestTimeoutFailure value)? requestTimeoutFailure,
+    TResult Function(SendTimeoutFailure value)? sendTimeoutFailure,
+    TResult Function(ConflictFailure value)? conflictFailure,
+    TResult Function(InternalServerErrorFailure value)?
+        internalServerErrorFailure,
+    TResult Function(NotImplementedFailure value)? notImplementedFailure,
+    TResult Function(ServiceUnavailableFailure value)?
+        serviceUnavailableFailure,
+    TResult Function(NoInternetConnectionFailure value)?
+        noInternetConnectionFailure,
+    TResult Function(FormatFailure value)? formatFailure,
+    TResult Function(UnableToProcessFailure value)? unableToProcessFailure,
+    TResult Function(OtherErrorFailure value)? otherErrorFailure,
+    TResult Function(UnexpectedFailure value)? unexpectedFailure,
+    TResult Function(ForbiddenErrorFailure value)? forbiddenErrorFailure,
+    TResult Function(BadCertificateFailure value)? badCertificateFailure,
+    TResult Function(TooManyAttemptRequestFailure value)?
+        tooManyAttemptRequestFailure,
+    TResult Function(DataNotFoundFailure value)? dataNotFoundFailure,
+    TResult Function(UnableToOpenGoogleMapsFailure value)?
+        unableToOpenGoogleMaps,
+    TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
+    TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
+    TResult Function(LocationPermissionDeniedFailure value)?
+        locationPermissionDeniedFailure,
+    TResult Function(LocationPermissionDeniedPermanentFailure value)?
+        locationPermissionDeniedPermanentFailure,
+    TResult Function(LocationPermissionDisabledFailure value)?
+        locationDisabledFailure,
+    required TResult orElse(),
+  }) {
+    if (invalidRegisterPhraseFailure != null) {
+      return invalidRegisterPhraseFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InvalidRegisterPhraseFailure extends Failure {
+  const factory InvalidRegisterPhraseFailure() =
+      _$InvalidRegisterPhraseFailureImpl;
+  const InvalidRegisterPhraseFailure._() : super._();
+}
+
+/// @nodoc
+abstract class _$$LocationPermissionDeniedFailureImplCopyWith<$Res> {
+  factory _$$LocationPermissionDeniedFailureImplCopyWith(
+          _$LocationPermissionDeniedFailureImpl value,
+          $Res Function(_$LocationPermissionDeniedFailureImpl) then) =
+      __$$LocationPermissionDeniedFailureImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LocationPermissionDeniedFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$LocationPermissionDeniedFailureImpl>
+    implements _$$LocationPermissionDeniedFailureImplCopyWith<$Res> {
+  __$$LocationPermissionDeniedFailureImplCopyWithImpl(
+      _$LocationPermissionDeniedFailureImpl _value,
+      $Res Function(_$LocationPermissionDeniedFailureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LocationPermissionDeniedFailureImpl
+    extends LocationPermissionDeniedFailure {
+  const _$LocationPermissionDeniedFailureImpl() : super._();
+
+  @override
+  String toString() {
+    return 'Failure.locationPermissionDeniedFailure()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LocationPermissionDeniedFailureImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Failure failure, Type runtimeType, String message,
+            StackTrace? stackTrace)
+        developmentFailure,
+    required TResult Function(int? code, String? message) apiFailure,
+    required TResult Function() requestCancelledFailure,
+    required TResult Function() unauthorisedRequestFailure,
+    required TResult Function() badRequestFailure,
+    required TResult Function() notFoundFailure,
+    required TResult Function() methodNotAllowedFailure,
+    required TResult Function() notAcceptableFailure,
+    required TResult Function() requestTimeoutFailure,
+    required TResult Function() sendTimeoutFailure,
+    required TResult Function() conflictFailure,
+    required TResult Function() internalServerErrorFailure,
+    required TResult Function() notImplementedFailure,
+    required TResult Function() serviceUnavailableFailure,
+    required TResult Function() noInternetConnectionFailure,
+    required TResult Function() formatFailure,
+    required TResult Function() unableToProcessFailure,
+    required TResult Function() otherErrorFailure,
+    required TResult Function() unexpectedFailure,
+    required TResult Function() forbiddenErrorFailure,
+    required TResult Function() badCertificateFailure,
+    required TResult Function() tooManyAttemptRequestFailure,
+    required TResult Function() dataNotFoundFailure,
+    required TResult Function() unableToOpenGoogleMaps,
+    required TResult Function(String? message, dynamic data)
+        invalidGiveDataFailure,
+    required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -8617,6 +11061,10 @@ class _$LocationPermissionDeniedFailure
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -8655,6 +11103,10 @@ class _$LocationPermissionDeniedFailure
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -8710,6 +11162,14 @@ class _$LocationPermissionDeniedFailure
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -8755,6 +11215,13 @@ class _$LocationPermissionDeniedFailure
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -8800,6 +11267,13 @@ class _$LocationPermissionDeniedFailure
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -8817,34 +11291,37 @@ class _$LocationPermissionDeniedFailure
 
 abstract class LocationPermissionDeniedFailure extends Failure {
   const factory LocationPermissionDeniedFailure() =
-      _$LocationPermissionDeniedFailure;
+      _$LocationPermissionDeniedFailureImpl;
   const LocationPermissionDeniedFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$LocationPermissionDeniedPermanentFailureCopyWith<$Res> {
-  factory _$$LocationPermissionDeniedPermanentFailureCopyWith(
-          _$LocationPermissionDeniedPermanentFailure value,
-          $Res Function(_$LocationPermissionDeniedPermanentFailure) then) =
-      __$$LocationPermissionDeniedPermanentFailureCopyWithImpl<$Res>;
+abstract class _$$LocationPermissionDeniedPermanentFailureImplCopyWith<$Res> {
+  factory _$$LocationPermissionDeniedPermanentFailureImplCopyWith(
+          _$LocationPermissionDeniedPermanentFailureImpl value,
+          $Res Function(_$LocationPermissionDeniedPermanentFailureImpl) then) =
+      __$$LocationPermissionDeniedPermanentFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LocationPermissionDeniedPermanentFailureCopyWithImpl<$Res>
+class __$$LocationPermissionDeniedPermanentFailureImplCopyWithImpl<$Res>
     extends _$FailureCopyWithImpl<$Res,
-        _$LocationPermissionDeniedPermanentFailure>
-    implements _$$LocationPermissionDeniedPermanentFailureCopyWith<$Res> {
-  __$$LocationPermissionDeniedPermanentFailureCopyWithImpl(
-      _$LocationPermissionDeniedPermanentFailure _value,
-      $Res Function(_$LocationPermissionDeniedPermanentFailure) _then)
+        _$LocationPermissionDeniedPermanentFailureImpl>
+    implements _$$LocationPermissionDeniedPermanentFailureImplCopyWith<$Res> {
+  __$$LocationPermissionDeniedPermanentFailureImplCopyWithImpl(
+      _$LocationPermissionDeniedPermanentFailureImpl _value,
+      $Res Function(_$LocationPermissionDeniedPermanentFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LocationPermissionDeniedPermanentFailure
+class _$LocationPermissionDeniedPermanentFailureImpl
     extends LocationPermissionDeniedPermanentFailure {
-  const _$LocationPermissionDeniedPermanentFailure() : super._();
+  const _$LocationPermissionDeniedPermanentFailureImpl() : super._();
 
   @override
   String toString() {
@@ -8852,10 +11329,10 @@ class _$LocationPermissionDeniedPermanentFailure
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LocationPermissionDeniedPermanentFailure);
+            other is _$LocationPermissionDeniedPermanentFailureImpl);
   }
 
   @override
@@ -8893,6 +11370,10 @@ class _$LocationPermissionDeniedPermanentFailure
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -8931,6 +11412,10 @@ class _$LocationPermissionDeniedPermanentFailure
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -8969,6 +11454,10 @@ class _$LocationPermissionDeniedPermanentFailure
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -9024,6 +11513,14 @@ class _$LocationPermissionDeniedPermanentFailure
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -9069,6 +11566,13 @@ class _$LocationPermissionDeniedPermanentFailure
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -9114,6 +11618,13 @@ class _$LocationPermissionDeniedPermanentFailure
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -9131,33 +11642,36 @@ class _$LocationPermissionDeniedPermanentFailure
 
 abstract class LocationPermissionDeniedPermanentFailure extends Failure {
   const factory LocationPermissionDeniedPermanentFailure() =
-      _$LocationPermissionDeniedPermanentFailure;
+      _$LocationPermissionDeniedPermanentFailureImpl;
   const LocationPermissionDeniedPermanentFailure._() : super._();
 }
 
 /// @nodoc
-abstract class _$$LocationPermissionDisabledFailureCopyWith<$Res> {
-  factory _$$LocationPermissionDisabledFailureCopyWith(
-          _$LocationPermissionDisabledFailure value,
-          $Res Function(_$LocationPermissionDisabledFailure) then) =
-      __$$LocationPermissionDisabledFailureCopyWithImpl<$Res>;
+abstract class _$$LocationPermissionDisabledFailureImplCopyWith<$Res> {
+  factory _$$LocationPermissionDisabledFailureImplCopyWith(
+          _$LocationPermissionDisabledFailureImpl value,
+          $Res Function(_$LocationPermissionDisabledFailureImpl) then) =
+      __$$LocationPermissionDisabledFailureImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LocationPermissionDisabledFailureCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$LocationPermissionDisabledFailure>
-    implements _$$LocationPermissionDisabledFailureCopyWith<$Res> {
-  __$$LocationPermissionDisabledFailureCopyWithImpl(
-      _$LocationPermissionDisabledFailure _value,
-      $Res Function(_$LocationPermissionDisabledFailure) _then)
+class __$$LocationPermissionDisabledFailureImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$LocationPermissionDisabledFailureImpl>
+    implements _$$LocationPermissionDisabledFailureImplCopyWith<$Res> {
+  __$$LocationPermissionDisabledFailureImplCopyWithImpl(
+      _$LocationPermissionDisabledFailureImpl _value,
+      $Res Function(_$LocationPermissionDisabledFailureImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of Failure
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LocationPermissionDisabledFailure
+class _$LocationPermissionDisabledFailureImpl
     extends LocationPermissionDisabledFailure {
-  const _$LocationPermissionDisabledFailure() : super._();
+  const _$LocationPermissionDisabledFailureImpl() : super._();
 
   @override
   String toString() {
@@ -9165,10 +11679,10 @@ class _$LocationPermissionDisabledFailure
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LocationPermissionDisabledFailure);
+            other is _$LocationPermissionDisabledFailureImpl);
   }
 
   @override
@@ -9206,6 +11720,10 @@ class _$LocationPermissionDisabledFailure
     required TResult Function(String? message, dynamic data)
         invalidGiveDataFailure,
     required TResult Function(String message) voucherInvalidFailure,
+    required TResult Function() invalidLoginCredentialsFailure,
+    required TResult Function() userNotRegisteredFailure,
+    required TResult Function() recoveryKeyNotSyncFailure,
+    required TResult Function() invalidRegisterPhraseFailure,
     required TResult Function() locationPermissionDeniedFailure,
     required TResult Function() locationPermissionDeniedPermanentFailure,
     required TResult Function() locationDisabledFailure,
@@ -9244,6 +11762,10 @@ class _$LocationPermissionDisabledFailure
     TResult? Function()? unableToOpenGoogleMaps,
     TResult? Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult? Function(String message)? voucherInvalidFailure,
+    TResult? Function()? invalidLoginCredentialsFailure,
+    TResult? Function()? userNotRegisteredFailure,
+    TResult? Function()? recoveryKeyNotSyncFailure,
+    TResult? Function()? invalidRegisterPhraseFailure,
     TResult? Function()? locationPermissionDeniedFailure,
     TResult? Function()? locationPermissionDeniedPermanentFailure,
     TResult? Function()? locationDisabledFailure,
@@ -9282,6 +11804,10 @@ class _$LocationPermissionDisabledFailure
     TResult Function()? unableToOpenGoogleMaps,
     TResult Function(String? message, dynamic data)? invalidGiveDataFailure,
     TResult Function(String message)? voucherInvalidFailure,
+    TResult Function()? invalidLoginCredentialsFailure,
+    TResult Function()? userNotRegisteredFailure,
+    TResult Function()? recoveryKeyNotSyncFailure,
+    TResult Function()? invalidRegisterPhraseFailure,
     TResult Function()? locationPermissionDeniedFailure,
     TResult Function()? locationPermissionDeniedPermanentFailure,
     TResult Function()? locationDisabledFailure,
@@ -9337,6 +11863,14 @@ class _$LocationPermissionDisabledFailure
         invalidGiveDataFailure,
     required TResult Function(VoucherInvalidFailure value)
         voucherInvalidFailure,
+    required TResult Function(InvalidLoginCredentialsFailure value)
+        invalidLoginCredentialsFailure,
+    required TResult Function(UserNotRegisteredFailure value)
+        userNotRegisteredFailure,
+    required TResult Function(RecoveryKeyNotSyncFailure value)
+        recoveryKeyNotSyncFailure,
+    required TResult Function(InvalidRegisterPhraseFailure value)
+        invalidRegisterPhraseFailure,
     required TResult Function(LocationPermissionDeniedFailure value)
         locationPermissionDeniedFailure,
     required TResult Function(LocationPermissionDeniedPermanentFailure value)
@@ -9382,6 +11916,13 @@ class _$LocationPermissionDisabledFailure
         unableToOpenGoogleMaps,
     TResult? Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult? Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult? Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult? Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult? Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult? Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult? Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult? Function(LocationPermissionDeniedPermanentFailure value)?
@@ -9427,6 +11968,13 @@ class _$LocationPermissionDisabledFailure
         unableToOpenGoogleMaps,
     TResult Function(InvalidGivenDataFailure value)? invalidGiveDataFailure,
     TResult Function(VoucherInvalidFailure value)? voucherInvalidFailure,
+    TResult Function(InvalidLoginCredentialsFailure value)?
+        invalidLoginCredentialsFailure,
+    TResult Function(UserNotRegisteredFailure value)? userNotRegisteredFailure,
+    TResult Function(RecoveryKeyNotSyncFailure value)?
+        recoveryKeyNotSyncFailure,
+    TResult Function(InvalidRegisterPhraseFailure value)?
+        invalidRegisterPhraseFailure,
     TResult Function(LocationPermissionDeniedFailure value)?
         locationPermissionDeniedFailure,
     TResult Function(LocationPermissionDeniedPermanentFailure value)?
@@ -9444,6 +11992,6 @@ class _$LocationPermissionDisabledFailure
 
 abstract class LocationPermissionDisabledFailure extends Failure {
   const factory LocationPermissionDisabledFailure() =
-      _$LocationPermissionDisabledFailure;
+      _$LocationPermissionDisabledFailureImpl;
   const LocationPermissionDisabledFailure._() : super._();
 }

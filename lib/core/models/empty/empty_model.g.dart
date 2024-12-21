@@ -6,14 +6,14 @@ part of 'empty_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_EmptyModel _$$_EmptyModelFromJson(Map<String, dynamic> json) =>
-    _$_EmptyModel(
-      code: json['code'] as int?,
+_$EmptyModelImpl _$$EmptyModelImplFromJson(Map<String, dynamic> json) =>
+    _$EmptyModelImpl(
+      code: (json['code'] as num?)?.toInt(),
       success: json['success'] as bool?,
       message: json['message'] as String?,
     );
 
-Map<String, dynamic> _$$_EmptyModelToJson(_$_EmptyModel instance) =>
+Map<String, dynamic> _$$EmptyModelImplToJson(_$EmptyModelImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'success': instance.success,

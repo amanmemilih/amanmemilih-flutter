@@ -12,7 +12,7 @@ part of 'single_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SingleModel<T> _$SingleModelFromJson<T>(
     Map<String, dynamic> json, T Function(Object?) fromJsonT) {
@@ -26,9 +26,13 @@ mixin _$SingleModel<T> {
   String? get message => throw _privateConstructorUsedError;
   T? get data => throw _privateConstructorUsedError;
 
+  /// Serializes this SingleModel to a JSON map.
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
       throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SingleModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SingleModelCopyWith<T, SingleModel<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$SingleModelCopyWithImpl<T, $Res, $Val extends SingleModel<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SingleModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,24 +88,26 @@ class _$SingleModelCopyWithImpl<T, $Res, $Val extends SingleModel<T>>
 }
 
 /// @nodoc
-abstract class _$$_SingleModelCopyWith<T, $Res>
+abstract class _$$SingleModelImplCopyWith<T, $Res>
     implements $SingleModelCopyWith<T, $Res> {
-  factory _$$_SingleModelCopyWith(
-          _$_SingleModel<T> value, $Res Function(_$_SingleModel<T>) then) =
-      __$$_SingleModelCopyWithImpl<T, $Res>;
+  factory _$$SingleModelImplCopyWith(_$SingleModelImpl<T> value,
+          $Res Function(_$SingleModelImpl<T>) then) =
+      __$$SingleModelImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call({int? code, bool? success, String? message, T? data});
 }
 
 /// @nodoc
-class __$$_SingleModelCopyWithImpl<T, $Res>
-    extends _$SingleModelCopyWithImpl<T, $Res, _$_SingleModel<T>>
-    implements _$$_SingleModelCopyWith<T, $Res> {
-  __$$_SingleModelCopyWithImpl(
-      _$_SingleModel<T> _value, $Res Function(_$_SingleModel<T>) _then)
+class __$$SingleModelImplCopyWithImpl<T, $Res>
+    extends _$SingleModelCopyWithImpl<T, $Res, _$SingleModelImpl<T>>
+    implements _$$SingleModelImplCopyWith<T, $Res> {
+  __$$SingleModelImplCopyWithImpl(
+      _$SingleModelImpl<T> _value, $Res Function(_$SingleModelImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of SingleModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -108,7 +116,7 @@ class __$$_SingleModelCopyWithImpl<T, $Res>
     Object? message = freezed,
     Object? data = freezed,
   }) {
-    return _then(_$_SingleModel<T>(
+    return _then(_$SingleModelImpl<T>(
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -131,12 +139,12 @@ class __$$_SingleModelCopyWithImpl<T, $Res>
 
 /// @nodoc
 @JsonSerializable(genericArgumentFactories: true)
-class _$_SingleModel<T> implements _SingleModel<T> {
-  const _$_SingleModel({this.code, this.success, this.message, this.data});
+class _$SingleModelImpl<T> implements _SingleModel<T> {
+  const _$SingleModelImpl({this.code, this.success, this.message, this.data});
 
-  factory _$_SingleModel.fromJson(
+  factory _$SingleModelImpl.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
-      _$$_SingleModelFromJson(json, fromJsonT);
+      _$$SingleModelImplFromJson(json, fromJsonT);
 
   @override
   final int? code;
@@ -153,30 +161,33 @@ class _$_SingleModel<T> implements _SingleModel<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SingleModel<T> &&
+            other is _$SingleModelImpl<T> &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, code, success, message,
       const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SingleModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SingleModelCopyWith<T, _$_SingleModel<T>> get copyWith =>
-      __$$_SingleModelCopyWithImpl<T, _$_SingleModel<T>>(this, _$identity);
+  _$$SingleModelImplCopyWith<T, _$SingleModelImpl<T>> get copyWith =>
+      __$$SingleModelImplCopyWithImpl<T, _$SingleModelImpl<T>>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
-    return _$$_SingleModelToJson<T>(this, toJsonT);
+    return _$$SingleModelImplToJson<T>(this, toJsonT);
   }
 }
 
@@ -185,11 +196,11 @@ abstract class _SingleModel<T> implements SingleModel<T> {
       {final int? code,
       final bool? success,
       final String? message,
-      final T? data}) = _$_SingleModel<T>;
+      final T? data}) = _$SingleModelImpl<T>;
 
   factory _SingleModel.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =
-      _$_SingleModel<T>.fromJson;
+      _$SingleModelImpl<T>.fromJson;
 
   @override
   int? get code;
@@ -199,8 +210,11 @@ abstract class _SingleModel<T> implements SingleModel<T> {
   String? get message;
   @override
   T? get data;
+
+  /// Create a copy of SingleModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_SingleModelCopyWith<T, _$_SingleModel<T>> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SingleModelImplCopyWith<T, _$SingleModelImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

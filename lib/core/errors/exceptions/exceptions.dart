@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 import 'package:equatable/equatable.dart';
 
@@ -66,6 +67,27 @@ class LocationPermissionDeniedPermanentException extends Equatable
 
 class LocationDisabledException extends Equatable implements Exception {
   const LocationDisabledException();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class InvalidLoginCredentialException extends Equatable implements Exception {
+  const InvalidLoginCredentialException();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class UserNotRegisteredException extends Equatable implements Exception {
+  const UserNotRegisteredException();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class InvalidRegisterPhraseException extends Equatable implements Exception {
+  const InvalidRegisterPhraseException();
 
   @override
   List<Object?> get props => [];

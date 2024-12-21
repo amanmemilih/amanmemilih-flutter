@@ -31,4 +31,8 @@ class LocalizationText {
   static const String locationPermissionDeniedFailure =
       "locationPermissionDeniedFailure";
   static const String locationDisabledFailure = "locationDisabledFailure";
+  static const String invalidLoginCredentialsFailure =
+      "invalidLoginCredentialsFailure";
+  static const String invalidRegisterPhraseFailure =
+      "invalidRegisterPhraseFailure";
 }

@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:localization/localization.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'core/constants/file.dart';
 import 'core/https/http_client_overrides.dart';
@@ -16,6 +18,7 @@ class InitialApp {
     _initHttp();
     await _initIntl();
     _initLocalization();
+    _initHive();
   }
 
   static void _initDependencyInjection() {
@@ -38,5 +41,9 @@ class InitialApp {
 
   static void _initLocalization() {
     LocalJsonLocalization.delegate.directories = [FILE.localizationPath];
+  }
+
+  static Future<void> _initHive() async {
+    return Hive.initFlutter();
   }
 }

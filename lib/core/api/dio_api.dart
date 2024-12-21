@@ -23,8 +23,8 @@ class DioApi extends Api {
     };
 
     // The following contains code for adding options to dio.
-    dio.options.connectTimeout = const Duration(minutes: 6);
-    dio.options.receiveTimeout = const Duration(minutes: 6);
+    dio.options.connectTimeout = const Duration(seconds: 120);
+    dio.options.receiveTimeout = const Duration(seconds: 120);
     dio.options.headers['Language'] = "EN";
     dio.options.headers['Accept'] = "application/json";
 
@@ -38,15 +38,15 @@ class DioApi extends Api {
       },
     ));
 
-    // dio.interceptors.add(
-    //   LogInterceptor(
-    //     responseBody: false,
-    //     requestHeader: false,
-    //     responseHeader: false,
-    //     request: false,
-    //     requestBody: true,
-    //   ),
-    // );
+    dio.interceptors.add(
+      LogInterceptor(
+        responseBody: false,
+        requestHeader: false,
+        responseHeader: false,
+        request: false,
+        requestBody: true,
+      ),
+    );
 
     // The following contains code for adding baseURL to dio.
     baseUrl = NETWORK.baseURL;

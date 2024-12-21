@@ -12,7 +12,7 @@ part of 'empty_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 EmptyModel _$EmptyModelFromJson(Map<String, dynamic> json) {
   return _EmptyModel.fromJson(json);
@@ -24,8 +24,12 @@ mixin _$EmptyModel {
   bool? get success => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
 
+  /// Serializes this EmptyModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EmptyModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EmptyModelCopyWith<EmptyModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$EmptyModelCopyWithImpl<$Res, $Val extends EmptyModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EmptyModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,24 +80,26 @@ class _$EmptyModelCopyWithImpl<$Res, $Val extends EmptyModel>
 }
 
 /// @nodoc
-abstract class _$$_EmptyModelCopyWith<$Res>
+abstract class _$$EmptyModelImplCopyWith<$Res>
     implements $EmptyModelCopyWith<$Res> {
-  factory _$$_EmptyModelCopyWith(
-          _$_EmptyModel value, $Res Function(_$_EmptyModel) then) =
-      __$$_EmptyModelCopyWithImpl<$Res>;
+  factory _$$EmptyModelImplCopyWith(
+          _$EmptyModelImpl value, $Res Function(_$EmptyModelImpl) then) =
+      __$$EmptyModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? code, bool? success, String? message});
 }
 
 /// @nodoc
-class __$$_EmptyModelCopyWithImpl<$Res>
-    extends _$EmptyModelCopyWithImpl<$Res, _$_EmptyModel>
-    implements _$$_EmptyModelCopyWith<$Res> {
-  __$$_EmptyModelCopyWithImpl(
-      _$_EmptyModel _value, $Res Function(_$_EmptyModel) _then)
+class __$$EmptyModelImplCopyWithImpl<$Res>
+    extends _$EmptyModelCopyWithImpl<$Res, _$EmptyModelImpl>
+    implements _$$EmptyModelImplCopyWith<$Res> {
+  __$$EmptyModelImplCopyWithImpl(
+      _$EmptyModelImpl _value, $Res Function(_$EmptyModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EmptyModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,7 +107,7 @@ class __$$_EmptyModelCopyWithImpl<$Res>
     Object? success = freezed,
     Object? message = freezed,
   }) {
-    return _then(_$_EmptyModel(
+    return _then(_$EmptyModelImpl(
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -119,11 +127,11 @@ class __$$_EmptyModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_EmptyModel implements _EmptyModel {
-  const _$_EmptyModel({this.code, this.success, this.message});
+class _$EmptyModelImpl implements _EmptyModel {
+  const _$EmptyModelImpl({this.code, this.success, this.message});
 
-  factory _$_EmptyModel.fromJson(Map<String, dynamic> json) =>
-      _$$_EmptyModelFromJson(json);
+  factory _$EmptyModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$EmptyModelImplFromJson(json);
 
   @override
   final int? code;
@@ -138,28 +146,30 @@ class _$_EmptyModel implements _EmptyModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EmptyModel &&
+            other is _$EmptyModelImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, code, success, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EmptyModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EmptyModelCopyWith<_$_EmptyModel> get copyWith =>
-      __$$_EmptyModelCopyWithImpl<_$_EmptyModel>(this, _$identity);
+  _$$EmptyModelImplCopyWith<_$EmptyModelImpl> get copyWith =>
+      __$$EmptyModelImplCopyWithImpl<_$EmptyModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EmptyModelToJson(
+    return _$$EmptyModelImplToJson(
       this,
     );
   }
@@ -169,10 +179,10 @@ abstract class _EmptyModel implements EmptyModel {
   const factory _EmptyModel(
       {final int? code,
       final bool? success,
-      final String? message}) = _$_EmptyModel;
+      final String? message}) = _$EmptyModelImpl;
 
   factory _EmptyModel.fromJson(Map<String, dynamic> json) =
-      _$_EmptyModel.fromJson;
+      _$EmptyModelImpl.fromJson;
 
   @override
   int? get code;
@@ -180,8 +190,11 @@ abstract class _EmptyModel implements EmptyModel {
   bool? get success;
   @override
   String? get message;
+
+  /// Create a copy of EmptyModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_EmptyModelCopyWith<_$_EmptyModel> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$EmptyModelImplCopyWith<_$EmptyModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,3 +1,3 @@
 class NETWORK {
-  static const baseURL = 'https://amanmemilih.com';
+  static const baseURL = 'http://localhost:8080/api';
 }
