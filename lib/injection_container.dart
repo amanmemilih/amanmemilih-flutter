@@ -5,11 +5,13 @@ import 'package:amanmemilih_mobile_app/features/auth/data/datasources/auth_remot
 import 'package:amanmemilih_mobile_app/features/auth/data/repositories/auth_repository_v1.dart';
 import 'package:amanmemilih_mobile_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:amanmemilih_mobile_app/features/auth/domain/usecases/check_credentials_usecase.dart';
+import 'package:amanmemilih_mobile_app/features/auth/domain/usecases/forgot_password_usecase.dart';
 import 'package:amanmemilih_mobile_app/features/auth/domain/usecases/generate_recovery_key_usecase.dart';
 import 'package:amanmemilih_mobile_app/features/auth/domain/usecases/login_usecase.dart';
 import 'package:amanmemilih_mobile_app/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:amanmemilih_mobile_app/features/auth/domain/usecases/register_usecase.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
+import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/forgotpassword/forgot_password_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/generaterecoverykey/generate_recovery_key_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/registerpassword/register_password_cubit.dart';
@@ -50,6 +52,7 @@ void initialize() {
   getIt.registerLazySingleton(() => CheckCredentialsUseCase(getIt()));
   getIt.registerLazySingleton(() => LoginUseCase(getIt()));
   getIt.registerLazySingleton(() => GenerateRecoveryKeyUseCase(getIt()));
+  getIt.registerLazySingleton(() => ForgotPasswordUseCase(getIt()));
   getIt.registerLazySingleton(() => RegisterUseCase(getIt()));
   getIt.registerLazySingleton(
       () => RegisterPasswordCubit(getIt(), getIt(), getIt()));
@@ -62,6 +65,24 @@ void initialize() {
   getIt.registerFactory(() => DashboardCubit(getIt()));
   getIt.registerFactory(() => GenerateRecoveryKeyCubit(getIt()));
   getIt.registerFactory(() => RegisterRecoveryKeyCubit(
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+      ));
+  getIt.registerFactory(() => ForgotPasswordCubit(
+        getIt(),
+        getIt(),
+        getIt(),
         getIt(),
         getIt(),
         getIt(),

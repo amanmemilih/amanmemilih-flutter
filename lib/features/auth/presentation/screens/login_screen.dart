@@ -9,7 +9,7 @@ import 'package:amanmemilih_mobile_app/core/widgets/text_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/text_field.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/login/login_cubit.dart';
-import 'package:amanmemilih_mobile_app/features/register_password/presentation/register_password_screen.dart';
+import 'package:amanmemilih_mobile_app/features/auth/presentation/screens/register_password_screen.dart';
 import 'package:amanmemilih_mobile_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -242,9 +242,10 @@ class LoginScreenImplement extends StatelessWidget {
                   );
                 },
               ),
+              SizedBox(height: 10.h),
               AMTextButton(
                 onTap: () {
-                  Navigator.of(context).pushNamed(ROUTER.recoveryKey);
+                  Navigator.of(context).pushNamed(ROUTER.forgotPassword);
                 },
                 title: "Lupa Password?",
               )

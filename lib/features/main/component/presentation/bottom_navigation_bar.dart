@@ -1,8 +1,8 @@
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
-import 'package:amanmemilih_mobile_app/features/camera/presentation/camera_screen.dart';
-import 'package:amanmemilih_mobile_app/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:amanmemilih_mobile_app/features/camera/presentation/screens/camera_screen.dart';
+import 'package:amanmemilih_mobile_app/features/main/presentation/screens/dashboard_screen.dart';
 import 'package:amanmemilih_mobile_app/features/main/component/bloc/navigation_cubit.dart';
-import 'package:amanmemilih_mobile_app/features/profile/presentation/profile_screen.dart';
+import 'package:amanmemilih_mobile_app/features/user/presentation/screens/profile_screen.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

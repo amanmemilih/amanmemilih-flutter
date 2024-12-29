@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:amanmemilih_mobile_app/features/camera/presentation/preview_screen.dart';
+import 'package:amanmemilih_mobile_app/features/camera/presentation/screens/preview_screen.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';

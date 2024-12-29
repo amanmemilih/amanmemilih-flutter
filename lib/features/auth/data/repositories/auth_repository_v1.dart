@@ -199,4 +199,52 @@ class AuthRepositoryV1 extends AuthRepository {
       return Left(CatchError.getFailure(err, stackTrace));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> forgotPassword(
+    String? password,
+    String? phrase1,
+    String? phrase2,
+    String? phrase3,
+    String? phrase4,
+    String? phrase5,
+    String? phrase6,
+    String? phrase7,
+    String? phrase8,
+    String? phrase9,
+    String? phrase10,
+    String? phrase11,
+    String? phrase12,
+  ) async {
+    try {
+      final response = await _remoteDataSource.forgotPassword(
+        password,
+        phrase1,
+        phrase2,
+        phrase3,
+        phrase4,
+        phrase5,
+        phrase6,
+        phrase7,
+        phrase8,
+        phrase9,
+        phrase10,
+        phrase11,
+        phrase12,
+      );
+      final model = EmptyModel.fromJson(response.data);
+
+      if (model.code == 422) {
+        throw InvalidRegisterPhraseException();
+      }
+
+      if (model.success == false) {
+        throw ApiException(model.code, model.message);
+      }
+
+      return Right(true);
+    } catch (err, stackTrace) {
+      return Left(CatchError.getFailure(err, stackTrace));
+    }
+  }
 }

@@ -1,5 +1,5 @@
 ///
-/// generate_recovery_phrase_screen.dart
+/// forgot_recovery_key_screen.dart
 /// lib/features/auth/presentation/screens
 ///
 /// Created by Indra Mahesa https://github.com/zinct
@@ -7,13 +7,12 @@
 library;
 
 import 'package:amanmemilih_mobile_app/core/components/alerts/alert_error.dart';
-import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/errors/errors.dart';
 import 'package:amanmemilih_mobile_app/core/resources/colors.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
+import 'package:amanmemilih_mobile_app/core/widgets/text_field.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/touchable_opacity_widget.dart';
-import 'package:amanmemilih_mobile_app/features/auth/presentation/args/register_recovery_key_args.dart';
-import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/generaterecoverykey/generate_recovery_key_cubit.dart';
+import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/forgotpassword/forgot_password_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/registerrecoverykey/register_recovery_key_cubit.dart';
 import 'package:amanmemilih_mobile_app/injection_container.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
@@ -23,36 +22,31 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RegisterRecoveryKeyScreen extends StatelessWidget {
-  const RegisterRecoveryKeyScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as RegisterRecoveryKeyArgs;
-
     return BlocProvider(
-      create: (context) => getIt<RegisterRecoveryKeyCubit>()..getData(args.key),
-      child: RegisterRecoveryKeyScreenImplement(),
+      create: (context) => getIt<ForgotPasswordCubit>(),
+      child: ForgotPasswordImplement(),
     );
   }
 }
 
-class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
-  const RegisterRecoveryKeyScreenImplement({
+class ForgotPasswordImplement extends StatelessWidget {
+  const ForgotPasswordImplement({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as RegisterRecoveryKeyArgs;
-
-    return BlocConsumer<RegisterRecoveryKeyCubit, RegisterRecoveryKeyState>(
+    return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
       listener: (context, state) {
-        if (state.status == RegisterRecoveryKeyStatus.error) {
+        if (state.status == ForgotPasswordStatus.error) {
           switch (state.error?.failure) {
             case InvalidRegisterPhraseFailure():
+              print('state.error?.failure');
               final snackBar = SnackBar(
                 elevation: 0,
                 behavior: SnackBarBehavior.floating,
@@ -77,6 +71,8 @@ class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
                 ..showSnackBar(snackBar);
               break;
             default:
+              print('state.aads?.failure');
+
               alertError(
                 context,
                 () {},
@@ -86,15 +82,13 @@ class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
               );
           }
         }
-        if (state.status == RegisterRecoveryKeyStatus.success) {
+
+        if (state.status == ForgotPasswordStatus.success) {
           Navigator.of(context).pop();
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
-          Navigator.of(context).pushReplacementNamed(ROUTER.bottomNavBar);
         }
       },
       builder: (context, state) {
-        final cubit = context.read<RegisterRecoveryKeyCubit>();
+        final cubit = context.read<ForgotPasswordCubit>();
 
         final controllers = [
           cubit.phrase1Controller,
@@ -122,25 +116,45 @@ class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
           ),
           body: Container(
             padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Atur kode recovery",
-                  textAlign: TextAlign.end,
-                  style: GoogleFonts.plusJakartaSans(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Lupa Password",
+                    textAlign: TextAlign.end,
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-                SizedBox(height: 8.h),
-                const Text(
-                  "Simpan kode ini ditempat yang aman, dan hanya anda yang bisa mengaksesnya.",
-                ),
-                SizedBox(height: 16.h),
-                Expanded(
-                  flex: 1,
-                  child: Column(
+                  SizedBox(height: 2.h),
+                  const Text(
+                    "Simpan kode ini ditempat yang aman, dan hanya anda yang bisa mengaksesnya.",
+                  ),
+                  SizedBox(height: 10.h),
+                  TouchableOpacityWidget(
+                    onTap: () {
+                      context.read<ForgotPasswordCubit>().toggleHiddenKey();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(width: 3.w),
+                        Text(
+                          !state.isKeyHidden ? "Sembunyikan" : "Perlihatkan",
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: BaseColors.primary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  Column(
                     children: [
                       GridView.count(
                         scrollDirection: Axis.vertical,
@@ -163,7 +177,6 @@ class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
                                 border: Border.all(color: BaseColors.primary),
                               ),
                               child: TextField(
-                                readOnly: controllers[index].text != '',
                                 controller: controllers[index],
                                 obscureText: state.isKeyHidden,
                                 textAlign: TextAlign.center,
@@ -176,52 +189,66 @@ class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
                         ).toList(),
                       ),
                       SizedBox(height: 20.h),
-                      TouchableOpacityWidget(
-                        onTap: () {
-                          context
-                              .read<RegisterRecoveryKeyCubit>()
-                              .toggleHiddenKey();
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              "assets/svg/${!state.isKeyHidden ? 'eye.svg' : 'eye_close.svg'}",
-                              alignment: Alignment.centerLeft,
-                              colorFilter: ColorFilter.mode(
-                                BaseColors.primary,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            SizedBox(width: 3.w),
-                            Text(
-                              !state.isKeyHidden
-                                  ? "Sembunyikan"
-                                  : "Perlihatkan",
-                              style: GoogleFonts.plusJakartaSans(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: BaseColors.primary,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      )
                     ],
                   ),
-                ),
-                AMElevatedButton(
-                    title: "Selanjutnya",
-                    isLoading:
-                        state.status == RegisterRecoveryKeyStatus.loading,
+                  Form(
+                    key: context.read<ForgotPasswordCubit>().formKey,
+                    child: Column(
+                      children: [
+                        AMTextField(
+                          controller: context
+                              .read<ForgotPasswordCubit>()
+                              .passwordController,
+                          hint: "Password",
+                          isPassword: true,
+                          obsecureText: !state.isPasswordHidden,
+                          onPasswordHiddenTap: context
+                              .read<ForgotPasswordCubit>()
+                              .toggleHiddenPassword,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Field ini tidak boleh kosong!';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 8.h),
+                        AMTextField(
+                          controller: context
+                              .read<ForgotPasswordCubit>()
+                              .passwordConfirmationController,
+                          hint: "Konfirmasi Password",
+                          isPassword: true,
+                          obsecureText: !state.isPasswordConfirmationHidden,
+                          onPasswordHiddenTap: context
+                              .read<ForgotPasswordCubit>()
+                              .toggleHiddenPasswordConfirmation,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Field ini tidak boleh kosong!';
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  AMElevatedButton(
+                    title: "Reset Password",
+                    isLoading: state.status == ForgotPasswordStatus.loading,
                     onTap: () {
-                      context
-                          .read<RegisterRecoveryKeyCubit>()
-                          .register(args.username, args.password);
-                    }),
-                const SizedBox(height: 21)
-              ],
+                      if (context
+                          .read<ForgotPasswordCubit>()
+                          .formKey
+                          .currentState!
+                          .validate()) {
+                        context.read<ForgotPasswordCubit>().forgotPassword();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );

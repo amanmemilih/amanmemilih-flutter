@@ -34,6 +34,21 @@ abstract class AuthRepository {
     String? phrase11,
     String? phrase12,
   );
+  Future<Either<Failure, void>> forgotPassword(
+    String? password,
+    String? phrase1,
+    String? phrase2,
+    String? phrase3,
+    String? phrase4,
+    String? phrase5,
+    String? phrase6,
+    String? phrase7,
+    String? phrase8,
+    String? phrase9,
+    String? phrase10,
+    String? phrase11,
+    String? phrase12,
+  );
   Future<Either<Failure, RecoveryKeyEntity?>> generateRecoveryKey(
       String? username);
   Future<Either<Failure, void>> logout();
