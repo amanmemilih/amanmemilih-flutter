@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditImageScreen extends StatefulWidget {
   const EditImageScreen({super.key});
@@ -15,10 +16,10 @@ class _EditImageScreenState extends State<EditImageScreen> {
 
   // List alat yang tersedia
   final List<Map<String, dynamic>> _tools = [
-    {'label': 'Crop', 'icon': Icons.crop},
-    {'label': 'Brightness', 'icon': Icons.brightness_6},
-    {'label': 'Contrast', 'icon': Icons.contrast},
-    {'label': 'Sharpness', 'icon': Icons.shutter_speed},
+    {'label': 'Pangkas', 'icon': Icons.crop},
+    {'label': 'Pencahayaan', 'icon': Icons.brightness_6},
+    {'label': 'Kontras', 'icon': Icons.contrast},
+    {'label': 'Ketajaman', 'icon': Icons.shutter_speed},
   ];
 
   @override
@@ -36,107 +37,115 @@ class _EditImageScreenState extends State<EditImageScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          // Area untuk menampilkan gambar
-          Expanded(
-            child: Stack(
-              children: [
-                CarouselSlider.builder(
-                  itemCount: imagePaths.length,
-                  itemBuilder: (context, index, realIndex) {
-                    try {
-                      return Image.file(
-                        File(imagePaths[index]),
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                      );
-                    } catch (e) {
-                      return const Center(
-                        child: Text('Gambar tidak dapat dimuat'),
-                      );
-                    }
-                  },
-                  options: CarouselOptions(
-                    height: double.infinity,
-                    viewportFraction: 1.0,
-                    enableInfiniteScroll: false,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _currentIndex = index;
-                      });
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Area untuk menampilkan gambar
+            Expanded(
+              child: Stack(
+                children: [
+                  CarouselSlider.builder(
+                    itemCount: imagePaths.length,
+                    itemBuilder: (context, index, realIndex) {
+                      try {
+                        return Image.file(
+                          File(imagePaths[index]),
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        );
+                      } catch (e) {
+                        return const Center(
+                          child: Text('Gambar tidak dapat dimuat'),
+                        );
+                      }
                     },
+                    options: CarouselOptions(
+                      height: double.infinity,
+                      viewportFraction: 1.0,
+                      enableInfiniteScroll: false,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          // Bottom bar untuk memilih alat pengeditan
-          Container(
-            padding: const EdgeInsets.all(20),
-            color: Colors.grey[900],
-            child: Column(
-              children: [
-                //titik titik indikator image carousel_slider
-                Container(
-                  margin: const EdgeInsets.only(bottom: 40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      imagePaths.length,
-                      (index) => Container(
-                        width: 8.0,
-                        height: 8.0,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 4.0, vertical: 2.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _currentIndex == index
-                              ? Colors.redAccent
-                              : Colors.white70,
+            Container(
+              color: Colors.grey[900],
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 100.w, top: 20.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        imagePaths.length,
+                        (index) => Container(
+                          width: 8.0,
+                          height: 8.0,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 4.0, vertical: 2.0),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _currentIndex == index
+                                ? Colors.redAccent
+                                : Colors.white70,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: _tools.map((tool) {
-                    final toolIndex = _tools.indexOf(tool);
-                    final isSelected = _selectedToolIndex == toolIndex;
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: _tools.map((tool) {
+                        final toolIndex = _tools.indexOf(tool);
+                        final isSelected = _selectedToolIndex == toolIndex;
 
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedToolIndex = toolIndex;
-                        });
-                        _navigateToTool(toolIndex, imagePaths);
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            tool['icon'],
-                            color: isSelected ? Colors.redAccent : Colors.white,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            tool['label'],
-                            style: TextStyle(
-                              color:
-                                  isSelected ? Colors.redAccent : Colors.white,
-                              fontSize: 12,
+                        return Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _selectedToolIndex = toolIndex;
+                              });
+                              _navigateToTool(toolIndex, imagePaths);
+                            },
+                            child: Column(
+                              children: [
+                                Icon(
+                                  tool['icon'],
+                                  color: isSelected
+                                      ? Colors.redAccent
+                                      : Colors.white,
+                                ),
+                                SizedBox(height: 6.w),
+                                Text(
+                                  tool['label'],
+                                  style: TextStyle(
+                                    color: isSelected
+                                        ? Colors.redAccent
+                                        : Colors.white,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ],
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  SizedBox(height: 70.w),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -199,17 +208,19 @@ class PlaceholderScreen extends StatelessWidget {
         title: Text(title),
         backgroundColor: Colors.redAccent,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.file(File(imagePath)),
-            const SizedBox(height: 20),
-            Text(
-              'Tool: $title',
-              style: const TextStyle(fontSize: 18, color: Colors.white),
-            ),
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.file(File(imagePath)),
+              const SizedBox(height: 20),
+              Text(
+                'Tool: $title',
+                style: const TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ],
+          ),
         ),
       ),
       backgroundColor: Colors.black,

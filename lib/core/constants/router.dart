@@ -8,6 +8,8 @@ class ROUTER {
   static const dashboard = 'apps.screen.dashboard';
   static const bottomNavBar = 'apps.screen.bottom_navigation';
   static const documentInformation = 'apps.screen.document_information';
+  static const documentRecapitulation = 'apps.screen.document_recapitulation';
+  static const documentValidation = 'apps.screen.document_validation';
   static const detailForm = 'apps.screen.detail_form';
   static const editImageScreen = 'apps.screen.edit_image';
 }

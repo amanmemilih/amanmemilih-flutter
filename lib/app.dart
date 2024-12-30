@@ -9,6 +9,8 @@ import 'package:amanmemilih_mobile_app/features/auth/presentation/screens/regist
 import 'package:amanmemilih_mobile_app/features/document/presentation/screens/document_information_screen.dart';
 import 'package:amanmemilih_mobile_app/features/camera/presentation/screens/edit_image_screen.dart';
 import 'package:amanmemilih_mobile_app/features/document/presentation/form_detail_screen.dart';
+import 'package:amanmemilih_mobile_app/features/document/presentation/screens/document_recapitulation_screen.dart';
+import 'package:amanmemilih_mobile_app/features/document/presentation/screens/document_validation_screen.dart';
 import 'package:amanmemilih_mobile_app/features/intro/presentation/screens/splash_screen.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:amanmemilih_mobile_app/features/main/component/bloc/navigation_cubit.dart';
@@ -71,6 +73,10 @@ class MainApp extends StatelessWidget {
               // Document
               ROUTER.documentInformation: (context) =>
                   const DocumentInformationScreen(),
+              ROUTER.documentValidation: (context) =>
+                  const DocumentValidationScreen(),
+              ROUTER.documentRecapitulation: (context) =>
+                  const DocumentRecapitulationScreen(),
               ROUTER.detailForm: (context) => const FormDetailScreen(),
             },
             debugShowCheckedModeBanner: false,

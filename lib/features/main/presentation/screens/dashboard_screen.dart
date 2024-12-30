@@ -2,14 +2,12 @@ import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/extensions/int_extension.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/outlined_button.dart';
-import 'package:amanmemilih_mobile_app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/main/presentation/cubits/dashboard/dashboard_cubit.dart';
 import 'package:amanmemilih_mobile_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -309,21 +307,7 @@ class DashboardScreenImplement extends StatelessWidget {
                   ],
                 ),
               ),
-              ListTile(
-                onTap: () {
-                  Navigator.of(context).pushNamed(ROUTER.documentInformation);
-                },
-                title: Text(
-                  "Selengkapnya",
-                  textAlign: TextAlign.right,
-                  style: GoogleFonts.plusJakartaSans(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                    color: colorPrimary,
-                  ),
-                ),
-                trailing: SvgPicture.asset("assets/svg/right_arrow.svg"),
-              )
+              SizedBox(height: 20.w),
             ],
           ),
         );

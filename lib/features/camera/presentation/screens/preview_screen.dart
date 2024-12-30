@@ -80,6 +80,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
       appBar: _isFullScreen
           ? null
           : AppBar(
+              foregroundColor: Colors.white,
               title: const Text(
                 "Preview Images",
                 style: TextStyle(color: Colors.white),
@@ -92,105 +93,109 @@ class _PreviewScreenState extends State<PreviewScreen> {
                 ),
               ],
             ),
-      body: Column(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: _toggleFullScreen,
-              child: CarouselSlider.builder(
-                itemCount: widget.imagePaths.length,
-                itemBuilder: (context, index, realIndex) {
-                  return Image.file(
-                    File(widget.imagePaths[index]),
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
-                  );
-                },
-                options: CarouselOptions(
-                  height: 400,
-                  autoPlay: false,
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: false,
-                  viewportFraction: 1.0,
-                  aspectRatio: 1.0,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: _toggleFullScreen,
+                child: CarouselSlider.builder(
+                  itemCount: widget.imagePaths.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return Image.file(
+                      File(widget.imagePaths[index]),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    );
                   },
+                  options: CarouselOptions(
+                    height: 400,
+                    autoPlay: false,
+                    enlargeCenterPage: true,
+                    enableInfiniteScroll: false,
+                    viewportFraction: 1.0,
+                    aspectRatio: 1.0,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-          if (!_isFullScreen)
-            Container(
-              padding: const EdgeInsets.all(20),
-              color: Colors.black,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    //membuat dots atau titik titik di carousel_slider
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:
-                          List.generate(widget.imagePaths.length, (index) {
-                        return AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                          width: _currentIndex == index ? 12.0 : 10.0,
-                          height: 10.0,
-                          decoration: BoxDecoration(
-                            color: _currentIndex == index
-                                ? Colors.redAccent
-                                : Colors.grey,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 42,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _customButton(
-                        icon: Icons.settings,
-                        label: "Edit",
-                        onPressed: () {
-                          final selectedImagePath =
-                              widget.imagePaths[_currentIndex];
-                          Navigator.pushNamed(
-                            context,
-                            ROUTER.editImageScreen,
-                            arguments: widget.imagePaths,
+            if (!_isFullScreen)
+              Container(
+                padding: const EdgeInsets.all(20),
+                color: Colors.black,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      //membuat dots atau titik titik di carousel_slider
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:
+                            List.generate(widget.imagePaths.length, (index) {
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                            width: _currentIndex == index ? 12.0 : 10.0,
+                            height: 10.0,
+                            decoration: BoxDecoration(
+                              color: _currentIndex == index
+                                  ? Colors.redAccent
+                                  : Colors.grey,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
                           );
-                        },
+                        }),
                       ),
-                      _customButton(
-                        icon: Icons.add,
-                        label: "Tambah",
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      _customButton(
-                        icon: Icons.check,
-                        label: "Selesai",
-                        onPressed: () {
-                          _saveImagesToGallery();
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                    const SizedBox(
+                      height: 42,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _customButton(
+                          icon: Icons.settings,
+                          label: "Edit",
+                          onPressed: () {
+                            final selectedImagePath =
+                                widget.imagePaths[_currentIndex];
+                            Navigator.pushNamed(
+                              context,
+                              ROUTER.editImageScreen,
+                              arguments: widget.imagePaths,
+                            );
+                          },
+                        ),
+                        _customButton(
+                          icon: Icons.add,
+                          label: "Tambah",
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        _customButton(
+                          icon: Icons.check,
+                          label: "Selesai",
+                          onPressed: () {
+                            // _saveImagesToGallery();
+                            Navigator.pushNamed(
+                                context, ROUTER.documentValidation,
+                                arguments: widget.imagePaths);
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
