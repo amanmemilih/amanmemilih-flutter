@@ -16,6 +16,7 @@ import '../../../../core/api/api.dart';
 
 abstract class DocumentRemoteDataSource {
   Future<ApiResponse> getListDocument();
+  Future<ApiResponse> getDetailDocument(int id);
   Future<ApiResponse> uploadDocument(UploadDocumentRequest request);
 }
 
@@ -27,6 +28,11 @@ class ApiDocumentRemoteDataSource extends DocumentRemoteDataSource {
   @override
   Future<ApiResponse> getListDocument() {
     return _api.get('documents');
+  }
+
+  @override
+  Future<ApiResponse> getDetailDocument(int id) {
+    return _api.get('documents/$id');
   }
 
   @override
