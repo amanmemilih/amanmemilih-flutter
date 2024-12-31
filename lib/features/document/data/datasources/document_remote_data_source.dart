@@ -16,7 +16,8 @@ import '../../../../core/api/api.dart';
 
 abstract class DocumentRemoteDataSource {
   Future<ApiResponse> getListDocument();
-  Future<ApiResponse> getDetailDocument(int id);
+  Future<ApiResponse> getDetailDocument(String? electionType, int? id);
+  Future<ApiResponse> documentVerification(String? electionType, int? id);
   Future<ApiResponse> uploadDocument(UploadDocumentRequest request);
 }
 
@@ -31,8 +32,10 @@ class ApiDocumentRemoteDataSource extends DocumentRemoteDataSource {
   }
 
   @override
-  Future<ApiResponse> getDetailDocument(int id) {
-    return _api.get('documents/$id');
+  Future<ApiResponse> getDetailDocument(String? electionType, int? id) {
+    return _api.get('documents/$id', queryParameters: {
+      'election_type': electionType.toString(),
+    });
   }
 
   @override
@@ -61,5 +64,12 @@ class ApiDocumentRemoteDataSource extends DocumentRemoteDataSource {
         contentType: Headers.multipartFormDataContentType,
       ),
     );
+  }
+
+  @override
+  Future<ApiResponse> documentVerification(String? electionType, int? id) {
+    return _api.post('documents/$id/verified', formObj: {
+      'election_type': electionType.toString(),
+    });
   }
 }

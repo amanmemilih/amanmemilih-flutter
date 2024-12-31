@@ -23,8 +23,11 @@ import 'package:amanmemilih_mobile_app/features/candidat/domain/usecases/get_pre
 import 'package:amanmemilih_mobile_app/features/document/data/datasources/document_remote_data_source.dart';
 import 'package:amanmemilih_mobile_app/features/document/data/repositories/document_repository_v1.dart';
 import 'package:amanmemilih_mobile_app/features/document/domain/repositories/document_repository.dart';
+import 'package:amanmemilih_mobile_app/features/document/domain/usecases/document_verification_usecase.dart';
+import 'package:amanmemilih_mobile_app/features/document/domain/usecases/get_detail_document_usecase.dart';
 import 'package:amanmemilih_mobile_app/features/document/domain/usecases/get_document_list_usecase.dart';
 import 'package:amanmemilih_mobile_app/features/document/domain/usecases/upload_document_usecase.dart';
+import 'package:amanmemilih_mobile_app/features/document/presentation/cubits/documentdetail/document_detail_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/document/presentation/cubits/documentinformation/document_information_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/document/presentation/cubits/documentrecapitulation/document_recapitulation_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/document/presentation/cubits/documentvalidation/document_validation_cubit.dart';
@@ -81,6 +84,8 @@ void initialize() {
   getIt.registerLazySingleton(() => GetPresidentialCandidatUseCase(getIt()));
   getIt.registerLazySingleton(() => UploadDocumentUseCase(getIt()));
   getIt.registerLazySingleton(() => GetDocumentListUseCase(getIt()));
+  getIt.registerLazySingleton(() => GetDetailDocumentUseCase(getIt()));
+  getIt.registerLazySingleton(() => DocumentVerificationUseCase(getIt()));
 
   // Cubit
   getIt.registerFactory(() => AuthCubit(getIt(), getIt(), getIt()));
@@ -123,6 +128,7 @@ void initialize() {
   getIt.registerFactory(() => DocumentValidationCubit(getIt()));
   getIt.registerFactory(() => DocumentRecapitulationCubit(getIt()));
   getIt.registerFactory(() => DocumentInformationCubit(getIt()));
+  getIt.registerFactory(() => DocumentDetailCubit(getIt(), getIt()));
 
   // Others
   getIt.registerFactory(() => TextEditingController());

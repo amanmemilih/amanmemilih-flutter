@@ -83,10 +83,16 @@ class DocumentInformationScreenImplement extends StatelessWidget {
                               : e.status == 1
                                   ? 'unverified'
                                   : 'verified',
-                          onTap: () => Navigator.pushNamed(
-                            context,
-                            ROUTER.detailForm,
-                          ),
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              ROUTER.detailForm,
+                              arguments: {
+                                'id': e.id,
+                                'electionType': e.electionType,
+                              },
+                            );
+                          },
                         ),
                       )
                     ],

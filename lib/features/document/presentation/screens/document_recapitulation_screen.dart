@@ -138,22 +138,24 @@ class DocumentRecapitulationScreenImplement extends StatelessWidget {
                             SizedBox(
                               height: 8,
                             ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(16, 20, 16, 0),
-                              child: Text("Hasil Rekapitulasi Suara",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700)),
-                            ),
-                            ...args.votes.map(
-                              (e) {
-                                return _formulirRowBold(
-                                  "${e['candidat_no']}. ",
-                                  e['candidat_name'],
-                                  "${e['total_votes']}",
-                                );
-                              },
-                            ),
+                            if (args.electionType == 'presidential')
+                              Container(
+                                padding: EdgeInsets.fromLTRB(16, 20, 16, 0),
+                                child: Text("Hasil Rekapitulasi Suara",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700)),
+                              ),
+                            if (args.electionType == 'presidential')
+                              ...args.votes.map(
+                                (e) {
+                                  return _formulirRowBold(
+                                    "${e['candidat_no']}. ",
+                                    e['candidat_name'],
+                                    "${e['total_votes']}",
+                                  );
+                                },
+                              ),
                             SizedBox(
                               height: 36,
                             )

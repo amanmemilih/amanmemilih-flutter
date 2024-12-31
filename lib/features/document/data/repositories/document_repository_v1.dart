@@ -8,7 +8,9 @@ library;
 
 import 'package:amanmemilih_mobile_app/core/models/empty/empty_model.dart';
 import 'package:amanmemilih_mobile_app/core/models/list/list_model.dart';
+import 'package:amanmemilih_mobile_app/core/models/single/single_model.dart';
 import 'package:amanmemilih_mobile_app/features/document/data/models/requests/upload_document_request.dart';
+import 'package:amanmemilih_mobile_app/features/document/domain/entities/detaildocument/detail_document_entity.dart';
 import 'package:amanmemilih_mobile_app/features/document/domain/entities/documentlist/document_list_entity.dart';
 import 'package:dartz/dartz.dart';
 
@@ -52,6 +54,44 @@ class DocumentRepositoryV1 extends DocumentRepository {
       }
 
       return Right(model.data!);
+    } catch (err, stackTrace) {
+      return Left(CatchError.getFailure(err, stackTrace));
+    }
+  }
+
+  @override
+  Future<Either<Failure, DetailDocumentEntity?>> getDetailDocument(
+      String? electionType, int? id) async {
+    try {
+      final response =
+          await _remoteDataSource.getDetailDocument(electionType, id);
+
+      final model = SingleModel.fromJson(
+          response.data, (p0) => DetailDocumentEntity.fromJson(p0));
+
+      if (model.success == false) {
+        throw ApiException(model.code, model.message);
+      }
+
+      return Right(model.data!);
+    } catch (err, stackTrace) {
+      return Left(CatchError.getFailure(err, stackTrace));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> documentVerification(
+      String? electionType, int? id) async {
+    try {
+      final response =
+          await _remoteDataSource.documentVerification(electionType, id);
+      final model = EmptyModel.fromJson(response.data);
+
+      if (model.success == false) {
+        throw ApiException(model.code, model.message);
+      }
+
+      return Right(true);
     } catch (err, stackTrace) {
       return Left(CatchError.getFailure(err, stackTrace));
     }

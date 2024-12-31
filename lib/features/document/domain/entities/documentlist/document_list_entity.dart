@@ -20,6 +20,7 @@ sealed class DocumentListEntity with _$DocumentListEntity {
     int? id,
     String? name,
     int? status,
+    String? electionType,
   }) = _DocumentListEntity;
 
   factory DocumentListEntity.fromJson(Map<String, dynamic> json) =>

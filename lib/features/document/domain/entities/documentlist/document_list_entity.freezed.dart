@@ -23,6 +23,7 @@ mixin _$DocumentListEntity {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int? get status => throw _privateConstructorUsedError;
+  String? get electionType => throw _privateConstructorUsedError;
 
   /// Serializes this DocumentListEntity to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +41,7 @@ abstract class $DocumentListEntityCopyWith<$Res> {
           DocumentListEntity value, $Res Function(DocumentListEntity) then) =
       _$DocumentListEntityCopyWithImpl<$Res, DocumentListEntity>;
   @useResult
-  $Res call({int? id, String? name, int? status});
+  $Res call({int? id, String? name, int? status, String? electionType});
 }
 
 /// @nodoc
@@ -61,6 +62,7 @@ class _$DocumentListEntityCopyWithImpl<$Res, $Val extends DocumentListEntity>
     Object? id = freezed,
     Object? name = freezed,
     Object? status = freezed,
+    Object? electionType = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -75,6 +77,10 @@ class _$DocumentListEntityCopyWithImpl<$Res, $Val extends DocumentListEntity>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int?,
+      electionType: freezed == electionType
+          ? _value.electionType
+          : electionType // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -87,7 +93,7 @@ abstract class _$$DocumentListEntityImplCopyWith<$Res>
       __$$DocumentListEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? name, int? status});
+  $Res call({int? id, String? name, int? status, String? electionType});
 }
 
 /// @nodoc
@@ -106,6 +112,7 @@ class __$$DocumentListEntityImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? status = freezed,
+    Object? electionType = freezed,
   }) {
     return _then(_$DocumentListEntityImpl(
       id: freezed == id
@@ -120,6 +127,10 @@ class __$$DocumentListEntityImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int?,
+      electionType: freezed == electionType
+          ? _value.electionType
+          : electionType // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -128,7 +139,8 @@ class __$$DocumentListEntityImplCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$DocumentListEntityImpl implements _DocumentListEntity {
-  const _$DocumentListEntityImpl({this.id, this.name, this.status});
+  const _$DocumentListEntityImpl(
+      {this.id, this.name, this.status, this.electionType});
 
   factory _$DocumentListEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$DocumentListEntityImplFromJson(json);
@@ -139,10 +151,12 @@ class _$DocumentListEntityImpl implements _DocumentListEntity {
   final String? name;
   @override
   final int? status;
+  @override
+  final String? electionType;
 
   @override
   String toString() {
-    return 'DocumentListEntity(id: $id, name: $name, status: $status)';
+    return 'DocumentListEntity(id: $id, name: $name, status: $status, electionType: $electionType)';
   }
 
   @override
@@ -152,12 +166,14 @@ class _$DocumentListEntityImpl implements _DocumentListEntity {
             other is _$DocumentListEntityImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.electionType, electionType) ||
+                other.electionType == electionType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, status);
+  int get hashCode => Object.hash(runtimeType, id, name, status, electionType);
 
   /// Create a copy of DocumentListEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -180,7 +196,8 @@ abstract class _DocumentListEntity implements DocumentListEntity {
   const factory _DocumentListEntity(
       {final int? id,
       final String? name,
-      final int? status}) = _$DocumentListEntityImpl;
+      final int? status,
+      final String? electionType}) = _$DocumentListEntityImpl;
 
   factory _DocumentListEntity.fromJson(Map<String, dynamic> json) =
       _$DocumentListEntityImpl.fromJson;
@@ -191,6 +208,8 @@ abstract class _DocumentListEntity implements DocumentListEntity {
   String? get name;
   @override
   int? get status;
+  @override
+  String? get electionType;
 
   /// Create a copy of DocumentListEntity
   /// with the given fields replaced by the non-null parameter values.

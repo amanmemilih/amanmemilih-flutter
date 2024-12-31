@@ -12,6 +12,7 @@ _$DocumentListEntityImpl _$$DocumentListEntityImplFromJson(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       status: (json['status'] as num?)?.toInt(),
+      electionType: json['election_type'] as String?,
     );
 
 Map<String, dynamic> _$$DocumentListEntityImplToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$DocumentListEntityImplToJson(
       'id': instance.id,
       'name': instance.name,
       'status': instance.status,
+      'election_type': instance.electionType,
     };
