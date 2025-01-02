@@ -16,6 +16,8 @@ import 'package:amanmemilih_mobile_app/features/auth/presentation/screens/login_
 import 'package:amanmemilih_mobile_app/features/main/component/bloc/navigation_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/main/component/presentation/bottom_navigation_bar.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/screens/register_password_screen.dart';
+import 'package:amanmemilih_mobile_app/features/user/presentation/screens/change_password_screen.dart';
+import 'package:amanmemilih_mobile_app/features/user/presentation/screens/change_profile_screen.dart';
 import 'package:amanmemilih_mobile_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,6 +80,8 @@ class MainApp extends StatelessWidget {
               ROUTER.documentRecapitulation: (context) =>
                   const DocumentRecapitulationScreen(),
               ROUTER.detailForm: (context) => const DocumentDetailScreen(),
+              ROUTER.changePassword: (context) => const ChangePasswordScreen(),
+              ROUTER.changeProfile: (context) => const ChangeProfileScreen(),
             },
             debugShowCheckedModeBanner: false,
             builder: (context, child) {

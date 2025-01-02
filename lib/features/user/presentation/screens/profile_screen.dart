@@ -1,6 +1,5 @@
 import 'package:amanmemilih_mobile_app/core/components/alerts/alert_error.dart';
 import 'package:amanmemilih_mobile_app/core/constants/router.dart';
-import 'package:amanmemilih_mobile_app/core/extensions/string_extension.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +101,8 @@ class ProfileScreen extends StatelessWidget {
                     leading: SvgPicture.asset("assets/svg/key.svg"),
                     title: const Text("Ubah Password"),
                     trailing: const Icon(Icons.arrow_forward_ios_outlined),
+                    onTap: () =>
+                        Navigator.pushNamed(context, ROUTER.changePassword),
                   ),
                   Divider(
                     color: Colors.black.withOpacity(0.05),
@@ -116,6 +117,8 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     title: const Text("Ubah Foto Profil"),
                     trailing: const Icon(Icons.arrow_forward_ios_outlined),
+                    onTap: () =>
+                        Navigator.pushNamed(context, ROUTER.changeProfile),
                   ),
                 ],
               ),

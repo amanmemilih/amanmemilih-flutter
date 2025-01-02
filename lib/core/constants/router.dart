@@ -12,4 +12,6 @@ class ROUTER {
   static const documentValidation = 'apps.screen.document_validation';
   static const detailForm = 'apps.screen.detail_form';
   static const editImageScreen = 'apps.screen.edit_image';
+  static const changePassword = 'apps.screen.change_password';
+  static const changeProfile = 'apps.screen.change_profile';
 }
