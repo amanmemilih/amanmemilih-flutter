@@ -7,6 +7,8 @@
 ///
 /// Maaf harus menggunakan stateful, karena mason punya indra bermasalah 🙏
 
+import 'dart:developer';
+
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/core/constants/network.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
@@ -27,6 +29,9 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
+  bool isPassword = true;
+  bool isConfirmPassword = true;
 
   @override
   void dispose() {
@@ -96,17 +101,29 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           child: Column(
             children: [
               AMTextField(
+                obsecureText: isPassword,
                 controller: passwordController,
                 hint: "Password Baru",
                 isPassword: true,
+                onPasswordHiddenTap: () {
+                  setState(() {
+                    isPassword = !isPassword;
+                  });
+                },
               ),
               const SizedBox(
                 height: 16,
               ),
               AMTextField(
+                obsecureText: isConfirmPassword,
                 controller: confirmPasswordController,
                 hint: "Konfirmasi Password Baru",
                 isPassword: true,
+                onPasswordHiddenTap: () {
+                  setState(() {
+                    isConfirmPassword = !isConfirmPassword;
+                  });
+                },
               ),
             ],
           ),
