@@ -7,6 +7,7 @@
 
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,8 +41,15 @@ class ChangeProfileScreen extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                    "https://media.licdn.com/dms/image/v2/D5603AQFOpkoLsoCUMw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1729517137199?e=2147483647&v=beta&t=71VA127ragJJkNX-oxaVU_2-vDxuz7a09oxEjrgBElE"),
+                child: CachedNetworkImage(
+                  progressIndicatorBuilder: (context, url, progress) => Center(
+                    child: CircularProgressIndicator(
+                      value: progress.progress,
+                    ),
+                  ),
+                  imageUrl:
+                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+                ),
               ),
               _buildListTile(
                 "Nama",
