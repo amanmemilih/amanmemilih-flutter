@@ -72,26 +72,25 @@ class GenerateRecoveryKeyScreenImplement extends StatelessWidget {
           ),
           body: Container(
             padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Atur kode recovery",
-                  textAlign: TextAlign.end,
-                  style: GoogleFonts.plusJakartaSans(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Atur kode recovery",
+                    textAlign: TextAlign.end,
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-                SizedBox(height: 8.h),
-                const Text(
-                  "Simpan kode ini ditempat yang aman, dan hanya anda yang bisa mengaksesnya.",
-                ),
-                SizedBox(height: 16.h),
-                state.status == GenerateRecoveryKeyStatus.success
-                    ? Expanded(
-                        flex: 1,
-                        child: Column(
+                  SizedBox(height: 8.h),
+                  const Text(
+                    "Simpan kode ini ditempat yang aman, dan hanya anda yang bisa mengaksesnya.",
+                  ),
+                  SizedBox(height: 16.h),
+                  state.status == GenerateRecoveryKeyStatus.success
+                      ? Column(
                           children: [
                             GridView.count(
                               scrollDirection: Axis.vertical,
@@ -143,31 +142,32 @@ class GenerateRecoveryKeyScreenImplement extends StatelessWidget {
                               ),
                             )
                           ],
-                        ),
-                      )
-                    : Padding(
-                        padding: EdgeInsets.symmetric(vertical: 100.w),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: BaseColors.primary,
+                        )
+                      : Padding(
+                          padding: EdgeInsets.symmetric(vertical: 100.w),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: BaseColors.primary,
+                            ),
                           ),
                         ),
-                      ),
-                AMElevatedButton(
-                    title: "Selanjutnya",
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                        ROUTER.registerRecoveryKey,
-                        arguments: RegisterRecoveryKeyArgs(
-                          username: args.username,
-                          password: args.password,
-                          passwordConfirmation: args.passwordConfirmation,
-                          key: state.data!,
-                        ),
-                      );
-                    }),
-                const SizedBox(height: 21)
-              ],
+                  SizedBox(height: 16.h),
+                  AMElevatedButton(
+                      title: "Selanjutnya",
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          ROUTER.registerRecoveryKey,
+                          arguments: RegisterRecoveryKeyArgs(
+                            username: args.username,
+                            password: args.password,
+                            passwordConfirmation: args.passwordConfirmation,
+                            key: state.data!,
+                          ),
+                        );
+                      }),
+                  const SizedBox(height: 21)
+                ],
+              ),
             ),
           ),
         );

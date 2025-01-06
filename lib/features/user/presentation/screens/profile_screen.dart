@@ -98,11 +98,14 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   ListTile(
                     contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                    leading: SvgPicture.asset("assets/svg/key.svg"),
-                    title: const Text("Ubah Password"),
+                    leading: SvgPicture.asset(
+                      "assets/svg/profile.svg",
+                      color: Colors.black,
+                    ),
+                    title: const Text("Detail Profil"),
                     trailing: const Icon(Icons.arrow_forward_ios_outlined),
                     onTap: () =>
-                        Navigator.pushNamed(context, ROUTER.changePassword),
+                        Navigator.pushNamed(context, ROUTER.changeProfile),
                   ),
                   Divider(
                     color: Colors.black.withOpacity(0.05),
@@ -111,14 +114,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   ListTile(
                     contentPadding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                    leading: SvgPicture.asset(
-                      "assets/svg/profile.svg",
-                      color: Colors.black,
-                    ),
-                    title: const Text("Ubah Foto Profil"),
+                    leading: SvgPicture.asset("assets/svg/key.svg"),
+                    title: const Text("Ubah Password"),
                     trailing: const Icon(Icons.arrow_forward_ios_outlined),
                     onTap: () =>
-                        Navigator.pushNamed(context, ROUTER.changeProfile),
+                        Navigator.pushNamed(context, ROUTER.changePassword),
                   ),
                 ],
               ),
