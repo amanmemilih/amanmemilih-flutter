@@ -1,3 +1,3 @@
 class NETWORK {
-  static const baseURL = 'http://10.0.2.2:8080/api';
+  static const baseURL = 'https://13fe-139-195-35-52.ngrok-free.app/api';
 }

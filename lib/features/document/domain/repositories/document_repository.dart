@@ -19,5 +19,6 @@ abstract class DocumentRepository {
       String? electionType, int? id);
   Future<Either<Failure, void>> documentVerification(
       String? electionType, int? id);
+  Future<Either<Failure, void>> deleteDocument(String? electionType, int? id);
   Future<Either<Failure, void>> uploadDocument(UploadDocumentRequest request);
 }

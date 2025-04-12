@@ -18,6 +18,7 @@ abstract class DocumentRemoteDataSource {
   Future<ApiResponse> getListDocument();
   Future<ApiResponse> getDetailDocument(String? electionType, int? id);
   Future<ApiResponse> documentVerification(String? electionType, int? id);
+  Future<ApiResponse> deleteDocument(String? electionType, int? id);
   Future<ApiResponse> uploadDocument(UploadDocumentRequest request);
 }
 
@@ -69,6 +70,13 @@ class ApiDocumentRemoteDataSource extends DocumentRemoteDataSource {
   @override
   Future<ApiResponse> documentVerification(String? electionType, int? id) {
     return _api.post('documents/$id/verified', formObj: {
+      'election_type': electionType.toString(),
+    });
+  }
+
+  @override
+  Future<ApiResponse> deleteDocument(String? electionType, int? id) {
+    return _api.delete('documents/$id', formObj: {
       'election_type': electionType.toString(),
     });
   }

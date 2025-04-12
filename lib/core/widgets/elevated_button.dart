@@ -10,10 +10,14 @@ class AMElevatedButton extends StatelessWidget {
     required this.title,
     required this.onTap,
     this.isLoading = false,
+    this.backgroundColor = colorPrimary,
+    this.foregroundColor = colorPrimary,
   });
 
   final String title;
   final bool isLoading;
+  final Color backgroundColor;
+  final Color foregroundColor;
   final Function() onTap;
 
   @override
@@ -30,8 +34,8 @@ class AMElevatedButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        backgroundColor: const WidgetStatePropertyAll(colorPrimary),
-        foregroundColor: const WidgetStatePropertyAll(colorPrimary),
+        backgroundColor: WidgetStatePropertyAll(backgroundColor),
+        foregroundColor: WidgetStatePropertyAll(foregroundColor),
         overlayColor: WidgetStatePropertyAll(buttonPressed),
       ),
       child: isLoading

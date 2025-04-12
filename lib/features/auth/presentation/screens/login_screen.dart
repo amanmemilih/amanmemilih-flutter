@@ -108,29 +108,14 @@ class LoginScreenImplement extends StatelessWidget {
                   if (state.status == AuthStatus.error) {
                     switch (state.error?.failure) {
                       case InvalidLoginCredentialsFailure():
-                        final snackBar = SnackBar(
-                          elevation: 0,
-                          behavior: SnackBarBehavior.floating,
-                          backgroundColor: Colors.transparent,
-                          content: AwesomeSnackbarContent(
-                            title: state.error?.title ?? 'Unknown Error',
-                            message: state.error?.message ??
-                                'Error Message Not Assigned',
-                            contentType: ContentType.failure,
-                            color: BaseColors.primary,
-                            titleTextStyle: GoogleFonts.plusJakartaSans(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            messageTextStyle: GoogleFonts.plusJakartaSans(
-                              fontSize: 12,
-                            ),
-                          ),
+                        alertError(
+                          context,
+                          () {},
+                          title: state.error?.title ?? 'Unknown Error',
+                          message: // later
+                              state.error?.message ??
+                                  'Error Message Not Assigned',
                         );
-
-                        ScaffoldMessenger.of(context)
-                          ..hideCurrentSnackBar()
-                          ..showSnackBar(snackBar);
                         break;
                       case UserNotRegisteredFailure():
                         showModalBottomSheet(

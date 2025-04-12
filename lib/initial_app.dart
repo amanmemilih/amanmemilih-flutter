@@ -18,7 +18,7 @@ class InitialApp {
     _initHttp();
     await _initIntl();
     _initLocalization();
-    _initHive();
+    await _initHive();
   }
 
   static void _initDependencyInjection() {

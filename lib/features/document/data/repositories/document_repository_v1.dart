@@ -96,4 +96,21 @@ class DocumentRepositoryV1 extends DocumentRepository {
       return Left(CatchError.getFailure(err, stackTrace));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteDocument(
+      String? electionType, int? id) async {
+    try {
+      final response = await _remoteDataSource.deleteDocument(electionType, id);
+      final model = EmptyModel.fromJson(response.data);
+
+      if (model.success == false) {
+        throw ApiException(model.code, model.message);
+      }
+
+      return Right(true);
+    } catch (err, stackTrace) {
+      return Left(CatchError.getFailure(err, stackTrace));
+    }
+  }
 }

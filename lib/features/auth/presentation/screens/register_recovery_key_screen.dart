@@ -53,28 +53,13 @@ class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
         if (state.status == RegisterRecoveryKeyStatus.error) {
           switch (state.error?.failure) {
             case InvalidRegisterPhraseFailure():
-              final snackBar = SnackBar(
-                elevation: 0,
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.transparent,
-                content: AwesomeSnackbarContent(
-                  title: state.error?.title ?? 'Unknown Error',
-                  message: state.error?.message ?? 'Error Message Not Assigned',
-                  contentType: ContentType.failure,
-                  color: BaseColors.primary,
-                  titleTextStyle: GoogleFonts.plusJakartaSans(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  messageTextStyle: GoogleFonts.plusJakartaSans(
-                    fontSize: 12,
-                  ),
-                ),
+              alertError(
+                context,
+                () {},
+                title: state.error?.title ?? 'Unknown Error',
+                message: // later
+                    state.error?.message ?? 'Error Message Not Assigned',
               );
-
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(snackBar);
               break;
             default:
               alertError(
@@ -90,7 +75,6 @@ class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
           Navigator.of(context).pop();
           Navigator.of(context).pop();
           Navigator.of(context).pop();
-          Navigator.of(context).pushReplacementNamed(ROUTER.bottomNavBar);
         }
       },
       builder: (context, state) {

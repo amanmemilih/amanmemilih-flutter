@@ -100,6 +100,12 @@ class CameraScreenState extends State<CameraScreen> {
   }
 
   void _navigateToEditor() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PreviewScreen(imagePaths: []),
+      ),
+    );
     if (_capturedImages.isNotEmpty) {
       List<String> imagePaths =
           _capturedImages.map((file) => file.path).toList();

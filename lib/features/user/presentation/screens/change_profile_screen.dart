@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
@@ -38,11 +39,6 @@ class ChangeProfileScreen extends StatelessWidget {
         child: BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) => Column(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                    "https://media.licdn.com/dms/image/v2/D5603AQFOpkoLsoCUMw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1729517137199?e=2147483647&v=beta&t=71VA127ragJJkNX-oxaVU_2-vDxuz7a09oxEjrgBElE"),
-              ),
               _buildListTile(
                 "Nama",
                 state.credential?.user?.username ?? '',

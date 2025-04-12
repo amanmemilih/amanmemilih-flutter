@@ -83,8 +83,8 @@ class DocumentInformationScreenImplement extends StatelessWidget {
                               : e.status == 1
                                   ? 'unverified'
                                   : 'verified',
-                          onTap: () {
-                            Navigator.pushNamed(
+                          onTap: () async {
+                            await Navigator.pushNamed(
                               context,
                               ROUTER.detailForm,
                               arguments: {
@@ -92,6 +92,7 @@ class DocumentInformationScreenImplement extends StatelessWidget {
                                 'electionType': e.electionType,
                               },
                             );
+                            context.read<DocumentInformationCubit>().getData();
                           },
                         ),
                       )

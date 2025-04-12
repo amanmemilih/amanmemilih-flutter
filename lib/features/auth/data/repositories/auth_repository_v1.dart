@@ -152,10 +152,6 @@ class AuthRepositoryV1 extends AuthRepository {
       final model = SingleModel.fromJson(
           response.data, (p0) => CredentialEntity.fromJson(p0));
 
-      if (model.code == 401) {
-        throw InvalidLoginCredentialException();
-      }
-
       if (model.code == 422) {
         throw InvalidRegisterPhraseException();
       }
@@ -163,16 +159,6 @@ class AuthRepositoryV1 extends AuthRepository {
       if (model.success == false) {
         throw ApiException(model.code, model.message);
       }
-
-      if (model.data!.token == null) {
-        throw const UnableToProcessException();
-      }
-
-      // Store token to headers
-      _remoteDataSource.setToken(model.data!.token!);
-
-      // Store token to local storage
-      _localDataSource.setToken(model.data!.token!);
 
       return Right(model.data!);
     } catch (err, stackTrace) {
