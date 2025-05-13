@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -31,117 +30,114 @@ class DashboardScreenImplement extends StatelessWidget {
   Widget _cardInformationDocument(BuildContext context) {
     return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, state) {
-        return Skeletonizer(
-          enabled: state.status == DashboardStatus.loading,
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(16, 18, 16, 18),
-            width: double.infinity,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF535308).withOpacity(0.05),
-                    offset: const Offset(0, 24),
-                    blurRadius: 50,
-                    spreadRadius: 0,
-                  ),
-                ]),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Informasi Dokumen",
-                  style: GoogleFonts.plusJakartaSans(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                    color: const Color(0xff3A3A3A),
-                  ),
+        return Container(
+          padding: const EdgeInsets.fromLTRB(16, 18, 16, 18),
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF535308).withOpacity(0.05),
+                  offset: const Offset(0, 24),
+                  blurRadius: 50,
+                  spreadRadius: 0,
                 ),
-                SizedBox(height: 5.h),
-                BlocBuilder<DashboardCubit, DashboardState>(
-                  builder: (context, state) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+              ]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Informasi Dokumen",
+                style: GoogleFonts.plusJakartaSans(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  color: const Color(0xff3A3A3A),
+                ),
+              ),
+              SizedBox(height: 5.h),
+              state.status == DashboardStatus.loading
+                  ? const Center(child: CircularProgressIndicator())
+                  : BlocBuilder<DashboardCubit, DashboardState>(
+                      builder: (context, state) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "Belum Unggah",
-                              style: GoogleFonts.plusJakartaSans(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: const Color(0xff5E5F60),
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Belum Unggah",
+                                  style: GoogleFonts.plusJakartaSans(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    color: const Color(0xff5E5F60),
+                                  ),
+                                ),
+                                Text(
+                                  "${state.data?.notUploaded.preventNull()} Dokumen",
+                                  style: GoogleFonts.plusJakartaSans(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: const Color(0xff3F3F3F),
+                                  ),
+                                )
+                              ],
                             ),
-                            Text(
-                              "${state.data?.notUploaded.preventNull()} Dokumen",
-                              style: GoogleFonts.plusJakartaSans(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                color: const Color(0xff3F3F3F),
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Terunggah",
+                                  style: GoogleFonts.plusJakartaSans(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    color: const Color(0xff5E5F60),
+                                  ),
+                                ),
+                                Text(
+                                  "${state.data?.uploaded.preventNull()} Dokumen",
+                                  style: GoogleFonts.plusJakartaSans(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: colorYellow,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Terverifikasi",
+                                  style: GoogleFonts.plusJakartaSans(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    color: const Color(0xff5E5F60),
+                                  ),
+                                ),
+                                Text(
+                                  "${state.data?.verified.preventNull()} Dokumen",
+                                  style: GoogleFonts.plusJakartaSans(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: colorGreen,
+                                  ),
+                                )
+                              ],
                             )
                           ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Terunggah",
-                              style: GoogleFonts.plusJakartaSans(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: const Color(0xff5E5F60),
-                              ),
-                            ),
-                            Text(
-                              "${state.data?.uploaded.preventNull()} Dokumen",
-                              style: GoogleFonts.plusJakartaSans(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                color: colorYellow,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Terverifikasi",
-                              style: GoogleFonts.plusJakartaSans(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: const Color(0xff5E5F60),
-                              ),
-                            ),
-                            Text(
-                              "${state.data?.verified.preventNull()} Dokumen",
-                              style: GoogleFonts.plusJakartaSans(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                color: colorGreen,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    );
-                  },
-                ),
-                SizedBox(height: 15.h),
-                Skeleton.shade(
-                  child: AMOutlinedButton(
-                    title: "Detail",
-                    onTap: () => Navigator.pushNamed(
-                        context, ROUTER.documentInformation),
-                  ),
-                )
-              ],
-            ),
+                        );
+                      },
+                    ),
+              SizedBox(height: 15.h),
+              AMOutlinedButton(
+                title: "Detail",
+                onTap: () =>
+                    Navigator.pushNamed(context, ROUTER.documentInformation),
+              )
+            ],
           ),
         );
       },
