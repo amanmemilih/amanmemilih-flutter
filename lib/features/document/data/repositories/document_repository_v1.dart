@@ -26,7 +26,7 @@ class DocumentRepositoryV1 extends DocumentRepository {
   );
 
   @override
-  Future<Either<Failure, void>> uploadDocument(
+  Future<Either<Failure, bool>> uploadDocument(
       UploadDocumentRequest request) async {
     try {
       final response = await _remoteDataSource.uploadDocument(request);
@@ -36,7 +36,7 @@ class DocumentRepositoryV1 extends DocumentRepository {
         throw ApiException(model.code, model.message);
       }
 
-      return Right(true);
+      return const Right(true);
     } catch (err, stackTrace) {
       return Left(CatchError.getFailure(err, stackTrace));
     }
@@ -80,7 +80,7 @@ class DocumentRepositoryV1 extends DocumentRepository {
   }
 
   @override
-  Future<Either<Failure, void>> documentVerification(
+  Future<Either<Failure, bool>> documentVerification(
       String? electionType, int? id) async {
     try {
       final response =
@@ -91,14 +91,14 @@ class DocumentRepositoryV1 extends DocumentRepository {
         throw ApiException(model.code, model.message);
       }
 
-      return Right(true);
+      return const Right(true);
     } catch (err, stackTrace) {
       return Left(CatchError.getFailure(err, stackTrace));
     }
   }
 
   @override
-  Future<Either<Failure, void>> deleteDocument(
+  Future<Either<Failure, bool>> deleteDocument(
       String? electionType, int? id) async {
     try {
       final response = await _remoteDataSource.deleteDocument(electionType, id);
@@ -108,7 +108,7 @@ class DocumentRepositoryV1 extends DocumentRepository {
         throw ApiException(model.code, model.message);
       }
 
-      return Right(true);
+      return const Right(true);
     } catch (err, stackTrace) {
       return Left(CatchError.getFailure(err, stackTrace));
     }

@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'package:amanmemilih_mobile_app/features/user/domain/entities/user/user_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'upload_document_request.g.dart';

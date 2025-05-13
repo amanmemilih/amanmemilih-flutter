@@ -12,10 +12,10 @@ class PreviewScreen extends StatefulWidget {
   const PreviewScreen({super.key, required this.imagePaths});
 
   @override
-  _PreviewScreenState createState() => _PreviewScreenState();
+  PreviewScreenState createState() => PreviewScreenState();
 }
 
-class _PreviewScreenState extends State<PreviewScreen> {
+class PreviewScreenState extends State<PreviewScreen> {
   bool _permissionsGranted = false;
   int _currentIndex = 0; // To keep track of the current slide index
   bool _isFullScreen = false; // State to manage full-screen mode
@@ -32,33 +32,10 @@ class _PreviewScreenState extends State<PreviewScreen> {
       _permissionsGranted = permissionStatus;
     });
 
-    if (!_permissionsGranted) {
+    if (!_permissionsGranted && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text('Storage permission is required to save images')),
-      );
-    }
-  }
-
-  Future<void> _saveImagesToGallery() async {
-    if (!_permissionsGranted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Storage permission is required')),
-      );
-      return;
-    }
-
-    try {
-      for (var path in widget.imagePaths) {
-        final image = File(path);
-        await Gal.putImageBytes(image.readAsBytesSync());
-      }
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Images saved to gallery!')),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error saving images: $e')),
       );
     }
   }
@@ -163,8 +140,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
                           icon: Icons.settings,
                           label: "Edit",
                           onPressed: () {
-                            final selectedImagePath =
-                                widget.imagePaths[_currentIndex];
                             Navigator.pushNamed(
                               context,
                               ROUTER.editImageScreen,
@@ -183,7 +158,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
                           icon: Icons.check,
                           label: "Selesai",
                           onPressed: () {
-                            // _saveImagesToGallery();
                             Navigator.pushNamed(
                                 context, ROUTER.documentValidation,
                                 arguments: widget.imagePaths);

@@ -94,7 +94,6 @@ class CatchError {
 
 class DevelopmentCatchError {
   static Failure getFailure(err, stackTrace, failure) {
-    print(err.toString());
     return DevelopmentFailure(
       failure: failure,
       runtimeType: err.runtimeType,

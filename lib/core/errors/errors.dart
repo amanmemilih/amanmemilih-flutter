@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 // Export all failure types
 export 'failures/failure.dart';

@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 // ignore_for_file: invalid_annotation_target
 

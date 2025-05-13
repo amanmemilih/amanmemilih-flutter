@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 import 'package:flutter/material.dart';
 

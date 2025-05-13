@@ -13,10 +13,10 @@ class AMBottomNavigationBar extends StatefulWidget {
   const AMBottomNavigationBar({super.key});
 
   @override
-  _AMBottomNavigationBarState createState() => _AMBottomNavigationBarState();
+  AMBottomNavigationBarState createState() => AMBottomNavigationBarState();
 }
 
-class _AMBottomNavigationBarState extends State<AMBottomNavigationBar> {
+class AMBottomNavigationBarState extends State<AMBottomNavigationBar> {
   final PageController _listViewController = PageController(initialPage: 0);
   final List<Widget> _listView = const [
     // Yazid

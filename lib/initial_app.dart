@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:localization/localization.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'core/constants/file.dart';
 import 'core/https/http_client_overrides.dart';

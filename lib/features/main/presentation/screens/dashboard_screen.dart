@@ -38,7 +38,7 @@ class DashboardScreenImplement extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF535308).withOpacity(0.05),
+                  color: const Color(0xFF535308).withAlpha(13),
                   offset: const Offset(0, 24),
                   blurRadius: 50,
                   spreadRadius: 0,
@@ -208,7 +208,7 @@ class DashboardScreenImplement extends StatelessWidget {
                           color: const Color(0xffFFF5E6),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: colorPrimary.withOpacity(0.05),
+                            color: colorPrimary.withAlpha(13),
                           ),
                         ),
                         child: Column(
@@ -241,7 +241,7 @@ class DashboardScreenImplement extends StatelessWidget {
                           color: const Color(0xffFFF5E6),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: colorPrimary.withOpacity(0.05),
+                            color: colorPrimary.withAlpha(13),
                           ),
                         ),
                         child: Column(
@@ -278,7 +278,7 @@ class DashboardScreenImplement extends StatelessWidget {
                   color: const Color(0xffFFF5E6),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: colorPrimary.withOpacity(0.05),
+                    color: colorPrimary.withAlpha(13),
                   ),
                 ),
                 child: Column(

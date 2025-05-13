@@ -35,9 +35,9 @@ class UnableToProcessException extends Equatable implements Exception {
 }
 
 class VoucherInvalidException extends Equatable implements Exception {
-  String message;
+  final String message;
 
-  VoucherInvalidException(this.message);
+  const VoucherInvalidException(this.message);
 
   @override
   List<Object?> get props => [message];

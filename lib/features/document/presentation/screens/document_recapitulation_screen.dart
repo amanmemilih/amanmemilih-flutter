@@ -53,17 +53,15 @@ class DocumentRecapitulationScreenImplement extends StatelessWidget {
   Widget _formulirRow(String textA, String textB) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
-      child: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              textA,
-              style: TextStyle(fontSize: 16),
-            ),
-            Text(textB, style: TextStyle(fontSize: 16))
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            textA,
+            style: TextStyle(fontSize: 16),
+          ),
+          Text(textB, style: TextStyle(fontSize: 16))
+        ],
       ),
     );
   }

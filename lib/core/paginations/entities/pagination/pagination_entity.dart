@@ -7,6 +7,8 @@
 
 // ignore_for_file: invalid_annotation_target
 
+library;
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'pagination_entity.freezed.dart';

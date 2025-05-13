@@ -7,10 +7,10 @@ class EditImageScreen extends StatefulWidget {
   const EditImageScreen({super.key});
 
   @override
-  _EditImageScreenState createState() => _EditImageScreenState();
+  EditImageScreenState createState() => EditImageScreenState();
 }
 
-class _EditImageScreenState extends State<EditImageScreen> {
+class EditImageScreenState extends State<EditImageScreen> {
   int _currentIndex = 0; // Index gambar yang sedang ditampilkan
   int _selectedToolIndex = -1; // -1 berarti tidak ada alat yang dipilih
 

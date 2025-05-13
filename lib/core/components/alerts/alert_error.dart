@@ -16,7 +16,7 @@ alertError(
   String? buttonText,
 }) {
   showDialog(
-    barrierColor: Colors.white.withOpacity(0.01),
+    barrierColor: Colors.white.withAlpha(3),
     barrierDismissible: true,
     useSafeArea: false,
     context: context,

@@ -10,7 +10,6 @@ import 'package:amanmemilih_mobile_app/core/components/alerts/alert_error.dart';
 import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/resources/colors.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
-import 'package:amanmemilih_mobile_app/core/widgets/text_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/touchable_opacity_widget.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/args/generate_recovery_phrase_args.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/args/register_recovery_key_args.dart';

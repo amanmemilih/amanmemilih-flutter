@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:gal/gal.dart';
 import 'package:image/image.dart' as img;
-import 'package:permission_handler/permission_handler.dart';
 
 class CameraScreen extends StatefulWidget {
   final CameraDescription camera;
@@ -60,6 +59,7 @@ class CameraScreenState extends State<CameraScreen> {
         _isFlashOn ? FlashMode.torch : FlashMode.off,
       );
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error toggling flash: $e')),
       );
@@ -92,7 +92,7 @@ class CameraScreenState extends State<CameraScreen> {
         _capturedImages.add(correctedFile);
       });
     } catch (e) {
-      print("Error: $e");
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error taking picture: $e')),
       );

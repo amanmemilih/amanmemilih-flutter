@@ -167,7 +167,7 @@ class AuthRepositoryV1 extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> logout() async {
+  Future<Either<Failure, bool>> logout() async {
     try {
       final response = await _remoteDataSource.logout();
       final model = EmptyModel.fromJson(response.data);
@@ -180,14 +180,14 @@ class AuthRepositoryV1 extends AuthRepository {
       _remoteDataSource.clearToken();
       _localDataSource.clearToken();
 
-      return Right(true);
+      return const Right(true);
     } catch (err, stackTrace) {
       return Left(CatchError.getFailure(err, stackTrace));
     }
   }
 
   @override
-  Future<Either<Failure, void>> forgotPassword(
+  Future<Either<Failure, bool>> forgotPassword(
     String? password,
     String? phrase1,
     String? phrase2,
@@ -228,7 +228,7 @@ class AuthRepositoryV1 extends AuthRepository {
         throw ApiException(model.code, model.message);
       }
 
-      return Right(true);
+      return const Right(true);
     } catch (err, stackTrace) {
       return Left(CatchError.getFailure(err, stackTrace));
     }

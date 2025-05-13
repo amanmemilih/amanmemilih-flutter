@@ -5,9 +5,12 @@ class TappedWidget extends StatelessWidget {
   final GestureTapCallback onTap;
   final BorderRadius? borderRadius;
 
-  const TappedWidget(
-      {Key? key, required this.child, required this.onTap, this.borderRadius})
-      : super(key: key);
+  const TappedWidget({
+    super.key,
+    required this.child,
+    required this.onTap,
+    this.borderRadius,
+  });
 
   @override
   Widget build(BuildContext context) {

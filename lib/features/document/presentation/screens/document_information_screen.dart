@@ -68,8 +68,6 @@ class DocumentInformationScreenImplement extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      // _filterButtons(),
-                      // SizedBox(height: 5.h),
                       ...state.data!.map(
                         (e) => _cardInformation(
                           title: e.name,
@@ -92,6 +90,7 @@ class DocumentInformationScreenImplement extends StatelessWidget {
                                 'electionType': e.electionType,
                               },
                             );
+                            if (!context.mounted) return;
                             context.read<DocumentInformationCubit>().getData();
                           },
                         ),
@@ -121,7 +120,7 @@ class DocumentInformationScreenImplement extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
           side: BorderSide(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withAlpha(20),
           ),
         ),
         title: Text(
@@ -149,65 +148,6 @@ class DocumentInformationScreenImplement extends StatelessWidget {
                 size: 17,
                 color: BaseColors.primary,
               ),
-      ),
-    );
-  }
-
-  Widget _filterButtons() {
-    return SingleChildScrollView(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Chip(
-            backgroundColor: const Color(0xffFFE5E5),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
-            ),
-            side: const BorderSide(
-              color: colorPrimary,
-            ),
-            label: Text(
-              "Semua",
-              style: GoogleFonts.plusJakartaSans(
-                fontWeight: FontWeight.w700,
-                fontSize: 12,
-                color: colorPrimary,
-              ),
-            ),
-          ),
-          Chip(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
-            ),
-            side: const BorderSide(
-              color: Color(0xffBDBDBD),
-            ),
-            label: Text(
-              "Belum Unggah",
-              style: GoogleFonts.plusJakartaSans(
-                fontWeight: FontWeight.w700,
-                fontSize: 12,
-                color: const Color(0xffBDBDBD),
-              ),
-            ),
-          ),
-          Chip(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
-            ),
-            side: const BorderSide(
-              color: Color(0xffBDBDBD),
-            ),
-            label: Text(
-              "Terverifikasi",
-              style: GoogleFonts.plusJakartaSans(
-                fontWeight: FontWeight.w700,
-                fontSize: 12,
-                color: const Color(0xffBDBDBD),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

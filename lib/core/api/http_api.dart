@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 import 'dart:io';
 
@@ -14,7 +15,7 @@ import 'api.dart';
 class HttpApi extends Api {
   @override
   void clearToken() {
-    // TODO: implement clearToken
+    // Implementation not needed as this is a stub class
   }
 
   @override
@@ -25,7 +26,6 @@ class HttpApi extends Api {
     Map<String, String>? queryParameters,
     Options? options,
   }) {
-    // TODO: implement delete
     throw UnimplementedError();
   }
 
@@ -35,7 +35,6 @@ class HttpApi extends Api {
     Map<String, String>? queryParameters,
     Options? options,
   }) {
-    // TODO: implement get
     throw UnimplementedError();
   }
 
@@ -47,7 +46,6 @@ class HttpApi extends Api {
     Map<String, String>? queryParameters,
     Options? options,
   }) {
-    // TODO: implement post
     throw UnimplementedError();
   }
 
@@ -59,44 +57,33 @@ class HttpApi extends Api {
     Map<String, String>? queryParameters,
     Options? options,
   }) {
-    // TODO: implement put
     throw UnimplementedError();
   }
 
   @override
-  void setToken(String token) {
-    // TODO: implement setToken
-  }
+  void setToken(String token) {}
 }
 
 class HttpApiFormData implements ApiFormData {
   @override
-  void addField(String key, String value) {
-    // TODO: implement addField
-  }
+  void addField(String key, String value) {}
 
   @override
-  void addFile(String key, File file, {String? filename}) {
-    // TODO: implement addFile
-  }
+  void addFile(String key, File file, {String? filename}) {}
 
   @override
   getBody() {
-    // TODO: implement getBody
     throw UnimplementedError();
   }
 }
 
 class HttpApiResponse extends ApiResponse {
   @override
-  // TODO: implement data
   get data => throw UnimplementedError();
 
   @override
-  // TODO: implement headers
   get headers => throw UnimplementedError();
 
   @override
-  // TODO: implement statusCode
   int? get statusCode => throw UnimplementedError();
 }

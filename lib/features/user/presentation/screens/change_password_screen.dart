@@ -4,8 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
-///
-/// Maaf harus menggunakan stateful, karena mason punya indra bermasalah 🙏
+library;
 
 import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/core/constants/network.dart';
@@ -51,6 +50,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       );
 
       if (response.statusCode == 200) {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Password berhasil diubah"),
@@ -59,6 +59,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         );
         Navigator.pop(context);
       } else {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Password gagal diubah"),

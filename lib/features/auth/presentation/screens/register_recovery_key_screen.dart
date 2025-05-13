@@ -7,16 +7,13 @@
 library;
 
 import 'package:amanmemilih_mobile_app/core/components/alerts/alert_error.dart';
-import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/errors/errors.dart';
 import 'package:amanmemilih_mobile_app/core/resources/colors.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/touchable_opacity_widget.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/args/register_recovery_key_args.dart';
-import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/generaterecoverykey/generate_recovery_key_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/registerrecoverykey/register_recovery_key_cubit.dart';
 import 'package:amanmemilih_mobile_app/injection_container.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';

@@ -100,7 +100,8 @@ class ProfileScreen extends StatelessWidget {
                     contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                     leading: SvgPicture.asset(
                       "assets/svg/profile.svg",
-                      color: Colors.black,
+                      colorFilter:
+                          ColorFilter.mode(Colors.black, BlendMode.srcIn),
                     ),
                     title: const Text("Detail Profil"),
                     trailing: const Icon(Icons.arrow_forward_ios_outlined),
@@ -108,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
                         Navigator.pushNamed(context, ROUTER.changeProfile),
                   ),
                   Divider(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withAlpha(13),
                     endIndent: 18,
                     indent: 18,
                   ),

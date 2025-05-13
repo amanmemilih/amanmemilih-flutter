@@ -3,7 +3,6 @@ import 'package:amanmemilih_mobile_app/core/constants/colors.dart';
 import 'package:amanmemilih_mobile_app/core/resources/colors.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
-import 'package:amanmemilih_mobile_app/features/document/domain/usecases/delete_document_usecase.dart';
 import 'package:amanmemilih_mobile_app/features/document/presentation/cubits/deletedocument/delete_document_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/document/presentation/cubits/documentdetail/document_detail_cubit.dart';
 import 'package:amanmemilih_mobile_app/injection_container.dart';
@@ -356,7 +355,7 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                                   SizedBox(height: 20),
                                   AMElevatedButton(
                                     backgroundColor:
-                                        BaseColors.primary.withOpacity(.6),
+                                        BaseColors.primary.withAlpha(153),
                                     title: "Hapus",
                                     isLoading: state.status ==
                                         DocumentDetailStatus.submitting,

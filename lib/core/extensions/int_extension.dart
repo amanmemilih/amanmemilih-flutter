@@ -4,6 +4,7 @@
 ///
 /// Created by Indra Mahesa https://github.com/zinct
 ///
+library;
 
 extension StringExtension on int? {
   int ifNull(int value) {

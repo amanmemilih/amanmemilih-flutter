@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-typedef Widget WidgetBuilder<T>(BuildContext context);
+typedef WidgetBuilder<T> = Widget Function(BuildContext context);

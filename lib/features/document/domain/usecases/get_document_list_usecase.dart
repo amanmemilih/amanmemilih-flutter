@@ -9,7 +9,6 @@ library;
 import 'package:amanmemilih_mobile_app/core/usecase/params.dart';
 import 'package:amanmemilih_mobile_app/features/document/domain/entities/documentlist/document_list_entity.dart';
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 
 import '../../../../core/errors/errors.dart';
 import '../../../../core/usecase/usecase.dart';

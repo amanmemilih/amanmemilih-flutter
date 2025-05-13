@@ -6,15 +6,17 @@ class TouchableOpacityWidget extends StatefulWidget {
   final Duration duration = const Duration(milliseconds: 50);
   final double opacity = 0.5;
 
-  const TouchableOpacityWidget(
-      {Key? key, required this.child, required this.onTap})
-      : super(key: key);
+  const TouchableOpacityWidget({
+    super.key,
+    required this.child,
+    required this.onTap,
+  });
 
   @override
-  _TouchableOpacityWidgetState createState() => _TouchableOpacityWidgetState();
+  TouchableOpacityWidgetState createState() => TouchableOpacityWidgetState();
 }
 
-class _TouchableOpacityWidgetState extends State<TouchableOpacityWidget> {
+class TouchableOpacityWidgetState extends State<TouchableOpacityWidget> {
   late bool isDown;
 
   @override

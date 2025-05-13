@@ -11,7 +11,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 class DocumentValidationScreen extends StatelessWidget {
   const DocumentValidationScreen({super.key});
@@ -23,23 +22,6 @@ class DocumentValidationScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<DocumentValidationCubit>()..getData(),
       child: DocumentValidationScreenImplement(imagePaths: imagePaths),
-    );
-  }
-
-  Container _tandaTanganPetugas() {
-    return Container(
-      child: Column(
-        children: [
-          Text(
-            "Tanda Tangan Petugas",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-          ),
-          SizedBox(height: 24),
-          Container(
-            child: Image.asset('assets/images/tanda_tangan.jpg'),
-          )
-        ],
-      ),
     );
   }
 }
@@ -83,7 +65,6 @@ class DocumentValidationScreenImplement extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 24),
-
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
@@ -293,7 +274,6 @@ class DocumentValidationScreenImplement extends StatelessWidget {
                     SizedBox(
                       height: 40,
                     ),
-                    // _tandaTanganPetugas(),
                     SizedBox(
                       height: 25,
                     ),

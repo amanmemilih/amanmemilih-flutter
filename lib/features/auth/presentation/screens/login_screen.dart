@@ -1,22 +1,18 @@
 import 'package:amanmemilih_mobile_app/core/components/alerts/alert_error.dart';
 import 'package:amanmemilih_mobile_app/core/constants/router.dart';
 import 'package:amanmemilih_mobile_app/core/errors/errors.dart';
-import 'package:amanmemilih_mobile_app/core/resources/colors.dart';
-import 'package:amanmemilih_mobile_app/core/widgets/bottom_sheet.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/elevated_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/outlined_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/text_button.dart';
 import 'package:amanmemilih_mobile_app/core/widgets/text_field.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
 import 'package:amanmemilih_mobile_app/features/auth/presentation/cubits/login/login_cubit.dart';
-import 'package:amanmemilih_mobile_app/features/auth/presentation/screens/register_password_screen.dart';
 import 'package:amanmemilih_mobile_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

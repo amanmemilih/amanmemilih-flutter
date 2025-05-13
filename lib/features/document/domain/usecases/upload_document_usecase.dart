@@ -8,7 +8,6 @@ library;
 
 import 'package:amanmemilih_mobile_app/features/document/data/models/requests/upload_document_request.dart';
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 
 import '../../../../core/errors/errors.dart';
 import '../../../../core/usecase/usecase.dart';

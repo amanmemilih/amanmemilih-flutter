@@ -15,8 +15,8 @@ class DioApi extends Api {
     dio = Dio();
 
     // The following contains code for handling bad certificates.
-    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
-        (HttpClient client) {
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      final client = HttpClient();
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       return client;
