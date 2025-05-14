@@ -25,6 +25,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:localization/localization.dart';
+import 'package:amanmemilih_mobile_app/features/camera/presentation/cubits/crop_image_cubit.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -71,7 +72,10 @@ class MainApp extends StatelessWidget {
               // Main
               ROUTER.bottomNavBar: (context) => AMBottomNavigationBar(),
               // Camera
-              ROUTER.editImageScreen: (context) => const EditImageScreen(),
+              ROUTER.editImageScreen: (context) => BlocProvider(
+                    create: (_) => CropImageCubit(),
+                    child: const EditImageScreen(),
+                  ),
               // Document
               ROUTER.documentInformation: (context) =>
                   const DocumentInformationScreen(),

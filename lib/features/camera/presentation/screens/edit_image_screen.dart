@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_cropper/image_cropper.dart';
+import '../cubits/crop_image_cubit.dart';
 
 class EditImageScreen extends StatefulWidget {
   const EditImageScreen({super.key});
@@ -25,126 +28,174 @@ class EditImageScreenState extends State<EditImageScreen> {
   @override
   Widget build(BuildContext context) {
     var imagePaths = ModalRoute.of(context)!.settings.arguments as List<String>;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Foto'),
-        backgroundColor: Colors.redAccent,
-        actions: [
-          IconButton(
-            onPressed: _saveEdits,
-            icon: const Icon(Icons.check),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Area untuk menampilkan gambar
-            Expanded(
-              child: Stack(
-                children: [
-                  CarouselSlider.builder(
-                    itemCount: imagePaths.length,
-                    itemBuilder: (context, index, realIndex) {
-                      try {
-                        return Image.file(
-                          File(imagePaths[index]),
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                        );
-                      } catch (e) {
-                        return const Center(
-                          child: Text('Gambar tidak dapat dimuat'),
-                        );
-                      }
-                    },
-                    options: CarouselOptions(
-                      height: double.infinity,
-                      viewportFraction: 1.0,
-                      enableInfiniteScroll: false,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _currentIndex = index;
-                        });
-                      },
-                    ),
-                  ),
-                ],
+    return BlocListener<CropImageCubit, CropImageState>(
+      listener: (context, state) {
+        state.mapOrNull(
+          success: (s) {
+            setState(() {
+              imagePaths[_currentIndex] = s.croppedImage.path;
+            });
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Gambar berhasil di-crop')),
+            );
+          },
+          error: (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Crop gagal: ${e.message}')),
+            );
+          },
+        );
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Edit Foto'),
+          backgroundColor: Colors.redAccent,
+          actions: [
+            Builder(
+              builder: (context) => IconButton(
+                onPressed: () => _saveEdits(context),
+                icon: const Icon(Icons.check),
               ),
             ),
-            Container(
-              color: Colors.grey[900],
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 100.w, top: 20.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        imagePaths.length,
-                        (index) => Container(
-                          width: 8.0,
-                          height: 8.0,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 4.0, vertical: 2.0),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: _currentIndex == index
-                                ? Colors.redAccent
-                                : Colors.white70,
+          ],
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              // Area untuk menampilkan gambar
+              Expanded(
+                child: Stack(
+                  children: [
+                    CarouselSlider.builder(
+                      itemCount: imagePaths.length,
+                      itemBuilder: (context, index, realIndex) {
+                        try {
+                          return Image.file(
+                            File(imagePaths[index]),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          );
+                        } catch (e) {
+                          return const Center(
+                            child: Text('Gambar tidak dapat dimuat'),
+                          );
+                        }
+                      },
+                      options: CarouselOptions(
+                        height: double.infinity,
+                        viewportFraction: 1.0,
+                        enableInfiniteScroll: false,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _currentIndex = index;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                color: Colors.grey[900],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 100.w, top: 20.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          imagePaths.length,
+                          (index) => Container(
+                            width: 8.0,
+                            height: 8.0,
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 4.0, vertical: 2.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _currentIndex == index
+                                  ? Colors.redAccent
+                                  : Colors.white70,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: _tools.map((tool) {
-                        final toolIndex = _tools.indexOf(tool);
-                        final isSelected = _selectedToolIndex == toolIndex;
-
-                        return Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _selectedToolIndex = toolIndex;
-                              });
-                              _navigateToTool(toolIndex, imagePaths);
-                            },
-                            child: Column(
-                              children: [
-                                Icon(
-                                  tool['icon'],
-                                  color: isSelected
-                                      ? Colors.redAccent
-                                      : Colors.white,
-                                ),
-                                SizedBox(height: 6.w),
-                                Text(
-                                  tool['label'],
-                                  style: TextStyle(
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: _tools.asMap().entries.map((entry) {
+                          final tool = entry.value;
+                          final toolIndex = entry.key;
+                          final isSelected = _selectedToolIndex == toolIndex;
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () async {
+                                setState(() {
+                                  _selectedToolIndex = toolIndex;
+                                });
+                                if (tool['label'] == 'Pangkas') {
+                                  final croppedFile =
+                                      await ImageCropper().cropImage(
+                                    sourcePath: imagePaths[_currentIndex],
+                                    aspectRatio: const CropAspectRatio(
+                                        ratioX: 1, ratioY: 1),
+                                    uiSettings: [
+                                      AndroidUiSettings(
+                                        toolbarTitle: 'Crop Image',
+                                        toolbarColor: Colors.redAccent,
+                                        toolbarWidgetColor: Colors.white,
+                                        initAspectRatio:
+                                            CropAspectRatioPreset.original,
+                                        lockAspectRatio: false,
+                                      ),
+                                      IOSUiSettings(
+                                        title: 'Crop Image',
+                                      ),
+                                    ],
+                                  );
+                                  if (croppedFile != null) {
+                                    context
+                                        .read<CropImageCubit>()
+                                        .setCroppedImage(
+                                            File(croppedFile.path));
+                                  }
+                                } else {
+                                  _navigateToTool(toolIndex, imagePaths);
+                                }
+                              },
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    tool['icon'],
                                     color: isSelected
                                         ? Colors.redAccent
                                         : Colors.white,
-                                    fontSize: 12,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(height: 6.w),
+                                  Text(
+                                    tool['label'],
+                                    style: TextStyle(
+                                      color: isSelected
+                                          ? Colors.redAccent
+                                          : Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      }).toList(),
+                          );
+                        }).toList(),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 70.w),
-                ],
+                    SizedBox(height: 70.w),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -181,7 +232,9 @@ class EditImageScreenState extends State<EditImageScreen> {
   }
 
   // Fungsi untuk menyimpan hasil edit
-  void _saveEdits() {
+  void _saveEdits(BuildContext context) {
+    // Contoh: akses cubit jika perlu
+    // final cubit = context.read<CropImageCubit>();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Gambar berhasil disimpan ke'),
