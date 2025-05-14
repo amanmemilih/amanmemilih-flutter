@@ -74,7 +74,10 @@ class CameraCubit extends Cubit<CameraState> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PreviewScreen(imagePaths: imagePaths),
+          builder: (context) => PreviewScreen(
+            imagePaths: imagePaths,
+            aspectRatio: state.controller?.value.aspectRatio,
+          ),
         ),
       );
     }

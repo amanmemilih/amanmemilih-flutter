@@ -11,6 +11,7 @@ class CameraScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (_) => CameraCubit(camera)..initialize(),
       child: BlocBuilder<CameraCubit, CameraState>(
@@ -30,7 +31,7 @@ class CameraScreen extends StatelessWidget {
                 else
                   const Center(child: CircularProgressIndicator()),
                 Positioned(
-                  bottom: 20,
+                  bottom: size.height * 0.03,
                   left: 0,
                   right: 0,
                   child: Column(
@@ -39,7 +40,7 @@ class CameraScreen extends StatelessWidget {
                         'Pastikan gambar sejajar dengan frame kamera anda',
                         style: TextStyle(color: Colors.white),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.01),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -50,35 +51,36 @@ class CameraScreen extends StatelessWidget {
                                   ? Icons.flash_on
                                   : Icons.flash_off,
                               color: Colors.white,
+                              size: size.width * 0.08,
                             ),
                           ),
                           IconButton(
                             onPressed: cubit.takePicture,
-                            icon: const Icon(Icons.circle,
-                                size: 60, color: Colors.white),
+                            icon: Icon(Icons.circle,
+                                size: size.width * 0.15, color: Colors.white),
                           ),
                           IconButton(
                             onPressed: () => cubit.navigateToEditor(context),
-                            icon: const Icon(Icons.photo_library,
-                                color: Colors.white),
+                            icon: Icon(Icons.photo_library,
+                                color: Colors.white, size: size.width * 0.08),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 80,
+                        height: size.height * 0.12,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: state.capturedImages.length,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.width * 0.01),
                               child: GestureDetector(
                                 onTap: () => cubit.navigateToEditor(context),
                                 child: Image.file(
                                   state.capturedImages[index],
-                                  width: 60,
-                                  height: 60,
+                                  width: size.width * 0.15,
+                                  height: size.width * 0.15,
                                   fit: BoxFit.cover,
                                 ),
                               ),

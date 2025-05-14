@@ -8,8 +8,9 @@ import 'package:carousel_slider/carousel_slider.dart'; // Import carousel_slider
 
 class PreviewScreen extends StatefulWidget {
   final List<String> imagePaths;
+  final double? aspectRatio;
 
-  const PreviewScreen({super.key, required this.imagePaths});
+  const PreviewScreen({super.key, required this.imagePaths, this.aspectRatio});
 
   @override
   PreviewScreenState createState() => PreviewScreenState();
@@ -53,6 +54,7 @@ class PreviewScreenState extends State<PreviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: _isFullScreen
           ? null
@@ -79,20 +81,23 @@ class PreviewScreenState extends State<PreviewScreen> {
                 child: CarouselSlider.builder(
                   itemCount: widget.imagePaths.length,
                   itemBuilder: (context, index, realIndex) {
-                    return Image.file(
-                      File(widget.imagePaths[index]),
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
+                    return AspectRatio(
+                      aspectRatio: widget.aspectRatio ?? 3 / 4,
+                      child: Image.file(
+                        File(widget.imagePaths[index]),
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
                     );
                   },
                   options: CarouselOptions(
-                    height: 400,
+                    height: size.height * 0.5,
                     autoPlay: false,
                     enlargeCenterPage: true,
                     enableInfiniteScroll: false,
                     viewportFraction: 1.0,
-                    aspectRatio: 1.0,
+                    aspectRatio: size.aspectRatio,
                     onPageChanged: (index, reason) {
                       setState(() {
                         _currentIndex = index;
@@ -104,20 +109,23 @@ class PreviewScreenState extends State<PreviewScreen> {
             ),
             if (!_isFullScreen)
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.05,
+                  vertical: size.height * 0.02,
+                ),
                 color: Colors.black,
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      //membuat dots atau titik titik di carousel_slider
+                      padding: EdgeInsets.all(size.height * 0.01),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:
                             List.generate(widget.imagePaths.length, (index) {
                           return AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
-                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: size.width * 0.01),
                             width: _currentIndex == index ? 12.0 : 10.0,
                             height: 10.0,
                             decoration: BoxDecoration(
@@ -130,9 +138,7 @@ class PreviewScreenState extends State<PreviewScreen> {
                         }),
                       ),
                     ),
-                    const SizedBox(
-                      height: 42,
-                    ),
+                    SizedBox(height: size.height * 0.03),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -187,23 +193,21 @@ Widget _customButton({
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 22),
-      child: Expanded(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: Icon(icon, color: Colors.white, size: 30),
-              onPressed: onPressed,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: Icon(icon, color: Colors.white, size: 30),
+            onPressed: onPressed,
+          ),
+          Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
             ),
-            Text(
-              label,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );
