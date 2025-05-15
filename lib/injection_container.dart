@@ -91,7 +91,12 @@ void initialize() {
   getIt.registerLazySingleton(() => DeleteDocumentUseCase(getIt()));
 
   // Cubit
-  getIt.registerFactory(() => AuthCubit(getIt(), getIt(), getIt()));
+  getIt.registerFactory(() => AuthCubit(
+        getIt<CheckCredentialsUseCase>(),
+        getIt<LoginUseCase>(),
+        getIt<LogoutUseCase>(),
+        getIt<AuthLocalDataSource>(),
+      ));
   getIt.registerFactory(() => LoginCubit(getIt(), getIt(), getIt()));
   getIt.registerFactory(() => DashboardCubit(getIt()));
   getIt.registerFactory(() => GenerateRecoveryKeyCubit(getIt()));

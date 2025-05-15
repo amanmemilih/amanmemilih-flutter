@@ -30,10 +30,12 @@ class SplashScreen extends StatelessWidget {
           case AuthStatus.error:
             alertError(
               context,
-              () {},
+              () {
+                if (!context.mounted) return;
+                Navigator.of(context).pushReplacementNamed(ROUTER.login);
+              },
               title: state.error?.title ?? 'Unknown Error',
-              message: // later
-                  state.error?.message ?? 'Error Message Not Assigned',
+              message: state.error?.message ?? 'Error Message Not Assigned',
             );
             break;
           default:

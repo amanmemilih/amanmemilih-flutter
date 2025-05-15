@@ -13,6 +13,7 @@ import 'package:amanmemilih_mobile_app/features/auth/domain/usecases/login_useca
 import 'package:amanmemilih_mobile_app/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:amanmemilih_mobile_app/features/auth/data/datasources/auth_local_data_source.dart';
 
 import '../../../../../core/errors/errors.dart';
 
@@ -23,11 +24,13 @@ class AuthCubit extends Cubit<AuthState> {
   final CheckCredentialsUseCase _checkCredentialsUseCase;
   final LoginUseCase _loginUseCase;
   final LogoutUseCase _logoutUseCase;
+  final AuthLocalDataSource _localDataSource;
 
   AuthCubit(
     this._checkCredentialsUseCase,
     this._loginUseCase,
     this._logoutUseCase,
+    this._localDataSource,
   ) : super(AuthState.initial());
 
   void checkCredential() async {
@@ -59,11 +62,29 @@ class AuthCubit extends Cubit<AuthState> {
       password: password,
     ));
 
-    data.fold(
-        (l) => emit(state.copyWith(
-              status: AuthStatus.error,
-              error: ErrorObject.mapFailureToErrorObject(l),
-            )), (r) {
+    data.fold((l) {
+      // Cek jika error karena koneksi
+      final isNetworkError = l.toString().contains('SocketException') ||
+          l.toString().contains('Failed host lookup') ||
+          l.toString().contains('No address associated with hostname');
+      if (isNetworkError) {
+        emit(state.copyWith(
+          status: AuthStatus.error,
+          error: ErrorObject(
+            title: 'Koneksi Gagal',
+            message:
+                'Tidak bisa terhubung ke server. Pastikan koneksi internet aktif.',
+            shortMessage: 'Tidak bisa terhubung ke server',
+            failure: const Failure.noInternetConnectionFailure(),
+          ),
+        ));
+      } else {
+        emit(state.copyWith(
+          status: AuthStatus.error,
+          error: ErrorObject.mapFailureToErrorObject(l),
+        ));
+      }
+    }, (r) {
       emit(state.copyWith(
         status: AuthStatus.authenticated,
         credential: r,
@@ -76,13 +97,27 @@ class AuthCubit extends Cubit<AuthState> {
     final data = await _logoutUseCase.call(NoParams());
 
     data.fold(
-        (l) => emit(state.copyWith(
-              status: AuthStatus.error,
-              error: ErrorObject.mapFailureToErrorObject(l),
-            )), (r) {
-      emit(state.copyWith(
-        status: AuthStatus.unauthenticated,
-      ));
-    });
+      (l) {
+        // Tetap clear token lokal walau gagal koneksi
+        try {
+          _localDataSource.clearToken();
+        } catch (_) {}
+        emit(state.copyWith(
+          status: AuthStatus.unauthenticated,
+          error: ErrorObject(
+            title: 'Logout Gagal',
+            message:
+                'Logout gagal karena koneksi. Anda sudah keluar dari aplikasi.',
+            shortMessage: 'Logout gagal karena koneksi',
+            failure: const Failure.otherErrorFailure(),
+          ),
+        ));
+      },
+      (r) {
+        emit(state.copyWith(
+          status: AuthStatus.unauthenticated,
+        ));
+      },
+    );
   }
 }
