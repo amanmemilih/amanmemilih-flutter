@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gal/gal.dart'; // Import gal package
 import 'package:carousel_slider/carousel_slider.dart'; // Import carousel_slider
+import 'package:camera/camera.dart';
+import 'package:amanmemilih_mobile_app/features/camera/presentation/screens/camera_screen.dart';
 
 class PreviewScreen extends StatefulWidget {
   final List<String> imagePaths;
@@ -154,10 +156,18 @@ class PreviewScreenState extends State<PreviewScreen> {
                           },
                         ),
                         _customButton(
-                          icon: Icons.add,
-                          label: "Tambah",
-                          onPressed: () {
-                            Navigator.pop(context);
+                          icon: Icons.camera_alt,
+                          label: "Ambil Gambar Ulang",
+                          onPressed: () async {
+                            // Ambil kamera utama
+                            final cameras = await availableCameras();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CameraScreen(camera: cameras.first),
+                              ),
+                            );
                           },
                         ),
                         _customButton(

@@ -4,16 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:amanmemilih_mobile_app/features/camera/presentation/cubits/camera_cubit.dart';
 
-class CameraScreen extends StatelessWidget {
+class CameraScreen extends StatefulWidget {
   final CameraDescription camera;
 
   const CameraScreen({super.key, required this.camera});
 
   @override
+  State<CameraScreen> createState() => _CameraScreenState();
+}
+
+class _CameraScreenState extends State<CameraScreen> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (_) => CameraCubit(camera)..initialize(),
+      create: (_) => CameraCubit(widget.camera)..initialize(),
       child: BlocBuilder<CameraCubit, CameraState>(
         builder: (context, state) {
           final cubit = context.read<CameraCubit>();

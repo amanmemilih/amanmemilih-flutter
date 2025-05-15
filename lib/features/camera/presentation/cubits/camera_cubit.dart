@@ -71,7 +71,7 @@ class CameraCubit extends Cubit<CameraState> {
     if (state.capturedImages.isNotEmpty) {
       List<String> imagePaths =
           state.capturedImages.map((file) => file.path).toList();
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => PreviewScreen(
