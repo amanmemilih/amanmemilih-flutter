@@ -7,6 +7,7 @@ import 'package:image_cropper/image_cropper.dart';
 import '../cubits/crop_image_cubit.dart';
 import '../cubits/brightness_edit_cubit.dart';
 import 'brightness_edit_screen.dart';
+import 'contrast_edit_screen.dart';
 
 class EditImageScreen extends StatefulWidget {
   const EditImageScreen({super.key});
@@ -226,6 +227,14 @@ class EditImageScreenState extends State<EditImageScreen> {
             create: (_) => BrightnessEditCubit(),
             child: BrightnessEditScreen(imagePath: selectedImagePath),
           ),
+        ),
+      );
+    } else if (_tools[toolIndex]['label'] == 'Kontras') {
+      editedImagePath = await Navigator.push<String>(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              ContrastEditScreen(imagePath: selectedImagePath),
         ),
       );
     } else {
