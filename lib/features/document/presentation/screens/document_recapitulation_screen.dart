@@ -111,57 +111,7 @@ class DocumentRecapitulationScreenImplement extends StatelessWidget {
                   SizedBox(
                     height: 24,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BaseShadows.primary[0],
-                      ],
-                    ),
-                    child: BlocBuilder<AuthCubit, AuthState>(
-                      builder: (context, state) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _formulirRow(
-                                "Formulir Pemilihan", args.electionType),
-                            _formulirRow("Kelurahan",
-                                state.credential?.user?.village ?? ''),
-                            _formulirRow("Kecamatan",
-                                state.credential?.user?.subdistrict ?? ''),
-                            _formulirRow("Kab/Kota",
-                                state.credential?.user?.district ?? ""),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            if (args.electionType == 'presidential')
-                              Container(
-                                padding: EdgeInsets.fromLTRB(16, 20, 16, 0),
-                                child: Text("Hasil Rekapitulasi Suara",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w700)),
-                              ),
-                            if (args.electionType == 'presidential')
-                              ...args.votes.map(
-                                (e) {
-                                  return _formulirRowBold(
-                                    "${e['candidat_no']}. ",
-                                    e['candidat_name'],
-                                    "${e['total_votes']}",
-                                  );
-                                },
-                              ),
-                            SizedBox(
-                              height: 36,
-                            )
-                          ],
-                        );
-                      },
-                    ),
-                  ),
+                  _detailFormulir(),
                   SizedBox(
                     height: 40,
                   ),
@@ -171,41 +121,7 @@ class DocumentRecapitulationScreenImplement extends StatelessWidget {
                   SizedBox(
                     height: 24,
                   ),
-                  Container(
-                    height: 500, // Tinggi Image nya
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(20), // Membuat sudut melengkung
-                      color: Colors.white,
-                    ),
-                    clipBehavior: Clip
-                        .hardEdge, // Memastikan konten di dalam rounded corners
-                    child: CarouselSlider.builder(
-                      itemCount: args.imagePaths.length,
-                      itemBuilder: (context, index, realIndex) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              20), // ngasih rounded di gambarnya langsung
-                          child: Image.file(
-                            File(args.imagePaths[index]),
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        );
-                      },
-                      options: CarouselOptions(
-                        height: 500,
-                        autoPlay: false,
-                        enlargeCenterPage: true,
-                        enableInfiniteScroll: false,
-                        viewportFraction: 1.0,
-                        aspectRatio: 1.0,
-                        onPageChanged: (index, reason) =>
-                            context.read<DocumentRecapitulationCubit>(),
-                      ),
-                    ),
-                  ),
+                  _fotoFormulir(context),
                   SizedBox(
                     height: 27,
                   ),
@@ -300,6 +216,92 @@ class DocumentRecapitulationScreenImplement extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Container _fotoFormulir(BuildContext context) {
+    return Container(
+      height: 500, // Tinggi Image nya
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20), // Membuat sudut melengkung
+        color: Colors.white,
+      ),
+      clipBehavior: Clip.hardEdge, // Memastikan konten di dalam rounded corners
+      child: CarouselSlider.builder(
+        itemCount: args.imagePaths.length,
+        itemBuilder: (context, index, realIndex) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(
+                20), // ngasih rounded di gambarnya langsung
+            child: Image.file(
+              File(args.imagePaths[index]),
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+            ),
+          );
+        },
+        options: CarouselOptions(
+          height: 500,
+          autoPlay: false,
+          enlargeCenterPage: true,
+          enableInfiniteScroll: false,
+          viewportFraction: 1.0,
+          aspectRatio: 1.0,
+          onPageChanged: (index, reason) =>
+              context.read<DocumentRecapitulationCubit>(),
+        ),
+      ),
+    );
+  }
+
+  Container _detailFormulir() {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BaseShadows.primary[0],
+        ],
+      ),
+      child: BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _formulirRow("Formulir Pemilihan", args.electionType),
+              _formulirRow("Kelurahan", state.credential?.user?.village ?? ''),
+              _formulirRow(
+                  "Kecamatan", state.credential?.user?.subdistrict ?? ''),
+              _formulirRow("Kab/Kota", state.credential?.user?.district ?? ""),
+              SizedBox(
+                height: 8,
+              ),
+              if (args.electionType == 'presidential')
+                Container(
+                  padding: EdgeInsets.fromLTRB(16, 20, 16, 0),
+                  child: Text("Hasil Rekapitulasi Suara",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                ),
+              if (args.electionType == 'presidential')
+                ...args.votes.map(
+                  (e) {
+                    return _formulirRowBold(
+                      "${e['candidat_no']}. ",
+                      e['candidat_name'],
+                      "${e['total_votes']}",
+                    );
+                  },
+                ),
+              SizedBox(
+                height: 36,
+              )
+            ],
+          );
+        },
       ),
     );
   }

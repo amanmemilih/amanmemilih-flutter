@@ -11,6 +11,8 @@ import 'dart:io';
 import 'package:amanmemilih_mobile_app/features/document/data/models/requests/upload_document_request.dart';
 import 'package:amanmemilih_mobile_app/injection_container.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/api/api.dart';
 
@@ -40,7 +42,7 @@ class ApiDocumentRemoteDataSource extends DocumentRemoteDataSource {
   }
 
   @override
-  Future<ApiResponse> uploadDocument(UploadDocumentRequest request) {
+  Future<ApiResponse> uploadDocument(UploadDocumentRequest request) async {
     final formData = getIt<ApiFormData>();
 
     formData.addField('election_type', request.electionType ?? "");
@@ -53,9 +55,24 @@ class ApiDocumentRemoteDataSource extends DocumentRemoteDataSource {
       index++;
     }
 
-    // Documents
+    // Documents (compress before upload)
     for (final String row in request.imagePaths ?? []) {
-      formData.addFile('documents[]', File(row));
+      final file = File(row);
+      final dir = await getTemporaryDirectory();
+      final targetPath =
+          "${dir.path}/${DateTime.now().millisecondsSinceEpoch}_${file.uri.pathSegments.last}";
+      final compressedXFile = await FlutterImageCompress.compressAndGetFile(
+        file.absolute.path,
+        targetPath,
+        quality: 70, // Bisa diubah sesuai kebutuhan
+      );
+      if (compressedXFile != null &&
+          await File(compressedXFile.path).exists()) {
+        formData.addFile('documents[]', File(compressedXFile.path));
+      } else {
+        // fallback jika gagal kompres
+        formData.addFile('documents[]', file);
+      }
     }
 
     return _api.post(

@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import '../cubits/crop_image_cubit.dart';
+import '../cubits/brightness_edit_cubit.dart';
+import 'brightness_edit_screen.dart';
 
 class EditImageScreen extends StatefulWidget {
   const EditImageScreen({super.key});
@@ -156,6 +158,7 @@ class EditImageScreenState extends State<EditImageScreen> {
                                     ],
                                   );
                                   if (croppedFile != null) {
+                                    if (!mounted) return;
                                     context
                                         .read<CropImageCubit>()
                                         .setCroppedImage(
@@ -214,19 +217,32 @@ class EditImageScreenState extends State<EditImageScreen> {
       return;
     }
 
-    final editedImagePath = await Navigator.push<String>(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PlaceholderScreen(
-          title: _tools[toolIndex]['label'],
-          imagePath: selectedImagePath,
+    String? editedImagePath;
+    if (_tools[toolIndex]['label'] == 'Pencahayaan') {
+      editedImagePath = await Navigator.push<String>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (_) => BrightnessEditCubit(),
+            child: BrightnessEditScreen(imagePath: selectedImagePath),
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      editedImagePath = await Navigator.push<String>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PlaceholderScreen(
+            title: _tools[toolIndex]['label'],
+            imagePath: selectedImagePath,
+          ),
+        ),
+      );
+    }
 
     if (editedImagePath != null) {
       setState(() {
-        imagePaths[_currentIndex] = editedImagePath; // Update hasil edit
+        imagePaths[_currentIndex] = editedImagePath!; // Update hasil edit
       });
     }
   }
