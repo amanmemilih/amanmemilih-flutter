@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image/image.dart' as img;
 import '../cubits/brightness_edit_cubit.dart';
+import 'dart:async';
 
 class BrightnessEditScreen extends StatefulWidget {
   final String imagePath;
@@ -16,11 +17,18 @@ class _BrightnessEditScreenState extends State<BrightnessEditScreen> {
   double _brightness = 0.0;
   File? _previewFile;
   bool _isProcessing = false;
+  Timer? _debounce;
 
   @override
   void initState() {
     super.initState();
     _previewFile = File(widget.imagePath);
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
   }
 
   Future<void> _applyBrightness(double value) async {
@@ -29,7 +37,8 @@ class _BrightnessEditScreenState extends State<BrightnessEditScreen> {
     final bytes = await original.readAsBytes();
     final image = img.decodeImage(bytes);
     if (image == null) return;
-    final adjusted = img.adjustColor(image, brightness: value);
+    final mappedBrightness = value + 1.0;
+    final adjusted = img.adjustColor(image, brightness: mappedBrightness);
     final tempPath =
         '${original.parent.path}/brightness_${DateTime.now().millisecondsSinceEpoch}.jpg';
     final result = File(tempPath)..writeAsBytesSync(img.encodeJpg(adjusted));
@@ -91,9 +100,13 @@ class _BrightnessEditScreenState extends State<BrightnessEditScreen> {
                       max: 1.0,
                       divisions: 20,
                       label: _brightness.toStringAsFixed(2),
-                      onChanged: (value) async {
+                      onChanged: (value) {
                         setState(() => _brightness = value);
-                        await _applyBrightness(value);
+                        _debounce?.cancel();
+                        _debounce =
+                            Timer(const Duration(milliseconds: 300), () {
+                          _applyBrightness(value);
+                        });
                       },
                     ),
                   ],
