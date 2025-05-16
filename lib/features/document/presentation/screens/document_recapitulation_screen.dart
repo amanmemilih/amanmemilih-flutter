@@ -82,10 +82,7 @@ class DocumentRecapitulationScreenImplement extends StatelessWidget {
         }
 
         if (state.status == DocumentRecapitulationStatus.success) {
-          Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pop(context);
+          Navigator.of(context).popUntil((route) => route.isFirst);
         }
       },
       child: Scaffold(

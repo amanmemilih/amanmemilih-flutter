@@ -27,7 +27,7 @@ class DocumentRecapitulationCubit extends Cubit<DocumentRecapitulationState> {
   void uploadDocument(DocumentRecapitulationArgs args) async {
     emit(state.copyWith(status: DocumentRecapitulationStatus.loading));
 
-    final data = await _useCase.call(UploadDocumentRequest(
+    final result = await _useCase.call(UploadDocumentRequest(
       imagePaths: args.imagePaths,
       electionType: args.electionType,
       votes: args.electionType == 'presidential'
@@ -39,14 +39,15 @@ class DocumentRecapitulationCubit extends Cubit<DocumentRecapitulationState> {
           : [],
     ));
 
-    return data.fold(
-        (l) => emit(state.copyWith(
-              status: DocumentRecapitulationStatus.error,
-              error: ErrorObject.mapFailureToErrorObject(l),
-            )),
-        (r) => emit(state.copyWith(
-              status: DocumentRecapitulationStatus.success,
-            )));
+    result.fold(
+      (l) => emit(state.copyWith(
+        status: DocumentRecapitulationStatus.error,
+        error: ErrorObject.mapFailureToErrorObject(l),
+      )),
+      (r) => emit(state.copyWith(
+        status: DocumentRecapitulationStatus.success,
+      )),
+    );
   }
 
   void changeDocumentIndex(int index) {

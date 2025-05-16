@@ -16,7 +16,22 @@ class DocumentDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map;
+    final routeArgs = ModalRoute.of(context)?.settings.arguments;
+    late final Map args;
+    if (routeArgs is Map) {
+      args = routeArgs;
+    } else {
+      // Jika arguments tidak sesuai, tampilkan error UI
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Detail Formulir'),
+          backgroundColor: colorPrimary,
+        ),
+        body: const Center(
+          child: Text('Terjadi kesalahan: arguments tidak valid.'),
+        ),
+      );
+    }
 
     return MultiBlocProvider(
       providers: [
@@ -40,7 +55,22 @@ class DocumentDetailScreenImplement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map;
+    final routeArgs = ModalRoute.of(context)?.settings.arguments;
+    late final Map args;
+    if (routeArgs is Map) {
+      args = routeArgs;
+    } else {
+      // Jika arguments tidak sesuai, tampilkan error UI
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Detail Formulir'),
+          backgroundColor: colorPrimary,
+        ),
+        body: const Center(
+          child: Text('Terjadi kesalahan: arguments tidak valid.'),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -71,8 +101,9 @@ class DocumentDetailScreenImplement extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state.status == DocumentDetailStatus.success ||
-              state.status == DocumentDetailStatus.submitting) {
+          if ((state.status == DocumentDetailStatus.success ||
+                  state.status == DocumentDetailStatus.submitting) &&
+              state.data != null) {
             return Container(
               margin: const EdgeInsets.all(24),
               child: SingleChildScrollView(
@@ -110,12 +141,12 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("Formulir Pemilihan"),
-                              Text("${state.data!.electionType}"),
+                              Text(state.data?.electionType ?? '-'),
                             ],
                           ),
                           SizedBox(height: 5.h),
                           BlocBuilder<AuthCubit, AuthState>(
-                            builder: (context, state) {
+                            builder: (context, authState) {
                               return Column(
                                 children: [
                                   Row(
@@ -124,7 +155,8 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                                     children: [
                                       Text("Kelurahan"),
                                       Text(
-                                          "${state.credential!.user!.village}"),
+                                          authState.credential?.user?.village ??
+                                              '-'),
                                     ],
                                   ),
                                   SizedBox(height: 5.h),
@@ -133,8 +165,9 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text("Kecamatan"),
-                                      Text(
-                                          "${state.credential!.user!.subdistrict}"),
+                                      Text(authState
+                                              .credential?.user?.subdistrict ??
+                                          '-'),
                                     ],
                                   ),
                                   SizedBox(height: 5.h),
@@ -143,8 +176,9 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text("Kab/Kota"),
-                                      Text(
-                                          "${state.credential!.user!.district}"),
+                                      Text(authState
+                                              .credential?.user?.district ??
+                                          '-'),
                                     ],
                                   ),
                                   SizedBox(height: 5.h),
@@ -153,8 +187,9 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text("Provinsi"),
-                                      Text(
-                                          "${state.credential!.user!.province}"),
+                                      Text(authState
+                                              .credential?.user?.province ??
+                                          '-'),
                                     ],
                                   ),
                                 ],
@@ -162,7 +197,8 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 10.h),
-                          state.data!.electionType == 'PILPRES'
+                          (state.data?.electionType == 'PILPRES' &&
+                                  state.data?.votes != null)
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -183,7 +219,7 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                "${e.candidatNo}. ${e.candidatName}",
+                                                "${e.candidatNo ?? '-'} ${e.candidatName ?? ''}",
                                                 style:
                                                     GoogleFonts.plusJakartaSans(
                                                   color:
@@ -193,7 +229,7 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                "${e.totalVotes}",
+                                                "${e.totalVotes ?? '-'}",
                                                 style:
                                                     GoogleFonts.plusJakartaSans(
                                                   color:
@@ -222,23 +258,43 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 5.h),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          for (var i = 0;
-                              i < state.data!.documents!.length;
-                              i++)
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: Image.network(state.data!.documents![i]),
+                    if (state.data?.documents != null &&
+                        state.data!.documents!.isNotEmpty)
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            for (var i = 0;
+                                i < state.data!.documents!.length;
+                                i++)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Image.network(
+                                    state.data!.documents![i],
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        color: Colors.grey[200],
+                                        width: double.infinity,
+                                        height: 200,
+                                        child: const Center(
+                                          child: Text(
+                                            'Gambar tidak tersedia',
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            ),
-                        ],
-                      ),
-                    ),
+                          ],
+                        ),
+                      )
+                    else
+                      const Text('Tidak ada foto formulir.'),
                     SizedBox(height: 10.h),
                     state.data!.status == 1
                         ? Container()
