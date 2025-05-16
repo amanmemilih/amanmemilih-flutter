@@ -101,7 +101,7 @@ class DocumentDetailScreenImplement extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          print('Dokumen gambar: ${state.data?.documents}');
+          // print('Dokumen gambar: ${state.data?.documents}');
           if ((state.status == DocumentDetailStatus.success ||
                   state.status == DocumentDetailStatus.submitting) &&
               state.data != null) {
