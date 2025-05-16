@@ -26,13 +26,22 @@ class DeleteDocumentCubit extends Cubit<DeleteDocumentState> {
     final data = await _useCase
         .call(DeleteDocumentParams(electionType: electionType, id: id));
 
-    return data.fold(
-        (l) => emit(state.copyWith(
-              status: DeleteDocumentStatus.error,
-              error: ErrorObject.mapFailureToErrorObject(l),
-            )),
-        (r) => emit(state.copyWith(
-              status: DeleteDocumentStatus.success,
-            )));
+    data.fold(
+      (l) {
+        if (!isClosed) {
+          emit(state.copyWith(
+            status: DeleteDocumentStatus.error,
+            error: ErrorObject.mapFailureToErrorObject(l),
+          ));
+        }
+      },
+      (r) {
+        if (!isClosed) {
+          emit(state.copyWith(
+            status: DeleteDocumentStatus.success,
+          ));
+        }
+      },
+    );
   }
 }

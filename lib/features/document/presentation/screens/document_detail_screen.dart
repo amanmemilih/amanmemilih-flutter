@@ -101,6 +101,7 @@ class DocumentDetailScreenImplement extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          print('Dokumen gambar: ${state.data?.documents}');
           if ((state.status == DocumentDetailStatus.success ||
                   state.status == DocumentDetailStatus.submitting) &&
               state.data != null) {
@@ -400,7 +401,12 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                         }
 
                         if (state.status == DeleteDocumentStatus.success) {
-                          Navigator.of(context).pop();
+                          if (context.mounted) {
+                            Future.microtask(() {
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                            });
+                          }
                         }
                       },
                       child: Container(

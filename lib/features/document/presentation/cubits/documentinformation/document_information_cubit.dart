@@ -30,13 +30,22 @@ class DocumentInformationCubit extends Cubit<DocumentInformationState> {
     final data = await _useCase.call(NoParams());
 
     return data.fold(
-        (l) => emit(state.copyWith(
-              status: DocumentInformationStatus.error,
-              error: ErrorObject.mapFailureToErrorObject(l),
-            )),
-        (r) => emit(state.copyWith(
-              status: DocumentInformationStatus.success,
-              data: r,
-            )));
+      (l) {
+        if (!isClosed) {
+          emit(state.copyWith(
+            status: DocumentInformationStatus.error,
+            error: ErrorObject.mapFailureToErrorObject(l),
+          ));
+        }
+      },
+      (r) {
+        if (!isClosed) {
+          emit(state.copyWith(
+            status: DocumentInformationStatus.success,
+            data: r,
+          ));
+        }
+      },
+    );
   }
 }
