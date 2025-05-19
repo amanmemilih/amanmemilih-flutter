@@ -54,25 +54,34 @@ class _CameraScreenState extends State<CameraScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          IconButton(
-                            onPressed: cubit.toggleFlash,
-                            icon: Icon(
-                              state.isFlashOn
-                                  ? Icons.flash_on
-                                  : Icons.flash_off,
-                              color: Colors.white,
-                              size: size.width * 0.08,
+                          Semantics(
+                            identifier: "toggle_flash_button",
+                            child: IconButton(
+                              onPressed: cubit.toggleFlash,
+                              icon: Icon(
+                                state.isFlashOn
+                                    ? Icons.flash_on
+                                    : Icons.flash_off,
+                                color: Colors.white,
+                                size: size.width * 0.08,
+                              ),
                             ),
                           ),
-                          IconButton(
-                            onPressed: cubit.takePicture,
-                            icon: Icon(Icons.circle,
-                                size: size.width * 0.15, color: Colors.white),
+                          Semantics(
+                            identifier: "take_picture_button",
+                            child: IconButton(
+                              onPressed: cubit.takePicture,
+                              icon: Icon(Icons.circle,
+                                  size: size.width * 0.15, color: Colors.white),
+                            ),
                           ),
-                          IconButton(
-                            onPressed: () => cubit.navigateToEditor(context),
-                            icon: Icon(Icons.photo_library,
-                                color: Colors.white, size: size.width * 0.08),
+                          Semantics(
+                            identifier: "open_gallery_button",
+                            child: IconButton(
+                              onPressed: () => cubit.navigateToEditor(context),
+                              icon: Icon(Icons.photo_library,
+                                  color: Colors.white, size: size.width * 0.08),
+                            ),
                           ),
                         ],
                       ),
@@ -85,13 +94,16 @@ class _CameraScreenState extends State<CameraScreen> {
                             return Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: size.width * 0.01),
-                              child: GestureDetector(
-                                onTap: () => cubit.navigateToEditor(context),
-                                child: Image.file(
-                                  state.capturedImages[index],
-                                  width: size.width * 0.15,
-                                  height: size.width * 0.15,
-                                  fit: BoxFit.cover,
+                              child: Semantics(
+                                identifier: "thumbnail_image_$index",
+                                child: GestureDetector(
+                                  onTap: () => cubit.navigateToEditor(context),
+                                  child: Image.file(
+                                    state.capturedImages[index],
+                                    width: size.width * 0.15,
+                                    height: size.width * 0.15,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             );

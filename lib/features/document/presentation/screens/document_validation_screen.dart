@@ -163,43 +163,48 @@ class DocumentValidationScreenImplement extends StatelessWidget {
                                                           SizedBox(
                                                             height: 12,
                                                           ),
-                                                          TextFormField(
-                                                            decoration: InputDecoration(
-                                                                enabledBorder: OutlineInputBorder(
-                                                                    borderSide: BorderSide(
-                                                                        color: Colors
-                                                                            .grey,
-                                                                        width:
-                                                                            1),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(Radius.circular(
-                                                                            20))),
-                                                                focusedBorder: OutlineInputBorder(
-                                                                    borderSide: BorderSide(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        width:
-                                                                            1),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(Radius.circular(
-                                                                            20))),
-                                                                labelText:
-                                                                    "jumlah suara"),
-                                                            controller: state
-                                                                    .voteControllers[
-                                                                e.key],
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .number,
-                                                            inputFormatters: <TextInputFormatter>[
-                                                              // for below version 2 use this
-                                                              FilteringTextInputFormatter
-                                                                  .allow(RegExp(
-                                                                      r'[0-9]')),
-                                                              // for version 2 and greater youcan also use this
-                                                              FilteringTextInputFormatter
-                                                                  .digitsOnly
-                                                            ],
+                                                          Semantics(
+                                                            identifier:
+                                                                "vote_input_${e.key}",
+                                                            child:
+                                                                TextFormField(
+                                                              decoration: InputDecoration(
+                                                                  enabledBorder: OutlineInputBorder(
+                                                                      borderSide: BorderSide(
+                                                                          color: Colors
+                                                                              .grey,
+                                                                          width:
+                                                                              1),
+                                                                      borderRadius: BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              20))),
+                                                                  focusedBorder: OutlineInputBorder(
+                                                                      borderSide: BorderSide(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          width:
+                                                                              1),
+                                                                      borderRadius:
+                                                                          BorderRadius.all(Radius.circular(
+                                                                              20))),
+                                                                  labelText:
+                                                                      "jumlah suara"),
+                                                              controller: state
+                                                                      .voteControllers[
+                                                                  e.key],
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .number,
+                                                              inputFormatters: <TextInputFormatter>[
+                                                                // for below version 2 use this
+                                                                FilteringTextInputFormatter
+                                                                    .allow(RegExp(
+                                                                        r'[0-9]')),
+                                                                // for version 2 and greater youcan also use this
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
+                                                            ),
                                                           ),
                                                         ],
                                                       ),

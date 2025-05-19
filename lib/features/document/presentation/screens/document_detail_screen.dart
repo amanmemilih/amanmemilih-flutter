@@ -279,10 +279,25 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                                         color: Colors.grey[200],
                                         width: double.infinity,
                                         height: 200,
-                                        child: const Center(
-                                          child: Text(
-                                            'Gambar tidak tersedia',
-                                            style: TextStyle(color: Colors.red),
+                                        child: Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'Gambar tidak tersedia',
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                              SizedBox(height: 8),
+                                              Text(
+                                                error.toString(),
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 12),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       );

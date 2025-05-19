@@ -25,6 +25,8 @@ class AMTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: Key(hint),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validator,
       controller: controller,
       keyboardType:

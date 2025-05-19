@@ -53,20 +53,23 @@ class AMBottomNavigationBarState extends State<AMBottomNavigationBar> {
           child: Scaffold(
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: FloatingActionButton(
-              shape: const CircleBorder(),
-              elevation: 0,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CameraScreen(camera: cameras.first),
-                  ),
-                );
-              },
-              child: SvgPicture.asset(
-                "assets/svg/scan.svg",
-                height: 30,
+            floatingActionButton: Semantics(
+              identifier: "navbar_scan_button",
+              child: FloatingActionButton(
+                shape: const CircleBorder(),
+                elevation: 0,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CameraScreen(camera: cameras.first),
+                    ),
+                  );
+                },
+                child: SvgPicture.asset(
+                  "assets/svg/scan.svg",
+                  height: 30,
+                ),
               ),
             ),
             body: BlocBuilder<NavigationCubit, int>(
@@ -89,16 +92,19 @@ class AMBottomNavigationBarState extends State<AMBottomNavigationBar> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          context.read<NavigationCubit>().changeTab(0);
-                          _listViewController.jumpToPage(0);
-                        },
-                        icon: SvgPicture.asset(
-                          state == 0
-                              ? "assets/svg/active_home.svg"
-                              : "assets/svg/home.svg",
+                      Semantics(
+                        identifier: "navbar_home_button",
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            context.read<NavigationCubit>().changeTab(0);
+                            _listViewController.jumpToPage(0);
+                          },
+                          icon: SvgPicture.asset(
+                            state == 0
+                                ? "assets/svg/active_home.svg"
+                                : "assets/svg/home.svg",
+                          ),
                         ),
                       ),
                       Text(
@@ -109,16 +115,19 @@ class AMBottomNavigationBarState extends State<AMBottomNavigationBar> {
                           color: colorPrimary,
                         ),
                       ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          context.read<NavigationCubit>().changeTab(1);
-                          _listViewController.jumpToPage(1);
-                        },
-                        icon: SvgPicture.asset(
-                          state == 1
-                              ? "assets/svg/active_provile.svg"
-                              : "assets/svg/profile.svg",
+                      Semantics(
+                        identifier: "navbar_profile_button",
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            context.read<NavigationCubit>().changeTab(1);
+                            _listViewController.jumpToPage(1);
+                          },
+                          icon: SvgPicture.asset(
+                            state == 1
+                                ? "assets/svg/active_provile.svg"
+                                : "assets/svg/profile.svg",
+                          ),
                         ),
                       ),
                     ],

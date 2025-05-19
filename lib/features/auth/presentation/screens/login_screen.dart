@@ -63,33 +63,39 @@ class LoginScreenImplement extends StatelessWidget {
                 "Silahkan login menggunakan username dan password anda sebelumnya",
               ),
               SizedBox(height: 12.h),
-              AMTextField(
-                controller: context.read<LoginCubit>().usernameController,
-                hint: "Username",
-                isPassword: false,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Field ini tidak boleh kosong!';
-                  }
-                  return null;
-                },
+              Semantics(
+                identifier: "username",
+                child: AMTextField(
+                  controller: context.read<LoginCubit>().usernameController,
+                  hint: "Username",
+                  isPassword: false,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Field ini tidak boleh kosong!';
+                    }
+                    return null;
+                  },
+                ),
               ),
               SizedBox(height: 8.h),
               BlocBuilder<LoginCubit, LoginState>(
                 builder: (context, state) {
-                  return AMTextField(
-                    controller: context.read<LoginCubit>().passwordController,
-                    hint: "Password",
-                    isPassword: true,
-                    obsecureText: state.isPasswordHidden,
-                    onPasswordHiddenTap:
-                        context.read<LoginCubit>().toggleHiddenPassword,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Field ini tidak boleh kosong!';
-                      }
-                      return null;
-                    },
+                  return Semantics(
+                    identifier: "password",
+                    child: AMTextField(
+                      controller: context.read<LoginCubit>().passwordController,
+                      hint: "Password",
+                      isPassword: true,
+                      obsecureText: state.isPasswordHidden,
+                      onPasswordHiddenTap:
+                          context.read<LoginCubit>().toggleHiddenPassword,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Field ini tidak boleh kosong!';
+                        }
+                        return null;
+                      },
+                    ),
                   );
                 },
               ),
