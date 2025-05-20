@@ -64,78 +64,90 @@ class DashboardScreenImplement extends StatelessWidget {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Belum Unggah",
-                                  style: GoogleFonts.plusJakartaSans(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    color: const Color(0xff5E5F60),
+                            Semantics(
+                              identifier: "info_not_uploaded_document",
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Belum Unggah",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      color: const Color(0xff5E5F60),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "${state.data?.notUploaded.preventNull()} Dokumen",
-                                  style: GoogleFonts.plusJakartaSans(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    color: const Color(0xff3F3F3F),
-                                  ),
-                                )
-                              ],
+                                  Text(
+                                    "${state.data?.notUploaded.preventNull()} Dokumen",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      color: const Color(0xff3F3F3F),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Terunggah",
-                                  style: GoogleFonts.plusJakartaSans(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    color: const Color(0xff5E5F60),
+                            Semantics(
+                              identifier: "info_uploaded_document",
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Terunggah",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      color: const Color(0xff5E5F60),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "${state.data?.uploaded.preventNull()} Dokumen",
-                                  style: GoogleFonts.plusJakartaSans(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    color: colorYellow,
+                                  Text(
+                                    "${state.data?.uploaded.preventNull()} Dokumen",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      color: colorYellow,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Terverifikasi",
-                                  style: GoogleFonts.plusJakartaSans(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    color: const Color(0xff5E5F60),
+                            Semantics(
+                              identifier: "info_verified_document",
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Terverifikasi",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      color: const Color(0xff5E5F60),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "${state.data?.verified.preventNull()} Dokumen",
-                                  style: GoogleFonts.plusJakartaSans(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    color: colorGreen,
-                                  ),
-                                )
-                              ],
+                                  Text(
+                                    "${state.data?.verified.preventNull()} Dokumen",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      color: colorGreen,
+                                    ),
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         );
                       },
                     ),
               SizedBox(height: 15.h),
-              AMOutlinedButton(
-                title: "Detail",
-                onTap: () =>
-                    Navigator.pushNamed(context, ROUTER.documentInformation),
+              Semantics(
+                identifier: "button_detail_document",
+                child: AMOutlinedButton(
+                  title: "Detail",
+                  onTap: () =>
+                      Navigator.pushNamed(context, ROUTER.documentInformation),
+                ),
               )
             ],
           ),
@@ -177,26 +189,29 @@ class DashboardScreenImplement extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       color: const Color(0xffFFF5E6),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "TPS",
-                          style: GoogleFonts.plusJakartaSans(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            color: const Color(0xff3A3A3A),
+                    child: Semantics(
+                      identifier: "info_tps_number",
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "TPS",
+                            style: GoogleFonts.plusJakartaSans(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              color: const Color(0xff3A3A3A),
+                            ),
                           ),
-                        ),
-                        Text(
-                          "12",
-                          style: GoogleFonts.plusJakartaSans(
-                            fontWeight: FontWeight.w700,
-                            color: colorPrimary,
-                            fontSize: 41,
+                          Text(
+                            "12",
+                            style: GoogleFonts.plusJakartaSans(
+                              fontWeight: FontWeight.w700,
+                              color: colorPrimary,
+                              fontSize: 41,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Column(
@@ -211,26 +226,29 @@ class DashboardScreenImplement extends StatelessWidget {
                             color: colorPrimary.withAlpha(13),
                           ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Kecamatan",
-                              style: GoogleFonts.plusJakartaSans(
-                                color: const Color(0xff3A3A3A),
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
+                        child: Semantics(
+                          identifier: "info_subdistrict",
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Kecamatan",
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: const Color(0xff3A3A3A),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                ),
                               ),
-                            ),
-                            Text(
-                              state.credential?.user?.subdistrict ?? '',
-                              style: GoogleFonts.plusJakartaSans(
-                                color: colorPrimary,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
+                              Text(
+                                state.credential?.user?.subdistrict ?? '',
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: colorPrimary,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: 10.h),
@@ -244,26 +262,29 @@ class DashboardScreenImplement extends StatelessWidget {
                             color: colorPrimary.withAlpha(13),
                           ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Kabupaten/Kota",
-                              style: GoogleFonts.plusJakartaSans(
-                                color: const Color(0xff3A3A3A),
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
+                        child: Semantics(
+                          identifier: "info_district",
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Kabupaten/Kota",
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: const Color(0xff3A3A3A),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                ),
                               ),
-                            ),
-                            Text(
-                              state.credential?.user?.district ?? '',
-                              style: GoogleFonts.plusJakartaSans(
-                                color: colorPrimary,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
+                              Text(
+                                state.credential?.user?.district ?? '',
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: colorPrimary,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       )
                     ],
@@ -281,26 +302,29 @@ class DashboardScreenImplement extends StatelessWidget {
                     color: colorPrimary.withAlpha(13),
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Provinsi",
-                      style: GoogleFonts.plusJakartaSans(
-                        color: const Color(0xff3A3A3A),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12,
+                child: Semantics(
+                  identifier: "info_province",
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Provinsi",
+                        style: GoogleFonts.plusJakartaSans(
+                          color: const Color(0xff3A3A3A),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                    Text(
-                      state.credential?.user?.province ?? '',
-                      style: GoogleFonts.plusJakartaSans(
-                        color: colorPrimary,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
+                      Text(
+                        state.credential?.user?.province ?? '',
+                        style: GoogleFonts.plusJakartaSans(
+                          color: colorPrimary,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20.w),
@@ -330,43 +354,46 @@ class DashboardScreenImplement extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.fromLTRB(24, 34.h, 24, 24.h),
-            child: RefreshIndicator(
-              onRefresh: () async {
-                context.read<DashboardCubit>().getData();
-              },
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Halo,",
-                        style: GoogleFonts.plusJakartaSans(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
+            child: Semantics(
+              identifier: "refresh_dashboard",
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  context.read<DashboardCubit>().getData();
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Halo,",
+                          style: GoogleFonts.plusJakartaSans(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                      BlocBuilder<AuthCubit, AuthState>(
-                        builder: (context, state) {
-                          return Text(
-                            state.credential?.user?.username ?? '',
-                            style: GoogleFonts.plusJakartaSans(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(height: 10.h),
-                      _cardInformationDocument(context),
-                      SizedBox(height: 10.h),
-                      _cardInformationTPS(context),
-                    ],
+                        BlocBuilder<AuthCubit, AuthState>(
+                          builder: (context, state) {
+                            return Text(
+                              state.credential?.user?.username ?? '',
+                              style: GoogleFonts.plusJakartaSans(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                              ),
+                            );
+                          },
+                        ),
+                        SizedBox(height: 10.h),
+                        _cardInformationDocument(context),
+                        SizedBox(height: 10.h),
+                        _cardInformationTPS(context),
+                      ],
+                    ),
                   ),
                 ),
               ),

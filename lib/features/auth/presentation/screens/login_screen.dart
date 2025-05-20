@@ -114,9 +114,8 @@ class LoginScreenImplement extends StatelessWidget {
                           context,
                           () {},
                           title: state.error?.title ?? 'Unknown Error',
-                          message: // later
-                              state.error?.message ??
-                                  'Error Message Not Assigned',
+                          message: state.error?.message ??
+                              'Error Message Not Assigned',
                         );
                         break;
                       case UserNotRegisteredFailure():
@@ -165,25 +164,31 @@ class LoginScreenImplement extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 28),
-                                    AMElevatedButton(
-                                      title: "Lanjut",
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed(
-                                          ROUTER.registerPassword,
-                                          arguments: context
-                                              .read<LoginCubit>()
-                                              .usernameController
-                                              .text,
-                                        );
-                                      },
+                                    Semantics(
+                                      identifier: "button_continue_register",
+                                      child: AMElevatedButton(
+                                        title: "Lanjut",
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pushReplacementNamed(
+                                            ROUTER.registerPassword,
+                                            arguments: context
+                                                .read<LoginCubit>()
+                                                .usernameController
+                                                .text,
+                                          );
+                                        },
+                                      ),
                                     ),
                                     const SizedBox(height: 16),
-                                    AMOutlinedButton(
-                                      title: "Batalkan",
-                                      onTap: () {
-                                        Navigator.of(context).pop();
-                                      },
+                                    Semantics(
+                                      identifier: "button_cancel_register",
+                                      child: AMOutlinedButton(
+                                        title: "Batalkan",
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -197,44 +202,49 @@ class LoginScreenImplement extends StatelessWidget {
                           context,
                           () {},
                           title: state.error?.title ?? 'Unknown Error',
-                          message: // later
-                              state.error?.message ??
-                                  'Error Message Not Assigned',
+                          message: state.error?.message ??
+                              'Error Message Not Assigned',
                         );
                     }
                   }
                 },
                 builder: (context, state) {
-                  return AMElevatedButton(
-                    title: "Masuk",
-                    isLoading: state.status == AuthStatus.loading,
-                    onTap: () {
-                      if (context
-                          .read<LoginCubit>()
-                          .formKey
-                          .currentState!
-                          .validate()) {
-                        context.read<AuthCubit>().login(
-                              context
-                                  .read<LoginCubit>()
-                                  .usernameController
-                                  .text,
-                              context
-                                  .read<LoginCubit>()
-                                  .passwordController
-                                  .text,
-                            );
-                      }
-                    },
+                  return Semantics(
+                    identifier: "button_login",
+                    child: AMElevatedButton(
+                      title: "Masuk",
+                      isLoading: state.status == AuthStatus.loading,
+                      onTap: () {
+                        if (context
+                            .read<LoginCubit>()
+                            .formKey
+                            .currentState!
+                            .validate()) {
+                          context.read<AuthCubit>().login(
+                                context
+                                    .read<LoginCubit>()
+                                    .usernameController
+                                    .text,
+                                context
+                                    .read<LoginCubit>()
+                                    .passwordController
+                                    .text,
+                              );
+                        }
+                      },
+                    ),
                   );
                 },
               ),
               SizedBox(height: 10.h),
-              AMTextButton(
-                onTap: () {
-                  Navigator.of(context).pushNamed(ROUTER.forgotPassword);
-                },
-                title: "Lupa Password?",
+              Semantics(
+                identifier: "button_forgot_password",
+                child: AMTextButton(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(ROUTER.forgotPassword);
+                  },
+                  title: "Lupa Password?",
+                ),
               )
             ],
           ),

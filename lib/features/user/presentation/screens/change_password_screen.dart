@@ -96,27 +96,36 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              AMTextField(
-                controller: passwordController,
-                hint: "Password Baru",
-                isPassword: true,
+              Semantics(
+                identifier: "input_new_password",
+                child: AMTextField(
+                  controller: passwordController,
+                  hint: "Password Baru",
+                  isPassword: true,
+                ),
               ),
               const SizedBox(
                 height: 16,
               ),
-              AMTextField(
-                controller: confirmPasswordController,
-                hint: "Konfirmasi Password Baru",
-                isPassword: true,
+              Semantics(
+                identifier: "input_confirm_new_password",
+                child: AMTextField(
+                  controller: confirmPasswordController,
+                  hint: "Konfirmasi Password Baru",
+                  isPassword: true,
+                ),
               ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        child: AMElevatedButton(
-          title: "Konfirmasi",
-          onTap: changePassword,
+        child: Semantics(
+          identifier: "button_confirm_change_password",
+          child: AMElevatedButton(
+            title: "Konfirmasi",
+            onTap: changePassword,
+          ),
         ),
       ),
     );

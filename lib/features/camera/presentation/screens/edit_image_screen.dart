@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_cropper/image_cropper.dart';
+
+import '../../../../core/router/router.dart';
 import '../cubits/crop_image_cubit.dart';
 import '../cubits/brightness_edit_cubit.dart';
+import '../cubits/contrast_edit_cubit.dart';
 import 'brightness_edit_screen.dart';
 import 'contrast_edit_screen.dart';
 import 'sharpness_edit_screen.dart';
@@ -19,15 +21,8 @@ class EditImageScreen extends StatefulWidget {
 
 class EditImageScreenState extends State<EditImageScreen> {
   int _currentIndex = 0; // Index gambar yang sedang ditampilkan
-  int _selectedToolIndex = -1; // -1 berarti tidak ada alat yang dipilih
-
-  // List alat yang tersedia
-  final List<Map<String, dynamic>> _tools = [
-    {'label': 'Pangkas', 'icon': Icons.crop},
-    {'label': 'Pencahayaan', 'icon': Icons.brightness_6},
-    {'label': 'Kontras', 'icon': Icons.contrast},
-    {'label': 'Ketajaman', 'icon': Icons.shutter_speed},
-  ];
+  final bool _showControls = false;
+  File? _previewFile;
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +50,17 @@ class EditImageScreenState extends State<EditImageScreen> {
           title: const Text('Edit Foto'),
           backgroundColor: Colors.redAccent,
           actions: [
-            Builder(
-              builder: (context) => IconButton(
-                onPressed: () => _saveEdits(context),
+            Semantics(
+              identifier: "button_save_edit",
+              child: IconButton(
                 icon: const Icon(Icons.check),
+                onPressed: _previewFile == null
+                    ? null
+                    : () {
+                        if (_previewFile != null) {
+                          Navigator.pop(context, _previewFile!.path);
+                        }
+                      },
               ),
             ),
           ],
@@ -99,106 +101,70 @@ class EditImageScreenState extends State<EditImageScreen> {
                   ],
                 ),
               ),
-              Container(
-                color: Colors.grey[900],
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(bottom: 100.w, top: 20.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          imagePaths.length,
-                          (index) => Container(
-                            width: 8.0,
-                            height: 8.0,
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 4.0, vertical: 2.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: _currentIndex == index
-                                  ? Colors.redAccent
-                                  : Colors.white70,
+              if (_showControls)
+                Container(
+                  color: Colors.black87,
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Semantics(
+                            identifier: "button_edit_brightness",
+                            child: _buildEditButton(
+                              icon: Icons.brightness_6,
+                              label: 'Brightness',
+                              onPressed: () => _navigateToEditScreen(
+                                  ROUTER.brightnessEditScreen),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: _tools.asMap().entries.map((entry) {
-                          final tool = entry.value;
-                          final toolIndex = entry.key;
-                          final isSelected = _selectedToolIndex == toolIndex;
-                          return Expanded(
-                            child: GestureDetector(
-                              onTap: () async {
-                                setState(() {
-                                  _selectedToolIndex = toolIndex;
-                                });
-                                if (tool['label'] == 'Pangkas') {
-                                  final croppedFile =
-                                      await ImageCropper().cropImage(
-                                    sourcePath: imagePaths[_currentIndex],
-                                    aspectRatio: const CropAspectRatio(
-                                        ratioX: 1, ratioY: 1),
-                                    uiSettings: [
-                                      AndroidUiSettings(
-                                        toolbarTitle: 'Crop Image',
-                                        toolbarColor: Colors.redAccent,
-                                        toolbarWidgetColor: Colors.white,
-                                        initAspectRatio:
-                                            CropAspectRatioPreset.original,
-                                        lockAspectRatio: false,
-                                      ),
-                                      IOSUiSettings(
-                                        title: 'Crop Image',
-                                      ),
-                                    ],
-                                  );
-                                  if (croppedFile != null) {
-                                    if (!mounted) return;
-                                    context
-                                        .read<CropImageCubit>()
-                                        .setCroppedImage(
-                                            File(croppedFile.path));
-                                  }
-                                } else {
-                                  _navigateToTool(toolIndex, imagePaths);
-                                }
-                              },
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    tool['icon'],
-                                    color: isSelected
-                                        ? Colors.redAccent
-                                        : Colors.white,
-                                  ),
-                                  SizedBox(height: 6.w),
-                                  Text(
-                                    tool['label'],
-                                    style: TextStyle(
-                                      color: isSelected
-                                          ? Colors.redAccent
-                                          : Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          Semantics(
+                            identifier: "button_edit_contrast",
+                            child: _buildEditButton(
+                              icon: Icons.contrast,
+                              label: 'Contrast',
+                              onPressed: () => _navigateToEditScreen(
+                                  ROUTER.contrastEditScreen),
                             ),
-                          );
-                        }).toList(),
+                          ),
+                          Semantics(
+                            identifier: "button_edit_sharpness",
+                            child: _buildEditButton(
+                              icon: Icons.blur_on,
+                              label: 'Sharpness',
+                              onPressed: () => _navigateToEditScreen(
+                                  ROUTER.sharpnessEditScreen),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(height: 70.w),
-                  ],
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Semantics(
+                            identifier: "button_rotate_left",
+                            child: _buildEditButton(
+                              icon: Icons.rotate_left,
+                              label: 'Rotate Left',
+                              onPressed: () => _rotateImage(-90),
+                            ),
+                          ),
+                          Semantics(
+                            identifier: "button_rotate_right",
+                            child: _buildEditButton(
+                              icon: Icons.rotate_right,
+                              label: 'Rotate Right',
+                              onPressed: () => _rotateImage(90),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ),
@@ -206,74 +172,69 @@ class EditImageScreenState extends State<EditImageScreen> {
     );
   }
 
-  // Navigasi ke halaman fitur tertentu
-  void _navigateToTool(int toolIndex, List<String> imagePaths) async {
-    final selectedImagePath = imagePaths.isNotEmpty
-        ? imagePaths[_currentIndex.clamp(0, imagePaths.length - 1)]
-        : null;
+  // Fungsi untuk menyimpan hasil edit
 
-    if (selectedImagePath == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Tidak ada gambar untuk diedit')),
-      );
-      return;
-    }
+  Widget _buildEditButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onPressed,
+  }) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon),
+      label: Text(label),
+    );
+  }
 
+  void _rotateImage(int degrees) {
+    // Implementasi rotasi gambar
+  }
+
+  void _navigateToEditScreen(ROUTER screen) async {
+    final imagePaths =
+        ModalRoute.of(context)!.settings.arguments as List<String>;
+    final selectedImagePath = imagePaths[_currentIndex];
     String? editedImagePath;
-    if (_tools[toolIndex]['label'] == 'Pencahayaan') {
-      editedImagePath = await Navigator.push<String>(
-        context,
-        MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (_) => BrightnessEditCubit(),
-            child: BrightnessEditScreen(imagePath: selectedImagePath),
+
+    switch (screen) {
+      case ROUTER.brightnessEditScreen:
+        editedImagePath = await Navigator.push<String>(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (_) => BrightnessEditCubit(),
+              child: BrightnessEditScreen(imagePath: selectedImagePath),
+            ),
           ),
-        ),
-      );
-    } else if (_tools[toolIndex]['label'] == 'Kontras') {
-      editedImagePath = await Navigator.push<String>(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>
-              ContrastEditScreen(imagePath: selectedImagePath),
-        ),
-      );
-    } else if (_tools[toolIndex]['label'] == 'Ketajaman') {
-      editedImagePath = await Navigator.push<String>(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>
-              SharpnessEditScreen(imagePath: selectedImagePath),
-        ),
-      );
-    } else {
-      editedImagePath = await Navigator.push<String>(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PlaceholderScreen(
-            title: _tools[toolIndex]['label'],
-            imagePath: selectedImagePath,
+        );
+        break;
+      case ROUTER.contrastEditScreen:
+        editedImagePath = await Navigator.push<String>(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (_) => ContrastEditCubit(),
+              child: ContrastEditScreen(imagePath: selectedImagePath),
+            ),
           ),
-        ),
-      );
+        );
+        break;
+      case ROUTER.sharpnessEditScreen:
+        editedImagePath = await Navigator.push<String>(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                SharpnessEditScreen(imagePath: selectedImagePath),
+          ),
+        );
+        break;
     }
 
     if (editedImagePath != null) {
       setState(() {
-        imagePaths[_currentIndex] = editedImagePath!; // Update hasil edit
+        imagePaths[_currentIndex] = editedImagePath!;
       });
     }
-  }
-
-  // Fungsi untuk menyimpan hasil edit
-  void _saveEdits(BuildContext context) {
-    // Contoh: akses cubit jika perlu
-    // final cubit = context.read<CropImageCubit>();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Gambar berhasil disimpan ke'),
-      ),
-    );
   }
 }
 

@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'dart:async';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubits/contrast_edit_cubit.dart';
 
 class ContrastEditScreen extends StatefulWidget {
   final String imagePath;
@@ -53,15 +55,21 @@ class _ContrastEditScreenState extends State<ContrastEditScreen> {
         title: const Text('Atur Kontras'),
         backgroundColor: Colors.redAccent,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: _isProcessing
-                ? null
-                : () {
-                    if (_previewFile != null) {
-                      Navigator.pop(context, _previewFile!.path);
-                    }
-                  },
+          Semantics(
+            identifier: "button_save_contrast",
+            child: IconButton(
+              icon: const Icon(Icons.check),
+              onPressed: _isProcessing
+                  ? null
+                  : () {
+                      if (_previewFile != null) {
+                        context
+                            .read<ContrastEditCubit>()
+                            .setContrastImage(_previewFile!);
+                        Navigator.pop(context, _previewFile!.path);
+                      }
+                    },
+            ),
           ),
         ],
       ),
@@ -70,8 +78,11 @@ class _ContrastEditScreenState extends State<ContrastEditScreen> {
           children: [
             Expanded(
               child: _previewFile != null
-                  ? Image.file(_previewFile!,
-                      fit: BoxFit.contain, width: double.infinity)
+                  ? Semantics(
+                      identifier: "preview_contrast_image",
+                      child: Image.file(_previewFile!,
+                          fit: BoxFit.contain, width: double.infinity),
+                    )
                   : const Center(child: Text('Gambar tidak dapat dimuat')),
             ),
             if (_isProcessing) const LinearProgressIndicator(),
@@ -79,21 +90,25 @@ class _ContrastEditScreenState extends State<ContrastEditScreen> {
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 children: [
-                  const Text('Kontras', style: TextStyle(color: Colors.white)),
-                  Slider(
-                    value: _contrast,
-                    min: -1.0,
-                    max: 1.0,
-                    divisions: 20,
-                    label: _contrast.toStringAsFixed(2),
-                    onChanged: (value) {
-                      setState(() => _contrast = value);
-                      _debounce?.cancel();
-                      _debounce = Timer(const Duration(milliseconds: 300), () {
-                        _applyContrast(value);
-                      });
-                    },
+                  Semantics(
+                    identifier: "slider_contrast",
+                    child: Slider(
+                      value: _contrast,
+                      min: -1.0,
+                      max: 1.0,
+                      divisions: 20,
+                      label: _contrast.toStringAsFixed(2),
+                      onChanged: (value) {
+                        setState(() => _contrast = value);
+                        _debounce?.cancel();
+                        _debounce =
+                            Timer(const Duration(milliseconds: 300), () {
+                          _applyContrast(value);
+                        });
+                      },
+                    ),
                   ),
+                  const Text('Kontras', style: TextStyle(color: Colors.white)),
                 ],
               ),
             ),

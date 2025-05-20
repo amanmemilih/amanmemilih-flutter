@@ -55,18 +55,21 @@ class _BrightnessEditScreenState extends State<BrightnessEditScreen> {
         title: const Text('Atur Pencahayaan'),
         backgroundColor: Colors.redAccent,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: _isProcessing
-                ? null
-                : () {
-                    if (_previewFile != null) {
-                      context
-                          .read<BrightnessEditCubit>()
-                          .setBrightnessImage(_previewFile!);
-                      Navigator.pop(context, _previewFile!.path);
-                    }
-                  },
+          Semantics(
+            identifier: "button_save_brightness",
+            child: IconButton(
+              icon: const Icon(Icons.check),
+              onPressed: _isProcessing
+                  ? null
+                  : () {
+                      if (_previewFile != null) {
+                        context
+                            .read<BrightnessEditCubit>()
+                            .setBrightnessImage(_previewFile!);
+                        Navigator.pop(context, _previewFile!.path);
+                      }
+                    },
+            ),
           ),
         ],
       ),
@@ -83,8 +86,10 @@ class _BrightnessEditScreenState extends State<BrightnessEditScreen> {
             children: [
               Expanded(
                 child: _previewFile != null
-                    ? Image.file(_previewFile!,
-                        fit: BoxFit.contain, width: double.infinity)
+                    ? Semantics(
+                        identifier: "preview_brightness_image",
+                        child: Image.file(_previewFile!,
+                            fit: BoxFit.contain, width: double.infinity))
                     : const Center(child: Text('Gambar tidak dapat dimuat')),
               ),
               if (_isProcessing) const LinearProgressIndicator(),
@@ -92,23 +97,26 @@ class _BrightnessEditScreenState extends State<BrightnessEditScreen> {
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   children: [
-                    const Text('Pencahayaan',
-                        style: TextStyle(color: Colors.white)),
-                    Slider(
-                      value: _brightness,
-                      min: -1.0,
-                      max: 1.0,
-                      divisions: 20,
-                      label: _brightness.toStringAsFixed(2),
-                      onChanged: (value) {
-                        setState(() => _brightness = value);
-                        _debounce?.cancel();
-                        _debounce =
-                            Timer(const Duration(milliseconds: 300), () {
-                          _applyBrightness(value);
-                        });
-                      },
+                    Semantics(
+                      identifier: "slider_brightness",
+                      child: Slider(
+                        value: _brightness,
+                        min: -1.0,
+                        max: 1.0,
+                        divisions: 20,
+                        label: _brightness.toStringAsFixed(2),
+                        onChanged: (value) {
+                          setState(() => _brightness = value);
+                          _debounce?.cancel();
+                          _debounce =
+                              Timer(const Duration(milliseconds: 300), () {
+                            _applyBrightness(value);
+                          });
+                        },
+                      ),
                     ),
+                    const Text('Brightness',
+                        style: TextStyle(color: Colors.white)),
                   ],
                 ),
               ),

@@ -63,66 +63,75 @@ class RegisterPasswordScreenImplement extends StatelessWidget {
                     "Tambahkan password agar anda bisa mengakses fitur pada AmanMemilih",
                   ),
                   SizedBox(height: 12.h),
-                  AMTextField(
-                    controller: context
-                        .read<RegisterPasswordCubit>()
-                        .passwordController,
-                    hint: "Password",
-                    isPassword: true,
-                    onPasswordHiddenTap: context
-                        .read<RegisterPasswordCubit>()
-                        .toggleHiddenPassword,
-                    obsecureText: state.isPasswordHidden,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Field ini tidak boleh kosong!';
-                      }
-                      return null;
-                    },
+                  Semantics(
+                    identifier: "input_password",
+                    child: AMTextField(
+                      controller: context
+                          .read<RegisterPasswordCubit>()
+                          .passwordController,
+                      hint: "Password",
+                      isPassword: true,
+                      onPasswordHiddenTap: context
+                          .read<RegisterPasswordCubit>()
+                          .toggleHiddenPassword,
+                      obsecureText: state.isPasswordHidden,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Field ini tidak boleh kosong!';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   SizedBox(height: 8.h),
-                  AMTextField(
-                    controller: context
-                        .read<RegisterPasswordCubit>()
-                        .passwordConfirmationController,
-                    hint: "Konfirmasi Password",
-                    isPassword: true,
-                    onPasswordHiddenTap: context
-                        .read<RegisterPasswordCubit>()
-                        .toggleHiddenPasswordConfirmation,
-                    obsecureText: state.isPasswordConfirmationHidden,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Field ini tidak boleh kosong!';
-                      }
-                      return null;
-                    },
+                  Semantics(
+                    identifier: "input_confirm_password",
+                    child: AMTextField(
+                      controller: context
+                          .read<RegisterPasswordCubit>()
+                          .passwordConfirmationController,
+                      hint: "Konfirmasi Password",
+                      isPassword: true,
+                      onPasswordHiddenTap: context
+                          .read<RegisterPasswordCubit>()
+                          .toggleHiddenPasswordConfirmation,
+                      obsecureText: state.isPasswordConfirmationHidden,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Field ini tidak boleh kosong!';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   SizedBox(height: 16.h),
-                  AMElevatedButton(
-                    title: "Lanjut",
-                    onTap: () {
-                      if (context
-                          .read<RegisterPasswordCubit>()
-                          .formKey
-                          .currentState!
-                          .validate()) {
-                        Navigator.of(context).pushNamed(
-                          ROUTER.generateRecoveryKey,
-                          arguments: GenerateRecoveryKeyArgs(
-                            username: username,
-                            password: context
-                                .read<RegisterPasswordCubit>()
-                                .passwordController
-                                .text,
-                            passwordConfirmation: context
-                                .read<RegisterPasswordCubit>()
-                                .passwordConfirmationController
-                                .text,
-                          ),
-                        );
-                      }
-                    },
+                  Semantics(
+                    identifier: "button_continue",
+                    child: AMElevatedButton(
+                      title: "Lanjut",
+                      onTap: () {
+                        if (context
+                            .read<RegisterPasswordCubit>()
+                            .formKey
+                            .currentState!
+                            .validate()) {
+                          Navigator.of(context).pushNamed(
+                            ROUTER.generateRecoveryKey,
+                            arguments: GenerateRecoveryKeyArgs(
+                              username: username,
+                              password: context
+                                  .read<RegisterPasswordCubit>()
+                                  .passwordController
+                                  .text,
+                              passwordConfirmation: context
+                                  .read<RegisterPasswordCubit>()
+                                  .passwordConfirmationController
+                                  .text,
+                            ),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ],
               );

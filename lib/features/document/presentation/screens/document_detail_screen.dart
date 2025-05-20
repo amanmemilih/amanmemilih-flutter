@@ -439,8 +439,10 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                         if (state.status == DeleteDocumentStatus.success) {
                           if (context.mounted) {
                             Future.microtask(() {
-                              Navigator.of(context)
-                                  .popUntil((route) => route.isFirst);
+                              if (context.mounted) {
+                                Navigator.of(context)
+                                    .popUntil((route) => route.isFirst);
+                              }
                             });
                           }
                         }

@@ -113,24 +113,27 @@ class ForgotPasswordImplement extends StatelessWidget {
                     "Simpan kode ini ditempat yang aman, dan hanya anda yang bisa mengaksesnya.",
                   ),
                   SizedBox(height: 10.h),
-                  TouchableOpacityWidget(
-                    onTap: () {
-                      context.read<ForgotPasswordCubit>().toggleHiddenKey();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(width: 3.w),
-                        Text(
-                          !state.isKeyHidden ? "Sembunyikan" : "Perlihatkan",
-                          style: GoogleFonts.plusJakartaSans(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: BaseColors.primary,
+                  Semantics(
+                    identifier: "button_toggle_key_visibility",
+                    child: TouchableOpacityWidget(
+                      onTap: () {
+                        context.read<ForgotPasswordCubit>().toggleHiddenKey();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(width: 3.w),
+                          Text(
+                            !state.isKeyHidden ? "Sembunyikan" : "Perlihatkan",
+                            style: GoogleFonts.plusJakartaSans(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: BaseColors.primary,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 10.h),
@@ -156,12 +159,15 @@ class ForgotPasswordImplement extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(color: BaseColors.primary),
                               ),
-                              child: TextField(
-                                controller: controllers[index],
-                                obscureText: state.isKeyHidden,
-                                textAlign: TextAlign.center,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
+                              child: Semantics(
+                                identifier: "input_recovery_key_${index + 1}",
+                                child: TextField(
+                                  controller: controllers[index],
+                                  obscureText: state.isKeyHidden,
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                  ),
                                 ),
                               ),
                             );
@@ -175,57 +181,66 @@ class ForgotPasswordImplement extends StatelessWidget {
                     key: context.read<ForgotPasswordCubit>().formKey,
                     child: Column(
                       children: [
-                        AMTextField(
-                          controller: context
-                              .read<ForgotPasswordCubit>()
-                              .passwordController,
-                          hint: "Password",
-                          isPassword: true,
-                          obsecureText: !state.isPasswordHidden,
-                          onPasswordHiddenTap: context
-                              .read<ForgotPasswordCubit>()
-                              .toggleHiddenPassword,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Field ini tidak boleh kosong!';
-                            }
-                            return null;
-                          },
+                        Semantics(
+                          identifier: "input_new_password",
+                          child: AMTextField(
+                            controller: context
+                                .read<ForgotPasswordCubit>()
+                                .passwordController,
+                            hint: "Password",
+                            isPassword: true,
+                            obsecureText: !state.isPasswordHidden,
+                            onPasswordHiddenTap: context
+                                .read<ForgotPasswordCubit>()
+                                .toggleHiddenPassword,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Field ini tidak boleh kosong!';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
                         SizedBox(height: 8.h),
-                        AMTextField(
-                          controller: context
-                              .read<ForgotPasswordCubit>()
-                              .passwordConfirmationController,
-                          hint: "Konfirmasi Password",
-                          isPassword: true,
-                          obsecureText: !state.isPasswordConfirmationHidden,
-                          onPasswordHiddenTap: context
-                              .read<ForgotPasswordCubit>()
-                              .toggleHiddenPasswordConfirmation,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Field ini tidak boleh kosong!';
-                            }
-                            return null;
-                          },
+                        Semantics(
+                          identifier: "input_confirm_new_password",
+                          child: AMTextField(
+                            controller: context
+                                .read<ForgotPasswordCubit>()
+                                .passwordConfirmationController,
+                            hint: "Konfirmasi Password",
+                            isPassword: true,
+                            obsecureText: !state.isPasswordConfirmationHidden,
+                            onPasswordHiddenTap: context
+                                .read<ForgotPasswordCubit>()
+                                .toggleHiddenPasswordConfirmation,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Field ini tidak boleh kosong!';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
                       ],
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  AMElevatedButton(
-                    title: "Reset Password",
-                    isLoading: state.status == ForgotPasswordStatus.loading,
-                    onTap: () {
-                      if (context
-                          .read<ForgotPasswordCubit>()
-                          .formKey
-                          .currentState!
-                          .validate()) {
-                        context.read<ForgotPasswordCubit>().forgotPassword();
-                      }
-                    },
+                  Semantics(
+                    identifier: "button_reset_password",
+                    child: AMElevatedButton(
+                      title: "Reset Password",
+                      isLoading: state.status == ForgotPasswordStatus.loading,
+                      onTap: () {
+                        if (context
+                            .read<ForgotPasswordCubit>()
+                            .formKey
+                            .currentState!
+                            .validate()) {
+                          context.read<ForgotPasswordCubit>().forgotPassword();
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),

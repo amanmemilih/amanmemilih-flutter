@@ -111,7 +111,11 @@ class GenerateRecoveryKeyScreenImplement extends StatelessWidget {
                                         border: Border.all(
                                             color: BaseColors.primary),
                                       ),
-                                      child: Text(e),
+                                      child: Semantics(
+                                        identifier:
+                                            "text_recovery_key_${state.recoveryKey.indexOf(e) + 1}",
+                                        child: Text(e),
+                                      ),
                                     ),
                                   )
                                   .toList(),
@@ -121,23 +125,26 @@ class GenerateRecoveryKeyScreenImplement extends StatelessWidget {
                               onTap: context
                                   .read<GenerateRecoveryKeyCubit>()
                                   .copyToClipBoard,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.copy,
-                                    color: BaseColors.primary,
-                                  ),
-                                  Text(
-                                    "Salin Teks",
-                                    style: GoogleFonts.plusJakartaSans(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w700,
+                              child: Semantics(
+                                identifier: "button_copy_recovery_key",
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.copy,
                                       color: BaseColors.primary,
                                     ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
+                                    Text(
+                                      "Salin Teks",
+                                      style: GoogleFonts.plusJakartaSans(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                        color: BaseColors.primary,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           ],
@@ -151,19 +158,22 @@ class GenerateRecoveryKeyScreenImplement extends StatelessWidget {
                           ),
                         ),
                   SizedBox(height: 16.h),
-                  AMElevatedButton(
-                      title: "Selanjutnya",
-                      onTap: () {
-                        Navigator.of(context).pushNamed(
-                          ROUTER.registerRecoveryKey,
-                          arguments: RegisterRecoveryKeyArgs(
-                            username: args.username,
-                            password: args.password,
-                            passwordConfirmation: args.passwordConfirmation,
-                            key: state.data!,
-                          ),
-                        );
-                      }),
+                  Semantics(
+                    identifier: "button_next",
+                    child: AMElevatedButton(
+                        title: "Selanjutnya",
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            ROUTER.registerRecoveryKey,
+                            arguments: RegisterRecoveryKeyArgs(
+                              username: args.username,
+                              password: args.password,
+                              passwordConfirmation: args.passwordConfirmation,
+                              key: state.data!,
+                            ),
+                          );
+                        }),
+                  ),
                   const SizedBox(height: 21)
                 ],
               ),

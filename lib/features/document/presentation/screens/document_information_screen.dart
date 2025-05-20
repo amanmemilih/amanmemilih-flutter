@@ -115,39 +115,42 @@ class DocumentInformationScreenImplement extends StatelessWidget {
   }) {
     return Container(
       margin: EdgeInsets.only(top: 5.h),
-      child: ListTile(
-        onTap: status == 'unuploaded' ? null : onTap,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: BorderSide(
-            color: Colors.black.withAlpha(20),
+      child: Semantics(
+        identifier: "button_document_$status",
+        child: ListTile(
+          onTap: status == 'unuploaded' ? null : onTap,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+            side: BorderSide(
+              color: Colors.black.withAlpha(20),
+            ),
           ),
-        ),
-        title: Text(
-          title ?? "Error",
-          style: GoogleFonts.plusJakartaSans(
-            fontWeight: FontWeight.w700,
-            fontSize: 15,
-            color: const Color(0xff3A3A3A),
+          title: Text(
+            title ?? "Error",
+            style: GoogleFonts.plusJakartaSans(
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
+              color: const Color(0xff3A3A3A),
+            ),
           ),
-        ),
-        subtitle: Text(
-          subtitle ?? "Error",
-          style: GoogleFonts.plusJakartaSans(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-            color: status == "verified"
-                ? colorGreen
-                : (status == "unverified" ? colorYellow : Colors.red),
+          subtitle: Text(
+            subtitle ?? "Error",
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: status == "verified"
+                  ? colorGreen
+                  : (status == "unverified" ? colorYellow : Colors.red),
+            ),
           ),
+          trailing: status == 'unuploaded'
+              ? null
+              : const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 17,
+                  color: BaseColors.primary,
+                ),
         ),
-        trailing: status == 'unuploaded'
-            ? null
-            : const Icon(
-                Icons.arrow_forward_ios,
-                size: 17,
-                color: BaseColors.primary,
-              ),
       ),
     );
   }

@@ -237,30 +237,32 @@ class DocumentValidationScreenImplement extends StatelessWidget {
                           ),
                           clipBehavior: Clip
                               .hardEdge, // Memastikan konten di dalam rounded corners
-                          child: CarouselSlider.builder(
-                            itemCount: imagePaths.length,
-                            itemBuilder: (context, index, realIndex) {
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    20), // ngasih rounded di gambarnya langsung
-                                child: Image.file(
-                                  File(imagePaths[index]),
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                ),
-                              );
-                            },
-                            options: CarouselOptions(
-                              height: 500,
-                              autoPlay: false,
-                              enlargeCenterPage: true,
-                              enableInfiniteScroll: false,
-                              viewportFraction: 1.0,
-                              aspectRatio: 1.0,
-                              onPageChanged: (index, reason) => context
-                                  .read<DocumentValidationCubit>()
-                                  .changeDocumentIndex(index),
+                          child: Semantics(
+                            identifier: "carousel_document_images",
+                            child: CarouselSlider.builder(
+                              itemCount: imagePaths.length,
+                              itemBuilder: (context, index, realIndex) {
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.file(
+                                    File(imagePaths[index]),
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                  ),
+                                );
+                              },
+                              options: CarouselOptions(
+                                height: 500,
+                                autoPlay: false,
+                                enlargeCenterPage: true,
+                                enableInfiniteScroll: false,
+                                viewportFraction: 1.0,
+                                aspectRatio: 1.0,
+                                onPageChanged: (index, reason) => context
+                                    .read<DocumentValidationCubit>()
+                                    .changeDocumentIndex(index),
+                              ),
                             ),
                           ),
                         )

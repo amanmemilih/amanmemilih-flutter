@@ -143,13 +143,16 @@ class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(color: BaseColors.primary),
                               ),
-                              child: TextField(
-                                readOnly: controllers[index].text != '',
-                                controller: controllers[index],
-                                obscureText: state.isKeyHidden,
-                                textAlign: TextAlign.center,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
+                              child: Semantics(
+                                identifier: "input_recovery_key_${index + 1}",
+                                child: TextField(
+                                  readOnly: controllers[index].text != '',
+                                  controller: controllers[index],
+                                  obscureText: state.isKeyHidden,
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                  ),
                                 ),
                               ),
                             );
@@ -163,44 +166,50 @@ class RegisterRecoveryKeyScreenImplement extends StatelessWidget {
                               .read<RegisterRecoveryKeyCubit>()
                               .toggleHiddenKey();
                         },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              "assets/svg/${!state.isKeyHidden ? 'eye.svg' : 'eye_close.svg'}",
-                              alignment: Alignment.centerLeft,
-                              colorFilter: ColorFilter.mode(
-                                BaseColors.primary,
-                                BlendMode.srcIn,
+                        child: Semantics(
+                          identifier: "button_toggle_key_visibility",
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                "assets/svg/${!state.isKeyHidden ? 'eye.svg' : 'eye_close.svg'}",
+                                alignment: Alignment.centerLeft,
+                                colorFilter: ColorFilter.mode(
+                                  BaseColors.primary,
+                                  BlendMode.srcIn,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 3.w),
-                            Text(
-                              !state.isKeyHidden
-                                  ? "Sembunyikan"
-                                  : "Perlihatkan",
-                              style: GoogleFonts.plusJakartaSans(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: BaseColors.primary,
+                              SizedBox(width: 3.w),
+                              Text(
+                                !state.isKeyHidden
+                                    ? "Sembunyikan"
+                                    : "Perlihatkan",
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: BaseColors.primary,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       )
                     ],
                   ),
                 ),
-                AMElevatedButton(
-                    title: "Selanjutnya",
-                    isLoading:
-                        state.status == RegisterRecoveryKeyStatus.loading,
-                    onTap: () {
-                      context
-                          .read<RegisterRecoveryKeyCubit>()
-                          .register(args.username, args.password);
-                    }),
+                Semantics(
+                  identifier: "button_next",
+                  child: AMElevatedButton(
+                      title: "Selanjutnya",
+                      isLoading:
+                          state.status == RegisterRecoveryKeyStatus.loading,
+                      onTap: () {
+                        context
+                            .read<RegisterRecoveryKeyCubit>()
+                            .register(args.username, args.password);
+                      }),
+                ),
                 const SizedBox(height: 21)
               ],
             ),

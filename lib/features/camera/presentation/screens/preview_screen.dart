@@ -68,9 +68,12 @@ class PreviewScreenState extends State<PreviewScreen> {
               ),
               backgroundColor: colorPrimary,
               actions: [
-                IconButton(
-                  icon: const Icon(Icons.fullscreen, color: Colors.white),
-                  onPressed: _toggleFullScreen,
+                Semantics(
+                  identifier: "button_toggle_fullscreen",
+                  child: IconButton(
+                    icon: const Icon(Icons.fullscreen, color: Colors.white),
+                    onPressed: _toggleFullScreen,
+                  ),
                 ),
               ],
             ),
@@ -78,33 +81,36 @@ class PreviewScreenState extends State<PreviewScreen> {
         child: Column(
           children: [
             Expanded(
-              child: GestureDetector(
-                onTap: _toggleFullScreen,
-                child: CarouselSlider.builder(
-                  itemCount: widget.imagePaths.length,
-                  itemBuilder: (context, index, realIndex) {
-                    return AspectRatio(
-                      aspectRatio: widget.aspectRatio ?? 3 / 4,
-                      child: Image.file(
-                        File(widget.imagePaths[index]),
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: double.infinity,
-                      ),
-                    );
-                  },
-                  options: CarouselOptions(
-                    height: size.height * 0.5,
-                    autoPlay: false,
-                    enlargeCenterPage: true,
-                    enableInfiniteScroll: false,
-                    viewportFraction: 1.0,
-                    aspectRatio: size.aspectRatio,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _currentIndex = index;
-                      });
+              child: Semantics(
+                identifier: "preview_image_gesture",
+                child: GestureDetector(
+                  onTap: _toggleFullScreen,
+                  child: CarouselSlider.builder(
+                    itemCount: widget.imagePaths.length,
+                    itemBuilder: (context, index, realIndex) {
+                      return AspectRatio(
+                        aspectRatio: widget.aspectRatio ?? 3 / 4,
+                        child: Image.file(
+                          File(widget.imagePaths[index]),
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                      );
                     },
+                    options: CarouselOptions(
+                      height: size.height * 0.5,
+                      autoPlay: false,
+                      enlargeCenterPage: true,
+                      enableInfiniteScroll: false,
+                      viewportFraction: 1.0,
+                      aspectRatio: size.aspectRatio,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -147,6 +153,7 @@ class PreviewScreenState extends State<PreviewScreen> {
                         _customButton(
                           icon: Icons.settings,
                           label: "Edit",
+                          identifier: "button_edit_image",
                           onPressed: () {
                             Navigator.pushNamed(
                               context,
@@ -158,21 +165,25 @@ class PreviewScreenState extends State<PreviewScreen> {
                         _customButton(
                           icon: Icons.camera_alt,
                           label: "Ambil Gambar Ulang",
+                          identifier: "button_retake_image",
                           onPressed: () async {
                             // Ambil kamera utama
                             final cameras = await availableCameras();
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    CameraScreen(camera: cameras.first),
-                              ),
-                            );
+                            if (context.mounted) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      CameraScreen(camera: cameras.first),
+                                ),
+                              );
+                            }
                           },
                         ),
                         _customButton(
                           icon: Icons.check,
                           label: "Selesai",
+                          identifier: "button_finish_preview",
                           onPressed: () {
                             Navigator.pushNamed(
                                 context, ROUTER.documentValidation,
@@ -195,6 +206,7 @@ Widget _customButton({
   required IconData icon,
   required String label,
   required VoidCallback onPressed,
+  required String identifier,
 }) {
   return Container(
     decoration: BoxDecoration(
@@ -206,9 +218,12 @@ Widget _customButton({
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(
-            icon: Icon(icon, color: Colors.white, size: 30),
-            onPressed: onPressed,
+          Semantics(
+            identifier: identifier,
+            child: IconButton(
+              icon: Icon(icon, color: Colors.white, size: 30),
+              onPressed: onPressed,
+            ),
           ),
           Text(
             label,

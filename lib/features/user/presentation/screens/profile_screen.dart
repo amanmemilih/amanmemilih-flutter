@@ -96,30 +96,36 @@ class ProfileScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  ListTile(
-                    contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                    leading: SvgPicture.asset(
-                      "assets/svg/profile.svg",
-                      colorFilter:
-                          ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                  Semantics(
+                    identifier: "button_detail_profile",
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                      leading: SvgPicture.asset(
+                        "assets/svg/profile.svg",
+                        colorFilter:
+                            ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                      ),
+                      title: const Text("Detail Profil"),
+                      trailing: const Icon(Icons.arrow_forward_ios_outlined),
+                      onTap: () =>
+                          Navigator.pushNamed(context, ROUTER.changeProfile),
                     ),
-                    title: const Text("Detail Profil"),
-                    trailing: const Icon(Icons.arrow_forward_ios_outlined),
-                    onTap: () =>
-                        Navigator.pushNamed(context, ROUTER.changeProfile),
                   ),
                   Divider(
                     color: Colors.black.withAlpha(13),
                     endIndent: 18,
                     indent: 18,
                   ),
-                  ListTile(
-                    contentPadding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                    leading: SvgPicture.asset("assets/svg/key.svg"),
-                    title: const Text("Ubah Password"),
-                    trailing: const Icon(Icons.arrow_forward_ios_outlined),
-                    onTap: () =>
-                        Navigator.pushNamed(context, ROUTER.changePassword),
+                  Semantics(
+                    identifier: "button_change_password",
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                      leading: SvgPicture.asset("assets/svg/key.svg"),
+                      title: const Text("Ubah Password"),
+                      trailing: const Icon(Icons.arrow_forward_ios_outlined),
+                      onTap: () =>
+                          Navigator.pushNamed(context, ROUTER.changePassword),
+                    ),
                   ),
                 ],
               ),
@@ -141,10 +147,13 @@ class ProfileScreen extends StatelessWidget {
                 }
               },
               builder: (context, state) {
-                return AMElevatedButton(
-                  title: "Logout",
-                  isLoading: state.status == AuthStatus.loading,
-                  onTap: context.read<AuthCubit>().logout,
+                return Semantics(
+                  identifier: "button_logout",
+                  child: AMElevatedButton(
+                    title: "Logout",
+                    isLoading: state.status == AuthStatus.loading,
+                    onTap: context.read<AuthCubit>().logout,
+                  ),
                 );
               },
             )

@@ -70,20 +70,23 @@ class ChangeProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildListTile(String title, String content) => ListTile(
-        title: Text(
-          title,
-          style: GoogleFonts.plusJakartaSans(
-            color: Colors.grey,
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
+  Widget _buildListTile(String title, String content) => Semantics(
+        identifier: "profile_field_${title.toLowerCase().replaceAll('/', '_')}",
+        child: ListTile(
+          title: Text(
+            title,
+            style: GoogleFonts.plusJakartaSans(
+              color: Colors.grey,
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
           ),
-        ),
-        trailing: Text(
-          content,
-          style: GoogleFonts.plusJakartaSans(
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
+          trailing: Text(
+            content,
+            style: GoogleFonts.plusJakartaSans(
+              fontWeight: FontWeight.w700,
+              fontSize: 14,
+            ),
           ),
         ),
       );
