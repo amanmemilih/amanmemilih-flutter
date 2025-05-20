@@ -21,40 +21,43 @@ class AMElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onTap,
-      style: ButtonStyle(
-        minimumSize: const WidgetStatePropertyAll(
-          Size(double.infinity, 52),
-        ),
-        elevation: const WidgetStatePropertyAll(0),
-        shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+    return Semantics(
+      identifier: "button_${title.replaceAll(" ", "_").toLowerCase()}",
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ButtonStyle(
+          minimumSize: const WidgetStatePropertyAll(
+            Size(double.infinity, 52),
           ),
+          elevation: const WidgetStatePropertyAll(0),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          backgroundColor: WidgetStatePropertyAll(backgroundColor),
+          foregroundColor: WidgetStatePropertyAll(foregroundColor),
+          overlayColor: WidgetStatePropertyAll(buttonPressed),
         ),
-        backgroundColor: WidgetStatePropertyAll(backgroundColor),
-        foregroundColor: WidgetStatePropertyAll(foregroundColor),
-        overlayColor: WidgetStatePropertyAll(buttonPressed),
-      ),
-      child: isLoading
-          ? Center(
-              child: SizedBox(
-                height: 50.w,
-                width: 50.w,
-                child: const CircularProgressIndicator(
+        child: isLoading
+            ? Center(
+                child: SizedBox(
+                  height: 50.w,
+                  width: 50.w,
+                  child: const CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            : Text(
+                title,
+                style: GoogleFonts.plusJakartaSans(
                   color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
                 ),
               ),
-            )
-          : Text(
-              title,
-              style: GoogleFonts.plusJakartaSans(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-              ),
-            ),
+      ),
     );
   }
 }

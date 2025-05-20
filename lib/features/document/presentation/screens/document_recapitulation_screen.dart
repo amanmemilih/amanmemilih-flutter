@@ -125,86 +125,98 @@ class DocumentRecapitulationScreenImplement extends StatelessWidget {
                   BlocBuilder<DocumentRecapitulationCubit,
                       DocumentRecapitulationState>(
                     builder: (context, state) {
-                      return AMElevatedButton(
-                        title: "Publikasi",
-                        isLoading: state.status ==
-                            DocumentRecapitulationStatus.loading,
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext innerContext) {
-                              return AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 24, vertical: 16),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor: Colors.red[100],
-                                      radius: 24,
-                                      child: Icon(
-                                        Icons.help_outline,
-                                        size: 32,
-                                        color: Colors.red,
+                      return Semantics(
+                        identifier: "button_publikasi",
+                        child: AMElevatedButton(
+                          title: "Publikasi",
+                          isLoading: state.status ==
+                              DocumentRecapitulationStatus.loading,
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext innerContext) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 24, vertical: 16),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor: Colors.red[100],
+                                        radius: 24,
+                                        child: Icon(
+                                          Icons.help_outline,
+                                          size: 32,
+                                          color: Colors.red,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(height: 16),
-                                    Text(
-                                      "Setelah data dipublikasikan, anda tidak dapat mengubahnya lagi. Lanjutkan?",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(height: 24),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            context
-                                                .read<
-                                                    DocumentRecapitulationCubit>()
-                                                .uploadDocument(args);
-                                            Navigator.pop(context);
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.red,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
+                                      SizedBox(height: 16),
+                                      Text(
+                                        "Setelah data dipublikasikan, anda tidak dapat mengubahnya lagi. Lanjutkan?",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      SizedBox(height: 24),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Semantics(
+                                            identifier:
+                                                "dialog_button_yes_publikasi",
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                context
+                                                    .read<
+                                                        DocumentRecapitulationCubit>()
+                                                    .uploadDocument(args);
+                                                Navigator.pop(context);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.red,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                              ),
+                                              child: Text(
+                                                "Yes",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
                                             ),
                                           ),
-                                          child: Text(
-                                            "Yes",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                        ),
-                                        OutlinedButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          style: OutlinedButton.styleFrom(
-                                            foregroundColor: Colors.red,
-                                            side: BorderSide(color: Colors.red),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
+                                          Semantics(
+                                            identifier:
+                                                "dialog_button_no_publikasi",
+                                            child: OutlinedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              style: OutlinedButton.styleFrom(
+                                                foregroundColor: Colors.red,
+                                                side: BorderSide(
+                                                    color: Colors.red),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                              ),
+                                              child: Text("No"),
                                             ),
                                           ),
-                                          child: Text("No"),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
                       );
                     },
                   ),

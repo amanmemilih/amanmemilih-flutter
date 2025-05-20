@@ -14,13 +14,16 @@ class TappedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.circular(0),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          child: child,
+    return Semantics(
+      identifier: "tapped_widget",
+      child: ClipRRect(
+        borderRadius: borderRadius ?? BorderRadius.circular(0),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            child: child,
+          ),
         ),
       ),
     );

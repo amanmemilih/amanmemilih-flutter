@@ -14,21 +14,24 @@ class AMOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: onTap,
-      style: OutlinedButton.styleFrom(
-        side: const BorderSide(color: colorPrimary),
-        minimumSize: const Size(double.infinity, 52),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+    return Semantics(
+      identifier: "button_${title.replaceAll(" ", "_").toLowerCase()}",
+      child: OutlinedButton(
+        onPressed: onTap,
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(color: colorPrimary),
+          minimumSize: const Size(double.infinity, 52),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
         ),
-      ),
-      child: Text(
-        title,
-        style: GoogleFonts.plusJakartaSans(
-          color: colorPrimary,
-          fontWeight: FontWeight.w700,
-          fontSize: 16,
+        child: Text(
+          title,
+          style: GoogleFonts.plusJakartaSans(
+            color: colorPrimary,
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+          ),
         ),
       ),
     );
@@ -47,22 +50,25 @@ class ColorOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: onTap,
-      style: OutlinedButton.styleFrom(
-        side: BorderSide.none,
-        backgroundColor: colorPrimary,
-        minimumSize: const Size(double.infinity, 52),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+    return Semantics(
+      identifier: "button_${title.replaceAll(" ", "_").toLowerCase()}",
+      child: OutlinedButton(
+        onPressed: onTap,
+        style: OutlinedButton.styleFrom(
+          side: BorderSide.none,
+          backgroundColor: colorPrimary,
+          minimumSize: const Size(double.infinity, 52),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
         ),
-      ),
-      child: Text(
-        title,
-        style: GoogleFonts.plusJakartaSans(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: 16,
+        child: Text(
+          title,
+          style: GoogleFonts.plusJakartaSans(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+          ),
         ),
       ),
     );

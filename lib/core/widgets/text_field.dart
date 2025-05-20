@@ -24,53 +24,56 @@ class AMTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: Key(hint),
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: validator,
-      controller: controller,
-      keyboardType:
-          isPassword ? TextInputType.name : TextInputType.visiblePassword,
-      obscureText: obsecureText,
-      decoration: InputDecoration(
-        hintText: hint,
-        contentPadding: const EdgeInsets.fromLTRB(20, 16, 0, 16),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(
-            color: colorPrimary,
+    return Semantics(
+      identifier: "textfield_${hint.replaceAll(" ", "_").toLowerCase()}",
+      child: TextFormField(
+        key: Key(hint),
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: validator,
+        controller: controller,
+        keyboardType:
+            isPassword ? TextInputType.name : TextInputType.visiblePassword,
+        obscureText: obsecureText,
+        decoration: InputDecoration(
+          hintText: hint,
+          contentPadding: const EdgeInsets.fromLTRB(20, 16, 0, 16),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: const BorderSide(
+              color: colorPrimary,
+            ),
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(
-            color: fieldDisable,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: const BorderSide(
+              color: fieldDisable,
+            ),
           ),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(color: Color(0xffCFCFCF)),
-        ),
-        hintStyle: GoogleFonts.plusJakartaSans(
-          fontWeight: FontWeight.w200,
-          color: const Color(0xffABABAB),
-        ),
-        suffixIconConstraints: const BoxConstraints(
-          minHeight: 25,
-          minWidth: 25,
-        ),
-        suffixIcon: isPassword
-            ? TouchableOpacityWidget(
-                onTap: onPasswordHiddenTap ?? () {},
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 24),
-                  child: SvgPicture.asset(
-                    "assets/svg/${obsecureText ? 'eye.svg' : 'eye_close.svg'}",
-                    alignment: Alignment.centerLeft,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: const BorderSide(color: Color(0xffCFCFCF)),
+          ),
+          hintStyle: GoogleFonts.plusJakartaSans(
+            fontWeight: FontWeight.w200,
+            color: const Color(0xffABABAB),
+          ),
+          suffixIconConstraints: const BoxConstraints(
+            minHeight: 25,
+            minWidth: 25,
+          ),
+          suffixIcon: isPassword
+              ? TouchableOpacityWidget(
+                  onTap: onPasswordHiddenTap ?? () {},
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 24),
+                    child: SvgPicture.asset(
+                      "assets/svg/${obsecureText ? 'eye.svg' : 'eye_close.svg'}",
+                      alignment: Alignment.centerLeft,
+                    ),
                   ),
-                ),
-              )
-            : null,
+                )
+              : null,
+        ),
       ),
     );
   }

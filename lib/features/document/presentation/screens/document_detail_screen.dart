@@ -314,93 +314,114 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                     SizedBox(height: 10.h),
                     state.data!.status == 1
                         ? Container()
-                        : AMElevatedButton(
-                            title: "Verifikasi",
-                            isLoading:
-                                state.status == DocumentDetailStatus.submitting,
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext innerContext) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 24, vertical: 16),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundColor: Colors.red[100],
-                                          radius: 24,
-                                          child: Icon(
-                                            Icons.help_outline,
-                                            size: 32,
-                                            color: Colors.red,
+                        : Semantics(
+                            identifier: "button_verifikasi",
+                            child: AMElevatedButton(
+                              title: "Verifikasi",
+                              isLoading: state.status ==
+                                  DocumentDetailStatus.submitting,
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext innerContext) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 24, vertical: 16),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundColor: Colors.red[100],
+                                            radius: 24,
+                                            child: Icon(
+                                              Icons.help_outline,
+                                              size: 32,
+                                              color: Colors.red,
+                                            ),
                                           ),
-                                        ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "Setelah data diverifikasi, anda tidak dapat mengubahnya lagi. Lanjutkan?",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        SizedBox(height: 24),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                context
-                                                    .read<DocumentDetailCubit>()
-                                                    .documentVerification(
-                                                        args['electionType'],
-                                                        args['id']);
-                                                context
-                                                    .read<DocumentDetailCubit>()
-                                                    .getData(
-                                                        args['electionType'],
-                                                        args['id']);
-                                                Navigator.pop(context);
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.red,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
+                                          SizedBox(height: 16),
+                                          Text(
+                                            "Setelah data diverifikasi, anda tidak dapat mengubahnya lagi. Lanjutkan?",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                          SizedBox(height: 24),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Semantics(
+                                                identifier:
+                                                    "dialog_button_yes_verifikasi",
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    context
+                                                        .read<
+                                                            DocumentDetailCubit>()
+                                                        .documentVerification(
+                                                            args[
+                                                                'electionType'],
+                                                            args['id']);
+                                                    context
+                                                        .read<
+                                                            DocumentDetailCubit>()
+                                                        .getData(
+                                                            args[
+                                                                'electionType'],
+                                                            args['id']);
+                                                    Navigator.pop(context);
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor: Colors.red,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                    ),
+                                                  ),
+                                                  child: Text(
+                                                    "Yes",
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
                                                 ),
                                               ),
-                                              child: Text(
-                                                "Yes",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                            OutlinedButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              style: OutlinedButton.styleFrom(
-                                                foregroundColor: Colors.red,
-                                                side: BorderSide(
-                                                    color: Colors.red),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
+                                              Semantics(
+                                                identifier:
+                                                    "dialog_button_no_verifikasi",
+                                                child: OutlinedButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  style:
+                                                      OutlinedButton.styleFrom(
+                                                    foregroundColor: Colors.red,
+                                                    side: BorderSide(
+                                                        color: Colors.red),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                    ),
+                                                  ),
+                                                  child: Text("No"),
                                                 ),
                                               ),
-                                              child: Text("No"),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
                     BlocListener<DeleteDocumentCubit, DeleteDocumentState>(
                       listener: (context, state) {
@@ -430,107 +451,123 @@ class DocumentDetailScreenImplement extends StatelessWidget {
                             : Column(
                                 children: [
                                   SizedBox(height: 20),
-                                  AMElevatedButton(
-                                    backgroundColor:
-                                        BaseColors.primary.withAlpha(153),
-                                    title: "Hapus",
-                                    isLoading: state.status ==
-                                        DocumentDetailStatus.submitting,
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext innerContext) {
-                                          return AlertDialog(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 24,
-                                                    vertical: 16),
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                CircleAvatar(
-                                                  backgroundColor:
-                                                      Colors.red[100],
-                                                  radius: 24,
-                                                  child: Icon(
-                                                    Icons.help_outline,
-                                                    size: 32,
-                                                    color: Colors.red,
+                                  Semantics(
+                                    identifier: "button_hapus",
+                                    child: AMElevatedButton(
+                                      backgroundColor:
+                                          BaseColors.primary.withAlpha(153),
+                                      title: "Hapus",
+                                      isLoading: state.status ==
+                                          DocumentDetailStatus.submitting,
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext innerContext) {
+                                            return AlertDialog(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                              ),
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 24,
+                                                      vertical: 16),
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.red[100],
+                                                    radius: 24,
+                                                    child: Icon(
+                                                      Icons.help_outline,
+                                                      size: 32,
+                                                      color: Colors.red,
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(height: 16),
-                                                Text(
-                                                  "Setelah data dihapus, anda tidak dapat mengubahnya lagi. Lanjutkan?",
-                                                  textAlign: TextAlign.center,
-                                                  style:
-                                                      TextStyle(fontSize: 16),
-                                                ),
-                                                SizedBox(height: 24),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    ElevatedButton(
-                                                      onPressed: () {
-                                                        context
-                                                            .read<
-                                                                DeleteDocumentCubit>()
-                                                            .deleteDocument(
-                                                                args[
-                                                                    'electionType'],
-                                                                args['id']);
-                                                        Navigator.pop(context);
-                                                      },
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        backgroundColor:
-                                                            Colors.red,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
+                                                  SizedBox(height: 16),
+                                                  Text(
+                                                    "Setelah data dihapus, anda tidak dapat mengubahnya lagi. Lanjutkan?",
+                                                    textAlign: TextAlign.center,
+                                                    style:
+                                                        TextStyle(fontSize: 16),
+                                                  ),
+                                                  SizedBox(height: 24),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      Semantics(
+                                                        identifier:
+                                                            "dialog_button_yes_hapus",
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            context
+                                                                .read<
+                                                                    DeleteDocumentCubit>()
+                                                                .deleteDocument(
+                                                                    args[
+                                                                        'electionType'],
+                                                                    args['id']);
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            backgroundColor:
+                                                                Colors.red,
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            "Yes",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
                                                         ),
                                                       ),
-                                                      child: Text(
-                                                        "Yes",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.white),
-                                                      ),
-                                                    ),
-                                                    OutlinedButton(
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      style: OutlinedButton
-                                                          .styleFrom(
-                                                        foregroundColor:
-                                                            Colors.red,
-                                                        side: BorderSide(
-                                                            color: Colors.red),
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
+                                                      Semantics(
+                                                        identifier:
+                                                            "dialog_button_no_hapus",
+                                                        child: OutlinedButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          style: OutlinedButton
+                                                              .styleFrom(
+                                                            foregroundColor:
+                                                                Colors.red,
+                                                            side: BorderSide(
+                                                                color:
+                                                                    Colors.red),
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                          ),
+                                                          child: Text("No"),
                                                         ),
                                                       ),
-                                                      child: Text("No"),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ],
                               ),

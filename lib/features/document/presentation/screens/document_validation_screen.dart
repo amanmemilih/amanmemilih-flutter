@@ -65,16 +65,8 @@ class DocumentValidationScreenImplement extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BaseShadows.primary[0],
-                        ],
-                      ),
+                    Semantics(
+                      identifier: "dropdown_election_type",
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           isExpanded: true,
@@ -196,11 +188,9 @@ class DocumentValidationScreenImplement extends StatelessWidget {
                                                                   TextInputType
                                                                       .number,
                                                               inputFormatters: <TextInputFormatter>[
-                                                                // for below version 2 use this
                                                                 FilteringTextInputFormatter
                                                                     .allow(RegExp(
                                                                         r'[0-9]')),
-                                                                // for version 2 and greater youcan also use this
                                                                 FilteringTextInputFormatter
                                                                     .digitsOnly
                                                               ],
@@ -283,29 +273,32 @@ class DocumentValidationScreenImplement extends StatelessWidget {
                       height: 25,
                     ),
                     state.status == DocumentValidationStatus.success
-                        ? ColorOutlinedButton(
-                            title: "Lanjut",
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                ROUTER.documentRecapitulation,
-                                arguments: DocumentRecapitulationArgs(
-                                  votes: state.presidentialCandidats!
-                                      .asMap()
-                                      .entries
-                                      .map((e) => {
-                                            'candidat_name': e.value.name,
-                                            'candidat_no': e.value.no,
-                                            'candidat_id': e.value.id,
-                                            'total_votes': state
-                                                .voteControllers[e.key].text,
-                                          })
-                                      .toList(),
-                                  electionType: state.electionType,
-                                  imagePaths: imagePaths,
-                                ),
-                              );
-                            },
+                        ? Semantics(
+                            identifier: "button_lanjut",
+                            child: ColorOutlinedButton(
+                              title: "Lanjut",
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  ROUTER.documentRecapitulation,
+                                  arguments: DocumentRecapitulationArgs(
+                                    votes: state.presidentialCandidats!
+                                        .asMap()
+                                        .entries
+                                        .map((e) => {
+                                              'candidat_name': e.value.name,
+                                              'candidat_no': e.value.no,
+                                              'candidat_id': e.value.id,
+                                              'total_votes': state
+                                                  .voteControllers[e.key].text,
+                                            })
+                                        .toList(),
+                                    electionType: state.electionType,
+                                    imagePaths: imagePaths,
+                                  ),
+                                );
+                              },
+                            ),
                           )
                         : Container(),
                   ],

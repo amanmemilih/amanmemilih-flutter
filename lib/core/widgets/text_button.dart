@@ -14,20 +14,23 @@ class AMTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: const ButtonStyle(
-        alignment: Alignment.center,
-        minimumSize: WidgetStatePropertyAll(Size(double.infinity, 30)),
-        foregroundColor: WidgetStatePropertyAll(colorPrimary),
-        overlayColor: WidgetStatePropertyAll(Colors.white),
-      ),
-      onPressed: onTap,
-      child: Text(
-        title,
-        style: GoogleFonts.plusJakartaSans(
-          fontSize: 14,
-          fontWeight: FontWeight.w700,
-          color: colorPrimary,
+    return Semantics(
+      identifier: "button_${title.replaceAll(" ", "_").toLowerCase()}",
+      child: TextButton(
+        style: const ButtonStyle(
+          alignment: Alignment.center,
+          minimumSize: WidgetStatePropertyAll(Size(double.infinity, 30)),
+          foregroundColor: WidgetStatePropertyAll(colorPrimary),
+          overlayColor: WidgetStatePropertyAll(Colors.white),
+        ),
+        onPressed: onTap,
+        child: Text(
+          title,
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            color: colorPrimary,
+          ),
         ),
       ),
     );
