@@ -57,7 +57,9 @@ class _CameraScreenState extends State<CameraScreen> {
                           Semantics(
                             identifier: "toggle_flash_button",
                             child: IconButton(
-                              onPressed: cubit.toggleFlash,
+                              onPressed: () {
+                                cubit.toggleFlash();
+                              },
                               icon: Icon(
                                 state.isFlashOn
                                     ? Icons.flash_on
@@ -70,7 +72,9 @@ class _CameraScreenState extends State<CameraScreen> {
                           Semantics(
                             identifier: "take_picture_button",
                             child: IconButton(
-                              onPressed: cubit.takePicture,
+                              onPressed: () {
+                                cubit.takePicture();
+                              },
                               icon: Icon(Icons.circle,
                                   size: size.width * 0.15, color: Colors.white),
                             ),
@@ -78,7 +82,9 @@ class _CameraScreenState extends State<CameraScreen> {
                           Semantics(
                             identifier: "open_gallery_button",
                             child: IconButton(
-                              onPressed: () => cubit.navigateToEditor(context),
+                              onPressed: () {
+                                cubit.navigateToEditor(context);
+                              },
                               icon: Icon(Icons.photo_library,
                                   color: Colors.white, size: size.width * 0.08),
                             ),
@@ -97,7 +103,9 @@ class _CameraScreenState extends State<CameraScreen> {
                               child: Semantics(
                                 identifier: "thumbnail_image_$index",
                                 child: GestureDetector(
-                                  onTap: () => cubit.navigateToEditor(context),
+                                  onTap: () {
+                                    cubit.navigateToEditor(context);
+                                  },
                                   child: Image.file(
                                     state.capturedImages[index],
                                     width: size.width * 0.15,

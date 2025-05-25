@@ -275,31 +275,37 @@ class DocumentValidationScreenImplement extends StatelessWidget {
                       height: 25,
                     ),
                     state.status == DocumentValidationStatus.success
-                        ? Semantics(
-                            identifier: "button_lanjut",
-                            child: ColorOutlinedButton(
-                              title: "Lanjut",
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  ROUTER.documentRecapitulation,
-                                  arguments: DocumentRecapitulationArgs(
-                                    votes: state.presidentialCandidats!
-                                        .asMap()
-                                        .entries
-                                        .map((e) => {
-                                              'candidat_name': e.value.name,
-                                              'candidat_no': e.value.no,
-                                              'candidat_id': e.value.id,
-                                              'total_votes': state
-                                                  .voteControllers[e.key].text,
-                                            })
-                                        .toList(),
-                                    electionType: state.electionType,
-                                    imagePaths: imagePaths,
-                                  ),
-                                );
-                              },
+                        ? Container(
+                            key: const ValueKey("container_button_lanjut"),
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Semantics(
+                              identifier: "button_lanjut",
+                              child: AMOutlinedButton(
+                                title: "Lanjut",
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    ROUTER.documentRecapitulation,
+                                    arguments: DocumentRecapitulationArgs(
+                                      votes: state.presidentialCandidats!
+                                          .asMap()
+                                          .entries
+                                          .map((e) => {
+                                                'candidat_name': e.value.name,
+                                                'candidat_no': e.value.no,
+                                                'candidat_id': e.value.id,
+                                                'total_votes': state
+                                                    .voteControllers[e.key]
+                                                    .text,
+                                              })
+                                          .toList(),
+                                      electionType: state.electionType,
+                                      imagePaths: imagePaths,
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           )
                         : Container(),

@@ -7,15 +7,18 @@ class AMOutlinedButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.onTap,
+    this.semanticIdentifier,
   });
 
   final String title;
   final Function() onTap;
+  final String? semanticIdentifier;
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      identifier: "button_${title.replaceAll(" ", "_").toLowerCase()}",
+      identifier: semanticIdentifier ??
+          "button_${title.replaceAll(" ", "_").toLowerCase()}",
       child: OutlinedButton(
         onPressed: onTap,
         style: OutlinedButton.styleFrom(
