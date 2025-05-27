@@ -11,6 +11,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:signature/signature.dart';
 
 class DocumentValidationScreen extends StatelessWidget {
   const DocumentValidationScreen({super.key});
@@ -26,13 +27,50 @@ class DocumentValidationScreen extends StatelessWidget {
   }
 }
 
-class DocumentValidationScreenImplement extends StatelessWidget {
+class DocumentValidationScreenImplement extends StatefulWidget {
   const DocumentValidationScreenImplement({
     super.key,
     required this.imagePaths,
   });
 
   final List<String> imagePaths;
+
+  @override
+  State<DocumentValidationScreenImplement> createState() =>
+      _DocumentValidationScreenImplementState();
+}
+
+class _DocumentValidationScreenImplementState
+    extends State<DocumentValidationScreenImplement> {
+  final SignatureController _signatureController = SignatureController(
+    penStrokeWidth: 3,
+    penColor: Colors.black,
+    exportBackgroundColor: Colors.white,
+  );
+  Uint8List? _signatureBytes;
+  final _formKey = GlobalKey<FormState>();
+
+  void _showError(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _signatureController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,262 +92,319 @@ class DocumentValidationScreenImplement extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Validasi Data",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Semantics(
-                      identifier: "dropdown_election_type",
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          isExpanded: true,
-                          value: state.electionType,
-                          items: context
-                              .read<DocumentValidationCubit>()
-                              .electionTypeValues
-                              .map((e) {
-                            return DropdownMenuItem<String>(
-                              value: e['value'],
-                              child: Text(e['label']),
-                            );
-                          }).toList(),
-                          onChanged: (value) => context
-                              .read<DocumentValidationCubit>()
-                              .changeElectionType(value!),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Validasi Data",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
-                    ),
-                    state.electionType == 'presidential'
-                        ? Column(
-                            children: [
-                              SizedBox(height: 40),
-                              Text(
-                                "Hasil Rekapitulasi Suara",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 24,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BaseShadows.primary[0],
-                                  ],
+                      const SizedBox(height: 24),
+                      Semantics(
+                        identifier: "dropdown_election_type",
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            isExpanded: true,
+                            value: state.electionType,
+                            items: context
+                                .read<DocumentValidationCubit>()
+                                .electionTypeValues
+                                .map((e) {
+                              return DropdownMenuItem<String>(
+                                value: e['value'],
+                                child: Text(e['label']),
+                              );
+                            }).toList(),
+                            onChanged: (value) => context
+                                .read<DocumentValidationCubit>()
+                                .changeElectionType(value!),
+                          ),
+                        ),
+                      ),
+                      state.electionType == 'presidential'
+                          ? Column(
+                              children: [
+                                SizedBox(height: 40),
+                                Text(
+                                  "Hasil Rekapitulasi Suara",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ...state.presidentialCandidats
-                                            ?.asMap()
-                                            .entries
-                                            .map(
-                                          (e) {
-                                            return Column(
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 10),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Column(
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                "${e.value.no}.   ",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700),
-                                                              ),
-                                                              Text(
-                                                                e.value.name ??
-                                                                    '',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            height: 12,
-                                                          ),
-                                                          Semantics(
-                                                            identifier:
-                                                                "vote_input_${e.key}",
-                                                            child:
-                                                                TextFormField(
-                                                              decoration: InputDecoration(
-                                                                  enabledBorder: OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          width:
-                                                                              1),
-                                                                      borderRadius: BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              20))),
-                                                                  focusedBorder: OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: Colors
-                                                                              .black,
-                                                                          width:
-                                                                              1),
-                                                                      borderRadius:
-                                                                          BorderRadius.all(Radius.circular(
-                                                                              20))),
-                                                                  labelText:
-                                                                      "jumlah suara"),
-                                                              controller: state
-                                                                      .voteControllers[
-                                                                  e.key],
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
-                                                              inputFormatters: <TextInputFormatter>[
-                                                                FilteringTextInputFormatter
-                                                                    .allow(RegExp(
-                                                                        r'[0-9]')),
-                                                                FilteringTextInputFormatter
-                                                                    .digitsOnly
+                                SizedBox(
+                                  height: 24,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BaseShadows.primary[0],
+                                    ],
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ...state.presidentialCandidats
+                                              ?.asMap()
+                                              .entries
+                                              .map(
+                                            (e) {
+                                              return Column(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 20,
+                                                        vertical: 10),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Column(
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "${e.value.no}.   ",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w700),
+                                                                ),
+                                                                Text(
+                                                                  e.value.name ??
+                                                                      '',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w700),
+                                                                ),
                                                               ],
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            );
-                                          },
-                                        ) ??
-                                        [],
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          )
-                        : Container(),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          "Foto Formulir",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w700),
-                        ),
-                        SizedBox(
-                          height: 24,
-                        ),
-                        Container(
-                          height: 500, // Tinggi Image nya
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                                20), // Membuat sudut melengkung
-                            color: Colors.white,
-                          ),
-                          clipBehavior: Clip
-                              .hardEdge, // Memastikan konten di dalam rounded corners
-                          child: Semantics(
-                            identifier: "carousel_document_images",
-                            child: CarouselSlider.builder(
-                              itemCount: imagePaths.length,
-                              itemBuilder: (context, index, realIndex) {
-                                return ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.file(
-                                    File(imagePaths[index]),
-                                    fit: BoxFit.cover,
-                                    width: double.infinity,
-                                    height: double.infinity,
+                                                            SizedBox(
+                                                              height: 12,
+                                                            ),
+                                                            Semantics(
+                                                              identifier:
+                                                                  "vote_input_${e.key}",
+                                                              child:
+                                                                  TextFormField(
+                                                                decoration: InputDecoration(
+                                                                    enabledBorder: OutlineInputBorder(
+                                                                        borderSide: BorderSide(
+                                                                            color: Colors
+                                                                                .grey,
+                                                                            width:
+                                                                                1),
+                                                                        borderRadius: BorderRadius.all(Radius.circular(
+                                                                            20))),
+                                                                    focusedBorder: OutlineInputBorder(
+                                                                        borderSide: BorderSide(
+                                                                            color: Colors
+                                                                                .black,
+                                                                            width:
+                                                                                1),
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(
+                                                                                20))),
+                                                                    labelText:
+                                                                        "jumlah suara"),
+                                                                controller:
+                                                                    state.voteControllers[
+                                                                        e.key],
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .number,
+                                                                inputFormatters: <TextInputFormatter>[
+                                                                  FilteringTextInputFormatter
+                                                                      .allow(RegExp(
+                                                                          r'[0-9]')),
+                                                                  FilteringTextInputFormatter
+                                                                      .digitsOnly
+                                                                ],
+                                                                validator: (v) =>
+                                                                    v == null ||
+                                                                            v.isEmpty
+                                                                        ? 'Wajib diisi'
+                                                                        : null,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              );
+                                            },
+                                          ) ??
+                                          [],
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                    ],
                                   ),
-                                );
-                              },
-                              options: CarouselOptions(
-                                height: 500,
-                                autoPlay: false,
-                                enlargeCenterPage: true,
-                                enableInfiniteScroll: false,
-                                viewportFraction: 1.0,
-                                aspectRatio: 1.0,
-                                onPageChanged: (index, reason) => context
-                                    .read<DocumentValidationCubit>()
-                                    .changeDocumentIndex(index),
-                              ),
-                            ),
+                                ),
+                              ],
+                            )
+                          : Container(),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            "Foto Formulir",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w700),
                           ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    state.status == DocumentValidationStatus.success
-                        ? Container(
-                            key: const ValueKey("container_button_lanjut"),
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(vertical: 8),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          Container(
+                            height: 500, // Tinggi Image nya
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                  20), // Membuat sudut melengkung
+                              color: Colors.white,
+                            ),
+                            clipBehavior: Clip
+                                .hardEdge, // Memastikan konten di dalam rounded corners
                             child: Semantics(
-                              identifier: "button_lanjut",
-                              child: AMOutlinedButton(
-                                title: "Lanjut",
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    ROUTER.documentRecapitulation,
-                                    arguments: DocumentRecapitulationArgs(
-                                      votes: state.presidentialCandidats!
-                                          .asMap()
-                                          .entries
-                                          .map((e) => {
-                                                'candidat_name': e.value.name,
-                                                'candidat_no': e.value.no,
-                                                'candidat_id': e.value.id,
-                                                'total_votes': state
-                                                    .voteControllers[e.key]
-                                                    .text,
-                                              })
-                                          .toList(),
-                                      electionType: state.electionType,
-                                      imagePaths: imagePaths,
+                              identifier: "carousel_document_images",
+                              child: CarouselSlider.builder(
+                                itemCount: widget.imagePaths.length,
+                                itemBuilder: (context, index, realIndex) {
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.file(
+                                      File(widget.imagePaths[index]),
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                      height: double.infinity,
                                     ),
                                   );
                                 },
+                                options: CarouselOptions(
+                                  height: 500,
+                                  autoPlay: false,
+                                  enlargeCenterPage: true,
+                                  enableInfiniteScroll: false,
+                                  viewportFraction: 1.0,
+                                  aspectRatio: 1.0,
+                                  onPageChanged: (index, reason) => context
+                                      .read<DocumentValidationCubit>()
+                                      .changeDocumentIndex(index),
+                                ),
                               ),
                             ),
                           )
-                        : Container(),
-                  ],
+                        ],
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        "Tanda Tangan Petugas",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w700),
+                      ),
+                      SizedBox(height: 12),
+                      Container(
+                        width: double.infinity,
+                        height: 180,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.white,
+                        ),
+                        child: Signature(
+                          controller: _signatureController,
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () => _signatureController.clear(),
+                            child: Text("Hapus"),
+                          ),
+                          SizedBox(width: 12),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      state.status == DocumentValidationStatus.success
+                          ? Container(
+                              key: const ValueKey("container_button_lanjut"),
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Semantics(
+                                identifier: "button_lanjut",
+                                child: AMOutlinedButton(
+                                  title: "Lanjut",
+                                  onTap: () async {
+                                    // Validasi form
+                                    if (!_formKey.currentState!.validate()) {
+                                      _showError(
+                                          "Semua input suara harus diisi.");
+                                      return;
+                                    }
+                                    // Validasi TTD
+                                    if (!_signatureController.isNotEmpty) {
+                                      _showError("Tanda tangan harus diisi.");
+                                      return;
+                                    }
+                                    final data =
+                                        await _signatureController.toPngBytes();
+                                    setState(() {
+                                      _signatureBytes = data;
+                                    });
+                                    if (!mounted) return;
+                                    Navigator.pushNamed(
+                                      context,
+                                      ROUTER.documentRecapitulation,
+                                      arguments: DocumentRecapitulationArgs(
+                                        votes: state.presidentialCandidats!
+                                            .asMap()
+                                            .entries
+                                            .map((e) => {
+                                                  'candidat_name': e.value.name,
+                                                  'candidat_no': e.value.no,
+                                                  'candidat_id': e.value.id,
+                                                  'total_votes': state
+                                                      .voteControllers[e.key]
+                                                      .text,
+                                                })
+                                            .toList(),
+                                        electionType: state.electionType,
+                                        imagePaths: widget.imagePaths,
+                                        signatureBytes: _signatureBytes,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            )
+                          : Container(),
+                    ],
+                  ),
                 ),
               )
             ],

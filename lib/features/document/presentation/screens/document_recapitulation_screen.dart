@@ -119,6 +119,25 @@ class DocumentRecapitulationScreenImplement extends StatelessWidget {
                     height: 24,
                   ),
                   _fotoFormulir(context),
+                  if (args.signatureBytes != null) ...[
+                    SizedBox(height: 32),
+                    Text(
+                      "Tanda Tangan Petugas",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(height: 16),
+                    Container(
+                      width: double.infinity,
+                      height: 180,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white,
+                      ),
+                      child: Image.memory(args.signatureBytes!),
+                    ),
+                  ],
                   SizedBox(
                     height: 27,
                   ),
