@@ -79,4 +79,14 @@ class DocumentValidationCubit extends Cubit<DocumentValidationState> {
       documentIndex: index,
     ));
   }
+
+  void setVoteControllersFromOcr(List<String> votes) {
+    final controllers = List<TextEditingController>.from(state.voteControllers);
+    for (int i = 0; i < votes.length; i++) {
+      if (controllers.length > i) {
+        controllers[i].text = votes[i];
+      }
+    }
+    emit(state.copyWith(voteControllers: controllers));
+  }
 }
