@@ -8,6 +8,7 @@ import '../../../../core/router/router.dart';
 import '../cubits/crop_image_cubit.dart';
 import '../cubits/brightness_edit_cubit.dart';
 import '../cubits/contrast_edit_cubit.dart';
+import '../cubits/sharpness_edit_cubit.dart';
 import 'brightness_edit_screen.dart';
 import 'contrast_edit_screen.dart';
 import 'sharpness_edit_screen.dart';
@@ -21,12 +22,14 @@ class EditImageScreen extends StatefulWidget {
 
 class EditImageScreenState extends State<EditImageScreen> {
   int _currentIndex = 0; // Index gambar yang sedang ditampilkan
-  final bool _showControls = false;
+  final bool _showControls = true;
   File? _previewFile;
 
   @override
   Widget build(BuildContext context) {
     var imagePaths = ModalRoute.of(context)!.settings.arguments as List<String>;
+    // Set _previewFile ke gambar yang sedang aktif
+    _previewFile = File(imagePaths[_currentIndex]);
     return BlocListener<CropImageCubit, CropImageState>(
       listener: (context, state) {
         state.mapOrNull(
@@ -54,13 +57,10 @@ class EditImageScreenState extends State<EditImageScreen> {
               identifier: "button_save_edit",
               child: IconButton(
                 icon: const Icon(Icons.check),
-                onPressed: _previewFile == null
-                    ? null
-                    : () {
-                        if (_previewFile != null) {
-                          Navigator.pop(context, _previewFile!.path);
-                        }
-                      },
+                onPressed: () {
+                  // Kembalikan seluruh list imagePaths ke preview
+                  Navigator.pop(context, imagePaths);
+                },
               ),
             ),
           ],
@@ -105,64 +105,50 @@ class EditImageScreenState extends State<EditImageScreen> {
                 Container(
                   color: Colors.black87,
                   padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Semantics(
-                            identifier: "button_edit_brightness",
-                            child: _buildEditButton(
-                              icon: Icons.brightness_6,
-                              label: 'Brightness',
-                              onPressed: () => _navigateToEditScreen(
-                                  ROUTER.brightnessEditScreen),
-                            ),
-                          ),
-                          Semantics(
-                            identifier: "button_edit_contrast",
-                            child: _buildEditButton(
-                              icon: Icons.contrast,
-                              label: 'Contrast',
-                              onPressed: () => _navigateToEditScreen(
-                                  ROUTER.contrastEditScreen),
-                            ),
-                          ),
-                          Semantics(
-                            identifier: "button_edit_sharpness",
-                            child: _buildEditButton(
-                              icon: Icons.blur_on,
-                              label: 'Sharpness',
-                              onPressed: () => _navigateToEditScreen(
-                                  ROUTER.sharpnessEditScreen),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Semantics(
-                            identifier: "button_rotate_left",
-                            child: _buildEditButton(
-                              icon: Icons.rotate_left,
-                              label: 'Rotate Left',
-                              onPressed: () => _rotateImage(-90),
-                            ),
-                          ),
-                          Semantics(
-                            identifier: "button_rotate_right",
-                            child: _buildEditButton(
-                              icon: Icons.rotate_right,
-                              label: 'Rotate Right',
-                              onPressed: () => _rotateImage(90),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        _editMenuButton(
+                          icon: Icons.crop,
+                          label: 'Crop',
+                          onTap: () async {
+                            final selectedImagePath = imagePaths[_currentIndex];
+                            // Panggil cropper (misal aspectRatio 3/4, bisa diubah sesuai kebutuhan)
+                            context.read<CropImageCubit>().cropImage(
+                                  File(selectedImagePath),
+                                  aspectRatio: 3 / 4,
+                                );
+                            // Tunggu hasil crop dari BlocListener, imagePaths akan diupdate otomatis
+                            setState(() {
+                              _previewFile = File(imagePaths[_currentIndex]);
+                            });
+                          },
+                        ),
+                        SizedBox(width: 16),
+                        _editMenuButton(
+                          icon: Icons.brightness_6,
+                          label: 'Kecerahan',
+                          onTap: () => _navigateToEditScreen(
+                              ROUTER.brightnessEditScreen),
+                        ),
+                        SizedBox(width: 16),
+                        _editMenuButton(
+                          icon: Icons.contrast,
+                          label: 'Kontras',
+                          onTap: () =>
+                              _navigateToEditScreen(ROUTER.contrastEditScreen),
+                        ),
+                        SizedBox(width: 16),
+                        _editMenuButton(
+                          icon: Icons.blur_on,
+                          label: 'Ketajaman',
+                          onTap: () =>
+                              _navigateToEditScreen(ROUTER.sharpnessEditScreen),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
             ],
@@ -223,8 +209,10 @@ class EditImageScreenState extends State<EditImageScreen> {
         editedImagePath = await Navigator.push<String>(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                SharpnessEditScreen(imagePath: selectedImagePath),
+            builder: (context) => BlocProvider(
+              create: (_) => SharpnessEditCubit(),
+              child: SharpnessEditScreen(imagePath: selectedImagePath),
+            ),
           ),
         );
         break;
@@ -235,6 +223,37 @@ class EditImageScreenState extends State<EditImageScreen> {
         imagePaths[_currentIndex] = editedImagePath!;
       });
     }
+  }
+
+  Widget _editMenuButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 100,
+        height: 100,
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        decoration: BoxDecoration(
+          color: Color(0xFF242424),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: Colors.white, size: 36),
+            SizedBox(height: 8),
+            Text(
+              label,
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

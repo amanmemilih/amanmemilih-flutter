@@ -12,6 +12,8 @@ import 'package:amanmemilih_mobile_app/features/candidat/domain/usecases/get_pre
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../../presentation/screens/document_validation_screen.dart';
 
 import '../../../../../core/errors/errors.dart';
 
@@ -88,5 +90,28 @@ class DocumentValidationCubit extends Cubit<DocumentValidationState> {
       }
     }
     emit(state.copyWith(voteControllers: controllers));
+  }
+
+  Future<void> regionBasedOcrFromXFile(XFile xfile) async {
+    emit(state.copyWith(status: DocumentValidationStatus.loading));
+    try {
+      final result =
+          await RegionBasedOcrHelper.extractPaslonVotesFromRegions(xfile);
+      final controllers =
+          List<TextEditingController>.from(state.voteControllers);
+      // Urutkan sesuai key paslon1, paslon2, paslon3
+      final keys = ['paslon1', 'paslon2', 'paslon3'];
+      for (int i = 0; i < keys.length; i++) {
+        if (controllers.length > i) {
+          controllers[i].text = result[keys[i]] ?? '';
+        }
+      }
+      emit(state.copyWith(
+        status: DocumentValidationStatus.success,
+        voteControllers: controllers,
+      ));
+    } catch (e) {
+      emit(state.copyWith(status: DocumentValidationStatus.error));
+    }
   }
 }
