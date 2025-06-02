@@ -85,31 +85,31 @@ class PreviewScreenState extends State<PreviewScreen> {
                 identifier: "preview_image_gesture",
                 child: GestureDetector(
                   onTap: _toggleFullScreen,
-                  child: CarouselSlider.builder(
-                    itemCount: widget.imagePaths.length,
-                    itemBuilder: (context, index, realIndex) {
-                      return AspectRatio(
-                        aspectRatio: widget.aspectRatio ?? 3 / 4,
-                        child: Image.file(
+                  child: Container(
+                    color: Colors.black,
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: CarouselSlider.builder(
+                      itemCount: widget.imagePaths.length,
+                      itemBuilder: (context, index, realIndex) {
+                        return Image.file(
                           File(widget.imagePaths[index]),
-                          fit: BoxFit.cover,
+                          fit: _isFullScreen ? BoxFit.contain : BoxFit.cover,
                           width: double.infinity,
                           height: double.infinity,
-                        ),
-                      );
-                    },
-                    options: CarouselOptions(
-                      height: size.height * 0.5,
-                      autoPlay: false,
-                      enlargeCenterPage: true,
-                      enableInfiniteScroll: false,
-                      viewportFraction: 1.0,
-                      aspectRatio: size.aspectRatio,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _currentIndex = index;
-                        });
+                        );
                       },
+                      options: CarouselOptions(
+                        height: double.infinity,
+                        viewportFraction: 1.0,
+                        enableInfiniteScroll: false,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _currentIndex = index;
+                          });
+                        },
+                        // swipe tetap aktif di fullscreen maupun normal
+                      ),
                     ),
                   ),
                 ),

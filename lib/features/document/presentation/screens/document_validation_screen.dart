@@ -69,6 +69,20 @@ class _DocumentValidationScreenImplementState
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final infoState = context.read<DocumentInformationCubit>().state;
+      final uploadedTypes = (infoState.data ?? <dynamic>[])
+          .where((e) => (e.status ?? 0) != 0 && e.electionType != null)
+          .map((e) => e.electionType)
+          .toSet();
+      final cubit = context.read<DocumentValidationCubit>();
+      final firstAvailable = cubit.electionTypeValues.firstWhere(
+          (e) => !uploadedTypes.contains(e['value']),
+          orElse: () => cubit.electionTypeValues.first);
+      if (uploadedTypes.contains(cubit.state.electionType)) {
+        cubit.changeElectionType(firstAvailable['value']);
+      }
+    });
   }
 
   Future<void> _runOcrOnFirstImage() async {
@@ -478,7 +492,10 @@ class _DocumentValidationScreenImplementState
                                           return;
                                         }
                                         final data = await _signatureController
-                                            .toPngBytes();
+                                            .toPngBytes(
+                                          height: 360,
+                                          width: 720,
+                                        );
                                         setState(() {
                                           _signatureBytes = data;
                                         });

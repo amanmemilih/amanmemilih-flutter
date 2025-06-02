@@ -135,7 +135,10 @@ class DocumentRecapitulationScreenImplement extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.white,
                       ),
-                      child: Image.memory(args.signatureBytes!),
+                      child: Image.memory(
+                        args.signatureBytes!,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ],
                   SizedBox(
