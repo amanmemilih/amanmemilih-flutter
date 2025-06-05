@@ -23,13 +23,10 @@ class EditImageScreen extends StatefulWidget {
 class EditImageScreenState extends State<EditImageScreen> {
   int _currentIndex = 0; // Index gambar yang sedang ditampilkan
   final bool _showControls = true;
-  File? _previewFile;
 
   @override
   Widget build(BuildContext context) {
     var imagePaths = ModalRoute.of(context)!.settings.arguments as List<String>;
-    // Set _previewFile ke gambar yang sedang aktif
-    _previewFile = File(imagePaths[_currentIndex]);
     return BlocListener<CropImageCubit, CropImageState>(
       listener: (context, state) {
         state.mapOrNull(
@@ -120,10 +117,6 @@ class EditImageScreenState extends State<EditImageScreen> {
                                   File(selectedImagePath),
                                   aspectRatio: 3 / 4,
                                 );
-                            // Tunggu hasil crop dari BlocListener, imagePaths akan diupdate otomatis
-                            setState(() {
-                              _previewFile = File(imagePaths[_currentIndex]);
-                            });
                           },
                         ),
                         SizedBox(width: 16),
@@ -159,22 +152,6 @@ class EditImageScreenState extends State<EditImageScreen> {
   }
 
   // Fungsi untuk menyimpan hasil edit
-
-  Widget _buildEditButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onPressed,
-  }) {
-    return ElevatedButton.icon(
-      onPressed: onPressed,
-      icon: Icon(icon),
-      label: Text(label),
-    );
-  }
-
-  void _rotateImage(int degrees) {
-    // Implementasi rotasi gambar
-  }
 
   void _navigateToEditScreen(ROUTER screen) async {
     final imagePaths =

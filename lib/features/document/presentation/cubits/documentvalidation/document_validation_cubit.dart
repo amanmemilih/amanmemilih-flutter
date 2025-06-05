@@ -13,9 +13,9 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../presentation/screens/document_validation_screen.dart';
 
 import '../../../../../core/errors/errors.dart';
+import '../../../../../helpers/ocr_service.dart';
 
 part 'document_validation_state.dart';
 part 'document_validation_cubit.freezed.dart';
@@ -95,8 +95,7 @@ class DocumentValidationCubit extends Cubit<DocumentValidationState> {
   Future<void> regionBasedOcrFromXFile(XFile xfile) async {
     emit(state.copyWith(status: DocumentValidationStatus.loading));
     try {
-      final result =
-          await RegionBasedOcrHelper.extractPaslonVotesFromRegions(xfile);
+      final result = await OcrService.regionBasedOcr(xfile);
       final controllers =
           List<TextEditingController>.from(state.voteControllers);
       // Urutkan sesuai key paslon1, paslon2, paslon3
