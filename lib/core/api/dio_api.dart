@@ -68,12 +68,22 @@ class DioApi extends Api {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    final response = await dio.get(
-      '$baseUrl/$path',
-      queryParameters: queryParameters,
-      options: options,
-    );
-    return DioApiResponse(response);
+    try {
+      final response = await dio.get(
+        '$baseUrl/$path',
+        queryParameters: queryParameters,
+        options: options,
+      );
+      return DioApiResponse(response);
+    } catch (e) {
+      if (e is DioException) {
+        // Handle DioException specifically
+        return DioApiResponse(e.response!);
+      } else {
+        // Handle other exceptions
+        rethrow;
+      }
+    }
   }
 
   @override
@@ -84,13 +94,23 @@ class DioApi extends Api {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    final response = await dio.post(
-      '$baseUrl/$path',
-      data: formData != null ? formData.getBody() : formObj,
-      queryParameters: queryParameters,
-      options: options,
-    );
-    return DioApiResponse(response);
+    try {
+      final response = await dio.post(
+        '$baseUrl/$path',
+        data: formData != null ? formData.getBody() : formObj,
+        queryParameters: queryParameters,
+        options: options,
+      );
+      return DioApiResponse(response);
+    } catch (e) {
+      if (e is DioException) {
+        // Handle DioException specifically
+        return DioApiResponse(e.response!);
+      } else {
+        // Handle other exceptions
+        rethrow;
+      }
+    }
   }
 
   @override
