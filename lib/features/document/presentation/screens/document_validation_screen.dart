@@ -14,8 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signature/signature.dart';
 import 'package:amanmemilih_mobile_app/features/document/presentation/cubits/documentinformation/document_information_cubit.dart';
 import '../../../../helpers/ocr_service.dart';
-import 'package:amanmemilih_mobile_app/features/camera/presentation/cubits/crop_image_cubit.dart';
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 class DocumentValidationScreen extends StatelessWidget {
   const DocumentValidationScreen({super.key});
@@ -87,8 +85,56 @@ class _DocumentValidationScreenImplementState
       _isOcrLoading = true;
     });
     try {
-      // Hardcode hasil suara
-      final votes = ['40', '30', '20'];
+      // Debug: print API Key
+      print('[DEBUG][VISION OCR] API KEY: $googleVisionApiKey');
+      // Ambil gambar pertama
+      final imageFile = File(widget.imagePaths[0]);
+      // OCR dengan Google Vision API
+      final ocrText = await OcrService().ocrWithGoogleVision(imageFile);
+      // Debug: print hasil mentah
+      print('[DEBUG][VISION OCR] Hasil mentah:\n$ocrText');
+      // Parsing: ambil baris, cari baris yang mengandung angka Indonesia
+      final lines = (ocrText ?? '').split('\n');
+      final keywords = [
+        'NOL',
+        'SATU',
+        'DUA',
+        'TIGA',
+        'EMPAT',
+        'LIMA',
+        'ENAM',
+        'TUJUH',
+        'DELAPAN',
+        'SEMBILAN',
+        'PULUH',
+        'BELAS',
+        'SERATUS',
+        'SERIBU'
+      ];
+      bool containsKeyword(String text) {
+        final upper = text.toUpperCase();
+        return keywords.any((k) => upper.contains(k));
+      }
+
+      // Ambil baris kandidat
+      final candidateLines = lines.where((l) => containsKeyword(l)).toList();
+      // Debug: print setiap baris hasil OCR
+      for (final l in lines) {
+        print('[DEBUG][VISION OCR] Baris: $l');
+      }
+      for (int i = 0; i < candidateLines.length; i++) {
+        print('[DEBUG][VISION OCR] Kandidat $i: ${candidateLines[i]}');
+      }
+      // Ambil 3 baris teratas, parsing ke angka
+      final votes = <String>[];
+      for (int i = 0; i < 3; i++) {
+        if (i < candidateLines.length) {
+          final angka = OcrService.parseOcrToNumberChained(candidateLines[i]);
+          votes.add(angka?.toString().padLeft(3, '0') ?? '');
+        } else {
+          votes.add('');
+        }
+      }
       // Masukkan ke textfield/form
       final cubit = context.read<DocumentValidationCubit>();
       for (int i = 0; i < 3; i++) {
@@ -99,7 +145,9 @@ class _DocumentValidationScreenImplementState
       setState(() {
         _isOcrLoading = false;
       });
-    } catch (e) {
+    } catch (e, s) {
+      print('[DEBUG][VISION OCR] ERROR: $e');
+      print(s);
       setState(() {
         _isOcrLoading = false;
       });

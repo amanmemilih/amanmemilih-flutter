@@ -3,6 +3,11 @@ import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+String get googleVisionApiKey => dotenv.env['GOOGLE_VISION_API_KEY'] ?? '';
 
 class OcrService {
   /// OCR satu gambar, parsing suara paslon (umum)
@@ -117,6 +122,44 @@ class OcrService {
       }
     }
     return d[s.length][t.length];
+  }
+
+  Future<String?> ocrWithGoogleVision(File imageFile) async {
+    final bytes = await imageFile.readAsBytes();
+    final base64Image = base64Encode(bytes);
+
+    final url =
+        'https://vision.googleapis.com/v1/images:annotate?key=$googleVisionApiKey';
+    final body = {
+      "requests": [
+        {
+          "image": {"content": base64Image},
+          "features": [
+            {"type": "TEXT_DETECTION"}
+          ]
+        }
+      ]
+    };
+
+    final dio = Dio();
+    try {
+      final response = await dio.post(
+        url,
+        data: jsonEncode(body),
+        options: Options(headers: {"Content-Type": "application/json"}),
+      );
+      if (response.statusCode == 200) {
+        final data = response.data;
+        final text = data['responses'][0]['fullTextAnnotation']?['text'];
+        return text;
+      } else {
+        print('Error: ${response.data}');
+        return null;
+      }
+    } catch (e) {
+      print('Dio error: $e');
+      return null;
+    }
   }
 }
 
@@ -320,6 +363,15 @@ class IndonesianNumberOcrParser {
         final sisaVal = parse(sisa);
         if (sisaVal != null) sum += sisaVal;
         if (sum > 0) return sum;
+      }
+    }
+    // Jika masih tidak ketemu, coba parse angka langsung dan hapus semua leading zero
+    if (!found) {
+      final digits = normalized.replaceAll(RegExp(r'[^0-9]'), '');
+      if (digits.isNotEmpty) {
+        // Hapus semua angka 0 di depan, kecuali jika hasil akhirnya kosong (artinya 0)
+        final cleaned = digits.replaceFirst(RegExp(r'^0+'), '');
+        return int.tryParse(cleaned.isEmpty ? '0' : cleaned);
       }
     }
     return found ? total : null;
