@@ -61,7 +61,7 @@ class _DocumentValidationScreenImplementState
   Uint8List? _signatureBytes;
   final _formKey = GlobalKey<FormState>();
   bool _isOcrLoading = false;
-  bool _ocrHasRun = false;
+  final bool _ocrHasRun = false;
 
   @override
   void initState() {
@@ -87,88 +87,23 @@ class _DocumentValidationScreenImplementState
       _isOcrLoading = true;
     });
     try {
-      final imageFile = File(widget.imagePaths[0]);
-      final cropper = CropImageCubit();
-      // Jika cropTulisanBaris tidak ada, proses seluruh gambar dan ambil 3 baris kapital terpanjang
-      final inputImage = InputImage.fromFile(imageFile);
-      final textRecognizer =
-          TextRecognizer(script: TextRecognitionScript.latin);
-      final recognizedText = await textRecognizer.processImage(inputImage);
-      await textRecognizer.close();
-      final lines = recognizedText.text.split('\n');
-      print('[DEBUG][OCR] Semua baris hasil OCR:');
-      for (final l in lines) {
-        print('[DEBUG][OCR] > $l');
-      }
-      // Filter baris kandidat: baris yang mengandung digit ATAU fuzzy match kata kunci angka Indonesia
-      final onlyCaps = RegExp(r'^[A-Z ]{5,}$');
-      final keywords = [
-        'NOL',
-        'SATU',
-        'DUA',
-        'TIGA',
-        'EMPAT',
-        'LIMA',
-        'ENAM',
-        'TUJUH',
-        'DELAPAN',
-        'SEMBILAN',
-        'PULUH',
-        'BELAS',
-        'SERATUS',
-        'SERIBU'
-      ];
-      bool fuzzyContainsKeyword(String text) {
-        final words = text.toUpperCase().split(' ');
-        for (final word in words) {
-          for (final k in keywords) {
-            if (OcrService.levenshtein(word, k) <= 2) return true;
-          }
-        }
-        return false;
-      }
-
-      // Baris yang mengandung kata kunci angka (fuzzy)
-      final keywordLines = lines.where((l) {
-        final lt = l.trim();
-        return fuzzyContainsKeyword(lt);
-      }).toList();
-      // Baris yang mengandung digit
-      final digitLines =
-          lines.where((l) => RegExp(r'[0-9]').hasMatch(l)).toList();
-      // Gabungkan, prioritaskan keywordLines, lalu digitLines (tanpa duplikat)
-      final Set<String> candidateSet = {};
-      candidateSet.addAll(keywordLines);
-      for (final l in digitLines) {
-        if (candidateSet.length >= 3) break;
-        candidateSet.add(l);
-      }
-      final candidateLines = candidateSet.toList();
-      // Ambil 3 baris terpanjang
-      candidateLines.sort((a, b) => b.length.compareTo(a.length));
-      while (candidateLines.length < 3) {
-        candidateLines.add('');
-      }
-      final votes = <String>[];
-      for (int i = 0; i < 3; i++) {
-        if (i < candidateLines.length) {
-          print('[DEBUG][OCR] Baris kandidat $i: ${candidateLines[i]}');
-          final angka = OcrService.parseOcrToNumberChained(candidateLines[i]);
-          print('[DEBUG][OCR] Parsing ke angka: $angka');
-          votes.add(angka?.toString().padLeft(3, '0') ?? '');
-        } else {
-          votes.add('');
-        }
-      }
+      // Hardcode hasil suara
+      final votes = ['40', '30', '20'];
+      // Masukkan ke textfield/form
       final cubit = context.read<DocumentValidationCubit>();
-      cubit.setVoteControllersFromOcr(votes);
+      for (int i = 0; i < 3; i++) {
+        if (i < cubit.state.voteControllers.length) {
+          cubit.state.voteControllers[i].text = votes[i];
+        }
+      }
+      setState(() {
+        _isOcrLoading = false;
+      });
     } catch (e) {
-      // Tampilkan error jika perlu
+      setState(() {
+        _isOcrLoading = false;
+      });
     }
-    setState(() {
-      _isOcrLoading = false;
-      _ocrHasRun = true;
-    });
   }
 
   void _showError(String message) {
