@@ -31,11 +31,13 @@ class CameraCubit extends Cubit<CameraState> {
   void toggleFlash() async {
     if (_controller == null || !_controller!.value.isInitialized) return;
     try {
-      final newFlash = !state.isFlashOn;
+      final isCurrentlyOn = _controller!.value.flashMode == FlashMode.torch;
+      final newFlash = !isCurrentlyOn;
       await _controller!.setFlashMode(
         newFlash ? FlashMode.torch : FlashMode.off,
       );
-      emit(state.copyWith(isFlashOn: newFlash));
+      final updatedFlashOn = _controller!.value.flashMode == FlashMode.torch;
+      emit(state.copyWith(isFlashOn: updatedFlashOn));
     } catch (e) {
       // ignore: empty_catches
     }

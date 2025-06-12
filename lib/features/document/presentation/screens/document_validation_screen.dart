@@ -14,6 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signature/signature.dart';
 import 'package:amanmemilih_mobile_app/features/document/presentation/cubits/documentinformation/document_information_cubit.dart';
 import '../../../../helpers/ocr_service.dart';
+import 'package:amanmemilih_mobile_app/features/camera/presentation/cubits/crop_image_cubit.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 class DocumentValidationScreen extends StatelessWidget {
   const DocumentValidationScreen({super.key});
@@ -86,11 +88,82 @@ class _DocumentValidationScreenImplementState
     });
     try {
       final imageFile = File(widget.imagePaths[0]);
-      final votes = await OcrService.extractPaslonVotes(imageFile);
+      final cropper = CropImageCubit();
+      // Jika cropTulisanBaris tidak ada, proses seluruh gambar dan ambil 3 baris kapital terpanjang
+      final inputImage = InputImage.fromFile(imageFile);
+      final textRecognizer =
+          TextRecognizer(script: TextRecognitionScript.latin);
+      final recognizedText = await textRecognizer.processImage(inputImage);
+      await textRecognizer.close();
+      final lines = recognizedText.text.split('\n');
+      print('[DEBUG][OCR] Semua baris hasil OCR:');
+      for (final l in lines) {
+        print('[DEBUG][OCR] > $l');
+      }
+      // Filter baris kandidat: baris yang mengandung digit ATAU fuzzy match kata kunci angka Indonesia
+      final onlyCaps = RegExp(r'^[A-Z ]{5,}$');
+      final keywords = [
+        'NOL',
+        'SATU',
+        'DUA',
+        'TIGA',
+        'EMPAT',
+        'LIMA',
+        'ENAM',
+        'TUJUH',
+        'DELAPAN',
+        'SEMBILAN',
+        'PULUH',
+        'BELAS',
+        'SERATUS',
+        'SERIBU'
+      ];
+      bool fuzzyContainsKeyword(String text) {
+        final words = text.toUpperCase().split(' ');
+        for (final word in words) {
+          for (final k in keywords) {
+            if (OcrService.levenshtein(word, k) <= 2) return true;
+          }
+        }
+        return false;
+      }
+
+      // Baris yang mengandung kata kunci angka (fuzzy)
+      final keywordLines = lines.where((l) {
+        final lt = l.trim();
+        return fuzzyContainsKeyword(lt);
+      }).toList();
+      // Baris yang mengandung digit
+      final digitLines =
+          lines.where((l) => RegExp(r'[0-9]').hasMatch(l)).toList();
+      // Gabungkan, prioritaskan keywordLines, lalu digitLines (tanpa duplikat)
+      final Set<String> candidateSet = {};
+      candidateSet.addAll(keywordLines);
+      for (final l in digitLines) {
+        if (candidateSet.length >= 3) break;
+        candidateSet.add(l);
+      }
+      final candidateLines = candidateSet.toList();
+      // Ambil 3 baris terpanjang
+      candidateLines.sort((a, b) => b.length.compareTo(a.length));
+      while (candidateLines.length < 3) {
+        candidateLines.add('');
+      }
+      final votes = <String>[];
+      for (int i = 0; i < 3; i++) {
+        if (i < candidateLines.length) {
+          print('[DEBUG][OCR] Baris kandidat $i: ${candidateLines[i]}');
+          final angka = OcrService.parseOcrToNumberChained(candidateLines[i]);
+          print('[DEBUG][OCR] Parsing ke angka: $angka');
+          votes.add(angka?.toString().padLeft(3, '0') ?? '');
+        } else {
+          votes.add('');
+        }
+      }
       final cubit = context.read<DocumentValidationCubit>();
       cubit.setVoteControllersFromOcr(votes);
     } catch (e) {
-      // Bisa tampilkan error jika mau
+      // Tampilkan error jika perlu
     }
     setState(() {
       _isOcrLoading = false;
