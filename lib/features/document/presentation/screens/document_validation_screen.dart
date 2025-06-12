@@ -496,7 +496,6 @@ class _DocumentValidationScreenImplementState
                                     child: AMOutlinedButton(
                                       title: "Lanjut",
                                       onTap: () async {
-                                        // Ambil uploadedTypes dari DocumentInformationCubit
                                         final infoState = context
                                             .read<DocumentInformationCubit>()
                                             .state;
@@ -510,52 +509,53 @@ class _DocumentValidationScreenImplementState
                                         if (uploadedTypes
                                             .contains(state.electionType)) {
                                           _showError(
-                                              "Dokumen ${state.electionType.toUpperCase()} sudah pernah di-upload, silakan pilih dokumen lain.");
+                                              'Tipe pemilihan sudah diupload.');
                                           return;
                                         }
-                                        // Validasi form
                                         if (!_formKey.currentState!
                                             .validate()) {
                                           _showError(
                                               "Semua input suara harus diisi.");
                                           return;
                                         }
-                                        // Validasi TTD
                                         if (!_signatureController.isNotEmpty) {
                                           _showError(
                                               "Tanda tangan harus diisi.");
                                           return;
                                         }
-                                        final data = await _signatureController
-                                            .toPngBytes(
-                                          height: 360,
-                                          width: 720,
+                                        // Ambil dan bersihkan angka dari voteControllers (strip leading zero)
+                                        final cleanedVotes =
+                                            state.voteControllers.map((c) {
+                                          final raw = c.text.trim();
+                                          final cleaned = raw.replaceFirst(
+                                              RegExp(r'^0+'), '');
+                                          return cleaned.isEmpty
+                                              ? '0'
+                                              : cleaned;
+                                        }).toList();
+                                        // Siapkan data kandidat (nama/no ambil dari state.presidentialCandidats)
+                                        final votes = List.generate(
+                                          state.presidentialCandidats?.length ??
+                                              0,
+                                          (i) => {
+                                            'candidat_no': state
+                                                .presidentialCandidats![i].no,
+                                            'candidat_name': state
+                                                .presidentialCandidats![i].name,
+                                            'total_votes': cleanedVotes[i],
+                                          },
                                         );
-                                        setState(() {
-                                          _signatureBytes = data;
-                                        });
-                                        if (!mounted) return;
+                                        final signatureBytes =
+                                            await _signatureController
+                                                .toPngBytes();
                                         Navigator.pushNamed(
                                           context,
                                           ROUTER.documentRecapitulation,
                                           arguments: DocumentRecapitulationArgs(
-                                            votes: state.presidentialCandidats!
-                                                .asMap()
-                                                .entries
-                                                .map((e) => {
-                                                      'candidat_name':
-                                                          e.value.name,
-                                                      'candidat_no': e.value.no,
-                                                      'candidat_id': e.value.id,
-                                                      'total_votes': state
-                                                          .voteControllers[
-                                                              e.key]
-                                                          .text,
-                                                    })
-                                                .toList(),
                                             electionType: state.electionType,
+                                            votes: votes,
                                             imagePaths: widget.imagePaths,
-                                            signatureBytes: _signatureBytes,
+                                            signatureBytes: signatureBytes,
                                           ),
                                         );
                                       },
