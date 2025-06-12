@@ -22,10 +22,12 @@ class PreviewScreenState extends State<PreviewScreen> {
   bool _permissionsGranted = false;
   int _currentIndex = 0; // To keep track of the current slide index
   bool _isFullScreen = false; // State to manage full-screen mode
+  late List<String> _imagePaths;
 
   @override
   void initState() {
     super.initState();
+    _imagePaths = List<String>.from(widget.imagePaths);
     _checkPermissions();
   }
 
@@ -90,10 +92,10 @@ class PreviewScreenState extends State<PreviewScreen> {
                     width: double.infinity,
                     height: double.infinity,
                     child: CarouselSlider.builder(
-                      itemCount: widget.imagePaths.length,
+                      itemCount: _imagePaths.length,
                       itemBuilder: (context, index, realIndex) {
                         return Image.file(
-                          File(widget.imagePaths[index]),
+                          File(_imagePaths[index]),
                           fit: _isFullScreen ? BoxFit.contain : BoxFit.cover,
                           width: double.infinity,
                           height: double.infinity,
@@ -128,8 +130,7 @@ class PreviewScreenState extends State<PreviewScreen> {
                       padding: EdgeInsets.all(size.height * 0.01),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children:
-                            List.generate(widget.imagePaths.length, (index) {
+                        children: List.generate(_imagePaths.length, (index) {
                           return AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
                             margin: EdgeInsets.symmetric(
@@ -154,12 +155,21 @@ class PreviewScreenState extends State<PreviewScreen> {
                           icon: Icons.settings,
                           label: "Edit",
                           identifier: "button_edit_image",
-                          onPressed: () {
-                            Navigator.pushNamed(
+                          onPressed: () async {
+                            final result = await Navigator.pushNamed(
                               context,
                               ROUTER.editImageScreen,
-                              arguments: widget.imagePaths,
+                              arguments: _imagePaths,
                             );
+                            if (result is List<String>) {
+                              setState(() {
+                                _imagePaths = List<String>.from(result);
+                                // Reset index jika jumlah gambar berubah
+                                if (_currentIndex >= _imagePaths.length) {
+                                  _currentIndex = 0;
+                                }
+                              });
+                            }
                           },
                         ),
                         _customButton(
@@ -187,7 +197,7 @@ class PreviewScreenState extends State<PreviewScreen> {
                           onPressed: () {
                             Navigator.pushNamed(
                                 context, ROUTER.documentValidation,
-                                arguments: widget.imagePaths);
+                                arguments: _imagePaths);
                           },
                         ),
                       ],
